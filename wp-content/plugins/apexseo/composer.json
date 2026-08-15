@@ -1,0 +1,29 @@
+{
+  "name": "apexseo/apexseo",
+  "description": "Production-grade unified WordPress SEO, Schema, AI, Performance, Cache & Analytics Platform",
+  "type": "wordpress-plugin",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "Apex SEO Team",
+      "homepage": "https://apexseo.io"
+    }
+  ],
+  "require": {
+    "php": ">=7.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "ApexSEO\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "ApexSEO\\Tests\\": "tests/"
+    }
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "sort-packages": true
+  }
+}

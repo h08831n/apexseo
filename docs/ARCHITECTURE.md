@@ -1,9 +1,43 @@
-# Apex SEO Platform — Master Architecture Blueprint
+# Apex SEO Platform — Master Architecture Blueprint (Evidence-Locked)
 
-## 1. Directory Structure Map
+## 1. Architectural Dependency Rules & Layering
+
+To prevent tight coupling and ensure testability, the Apex SEO architecture strictly enforces directional dependency boundaries:
+
 ```
-wp-content/plugins/apex-seo/
-├── apex-seo.php                         (Main Plugin Bootstrap)
+┌────────────────────────────────────────────────────────┐
+│               Core / Domain Contracts                  │
+│       (Interfaces, Models, Events, Value Objects)      │
+└───────────────────────────┬────────────────────────────┘
+                            │ (depends on)
+┌───────────────────────────▼────────────────────────────┐
+│                  Application Services                  │
+│    (SEO Presenters, Schema Builders, Cache Engine)     │
+└───────────────────────────┬────────────────────────────┘
+                            │ (depends on)
+┌───────────────────────────▼────────────────────────────┐
+│                 Infrastructure Adapters                │
+│    (LiteSpeed, Redis, Imagick, Cloudflare, OpenAI)     │
+└───────────────────────────┬────────────────────────────┘
+                            │ (depends on)
+┌───────────────────────────▼────────────────────────────┐
+│               WordPress Integration Layer              │
+│    (Hooks, WP REST API, Settings API, WP-CLI, Admin)   │
+└────────────────────────────────────────────────────────┘
+```
+
+### Strict Isolation Rules:
+1. **Frontend Isolation**: Frontend request execution **MUST NOT** instantiate Admin UI controllers, Migration parsers, Schema editors, or Diagnostics loggers.
+2. **Server Capability Decoupling**: Cache and Image optimization services **MUST NOT** directly invoke server-specific binaries (`avifenc`, `redis-cli`, `litespeed_finish_request`) without passing through the respective `CacheDriverInterface` or `ImageEncoderInterface` with environmental availability detection.
+3. **Database Layering**: Admin and SEO controllers **MUST NOT** execute raw SQL queries directly against `$wpdb`. All queries must route through dedicated Repository and Model abstractions (`IndexableRepository`, `RedirectRepository`, `SchemaRepository`).
+4. **AI & Cloud Decoupling**: AI capabilities and Instant Indexing must implement provider interfaces (`AIProviderInterface`, `IndexingProviderInterface`), preventing vendor lock-in.
+
+---
+
+## 2. Directory Structure Map
+```
+wp-content/plugins/apexseo/
+├── apexseo.php                         (Main Plugin Bootstrap)
 ├── uninstall.php                        (Safe Cleanup Handler)
 ├── readme.txt                           (WP Plugin Header & Changelog)
 ├── composer.json                        (PSR-4 Autoloading Map)
@@ -12,25 +46,25 @@ wp-content/plugins/apex-seo/
 │
 ├── src/
 │   ├── Core/                            (Bootstrap, Service Container, Event Dispatcher, Environment)
-│   ├── SEO/                             (Titles, Meta, Robots, Canonical, Social, Indexables, Sitemaps)
-│   ├── Schema/                          (52 Built-in Types, Graph Merger, Conditions, Variables, Validator)
+│   ├── SEO/                             (Titles, Meta, Robots, Canonical, Social, Indexables, Sitemaps, Redirects, 404)
+│   ├── Schema/                          (62 Concrete Types, Graph Merger, Conditions ALL/ANY/NOT, Variables, Validator)
 │   ├── Media/                           (Image Optimizer, WebP, AVIF, Image SEO, Queue, Media Library)
 │   ├── Performance/                     (CSS, JavaScript Defer/Delay, Fonts, LazyLoad, Preload, Diagnostics)
 │   ├── Cache/                           (Page Cache, Redis, Memcached, Purge Engine)
 │   ├── Server/                          (LiteSpeed, OpenLiteSpeed, Nginx, Apache Adapters)
 │   ├── CDN/                             (Cloudflare, Generic CDN URL Rewriter)
-│   ├── AI/                              (AIVisibility, Crawlers, Virtual llms.txt, Gemini API Integration)
+│   ├── AI/                              (AIVisibility, Crawlers, Virtual llms.txt, AIProviderInterface)
 │   ├── Analytics/                       (Search Console, GA4, Matomo, Rank Tracker, Instant Indexing)
-│   ├── Database/                        (Custom Table Schema, Optimizer, Migrator)
-│   ├── Migration/                       (Yoast, Rank Math, AIOSEO, SEOPress, Redirection Importers)
+│   ├── Database/                        (8 Custom Tables, Schema Migrator, Optimizer)
+│   ├── Migration/                       (7 Ecosystems: Yoast, RM, AIOSEO, SEOPress, TSF, WPRocket, LSCache)
 │   ├── WooCommerce/                     (Product SEO, Schema, Shop Archive, Dynamic Cache Protections)
 │   ├── API/                             (REST API Endpoints, Headless JSON Payload, Abilities API)
-│   ├── CLI/                             (WP-CLI Command Implementations)
+│   ├── CLI/                             (WP-CLI Command Suite: wp apexseo *)
 │   └── Admin/                           (Menus, MetaBoxes, AdminBar, Diagnostics, Conflict Detector)
 │
 ├── assets/
 │   ├── css/                             (Admin & Metabox Styling, RTL Styles)
-│   ├── js/                              (Admin Scripting, Real-Time Content Analyzer, Chart Visualizers)
+│   ├── js/                              (Admin Scripting, Real-Time Content Analyzer)
 │   └── images/                          (Logos, Status Icons)
 │
 ├── languages/                           (apex-seo.pot, Translation Catalogs)

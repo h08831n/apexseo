@@ -1,0 +1,56 @@
+{
+  "audit_version": "2.0.0-LOCKED",
+  "audit_date": "2026-08-15",
+  "authoritative_metrics": {
+    "product_ecosystems_audited": 8,
+    "repositories_and_distributions_audited": 11,
+    "total_granular_capabilities": 198,
+    "capabilities_by_status": {
+      "VERIFIED": 148,
+      "VERIFIED_SERVER_DEPENDENCY": 34,
+      "VERIFIED_EXTERNAL_DEPENDENCY": 12,
+      "NOT_APPLICABLE": 4
+    },
+    "capabilities_by_category": {
+      "meta_and_titles": 18,
+      "canonical_and_robots": 12,
+      "social_meta": 9,
+      "sitemaps": 8,
+      "content_analysis": 7,
+      "url_routing_and_redirects": 10,
+      "schema_structured_data": 16,
+      "page_caching": 18,
+      "asset_optimization": 18,
+      "media_optimization": 14,
+      "lazy_loading": 8,
+      "database_optimization": 10,
+      "server_integration": 10,
+      "analytics_and_rank_tracking": 10,
+      "rest_api": 12,
+      "wp_cli": 10,
+      "core_architecture_and_admin": 8
+    },
+    "schema_metrics": {
+      "total_schema_vocabulary_types": 44,
+      "top_level_apex_templates": 26,
+      "supporting_nested_objects": 14,
+      "media_objects": 4,
+      "google_rich_result_eligible_types": 19,
+      "woocommerce_commerce_types": 6
+    },
+    "migration_sources": 8,
+    "dedicated_custom_tables": 8,
+    "rest_api_endpoints": 22,
+    "wp_cli_commands": 10,
+    "supported_php_versions": ["7.4", "8.0", "8.1", "8.2", "8.3", "8.4"],
+    "supported_wp_versions": ["6.2", "6.3", "6.4", "6.5", "6.6", "6.7"],
+    "performance_budgets": {
+      "static_cache_hit_php_overhead_ms": 1.0,
+      "dynamic_frontend_overhead_ms": 8.0,
+      "frontend_memory_overhead_mb": 2.5,
+      "db_queries_cached_hit": 0,
+      "db_queries_dynamic_request": 1
+    }
+  },
+  "reconciliation_status": "ZERO_CONTRADICTIONS_VERIFIED"
+}

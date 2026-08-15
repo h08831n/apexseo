@@ -1,40 +1,47 @@
-# 11 - REST API & Headless SEO Specification
+# 11 - REST API & Headless Architecture Specification
 
-## 1. Base URL & Authentication
-- **Namespace**: `/wp-json/apexseo/v1/`
-- **Authentication**:
-  - Public read-only endpoints (e.g. meta retrieval, schema query) require no auth.
-  - State-modifying endpoints (purge cache, optimize media, run migrations, save settings) require standard WordPress Nonce (`X-WP-Nonce`) or Application Passwords / Bearer Token with `manage_options` capability.
-
----
-
-## 2. Comprehensive Endpoint Index
-
-### 2.1 Public Headless & SEO Query Endpoints
-- `GET /wp-json/apexseo/v1/meta?url={url}` -> Returns full calculated SEO payload (Title, Description, Canonical, Robots, Social, Schema graph, Breadcrumbs).
-- `GET /wp-json/apexseo/v1/schema?post_id={id}` -> Returns raw JSON-LD graph representation for a specific post.
-- `GET /wp-json/apexseo/v1/sitemap/index` -> Returns structured list of all active sitemap chunks and last modification dates.
-- `GET /wp-json/apexseo/v1/llms.txt` -> Dynamic plain-text output for AI crawler context.
-
-### 2.2 Content Analysis & AI Endpoints
-- `POST /wp-json/apexseo/v1/analyze` -> Receives post content, title, and target keyword; returns full TruScore, Readability metrics, and suggestion checklist.
-- `POST /wp-json/apexseo/v1/ai/generate-meta` -> Calls server-side Gemini API with content summary to produce candidate titles, descriptions, and FAQ blocks.
-
-### 2.3 Management & Performance Endpoints
-- `POST /wp-json/apexseo/v1/cache/purge` -> Accepts optional `urls` array or `all=true` to invalidate static page cache and server cache tags.
-- `POST /wp-json/apexseo/v1/media/optimize` -> Queues or executes synchronous compression on specified attachment IDs.
-- `GET  /wp-json/apexseo/v1/system/status` -> Returns JSON matrix of server capabilities, PHP extensions, and DB table health.
-- `GET  /wp-json/apexseo/v1/redirects` -> Lists configured redirect rules with pagination, hits, and filter queries.
-- `POST /wp-json/apexseo/v1/redirects` -> Creates or updates a redirect rule.
-- `GET  /wp-json/apexseo/v1/404-logs` -> Lists recent 404 access records with hit counts.
+**Namespace**: `/wp-json/apexseo/v1/`  
+**Authentication & Permissions**:
+- Public Read-Only Endpoints: Open or validated with public site token.
+- Protected Mutation Endpoints: Require `X-WP-Nonce` header, Application Passwords, or JWT with `manage_options` capability.
 
 ---
 
-## 3. Standard Headless JSON Response Structure
+## 1. Exhaustive 22 REST API Route Inventory
+
+| Endpoint Route | HTTP Method | Capability Required | Request Body / Query Params | Response Data Contract |
+|---|---|---|---|---|
+| `/apexseo/v1/meta` | `GET` | Public | `?url={url}` or `?post_id={id}` | Full resolved SEO payload (Title, Desc, Canonical, Robots, Social, Breadcrumbs, Schema graph) |
+| `/apexseo/v1/schema` | `GET` | Public | `?post_id={id}` | Raw JSON-LD Schema graph representation for headless consumers |
+| `/apexseo/v1/sitemap/index` | `GET` | Public | None | Index list of active sitemaps, chunk counts, and last modification timestamps |
+| `/apexseo/v1/llms.txt` | `GET` | Public | None | Plaintext Markdown representation conforming to llmstxt.org |
+| `/apexseo/v1/settings` | `GET` | `manage_options` | None | Complete serialized plugin settings object |
+| `/apexseo/v1/settings` | `POST` | `manage_options` | `{ settings: { ... } }` | Success status, updated timestamp, validation errors if any |
+| `/apexseo/v1/analyze` | `POST` | `edit_posts` | `{ content: string, title: string, keyword: string }` | Full Real-Time Content Analysis, Flesch score, keyword density, improvement checklist |
+| `/apexseo/v1/cache/status` | `GET` | `manage_options` | None | Cache driver status, hit rate, cached files count, total disk space used |
+| `/apexseo/v1/cache/purge` | `POST` | `manage_options` (or `edit_posts` for single post) | `{ all?: boolean, urls?: string[], tags?: string[] }` | Purge confirmation, invalidated tags count |
+| `/apexseo/v1/cache/warmup` | `POST` | `manage_options` | `{ sitemap_url?: string }` | Warmup job dispatched status, queued URLs count |
+| `/apexseo/v1/schema/templates` | `GET` | `manage_options` | `?type={schema_type}` | List of visual schema templates with rules |
+| `/apexseo/v1/schema/templates` | `POST` | `manage_options` | `{ title: string, schema_type: string, data: object, conditions: object }` | Created/updated template record ID |
+| `/apexseo/v1/schema/templates/{id}` | `DELETE` | `manage_options` | None | Deletion status |
+| `/apexseo/v1/redirects` | `GET` | `manage_options` | `?page={int}&per_page={int}&search={string}` | Paginated list of redirects, hits, status codes |
+| `/apexseo/v1/redirects` | `POST` | `manage_options` | `{ source: string, target: string, status_code: int, is_regex: boolean }` | Created redirect ID |
+| `/apexseo/v1/redirects/{id}` | `DELETE` | `manage_options` | None | Deletion status |
+| `/apexseo/v1/404-logs` | `GET` | `manage_options` | `?page={int}&per_page={int}` | Paginated 404 URL access logs |
+| `/apexseo/v1/404-logs` | `DELETE` | `manage_options` | `{ ids?: int[], all?: boolean }` | Purge confirmation |
+| `/apexseo/v1/media/optimize-single` | `POST` | `upload_files` | `{ attachment_id: int, format: 'webp'\|'avif' }` | Image compression statistics, savings percentage |
+| `/apexseo/v1/media/bulk-optimize` | `POST` | `manage_options` | `{ batch_size?: int }` | Background queue progress, processed count, remaining count |
+| `/apexseo/v1/migrate/execute` | `POST` | `manage_options` | `{ source: string, dry_run?: boolean }` | Migration logs, imported entities count, errors |
+| `/apexseo/v1/system/status` | `GET` | `manage_options` | None | PHP version, extensions (GD/Imagick/Redis), server software, table integrity |
+
+---
+
+## 2. Standard Headless JSON Response Structure (`GET /apexseo/v1/meta`)
+
 ```json
 {
   "status": "success",
-  "seo": {
+  "data": {
     "title": "Unified WordPress SEO & Performance Platform - Apex SEO",
     "meta_description": "Production-grade unified platform combining SEO, schema, cache, and media optimization.",
     "canonical": "https://example.com/sample-post/",
