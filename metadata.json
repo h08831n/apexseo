@@ -1,0 +1,6 @@
+{
+  "name": "Apex SEO Platform",
+  "description": "Production-grade unified WordPress SEO, Schema, AI, Performance, Cache & Analytics Platform",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
