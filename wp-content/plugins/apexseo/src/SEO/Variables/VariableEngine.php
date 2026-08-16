@@ -1,170 +1,224 @@
 <?php
 namespace ApexSEO\SEO\Variables;
 
-use ApexSEO\Core\Contracts\ServiceContractInterface;
+use ApexSEO\SEO\Models\SeoContext;
 
 /**
- * High-Performance SEO Dynamic Template Variable Engine.
+ * Dynamic Template Variable Engine for SEO title and description interpolation.
  */
-class VariableEngine implements ServiceContractInterface {
+class VariableEngine {
     /**
-     * Custom registered variable callbacks.
+     * Custom registered variable resolvers.
      *
      * @var array<string, callable>
      */
-    protected $customVariables = [];
+    protected $resolvers = [];
 
     /**
-     * Register a custom replacement variable token.
+     * Default fallback token values.
      *
-     * @param string $token Token name without %% delimiters (e.g. 'custom_field').
-     * @param callable $callback Resolver callback receiving ($context, $token).
+     * @var array<string, string>
+     */
+    protected $defaults = [
+        'sep' => '-',
+    ];
+
+    /**
+     * Constructor.
+     */
+    public function __construct() {
+        $this->registerCoreVariables();
+    }
+
+    /**
+     * Register core dynamic variable resolvers.
+     *
+     * @return void
+     */
+    protected function registerCoreVariables() {
+        $this->registerVariable('currentyear', function() {
+            return date('Y');
+        });
+
+        $this->registerVariable('currentmonth', function() {
+            return date('F');
+        });
+
+        $this->registerVariable('currentday', function() {
+            return date('j');
+        });
+
+        $this->registerVariable('date', function($ctx) {
+            return isset($ctx['date']) ? $ctx['date'] : date(get_option('date_format', 'F j, Y'));
+        });
+
+        $this->registerVariable('modified', function($ctx) {
+            return isset($ctx['modified']) ? $ctx['modified'] : (isset($ctx['date']) ? $ctx['date'] : '');
+        });
+
+        $this->registerVariable('sitename', function($ctx) {
+            return !empty($ctx['sitename']) ? $ctx['sitename'] : get_option('blogname', 'WordPress');
+        });
+
+        $this->registerVariable('sitedesc', function($ctx) {
+            return !empty($ctx['sitedesc']) ? $ctx['sitedesc'] : get_option('blogdescription', '');
+        });
+
+        $this->registerVariable('sep', function($ctx) {
+            return !empty($ctx['sep']) ? $ctx['sep'] : '-';
+        });
+
+        $this->registerVariable('title', function($ctx) {
+            return isset($ctx['title']) ? $ctx['title'] : '';
+        });
+
+        $this->registerVariable('excerpt', function($ctx) {
+            return isset($ctx['excerpt']) ? $ctx['excerpt'] : '';
+        });
+
+        $this->registerVariable('author', function($ctx) {
+            return isset($ctx['author']) ? $ctx['author'] : (isset($ctx['author_name']) ? $ctx['author_name'] : '');
+        });
+
+        $this->registerVariable('author_name', function($ctx) {
+            return isset($ctx['author_name']) ? $ctx['author_name'] : (isset($ctx['author']) ? $ctx['author'] : '');
+        });
+
+        $this->registerVariable('category', function($ctx) {
+            return isset($ctx['category']) ? $ctx['category'] : '';
+        });
+
+        $this->registerVariable('tag', function($ctx) {
+            return isset($ctx['tag']) ? $ctx['tag'] : '';
+        });
+
+        $this->registerVariable('term', function($ctx) {
+            return isset($ctx['term']) ? $ctx['term'] : (isset($ctx['term_name']) ? $ctx['term_name'] : '');
+        });
+
+        $this->registerVariable('post_type', function($ctx) {
+            return isset($ctx['post_type']) ? $ctx['post_type'] : '';
+        });
+
+        $this->registerVariable('page', function($ctx) {
+            return isset($ctx['page']) ? $ctx['page'] : '';
+        });
+
+        $this->registerVariable('pagenumber', function($ctx) {
+            return isset($ctx['pagenumber']) ? (string) $ctx['pagenumber'] : '1';
+        });
+
+        $this->registerVariable('searchphrase', function($ctx) {
+            return isset($ctx['searchphrase']) ? $ctx['searchphrase'] : (isset($ctx['search_query']) ? $ctx['search_query'] : '');
+        });
+    }
+
+    /**
+     * Register a custom variable handler.
+     *
+     * @param string $variableName Variable key without %% (e.g. 'brand_name')
+     * @param callable $callback
      * @return self
      */
-    public function registerVariable($token, callable $callback) {
-        $this->customVariables[strtolower(trim($token, '%'))] = $callback;
+    public function registerVariable($variableName, $callback) {
+        $this->resolvers[strtolower(trim($variableName))] = $callback;
         return $this;
     }
 
     /**
-     * Replace all dynamic template variables in a text string.
+     * Replace dynamic tokens in a template string given an evaluation context.
      *
-     * @param string $template Text with %%var%% tokens.
-     * @param array $context Context dictionary (e.g. ['post_id' => 123, 'post' => $post, 'term_id' => 5]).
-     * @return string Interpolated text.
+     * @param string $template Template string containing %%token%%
+     * @param SeoContext|array $context Context object or key-value array
+     * @return string Parsed and interpolated string
      */
-    public function replace($template, array $context = []) {
-        if (empty($template) || strpos($template, '%%') === false) {
-            return (string) $template;
+    public function replace($template, $context = []) {
+        if (empty($template)) {
+            return '';
         }
 
-        return preg_replace_callback('/%%([a-zA-Z0-9_\-]+)%%/', function($matches) use ($context) {
-            $token = strtolower($matches[1]);
-            return $this->resolveToken($token, $context);
+        if ($context instanceof SeoContext) {
+            $contextArray = $context->toArray();
+        } else {
+            $contextArray = (array) $context;
+        }
+
+        // Allow third-party plugins to register or alter context via WP Filter
+        if (function_exists('apply_filters')) {
+            $contextArray = apply_filters('apexseo_replacement_context', $contextArray, $template);
+        }
+
+        // Replace all %%key%% tokens
+        $replaced = preg_replace_callback('/%%([a-zA-Z0-9_\-]+)%%/', function($matches) use ($contextArray) {
+            $key = strtolower($matches[1]);
+
+            // 1. Direct match in provided context array
+            if (isset($contextArray[$key]) && is_scalar($contextArray[$key])) {
+                return (string) $contextArray[$key];
+            }
+
+            // 2. Match in registered resolver callbacks
+            if (isset($this->resolvers[$key]) && is_callable($this->resolvers[$key])) {
+                $val = call_user_func($this->resolvers[$key], $contextArray);
+                if (is_scalar($val)) {
+                    return (string) $val;
+                }
+            }
+
+            // 3. Custom Field lookup %%cf_<custom_field_name>%%
+            if (strpos($key, 'cf_') === 0 && !empty($contextArray['object_id'])) {
+                $metaKey = substr($key, 3);
+                if (function_exists('get_post_meta')) {
+                    $metaVal = get_post_meta($contextArray['object_id'], $metaKey, true);
+                    if (is_scalar($metaVal)) {
+                        return (string) $metaVal;
+                    }
+                }
+            }
+
+            // 4. Default fallback
+            if (isset($this->defaults[$key])) {
+                return $this->defaults[$key];
+            }
+
+            return '';
         }, $template);
+
+        // Normalize whitespace and dangling separators (e.g. " - " at end or " - - ")
+        $replaced = $this->cleanDanglingSeparators($replaced, isset($contextArray['sep']) ? $contextArray['sep'] : '-');
+
+        if (function_exists('apply_filters')) {
+            $replaced = apply_filters('apexseo_replace_vars', $replaced, $template, $contextArray);
+        }
+
+        return trim($replaced);
     }
 
     /**
-     * Resolve a single token value.
+     * Clean up dangling, duplicate, or leading/trailing separators created by empty tokens.
      *
-     * @param string $token Token name.
-     * @param array $context
+     * @param string $str
+     * @param string $sep
      * @return string
      */
-    public function resolveToken($token, array $context = []) {
-        // 1. Custom registered callbacks take top priority
-        if (isset($this->customVariables[$token])) {
-            return (string) call_user_func($this->customVariables[$token], $context, $token);
+    protected function cleanDanglingSeparators($str, $sep = '-') {
+        $sepEscaped = preg_quote(trim($sep), '/');
+        if (empty($sepEscaped)) {
+            $sepEscaped = '\-';
         }
 
-        // 2. Core Site & System Variables
-        switch ($token) {
-            case 'sitename':
-                return function_exists('get_bloginfo') ? (string) get_bloginfo('name') : 'Apex SEO Site';
-            case 'sitedesc':
-                return function_exists('get_bloginfo') ? (string) get_bloginfo('description') : '';
-            case 'siteurl':
-                return function_exists('home_url') ? (string) home_url() : 'https://example.com';
-            case 'currentyear':
-                return date('Y');
-            case 'currentmonth':
-                return date('F');
-            case 'currentdate':
-                return date('F j, Y');
-            case 'sep':
-                return isset($context['sep']) ? (string) $context['sep'] : '-';
-        }
+        // Collapse multiple spaces
+        $str = preg_replace('/\s+/', ' ', $str);
 
-        // Context object inspection (Post/Term)
-        $post = isset($context['post']) ? $context['post'] : null;
-        $postId = isset($context['post_id']) ? (int) $context['post_id'] : (isset($post->ID) ? (int) $post->ID : 0);
+        // Collapse duplicate separators: e.g. " | | " -> " | "
+        $str = preg_replace('/(\s*' . $sepEscaped . '\s*){2,}/', ' ' . trim($sep) . ' ', $str);
 
-        // 3. Post / Page Variables
-        if ($postId > 0 || $post !== null) {
-            switch ($token) {
-                case 'title':
-                    if (isset($context['title'])) {
-                        return (string) $context['title'];
-                    }
-                    if (function_exists('get_the_title')) {
-                        return (string) get_the_title($postId);
-                    }
-                    return isset($post->post_title) ? (string) $post->post_title : '';
+        // Remove leading separator: " | Title" -> "Title"
+        $str = preg_replace('/^\s*' . $sepEscaped . '\s*/', '', $str);
 
-                case 'excerpt':
-                    if (isset($context['excerpt'])) {
-                        return (string) $context['excerpt'];
-                    }
-                    if (function_exists('get_the_excerpt')) {
-                        return (string) wp_strip_all_tags(get_the_excerpt($postId));
-                    }
-                    if (isset($post->post_excerpt) && !empty($post->post_excerpt)) {
-                        return (string) wp_strip_all_tags($post->post_excerpt);
-                    }
-                    if (isset($post->post_content)) {
-                        return (string) substr(wp_strip_all_tags($post->post_content), 0, 160);
-                    }
-                    return '';
+        // Remove trailing separator: "Title | " -> "Title"
+        $str = preg_replace('/\s*' . $sepEscaped . '\s*$/', '', $str);
 
-                case 'date':
-                    if (function_exists('get_the_date')) {
-                        return (string) get_the_date('', $postId);
-                    }
-                    return isset($post->post_date) ? (string) date('F j, Y', strtotime($post->post_date)) : '';
-
-                case 'modified':
-                    if (function_exists('get_the_modified_date')) {
-                        return (string) get_the_modified_date('', $postId);
-                    }
-                    return isset($post->post_modified) ? (string) date('F j, Y', strtotime($post->post_modified)) : '';
-
-                case 'id':
-                    return (string) $postId;
-
-                case 'slug':
-                    return isset($post->post_name) ? (string) $post->post_name : '';
-
-                case 'author_name':
-                    if (function_exists('get_the_author_meta') && isset($post->post_author)) {
-                        return (string) get_the_author_meta('display_name', $post->post_author);
-                    }
-                    return isset($context['author_name']) ? (string) $context['author_name'] : 'Admin';
-
-                case 'category':
-                    if (function_exists('get_the_category')) {
-                        $cats = get_the_category($postId);
-                        return !empty($cats) && isset($cats[0]->name) ? (string) $cats[0]->name : '';
-                    }
-                    return isset($context['category']) ? (string) $context['category'] : '';
-
-                case 'tag':
-                    if (function_exists('get_the_tags')) {
-                        $tags = get_the_tags($postId);
-                        return !empty($tags) && isset($tags[0]->name) ? (string) $tags[0]->name : '';
-                    }
-                    return isset($context['tag']) ? (string) $context['tag'] : '';
-            }
-
-            // Custom Field tokens: %%cf_field_name%%
-            if (strpos($token, 'cf_') === 0) {
-                $fieldName = substr($token, 3);
-                if (function_exists('get_post_meta')) {
-                    $val = get_post_meta($postId, $fieldName, true);
-                    return is_scalar($val) ? (string) $val : '';
-                }
-            }
-        }
-
-        // 4. Term / Taxonomy Variables
-        if (isset($context['term_id']) || isset($context['term'])) {
-            switch ($token) {
-                case 'term_title':
-                    return isset($context['term_title']) ? (string) $context['term_title'] : '';
-                case 'term_description':
-                    return isset($context['term_description']) ? (string) $context['term_description'] : '';
-            }
-        }
-
-        return '';
+        return trim($str);
     }
 }

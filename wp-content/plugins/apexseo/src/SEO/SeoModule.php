@@ -2,8 +2,15 @@
 namespace ApexSEO\SEO;
 
 use ApexSEO\Core\Contracts\ModuleInterface;
+use ApexSEO\Core\Contracts\HookableInterface;
 use ApexSEO\Core\Container\ContainerInterface;
+use ApexSEO\Core\Database\DatabaseManager;
+use ApexSEO\Core\Configuration\ConfigurationManager;
 use ApexSEO\SEO\Variables\VariableEngine;
+use ApexSEO\SEO\Templates\TemplateManager;
+use ApexSEO\SEO\Repository\IndexableRepository;
+use ApexSEO\SEO\Builder\IndexableBuilder;
+use ApexSEO\SEO\Context\ContextDetector;
 use ApexSEO\SEO\Meta\TitlePresenter;
 use ApexSEO\SEO\Meta\DescriptionPresenter;
 use ApexSEO\SEO\Meta\CanonicalPresenter;
@@ -14,59 +21,95 @@ use ApexSEO\SEO\Meta\MetaTagManager;
 use ApexSEO\SEO\Breadcrumbs\BreadcrumbGenerator;
 use ApexSEO\SEO\Sitemap\SitemapGenerator;
 use ApexSEO\SEO\Redirects\RedirectManager;
-use ApexSEO\Core\Database\DatabaseManager;
+use ApexSEO\SEO\Integrations\WooCommerceIntegration;
+use ApexSEO\SEO\Admin\MetaSaver;
 
 /**
- * Apex SEO Subsystem Module.
+ * SEO Core Subsystem Module.
  */
-class SeoModule implements ModuleInterface {
+class SeoModule implements ModuleInterface, HookableInterface {
     const ID = 'seo';
     const VERSION = '1.0.0';
 
     /**
-     * {@inheritdoc}
+     * Get module unique identifier.
+     *
+     * @return string
      */
     public function getId() {
         return self::ID;
     }
 
     /**
-     * {@inheritdoc}
+     * Get human-readable module name.
+     *
+     * @return string
      */
     public function getName() {
-        return 'Apex SEO Subsystem';
+        return 'SEO Core Subsystem';
     }
 
     /**
-     * {@inheritdoc}
+     * Get module version.
+     *
+     * @return string
      */
     public function getVersion() {
         return self::VERSION;
     }
 
     /**
-     * {@inheritdoc}
+     * Determine if module is enabled.
+     *
+     * @return bool
      */
     public function isEnabled() {
         return true;
     }
 
     /**
-     * {@inheritdoc}
+     * Register domain services into DI Container.
+     *
+     * @param ContainerInterface $container
+     * @return void
      */
     public function register(ContainerInterface $container) {
-        // Variable Engine
         $container->singleton(VariableEngine::class, function() {
             return new VariableEngine();
         });
 
-        // Presenters
+        $container->singleton(TemplateManager::class, function(ContainerInterface $c) {
+            $config = $c->has(ConfigurationManager::class) ? $c->get(ConfigurationManager::class) : null;
+            return new TemplateManager($config);
+        });
+
+        $container->singleton(IndexableRepository::class, function(ContainerInterface $c) {
+            return new IndexableRepository($c->get(DatabaseManager::class));
+        });
+
+        $container->singleton(IndexableBuilder::class, function(ContainerInterface $c) {
+            return new IndexableBuilder(
+                $c->get(VariableEngine::class),
+                $c->get(TemplateManager::class)
+            );
+        });
+
+        $container->singleton(ContextDetector::class, function(ContainerInterface $c) {
+            return new ContextDetector($c->get(TemplateManager::class));
+        });
+
         $container->singleton(TitlePresenter::class, function(ContainerInterface $c) {
-            return new TitlePresenter($c->get(VariableEngine::class));
+            return new TitlePresenter(
+                $c->get(VariableEngine::class),
+                $c->get(TemplateManager::class)
+            );
         });
 
         $container->singleton(DescriptionPresenter::class, function(ContainerInterface $c) {
-            return new DescriptionPresenter($c->get(VariableEngine::class));
+            return new DescriptionPresenter(
+                $c->get(VariableEngine::class),
+                $c->get(TemplateManager::class)
+            );
         });
 
         $container->singleton(CanonicalPresenter::class, function() {
@@ -85,9 +128,26 @@ class SeoModule implements ModuleInterface {
             return new TwitterCardPresenter($c->get(VariableEngine::class));
         });
 
-        // Main Meta Coordinator
+        $container->singleton(BreadcrumbGenerator::class, function() {
+            return new BreadcrumbGenerator();
+        });
+
+        $container->singleton(SitemapGenerator::class, function() {
+            return new SitemapGenerator();
+        });
+
+        $container->singleton(RedirectManager::class, function(ContainerInterface $c) {
+            return new RedirectManager($c->get(DatabaseManager::class));
+        });
+
+        $container->singleton(WooCommerceIntegration::class, function() {
+            return new WooCommerceIntegration();
+        });
+
         $container->singleton(MetaTagManager::class, function(ContainerInterface $c) {
             return new MetaTagManager(
+                $c->get(ContextDetector::class),
+                $c->get(IndexableRepository::class),
                 $c->get(TitlePresenter::class),
                 $c->get(DescriptionPresenter::class),
                 $c->get(CanonicalPresenter::class),
@@ -97,31 +157,97 @@ class SeoModule implements ModuleInterface {
             );
         });
 
-        // Breadcrumbs & Sitemap
-        $container->singleton(BreadcrumbGenerator::class, function() {
-            return new BreadcrumbGenerator();
-        });
-
-        $container->singleton(SitemapGenerator::class, function() {
-            return new SitemapGenerator();
-        });
-
-        // Redirects
-        $container->singleton(RedirectManager::class, function(ContainerInterface $c) {
-            return new RedirectManager($c->get(DatabaseManager::class));
+        $container->singleton(MetaSaver::class, function(ContainerInterface $c) {
+            return new MetaSaver(
+                $c->get(IndexableRepository::class),
+                $c->get(IndexableBuilder::class)
+            );
         });
     }
 
     /**
-     * {@inheritdoc}
+     * Boot the SEO module.
+     *
+     * @param ContainerInterface $container
+     * @return void
      */
     public function boot(ContainerInterface $container) {
-        // Hook into wp_head when running inside WordPress
-        if (function_exists('add_action')) {
-            add_action('wp_head', function() use ($container) {
-                $metaManager = $container->get(MetaTagManager::class);
-                echo $metaManager->renderHeadHtml();
-            }, 1);
+        $this->registerModuleHooks($container);
+    }
+
+    /**
+     * Register WordPress runtime actions and filters.
+     *
+     * @return void
+     */
+    public function registerHooks() {
+        // Required by HookableInterface if instantiated without container
+    }
+
+    /**
+     * Register module hooks with container context.
+     *
+     * @param ContainerInterface $container
+     * @return void
+     */
+    public function registerModuleHooks(ContainerInterface $container) {
+        if (!function_exists('add_action') || !function_exists('add_filter')) {
+            return;
         }
+
+        // Frontend Head Output
+        add_action('wp_head', function() use ($container) {
+            if ($container->has(MetaTagManager::class)) {
+                $container->get(MetaTagManager::class)->outputHead();
+            }
+        }, 1);
+
+        // Document Title Filter (WP 4.4+)
+        add_filter('pre_get_document_title', function($title) use ($container) {
+            if ($container->has(TitlePresenter::class) && $container->has(ContextDetector::class)) {
+                $detector = $container->get(ContextDetector::class);
+                $presenter = $container->get(TitlePresenter::class);
+                return $presenter->render($detector->detectContext());
+            }
+            return $title;
+        }, 15);
+
+        // Admin Metadata Persistence
+        add_action('save_post', function($postId, $post = null) use ($container) {
+            if ($container->has(MetaSaver::class)) {
+                $container->get(MetaSaver::class)->savePostMeta($postId, $post);
+            }
+        }, 10, 2);
+
+        add_action('created_term', function($termId, $ttId, $taxonomy) use ($container) {
+            if ($container->has(MetaSaver::class)) {
+                $container->get(MetaSaver::class)->saveTermMeta($termId, $ttId, $taxonomy);
+            }
+        }, 10, 3);
+
+        add_action('edited_term', function($termId, $ttId, $taxonomy) use ($container) {
+            if ($container->has(MetaSaver::class)) {
+                $container->get(MetaSaver::class)->saveTermMeta($termId, $ttId, $taxonomy);
+            }
+        }, 10, 3);
+
+        add_action('delete_post', function($postId) use ($container) {
+            if ($container->has(MetaSaver::class)) {
+                $container->get(MetaSaver::class)->deletePostIndexable($postId);
+            }
+        }, 10, 1);
+
+        add_action('delete_term', function($termId) use ($container) {
+            if ($container->has(MetaSaver::class)) {
+                $container->get(MetaSaver::class)->deleteTermIndexable($termId);
+            }
+        }, 10, 1);
+
+        // Fast Redirection Interceptor
+        add_action('template_redirect', function() use ($container) {
+            if ($container->has(RedirectManager::class)) {
+                $container->get(RedirectManager::class)->interceptAndRedirect();
+            }
+        }, 1);
     }
 }

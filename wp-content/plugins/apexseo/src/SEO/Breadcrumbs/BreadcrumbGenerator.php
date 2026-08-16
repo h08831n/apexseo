@@ -1,111 +1,149 @@
 <?php
 namespace ApexSEO\SEO\Breadcrumbs;
 
-use ApexSEO\Core\Contracts\ServiceContractInterface;
+use ApexSEO\SEO\Models\SeoContext;
 
 /**
- * Semantic HTML & JSON-LD Breadcrumb Trail Generator.
+ * Generates accessible HTML Breadcrumb trails and valid Schema.org BreadcrumbList JSON-LD.
  */
-class BreadcrumbGenerator implements ServiceContractInterface {
+class BreadcrumbGenerator {
     /**
-     * Build breadcrumb items list for context.
+     * Build breadcrumb items array for a given context.
      *
-     * @param array $context
-     * @return array<int, array{title: string, url: string}>
+     * @param SeoContext|array $context
+     * @return array<int, array{title: string, url: string|null, position: int}>
      */
-    public function getItems(array $context = []) {
+    public function getBreadcrumbItems($context) {
         $items = [];
+        $homeTitle = 'Home';
+        $homeUrl = function_exists('home_url') ? home_url('/') : '/';
 
-        // 1. Home Item
-        $homeUrl = function_exists('home_url') ? home_url('/') : 'https://example.com/';
-        $homeTitle = !empty($context['home_title']) ? $context['home_title'] : 'Home';
-        $items[] = [
-            'title' => $homeTitle,
-            'url'   => $homeUrl,
-        ];
-
-        // 2. Category / Taxonomy ancestry if single post
-        if (!empty($context['category'])) {
-            $catUrl = !empty($context['category_url']) ? $context['category_url'] : $homeUrl . 'category/' . sanitize_title($context['category']) . '/';
-            $items[] = [
-                'title' => $context['category'],
-                'url'   => $catUrl,
-            ];
+        if (is_array($context)) {
+            $homeTitle = isset($context['home_title']) ? $context['home_title'] : 'Home';
         }
 
-        // 3. Current page item
-        if (!empty($context['title'])) {
-            $currentUrl = !empty($context['canonical_url']) ? $context['canonical_url'] : '';
-            $items[] = [
-                'title' => $context['title'],
-                'url'   => $currentUrl,
-            ];
+        // 1. Root Home item
+        $items[] = [
+            'title'    => $homeTitle,
+            'url'      => $homeUrl,
+            'position' => 1,
+        ];
+
+        if (is_array($context)) {
+            $pos = 2;
+            if (!empty($context['category'])) {
+                $items[] = [
+                    'title'    => $context['category'],
+                    'url'      => isset($context['category_url']) ? $context['category_url'] : null,
+                    'position' => $pos++,
+                ];
+            }
+            if (!empty($context['title'])) {
+                $items[] = [
+                    'title'    => $context['title'],
+                    'url'      => isset($context['canonical_url']) ? $context['canonical_url'] : null,
+                    'position' => $pos++,
+                ];
+            }
+            return $items;
+        }
+
+        if ($context instanceof SeoContext) {
+            $pos = 2;
+
+            if ($context->page_type === 'front_page' || $context->page_type === 'home') {
+                return $items;
+            }
+
+            // Category or Taxonomy term
+            if (!empty($context->category)) {
+                $items[] = [
+                    'title'    => $context->category,
+                    'url'      => null,
+                    'position' => $pos++,
+                ];
+            } elseif (!empty($context->term_name)) {
+                $items[] = [
+                    'title'    => $context->term_name,
+                    'url'      => null,
+                    'position' => $pos++,
+                ];
+            }
+
+            // Current item
+            if (!empty($context->title)) {
+                $items[] = [
+                    'title'    => $context->title,
+                    'url'      => $context->canonical_url,
+                    'position' => $pos++,
+                ];
+            }
         }
 
         return $items;
     }
 
     /**
-     * Render accessible HTML breadcrumb navigation markup.
+     * Render accessible HTML breadcrumb navigation.
      *
-     * @param array $context
-     * @param string $separator
-     * @return string HTML
+     * @param SeoContext|array $context
+     * @return string
      */
-    public function renderHtml(array $context = [], $separator = '›') {
-        $items = $this->getItems($context);
-        if (count($items) <= 1) {
+    public function renderHtml($context) {
+        $items = $this->getBreadcrumbItems($context);
+        if (empty($items)) {
             return '';
         }
 
-        $html = '<nav class="apex-breadcrumbs" aria-label="Breadcrumbs">' . "\n";
+        $html = '<nav aria-label="Breadcrumb" class="apexseo-breadcrumbs">' . "\n";
         $html .= '  <ol itemscope itemtype="https://schema.org/BreadcrumbList">' . "\n";
 
-        $count = count($items);
-        foreach ($items as $index => $item) {
-            $position = $index + 1;
-            $isLast = ($position === $count);
+        foreach ($items as $item) {
+            $title = function_exists('esc_html') ? esc_html($item['title']) : htmlspecialchars($item['title'], ENT_QUOTES, 'UTF-8');
+            $html .= sprintf('    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">' . "\n");
 
-            $html .= sprintf('    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">%s', "\n");
-            if (!$isLast && !empty($item['url'])) {
-                $html .= sprintf('      <a itemprop="item" href="%s"><span itemprop="name">%s</span></a>', esc_url($item['url']), esc_html($item['title'])) . "\n";
+            if (!empty($item['url']) && $item['position'] < count($items)) {
+                $url = function_exists('esc_url') ? esc_url($item['url']) : htmlspecialchars($item['url'], ENT_QUOTES, 'UTF-8');
+                $html .= sprintf('      <a itemprop="item" href="%s"><span itemprop="name">%s</span></a>' . "\n", $url, $title);
             } else {
-                $html .= sprintf('      <span itemprop="name" aria-current="page">%s</span>', esc_html($item['title'])) . "\n";
+                $html .= sprintf('      <span itemprop="name">%s</span>' . "\n", $title);
             }
-            $html .= sprintf('      <meta itemprop="position" content="%d" />', $position) . "\n";
-            if (!$isLast) {
-                $html .= sprintf('      <span class="apex-breadcrumb-sep" aria-hidden="true">%s</span>', esc_html($separator)) . "\n";
-            }
+
+            $html .= sprintf('      <meta itemprop="position" content="%d" />' . "\n", $item['position']);
             $html .= '    </li>' . "\n";
         }
 
         $html .= '  </ol>' . "\n";
-        $html .= '</nav>';
+        $html .= '</nav>' . "\n";
 
         return $html;
     }
 
     /**
-     * Generate Schema.org BreadcrumbList structured data array.
+     * Generate Schema.org BreadcrumbList JSON-LD structure.
      *
-     * @param array $context
+     * @param SeoContext|array $context
      * @return array
      */
-    public function generateSchema(array $context = []) {
-        $items = $this->getItems($context);
+    public function generateSchema($context) {
+        $items = $this->getBreadcrumbItems($context);
         $elements = [];
 
-        foreach ($items as $index => $item) {
-            $elements[] = [
+        foreach ($items as $item) {
+            $el = [
                 '@type'    => 'ListItem',
-                'position' => $index + 1,
+                'position' => $item['position'],
                 'name'     => $item['title'],
-                'item'     => !empty($item['url']) ? $item['url'] : null,
             ];
+
+            if (!empty($item['url'])) {
+                $el['item'] = $item['url'];
+            }
+
+            $elements[] = $el;
         }
 
         return [
-            '@context'        => 'https://schema.org',
             '@type'           => 'BreadcrumbList',
             'itemListElement' => $elements,
         ];

@@ -1,85 +1,125 @@
 <?php
 namespace ApexSEO\SEO\Meta;
 
-use ApexSEO\Core\Contracts\ServiceContractInterface;
+use ApexSEO\SEO\Models\SeoContext;
+use ApexSEO\SEO\Models\Indexable;
 
 /**
- * Canonical URL Presenter.
+ * Renders high-fidelity canonical URL link elements and strips tracking parameters.
  */
-class CanonicalPresenter implements ServiceContractInterface {
+class CanonicalPresenter {
     /**
-     * Compute the canonical URL for the current request context.
+     * Query parameters to strip for canonical normalization.
      *
-     * @param array $context
+     * @var array<string>
+     */
+    protected $blacklistedParams = [
+        'utm_source',
+        'utm_medium',
+        'utm_campaign',
+        'utm_term',
+        'utm_content',
+        'utm_id',
+        'fbclid',
+        'gclid',
+        'dclid',
+        'msclkid',
+        'zanpid',
+        '_ga',
+        '_gl',
+        'mc_cid',
+        'mc_eid',
+    ];
+
+    /**
+     * Render the canonical URL string.
+     *
+     * @param SeoContext|Indexable|array|string $context
      * @return string
      */
-    public function render(array $context = []) {
-        // 1. Explicit post/page override
-        if (!empty($context['custom_canonical'])) {
-            return esc_url_raw($context['custom_canonical']);
+    public function render($context) {
+        if (is_string($context)) {
+            return $this->cleanUrl($context);
         }
 
-        // 2. Single Post / Page
-        if (!empty($context['post_id'])) {
-            if (function_exists('get_permalink')) {
-                $permalink = get_permalink((int) $context['post_id']);
-                if (!empty($permalink)) {
-                    return $this->cleanUrl($permalink);
+        if ($context instanceof Indexable && !empty($context->canonical_url)) {
+            return $this->cleanUrl($context->canonical_url);
+        }
+
+        if ($context instanceof SeoContext) {
+            $url = !empty($context->canonical_url) ? $context->canonical_url : $context->permalink;
+            if (empty($url)) {
+                $url = home_url('/');
+            }
+
+            // Handle pagination on canonical
+            if ($context->is_paged && $context->page_number > 1) {
+                if (function_exists('get_pagenum_link')) {
+                    $url = get_pagenum_link($context->page_number);
+                } else {
+                    $url = add_query_arg('paged', $context->page_number, $url);
                 }
             }
+
+            return $this->cleanUrl($url);
         }
 
-        // 3. Term / Taxonomy
-        if (!empty($context['term_id']) && !empty($context['taxonomy'])) {
-            if (function_exists('get_term_link')) {
-                $link = get_term_link((int) $context['term_id'], $context['taxonomy']);
-                if (!is_wp_error($link) && !empty($link)) {
-                    return $this->cleanUrl($link);
-                }
-            }
+        if (is_array($context)) {
+            $url = isset($context['canonical_url']) ? $context['canonical_url'] : (isset($context['permalink']) ? $context['permalink'] : '');
+            return $this->cleanUrl($url);
         }
 
-        // 4. Fallback URL in context or Home URL
-        if (!empty($context['current_url'])) {
-            return $this->cleanUrl($context['current_url']);
-        }
-
-        return function_exists('home_url') ? home_url('/') : 'https://example.com/';
+        return '';
     }
 
     /**
-     * Clean tracking parameters and normalize URL trailing slash.
+     * Render full HTML tag: <link rel="canonical" href="..." />
+     *
+     * @param SeoContext|Indexable|array|string $context
+     * @return string
+     */
+    public function renderHtmlTag($context) {
+        $url = $this->render($context);
+        if (empty($url)) {
+            return '';
+        }
+
+        $escaped = function_exists('esc_url') ? esc_url($url) : htmlspecialchars($url, ENT_QUOTES, 'UTF-8');
+        return '<link rel="canonical" href="' . $escaped . '" />' . "\n";
+    }
+
+    /**
+     * Strip tracking query parameters and normalize duplicate slashes.
      *
      * @param string $url
      * @return string
      */
     public function cleanUrl($url) {
-        $parts = parse_url($url);
-        if (!$parts) {
+        if (empty($url)) {
+            return '';
+        }
+
+        $parsed = parse_url($url);
+        if (!$parsed || !isset($parsed['host'])) {
             return $url;
         }
 
-        $scheme = isset($parts['scheme']) ? $parts['scheme'] . '://' : 'https://';
-        $host   = isset($parts['host']) ? $parts['host'] : '';
-        $port   = isset($parts['port']) ? ':' . $parts['port'] : '';
-        $path   = isset($parts['path']) ? $parts['path'] : '/';
+        $scheme = isset($parsed['scheme']) ? $parsed['scheme'] : 'https';
+        $host   = $parsed['host'];
+        $port   = isset($parsed['port']) ? ':' . $parsed['port'] : '';
+        $path   = isset($parsed['path']) ? $parsed['path'] : '/';
 
-        // Filter tracking query params like utm_*, fbclid, gclid
         $query = '';
-        if (isset($parts['query'])) {
-            parse_str($parts['query'], $queryParams);
-            $filtered = [];
-            foreach ($queryParams as $key => $val) {
-                if (strpos($key, 'utm_') === 0 || in_array($key, ['fbclid', 'gclid', '_ga', 'mc_cid', 'mc_eid'], true)) {
-                    continue;
-                }
-                $filtered[$key] = $val;
+        if (!empty($parsed['query'])) {
+            parse_str($parsed['query'], $queryParams);
+            foreach ($this->blacklistedParams as $param) {
+                unset($queryParams[$param]);
             }
-            if (!empty($filtered)) {
-                $query = '?' . http_build_query($filtered);
+            if (!empty($queryParams)) {
+                $query = '?' . http_build_query($queryParams);
             }
         }
 
-        return $scheme . $host . $port . $path . $query;
+        return $scheme . '://' . $host . $port . $path . $query;
     }
 }

@@ -1,122 +1,101 @@
 <?php
 namespace ApexSEO\SEO\Meta;
 
-use ApexSEO\Core\Contracts\ServiceContractInterface;
+use ApexSEO\SEO\Models\SeoContext;
+use ApexSEO\SEO\Models\Indexable;
+use ApexSEO\SEO\Context\ContextDetector;
+use ApexSEO\SEO\Repository\IndexableRepository;
 use ApexSEO\SEO\Social\OpenGraphPresenter;
 use ApexSEO\SEO\Social\TwitterCardPresenter;
 
 /**
- * SEO Meta Tag Manager & Output Coordinator.
+ * Orchestrates all frontend SEO tag generation and renders clean, valid HTML in wp_head.
  */
-class MetaTagManager implements ServiceContractInterface {
-    /**
-     * @var TitlePresenter
-     */
+class MetaTagManager {
+    /** @var ContextDetector */
+    protected $contextDetector;
+
+    /** @var IndexableRepository|null */
+    protected $indexableRepository;
+
+    /** @var TitlePresenter */
     protected $titlePresenter;
 
-    /**
-     * @var DescriptionPresenter
-     */
+    /** @var DescriptionPresenter */
     protected $descriptionPresenter;
 
-    /**
-     * @var CanonicalPresenter
-     */
+    /** @var CanonicalPresenter */
     protected $canonicalPresenter;
 
-    /**
-     * @var RobotsPresenter
-     */
+    /** @var RobotsPresenter */
     protected $robotsPresenter;
 
-    /**
-     * @var OpenGraphPresenter
-     */
+    /** @var OpenGraphPresenter */
     protected $openGraphPresenter;
 
-    /**
-     * @var TwitterCardPresenter
-     */
+    /** @var TwitterCardPresenter */
     protected $twitterCardPresenter;
 
     /**
      * Constructor.
      */
     public function __construct(
-        TitlePresenter $titlePresenter,
-        DescriptionPresenter $descriptionPresenter,
-        CanonicalPresenter $canonicalPresenter,
-        RobotsPresenter $robotsPresenter,
-        OpenGraphPresenter $openGraphPresenter,
-        TwitterCardPresenter $twitterCardPresenter
+        $contextDetector = null,
+        $indexableRepository = null,
+        $titlePresenter = null,
+        $descriptionPresenter = null,
+        $canonicalPresenter = null,
+        $robotsPresenter = null,
+        $openGraphPresenter = null,
+        $twitterCardPresenter = null
     ) {
-        $this->titlePresenter = $titlePresenter;
-        $this->descriptionPresenter = $descriptionPresenter;
-        $this->canonicalPresenter = $canonicalPresenter;
-        $this->robotsPresenter = $robotsPresenter;
-        $this->openGraphPresenter = $openGraphPresenter;
-        $this->twitterCardPresenter = $twitterCardPresenter;
+        $this->contextDetector      = $contextDetector !== null ? $contextDetector : new ContextDetector();
+        $this->indexableRepository  = $indexableRepository;
+        $this->titlePresenter       = $titlePresenter !== null ? $titlePresenter : new TitlePresenter();
+        $this->descriptionPresenter = $descriptionPresenter !== null ? $descriptionPresenter : new DescriptionPresenter();
+        $this->canonicalPresenter   = $canonicalPresenter !== null ? $canonicalPresenter : new CanonicalPresenter();
+        $this->robotsPresenter      = $robotsPresenter !== null ? $robotsPresenter : new RobotsPresenter();
+        $this->openGraphPresenter   = $openGraphPresenter !== null ? $openGraphPresenter : new OpenGraphPresenter();
+        $this->twitterCardPresenter = $twitterCardPresenter !== null ? $twitterCardPresenter : new TwitterCardPresenter();
     }
 
     /**
-     * Build the complete SEO head tags packet.
+     * Render complete SEO head block HTML for current request context.
      *
-     * @param array $context
-     * @return array
-     */
-    public function buildHeadData(array $context = []) {
-        $title = $this->titlePresenter->render($context);
-        $description = $this->descriptionPresenter->render($context);
-        $canonical = $this->canonicalPresenter->render($context);
-        $robots = $this->robotsPresenter->render($context);
-
-        $context['title'] = $title;
-        $context['description'] = $description;
-        $context['canonical_url'] = $canonical;
-
-        $ogTags = $this->openGraphPresenter->buildTags($context);
-        $twitterTags = $this->twitterCardPresenter->buildTags($context);
-
-        return [
-            'title'       => $title,
-            'description' => $description,
-            'canonical'   => $canonical,
-            'robots'      => $robots,
-            'og'          => $ogTags,
-            'twitter'     => $twitterTags,
-        ];
-    }
-
-    /**
-     * Render the full HTML block to be output in <head>.
-     *
-     * @param array $context
+     * @param SeoContext|Indexable|null $context Optional override
      * @return string
      */
-    public function renderHeadHtml(array $context = []) {
-        $data = $this->buildHeadData($context);
-        $context['title'] = $data['title'];
-        $context['description'] = $data['description'];
-        $context['canonical_url'] = $data['canonical'];
+    public function renderHead($context = null) {
+        if ($context === null) {
+            $context = $this->contextDetector->detectContext();
 
-        $out = "<!-- This site is optimized with Apex SEO Platform -->\n";
-        if (!empty($data['title'])) {
-            $out .= sprintf("<title>%s</title>\n", esc_html($data['title']));
-        }
-        if (!empty($data['description'])) {
-            $out .= sprintf("<meta name=\"description\" content=\"%s\" />\n", esc_attr($data['description']));
-        }
-        if (!empty($data['canonical'])) {
-            $out .= sprintf("<link rel=\"canonical\" href=\"%s\" />\n", esc_url($data['canonical']));
-        }
-        if (!empty($data['robots'])) {
-            $out .= sprintf("<meta name=\"robots\" content=\"%s\" />\n", esc_attr($data['robots']));
+            // Check if stored indexable exists in DB repository
+            if ($this->indexableRepository !== null && $context->object_id) {
+                $saved = $this->indexableRepository->findByObject($context->object_type, $context->object_id);
+                if ($saved) {
+                    $context = $saved;
+                }
+            }
         }
 
-        $out .= $this->openGraphPresenter->render($context);
-        $out .= $this->twitterCardPresenter->render($context);
-        $out .= "<!-- / Apex SEO Platform -->\n";
+        $html = "<!-- This site is optimized with the Apex SEO Platform -->\n";
+        $html .= $this->titlePresenter->renderHtmlTag($context);
+        $html .= $this->descriptionPresenter->renderHtmlTag($context);
+        $html .= $this->canonicalPresenter->renderHtmlTag($context);
+        $html .= $this->robotsPresenter->renderHtmlTag($context);
+        $html .= $this->openGraphPresenter->render($context);
+        $html .= $this->twitterCardPresenter->render($context);
+        $html .= "<!-- / Apex SEO Platform -->\n";
 
-        return $out;
+        return $html;
+    }
+
+    /**
+     * Echo head markup into wp_head hook.
+     *
+     * @return void
+     */
+    public function outputHead() {
+        echo $this->renderHead();
     }
 }

@@ -1,13 +1,14 @@
 <?php
 namespace ApexSEO\SEO\Social;
 
-use ApexSEO\Core\Contracts\ServiceContractInterface;
+use ApexSEO\SEO\Models\SeoContext;
+use ApexSEO\SEO\Models\Indexable;
 use ApexSEO\SEO\Variables\VariableEngine;
 
 /**
- * Twitter Cards Metadata Presenter.
+ * Renders Twitter / X Card meta tags.
  */
-class TwitterCardPresenter implements ServiceContractInterface {
+class TwitterCardPresenter {
     /**
      * Variable engine.
      *
@@ -18,68 +19,72 @@ class TwitterCardPresenter implements ServiceContractInterface {
     /**
      * Constructor.
      *
-     * @param VariableEngine $variableEngine
+     * @param VariableEngine|null $variableEngine
      */
-    public function __construct(VariableEngine $variableEngine) {
-        $this->variableEngine = $variableEngine;
+    public function __construct($variableEngine = null) {
+        $this->variableEngine = $variableEngine !== null ? $variableEngine : new VariableEngine();
     }
 
     /**
-     * Build Twitter card tags array.
+     * Render Twitter Card meta tags HTML block.
      *
-     * @param array $context
-     * @return array<string, string>
+     * @param SeoContext|Indexable|array $context
+     * @return string
      */
-    public function buildTags(array $context = []) {
-        $tags = [
-            'twitter:card' => !empty($context['twitter_card_type']) ? $context['twitter_card_type'] : 'summary_large_image',
-        ];
+    public function render($context) {
+        $tags = $this->buildTags($context);
+        $output = '';
 
-        if (!empty($context['twitter_site'])) {
-            $tags['twitter:site'] = $context['twitter_site'];
+        foreach ($tags as $name => $content) {
+            if ($content === null || $content === '') {
+                continue;
+            }
+
+            if (strpos($name, 'image') !== false) {
+                $escapedContent = function_exists('esc_url') ? esc_url($content) : htmlspecialchars($content, ENT_QUOTES, 'UTF-8');
+            } else {
+                $escapedContent = function_exists('esc_attr') ? esc_attr($content) : htmlspecialchars($content, ENT_QUOTES, 'UTF-8');
+            }
+
+            $output .= sprintf('<meta name="%s" content="%s" />' . "\n", $name, $escapedContent);
         }
 
-        if (!empty($context['twitter_creator'])) {
-            $tags['twitter:creator'] = $context['twitter_creator'];
+        return $output;
+    }
+
+    /**
+     * Build raw name => value map for Twitter Card tags.
+     *
+     * @param SeoContext|Indexable|array $context
+     * @return array<string, string|null>
+     */
+    public function buildTags($context) {
+        $tags = [];
+        $tags['twitter:card'] = 'summary_large_image';
+
+        if ($context instanceof Indexable) {
+            $tags['twitter:title'] = !empty($context->twitter_title) ? $context->twitter_title : (!empty($context->og_title) ? $context->og_title : $context->title);
+            $tags['twitter:description'] = !empty($context->twitter_description) ? $context->twitter_description : (!empty($context->og_description) ? $context->og_description : $context->description);
+            $tags['twitter:image'] = !empty($context->twitter_image) ? $context->twitter_image : $context->og_image;
+            return $tags;
         }
 
-        if (!empty($context['twitter_title'])) {
-            $tags['twitter:title'] = $this->variableEngine->replace($context['twitter_title'], $context);
-        } elseif (!empty($context['title'])) {
-            $tags['twitter:title'] = $this->variableEngine->replace($context['title'], $context);
+        if ($context instanceof SeoContext) {
+            $tags['twitter:card'] = $context->twitter_card ? $context->twitter_card : 'summary_large_image';
+            $tags['twitter:title'] = !empty($context->twitter_title) ? $context->twitter_title : (!empty($context->og_title) ? $context->og_title : $context->title);
+            $tags['twitter:description'] = !empty($context->twitter_description) ? $context->twitter_description : (!empty($context->og_description) ? $context->og_description : $context->excerpt);
+            $tags['twitter:image'] = !empty($context->twitter_image) ? $context->twitter_image : (!empty($context->og_image) ? $context->og_image : $context->featured_image);
+            return $tags;
         }
 
-        if (!empty($context['twitter_description'])) {
-            $tags['twitter:description'] = $this->variableEngine->replace($context['twitter_description'], $context);
-        } elseif (!empty($context['description'])) {
-            $tags['twitter:description'] = $this->variableEngine->replace($context['description'], $context);
-        }
-
-        if (!empty($context['twitter_image'])) {
-            $tags['twitter:image'] = $context['twitter_image'];
-        } elseif (!empty($context['featured_image'])) {
-            $tags['twitter:image'] = $context['featured_image'];
+        if (is_array($context)) {
+            $tags['twitter:card'] = isset($context['twitter_card']) ? $context['twitter_card'] : 'summary_large_image';
+            $tags['twitter:title'] = isset($context['twitter_title']) ? $context['twitter_title'] : (isset($context['title']) ? $context['title'] : '');
+            $tags['twitter:description'] = isset($context['twitter_description']) ? $context['twitter_description'] : (isset($context['description']) ? $context['description'] : '');
+            $tags['twitter:image'] = isset($context['twitter_image']) ? $context['twitter_image'] : (isset($context['featured_image']) ? $context['featured_image'] : null);
+            return $tags;
         }
 
         return $tags;
-    }
-
-    /**
-     * Render Twitter Card HTML meta tags.
-     *
-     * @param array $context
-     * @return string
-     */
-    public function render(array $context = []) {
-        $tags = $this->buildTags($context);
-        $html = '';
-
-        foreach ($tags as $name => $content) {
-            if (!empty($content)) {
-                $html .= sprintf('<meta name="%s" content="%s" />' . "\n", esc_attr($name), esc_attr($content));
-            }
-        }
-
-        return $html;
     }
 }

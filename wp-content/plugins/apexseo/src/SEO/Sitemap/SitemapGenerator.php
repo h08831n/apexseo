@@ -1,88 +1,61 @@
 <?php
 namespace ApexSEO\SEO\Sitemap;
 
-use ApexSEO\Core\Contracts\ServiceContractInterface;
-
 /**
- * High-Performance XML Sitemap Engine.
+ * High-Performance XML Sitemap Generator.
  */
-class SitemapGenerator implements ServiceContractInterface {
+class SitemapGenerator {
     /**
-     * Max URLs per sitemap chunk.
+     * Render XML URL set sitemap string.
      *
-     * @var int
+     * @param array<int, array{loc: string, lastmod?: string, changefreq?: string, priority?: string|float}> $urls
+     * @return string
      */
-    protected $maxEntries = 1000;
-
-    /**
-     * Generate XML Sitemap Index.
-     *
-     * @param array<string, string> $sitemaps Array of [sitemap_url => lastmod]
-     * @return string XML
-     */
-    public function renderSitemapIndex(array $sitemaps = []) {
+    public function renderUrlSitemap(array $urls) {
         $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
-        $xml .= '<?xml-stylesheet type="text/xsl" href="/main-sitemap.xsl"?>' . "\n";
-        $xml .= '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
+        $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
 
-        foreach ($sitemaps as $url => $lastmod) {
-            $xml .= "  <sitemap>\n";
-            $xml .= sprintf("    <loc>%s</loc>\n", esc_url($url));
-            if (!empty($lastmod)) {
-                $xml .= sprintf("    <lastmod>%s</lastmod>\n", esc_html($lastmod));
+        foreach ($urls as $entry) {
+            $xml .= '  <url>' . "\n";
+            $xml .= '    <loc>' . htmlspecialchars($entry['loc'], ENT_XML1, 'UTF-8') . '</loc>' . "\n";
+
+            if (!empty($entry['lastmod'])) {
+                $xml .= '    <lastmod>' . htmlspecialchars($entry['lastmod'], ENT_XML1, 'UTF-8') . '</lastmod>' . "\n";
             }
-            $xml .= "  </sitemap>\n";
+            if (!empty($entry['changefreq'])) {
+                $xml .= '    <changefreq>' . htmlspecialchars($entry['changefreq'], ENT_XML1, 'UTF-8') . '</changefreq>' . "\n";
+            }
+            if (isset($entry['priority'])) {
+                $xml .= '    <priority>' . sprintf('%.1f', (float) $entry['priority']) . '</priority>' . "\n";
+            }
+
+            $xml .= '  </url>' . "\n";
         }
 
-        $xml .= '</sitemapindex>';
+        $xml .= '</urlset>';
         return $xml;
     }
 
     /**
-     * Generate standard URL XML Sitemap.
+     * Render XML Sitemap Index string.
      *
-     * @param array<int, array{loc: string, lastmod?: string, changefreq?: string, priority?: string, images?: array}> $urls
-     * @return string XML
+     * @param array<int, array{loc: string, lastmod?: string}> $sitemaps
+     * @return string
      */
-    public function renderUrlSitemap(array $urls = []) {
+    public function renderIndexSitemap(array $sitemaps) {
         $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
-        $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">' . "\n";
+        $xml .= '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
 
-        foreach ($urls as $entry) {
-            if (empty($entry['loc'])) {
-                continue;
+        foreach ($sitemaps as $sitemap) {
+            $xml .= '  <sitemap>' . "\n";
+            $xml .= '    <loc>' . htmlspecialchars($sitemap['loc'], ENT_XML1, 'UTF-8') . '</loc>' . "\n";
+            if (!empty($sitemap['lastmod'])) {
+                $xml .= '    <lastmod>' . htmlspecialchars($sitemap['lastmod'], ENT_XML1, 'UTF-8') . '</lastmod>' . "\n";
             }
-            $xml .= "  <url>\n";
-            $xml .= sprintf("    <loc>%s</loc>\n", esc_url($entry['loc']));
-
-            if (!empty($entry['lastmod'])) {
-                $xml .= sprintf("    <lastmod>%s</lastmod>\n", esc_html($entry['lastmod']));
-            }
-            if (!empty($entry['changefreq'])) {
-                $xml .= sprintf("    <changefreq>%s</changefreq>\n", esc_html($entry['changefreq']));
-            }
-            if (!empty($entry['priority'])) {
-                $xml .= sprintf("    <priority>%s</priority>\n", esc_html($entry['priority']));
-            }
-
-            // Image sitemap nodes
-            if (!empty($entry['images']) && is_array($entry['images'])) {
-                foreach ($entry['images'] as $img) {
-                    if (!empty($img['loc'])) {
-                        $xml .= "    <image:image>\n";
-                        $xml .= sprintf("      <image:loc>%s</image:loc>\n", esc_url($img['loc']));
-                        if (!empty($img['title'])) {
-                            $xml .= sprintf("      <image:title>%s</image:title>\n", esc_html($img['title']));
-                        }
-                        $xml .= "    </image:image>\n";
-                    }
-                }
-            }
-
-            $xml .= "  </url>\n";
+            $xml .= '  </sitemap>' . "\n";
         }
 
-        $xml .= '</urlset>';
+        $xml .= '</sitemapindex>';
         return $xml;
     }
 }

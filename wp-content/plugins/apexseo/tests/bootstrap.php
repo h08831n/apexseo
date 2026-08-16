@@ -75,6 +75,19 @@ if (!class_exists('wpdb')) {
         public function get_results($query, $output = 'OBJECT') {
             return [];
         }
+
+        public function insert($table, $data, $format = null) {
+            $this->insert_id = rand(1, 9999);
+            return 1;
+        }
+
+        public function update($table, $data, $where, $format = null, $where_format = null) {
+            return 1;
+        }
+
+        public function delete($table, $where, $where_format = null) {
+            return 1;
+        }
     }
 }
 

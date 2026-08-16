@@ -1,103 +1,171 @@
 <?php
 namespace ApexSEO\SEO\Redirects;
 
-use ApexSEO\Core\Contracts\ServiceContractInterface;
 use ApexSEO\Core\Database\DatabaseManager;
 
 /**
- * High-Speed Redirection Manager (301, 302, 307, 308, 410, 451).
+ * High-Speed Redirection Engine operating against wp_apex_redirects.
  */
-class RedirectManager implements ServiceContractInterface {
+class RedirectManager {
     /**
      * Database manager.
      *
      * @var DatabaseManager
      */
-    protected $databaseManager;
+    protected $db;
 
     /**
-     * In-memory redirect rules cache.
+     * Table name.
      *
-     * @var array
+     * @var string
      */
-    protected $rulesCache = [];
+    protected $table;
+
+    /**
+     * In-memory cache for fast lookups.
+     *
+     * @var array<string, array|null>
+     */
+    protected $lookupCache = [];
 
     /**
      * Constructor.
      *
-     * @param DatabaseManager $databaseManager
+     * @param DatabaseManager $db
      */
-    public function __construct(DatabaseManager $databaseManager) {
-        $this->databaseManager = $databaseManager;
+    public function __construct(DatabaseManager $db) {
+        $this->db = $db;
+        $this->table = $db->getPrefix() . 'apex_redirects';
     }
 
     /**
-     * Add or update a redirect rule.
+     * Add a redirect rule.
      *
-     * @param string $sourcePath (e.g. '/old-url/')
-     * @param string $targetUrl  (e.g. '/new-url/' or 'https://external.com')
-     * @param int $statusCode    (301, 302, 307, 308, 410, 451)
-     * @param array $options     (regex, query_match, group)
-     * @return bool
+     * @param string $sourceUrl
+     * @param string $targetUrl
+     * @param int $statusCode
+     * @param string $matchType 'exact'|'prefix'|'regex'
+     * @param bool $isRegex
+     * @return int|false Insert ID on success, false on failure
      */
-    public function addRedirect($sourcePath, $targetUrl, $statusCode = 301, array $options = []) {
-        $cleanSource = trim($sourcePath);
-        $this->rulesCache[$cleanSource] = [
-            'target'     => trim($targetUrl),
-            'status'     => (int) $statusCode,
-            'is_regex'   => !empty($options['is_regex']),
-            'keep_query' => isset($options['keep_query']) ? (bool) $options['keep_query'] : true,
+    public function addRedirect($sourceUrl, $targetUrl, $statusCode = 301, $matchType = 'exact', $isRegex = false) {
+        $sourceUrl = '/' . ltrim(trim($sourceUrl), '/');
+        $hash = md5($sourceUrl);
+
+        $wpdb = $this->db->getWpdb();
+        $data = [
+            'source_url'      => $sourceUrl,
+            'source_url_hash' => $hash,
+            'target_url'      => trim($targetUrl),
+            'status_code'     => (int) $statusCode,
+            'match_type'      => $matchType,
+            'is_regex'        => $isRegex ? 1 : 0,
+            'hits_count'      => 0,
+            'status'          => 'active',
         ];
 
-        return true;
+        $res = $wpdb->insert(
+            $this->table,
+            $data,
+            ['%s', '%s', '%s', '%d', '%s', '%d', '%d', '%s']
+        );
+
+        if ($res !== false) {
+            $insertId = $wpdb->insert_id;
+            $this->lookupCache[$sourceUrl] = [
+                'id'          => $insertId,
+                'target'      => $data['target_url'],
+                'status'      => $data['status_code'],
+                'match_type'  => $matchType,
+            ];
+            return $insertId;
+        }
+
+        return false;
     }
 
     /**
-     * Match a requested URI against redirect rules.
+     * Match an incoming request URI against active redirect rules.
      *
      * @param string $requestUri
-     * @return array|null [target, status] or null if no match.
+     * @return array{id: int, target: string, status: int}|null
      */
     public function matchRedirect($requestUri) {
-        $path = parse_url($requestUri, PHP_URL_PATH);
-        $query = parse_url($requestUri, PHP_URL_QUERY);
+        $cleanUri = '/' . ltrim(parse_url($requestUri, PHP_URL_PATH), '/');
 
-        // 1. Direct path match
-        if (isset($this->rulesCache[$path])) {
-            $rule = $this->rulesCache[$path];
-            $target = $rule['target'];
-            if ($rule['keep_query'] && !empty($query)) {
-                $separator = (strpos($target, '?') !== false) ? '&' : '?';
-                $target .= $separator . $query;
-            }
-            return [
-                'target' => $target,
-                'status' => $rule['status'],
+        if (array_key_exists($cleanUri, $this->lookupCache)) {
+            return $this->lookupCache[$cleanUri];
+        }
+
+        $hash = md5($cleanUri);
+        $wpdb = $this->db->getWpdb();
+
+        // 1. Direct Exact Hash Match (O(1) Indexed query)
+        $query = $wpdb->prepare(
+            "SELECT id, target_url, status_code FROM `{$this->table}` WHERE `source_url_hash` = %s AND `status` = 'active' LIMIT 1",
+            $hash
+        );
+
+        $row = $wpdb->get_row($query, ARRAY_A);
+        if ($row) {
+            $match = [
+                'id'     => (int) $row['id'],
+                'target' => $row['target_url'],
+                'status' => (int) $row['status_code'],
             ];
+            $this->lookupCache[$cleanUri] = $match;
+            return $match;
         }
 
-        // 2. Regex matching
-        foreach ($this->rulesCache as $source => $rule) {
-            if ($rule['is_regex']) {
-                if (@preg_match('#' . $source . '#i', $requestUri, $matches)) {
-                    $target = preg_replace('#' . $source . '#i', $rule['target'], $requestUri);
-                    return [
-                        'target' => $target,
-                        'status' => $rule['status'],
-                    ];
-                }
-            }
+        // 2. Trailing slash variation match
+        $altUri = substr($cleanUri, -1) === '/' ? rtrim($cleanUri, '/') : $cleanUri . '/';
+        $altHash = md5($altUri);
+        $altRow = $wpdb->get_row(
+            $wpdb->prepare("SELECT id, target_url, status_code FROM `{$this->table}` WHERE `source_url_hash` = %s AND `status` = 'active' LIMIT 1", $altHash),
+            ARRAY_A
+        );
+
+        if ($altRow) {
+            $match = [
+                'id'     => (int) $altRow['id'],
+                'target' => $altRow['target_url'],
+                'status' => (int) $altRow['status_code'],
+            ];
+            $this->lookupCache[$cleanUri] = $match;
+            return $match;
         }
 
+        $this->lookupCache[$cleanUri] = null;
         return null;
     }
 
     /**
-     * Get all cached redirect rules.
+     * Intercept request in template_redirect and trigger HTTP redirect if matched.
      *
-     * @return array
+     * @return void
      */
-    public function getRules() {
-        return $this->rulesCache;
+    public function interceptAndRedirect() {
+        if (!isset($_SERVER['REQUEST_URI'])) {
+            return;
+        }
+
+        $uri = sanitize_text_field($_SERVER['REQUEST_URI']);
+        $match = $this->matchRedirect($uri);
+
+        if ($match && !empty($match['target'])) {
+            $wpdb = $this->db->getWpdb();
+            // Increment hit counter asynchronously/efficiently
+            $wpdb->query(
+                $wpdb->prepare("UPDATE `{$this->table}` SET `hits_count` = `hits_count` + 1, `last_accessed_at` = NOW() WHERE `id` = %d", $match['id'])
+            );
+
+            if (function_exists('wp_safe_redirect')) {
+                wp_safe_redirect($match['target'], $match['status']);
+                exit;
+            } elseif (!headers_sent()) {
+                header("Location: {$match['target']}", true, $match['status']);
+                exit;
+            }
+        }
     }
 }

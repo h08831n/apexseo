@@ -1,13 +1,14 @@
 <?php
 namespace ApexSEO\SEO\Social;
 
-use ApexSEO\Core\Contracts\ServiceContractInterface;
+use ApexSEO\SEO\Models\SeoContext;
+use ApexSEO\SEO\Models\Indexable;
 use ApexSEO\SEO\Variables\VariableEngine;
 
 /**
- * Open Graph Social Metadata Presenter.
+ * Renders Open Graph meta tags (Facebook, LinkedIn, Pinterest, Discord, Slack).
  */
-class OpenGraphPresenter implements ServiceContractInterface {
+class OpenGraphPresenter {
     /**
      * Variable engine.
      *
@@ -18,69 +19,93 @@ class OpenGraphPresenter implements ServiceContractInterface {
     /**
      * Constructor.
      *
-     * @param VariableEngine $variableEngine
+     * @param VariableEngine|null $variableEngine
      */
-    public function __construct(VariableEngine $variableEngine) {
-        $this->variableEngine = $variableEngine;
+    public function __construct($variableEngine = null) {
+        $this->variableEngine = $variableEngine !== null ? $variableEngine : new VariableEngine();
     }
 
     /**
-     * Build dictionary of Open Graph properties.
+     * Render OpenGraph meta tags HTML block.
      *
-     * @param array $context
-     * @return array<string, string>
+     * @param SeoContext|Indexable|array $context
+     * @return string
      */
-    public function buildTags(array $context = []) {
+    public function render($context) {
+        $tags = $this->buildTags($context);
+        $output = '';
+
+        foreach ($tags as $property => $content) {
+            if ($content === null || $content === '') {
+                continue;
+            }
+
+            if (strpos($property, 'image') !== false || strpos($property, 'url') !== false) {
+                $escapedContent = function_exists('esc_url') ? esc_url($content) : htmlspecialchars($content, ENT_QUOTES, 'UTF-8');
+            } else {
+                $escapedContent = function_exists('esc_attr') ? esc_attr($content) : htmlspecialchars($content, ENT_QUOTES, 'UTF-8');
+            }
+
+            $output .= sprintf('<meta property="%s" content="%s" />' . "\n", $property, $escapedContent);
+        }
+
+        return $output;
+    }
+
+    /**
+     * Build raw property => value map for Open Graph tags.
+     *
+     * @param SeoContext|Indexable|array $context
+     * @return array<string, string|null>
+     */
+    public function buildTags($context) {
+        $tags = [];
+
+        $siteName = get_option('blogname', 'WordPress');
         $locale = function_exists('get_locale') ? get_locale() : 'en_US';
-        $siteName = function_exists('get_bloginfo') ? get_bloginfo('name') : 'Apex SEO Site';
 
-        $tags = [
-            'og:locale'    => $locale,
-            'og:site_name' => $siteName,
-            'og:type'      => (!empty($context['page_type']) && in_array($context['page_type'], ['single', 'post'])) ? 'article' : 'website',
-        ];
+        $tags['og:locale'] = $locale;
+        $tags['og:site_name'] = $siteName;
 
-        if (!empty($context['og_title'])) {
-            $tags['og:title'] = $this->variableEngine->replace($context['og_title'], $context);
-        } elseif (!empty($context['title'])) {
-            $tags['og:title'] = $this->variableEngine->replace($context['title'], $context);
+        if ($context instanceof Indexable) {
+            $tags['og:type'] = $context->object_sub_type === 'page' ? 'website' : 'article';
+            $tags['og:title'] = !empty($context->og_title) ? $context->og_title : $context->title;
+            $tags['og:description'] = !empty($context->og_description) ? $context->og_description : $context->description;
+            $tags['og:url'] = $context->canonical_url ? $context->canonical_url : $context->permalink;
+            $tags['og:image'] = $context->og_image;
+            return $tags;
         }
 
-        if (!empty($context['og_description'])) {
-            $tags['og:description'] = $this->variableEngine->replace($context['og_description'], $context);
-        } elseif (!empty($context['description'])) {
-            $tags['og:description'] = $this->variableEngine->replace($context['description'], $context);
+        if ($context instanceof SeoContext) {
+            $tags['og:type'] = $context->og_type ? $context->og_type : 'article';
+            $tags['og:title'] = !empty($context->og_title) ? $context->og_title : (!empty($context->title) ? $context->title : $siteName);
+            $tags['og:description'] = !empty($context->og_description) ? $context->og_description : $context->excerpt;
+            $tags['og:url'] = !empty($context->canonical_url) ? $context->canonical_url : $context->permalink;
+            $tags['og:image'] = !empty($context->og_image) ? $context->og_image : $context->featured_image;
+
+            if ($tags['og:type'] === 'article') {
+                if (!empty($context->date_published)) {
+                    $tags['article:published_time'] = $context->date_published;
+                }
+                if (!empty($context->date_modified)) {
+                    $tags['article:modified_time'] = $context->date_modified;
+                }
+                if (!empty($context->author_name)) {
+                    $tags['article:author'] = $context->author_name;
+                }
+            }
+            return $tags;
         }
 
-        if (!empty($context['canonical_url'])) {
-            $tags['og:url'] = $context['canonical_url'];
-        }
-
-        if (!empty($context['og_image'])) {
-            $tags['og:image'] = $context['og_image'];
-        } elseif (!empty($context['featured_image'])) {
-            $tags['og:image'] = $context['featured_image'];
+        if (is_array($context)) {
+            $tags['og:type'] = isset($context['og_type']) ? $context['og_type'] : 'article';
+            $tags['og:title'] = isset($context['og_title']) ? $context['og_title'] : (isset($context['title']) ? $context['title'] : $siteName);
+            $tags['og:description'] = isset($context['og_description']) ? $context['og_description'] : (isset($context['description']) ? $context['description'] : '');
+            $tags['og:url'] = isset($context['canonical_url']) ? $context['canonical_url'] : (isset($context['permalink']) ? $context['permalink'] : '');
+            $tags['og:image'] = isset($context['og_image']) ? $context['og_image'] : (isset($context['featured_image']) ? $context['featured_image'] : null);
+            return $tags;
         }
 
         return $tags;
-    }
-
-    /**
-     * Render Open Graph HTML meta tags.
-     *
-     * @param array $context
-     * @return string
-     */
-    public function render(array $context = []) {
-        $tags = $this->buildTags($context);
-        $html = '';
-
-        foreach ($tags as $property => $content) {
-            if (!empty($content)) {
-                $html .= sprintf('<meta property="%s" content="%s" />' . "\n", esc_attr($property), esc_attr($content));
-            }
-        }
-
-        return $html;
     }
 }

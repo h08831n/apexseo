@@ -1,13 +1,15 @@
 <?php
 namespace ApexSEO\SEO\Meta;
 
-use ApexSEO\Core\Contracts\ServiceContractInterface;
+use ApexSEO\SEO\Models\SeoContext;
+use ApexSEO\SEO\Models\Indexable;
 use ApexSEO\SEO\Variables\VariableEngine;
+use ApexSEO\SEO\Templates\TemplateManager;
 
 /**
- * Meta Description Presenter.
+ * Renders sanitized Meta Description tags for document head.
  */
-class DescriptionPresenter implements ServiceContractInterface {
+class DescriptionPresenter {
     /**
      * Variable engine.
      *
@@ -16,81 +18,89 @@ class DescriptionPresenter implements ServiceContractInterface {
     protected $variableEngine;
 
     /**
-     * Maximum character length limit.
+     * Template manager.
      *
-     * @var int
+     * @var TemplateManager
      */
-    protected $maxLength = 160;
+    protected $templateManager;
 
     /**
      * Constructor.
      *
-     * @param VariableEngine $variableEngine
+     * @param VariableEngine|null $variableEngine
+     * @param TemplateManager|null $templateManager
      */
-    public function __construct(VariableEngine $variableEngine) {
-        $this->variableEngine = $variableEngine;
+    public function __construct($variableEngine = null, $templateManager = null) {
+        $this->variableEngine = $variableEngine !== null ? $variableEngine : new VariableEngine();
+        $this->templateManager = $templateManager !== null ? $templateManager : new TemplateManager();
     }
 
     /**
-     * Render meta description.
+     * Render raw meta description string.
      *
-     * @param array $context
-     * @param string|null $customTemplate
+     * @param SeoContext|Indexable|array $context
      * @return string
      */
-    public function render(array $context = [], $customTemplate = null) {
-        if (!empty($context['custom_description'])) {
-            $desc = $this->variableEngine->replace($context['custom_description'], $context);
-            return $this->truncate($desc);
+    public function render($context) {
+        if ($context instanceof Indexable && !empty($context->description)) {
+            return $this->cleanDescription($context->description);
         }
 
-        if ($customTemplate !== null) {
-            $desc = $this->variableEngine->replace($customTemplate, $context);
-            return $this->truncate($desc);
+        if (is_array($context)) {
+            if (!empty($context['description'])) {
+                return $this->cleanDescription($this->variableEngine->replace($context['description'], $context));
+            }
+            if (!empty($context['excerpt'])) {
+                return $this->cleanDescription($context['excerpt']);
+            }
+            $pageType = isset($context['page_type']) ? $context['page_type'] : 'post';
+            $template = $this->templateManager->getDescriptionTemplate($pageType);
+            return $this->cleanDescription($this->variableEngine->replace($template, $context));
         }
 
-        $type = isset($context['page_type']) ? $context['page_type'] : 'single';
-
-        switch ($type) {
-            case 'home':
-            case 'frontpage':
-                $desc = $this->variableEngine->replace('%%sitedesc%%', $context);
-                break;
-            case 'category':
-            case 'taxonomy':
-                $desc = $this->variableEngine->replace('%%term_description%%', $context);
-                break;
-            case 'author':
-                $desc = $this->variableEngine->replace('Articles written by %%author_name%% on %%sitename%%.', $context);
-                break;
-            case 'single':
-            case 'page':
-            default:
-                $desc = $this->variableEngine->replace('%%excerpt%%', $context);
-                break;
+        if ($context instanceof SeoContext) {
+            if (!empty($context->excerpt)) {
+                $pageType = $context->page_type === 'single' ? $context->object_sub_type : $context->page_type;
+                $template = $this->templateManager->getDescriptionTemplate($pageType);
+                return $this->cleanDescription($this->variableEngine->replace($template, $context));
+            }
         }
 
-        return $this->truncate($desc);
+        return '';
     }
 
     /**
-     * Truncate and sanitize description cleanly.
+     * Render full HTML tag: <meta name="description" content="..." />
      *
-     * @param string $text
+     * @param SeoContext|Indexable|array $context
      * @return string
      */
-    public function truncate($text) {
-        $clean = trim(preg_replace('/\s+/', ' ', strip_tags($text)));
-        if (mb_strlen($clean) <= $this->maxLength) {
-            return $clean;
+    public function renderHtmlTag($context) {
+        $desc = $this->render($context);
+        if (empty($desc)) {
+            return '';
         }
 
-        $sub = mb_substr($clean, 0, $this->maxLength);
-        $lastSpace = mb_strrpos($sub, ' ');
-        if ($lastSpace !== false && $lastSpace > 120) {
-            return mb_substr($sub, 0, $lastSpace) . '...';
+        $escaped = function_exists('esc_attr') ? esc_attr($desc) : htmlspecialchars($desc, ENT_QUOTES, 'UTF-8');
+        return '<meta name="description" content="' . $escaped . '" />' . "\n";
+    }
+
+    /**
+     * Clean and normalize description string.
+     *
+     * @param string $str
+     * @return string
+     */
+    protected function cleanDescription($str) {
+        $clean = strip_tags(strip_shortcodes((string) $str));
+        $clean = str_replace(["\r", "\n", "\t"], ' ', $clean);
+        $clean = preg_replace('/\s+/', ' ', $clean);
+        $clean = trim($clean);
+
+        if (mb_strlen($clean) > 320) {
+            $clean = mb_substr($clean, 0, 317) . '...';
         }
 
-        return $sub . '...';
+        return $clean;
     }
 }
