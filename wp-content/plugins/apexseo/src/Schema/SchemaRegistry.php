@@ -9,9 +9,15 @@ use ApexSEO\Schema\Types\FAQPageSchema;
 use ApexSEO\Schema\Types\LocalBusinessSchema;
 use ApexSEO\Schema\Types\OrganizationSchema;
 use ApexSEO\Schema\Types\WebSiteSchema;
+use ApexSEO\Schema\Types\RecipeSchema;
+use ApexSEO\Schema\Types\JobPostingSchema;
+use ApexSEO\Schema\Types\CourseSchema;
+use ApexSEO\Schema\Types\EventSchema;
+use ApexSEO\Schema\Types\SoftwareApplicationSchema;
+use ApexSEO\Schema\Media\VideoObjectSchema;
 
 /**
- * 52 Schema Types Registry & Provider.
+ * Schema Types Registry & Provider.
  */
 class SchemaRegistry implements ServiceContractInterface {
     /**
@@ -41,6 +47,12 @@ class SchemaRegistry implements ServiceContractInterface {
         $this->register(new LocalBusinessSchema('Restaurant'));
         $this->register(new OrganizationSchema());
         $this->register(new WebSiteSchema());
+        $this->register(new RecipeSchema());
+        $this->register(new JobPostingSchema());
+        $this->register(new CourseSchema());
+        $this->register(new EventSchema());
+        $this->register(new SoftwareApplicationSchema());
+        $this->register(new VideoObjectSchema());
     }
 
     /**
