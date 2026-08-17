@@ -168,10 +168,20 @@ class RestSubsystemTest extends TestCase {
         $this->assertTrue($createData['success']);
         $this->assertEquals('/old-rest-url/', $createData['source_url']);
 
+        // Prevent Loop
+        $loopResponse = $controller->createRedirect([
+            'source_url'  => 'https://example.com/loop/',
+            'target_url'  => 'https://example.com/loop/',
+            'status_code' => 301,
+        ]);
+        $this->assertTrue(($loopResponse instanceof \WP_Error) || (isset($loopResponse['error'])));
+
         // GET List
-        $getResponse = $controller->getRedirects();
+        $getResponse = $controller->getRedirects(['page' => 1, 'per_page' => 10]);
         $getData = ($getResponse instanceof \WP_REST_Response) ? $getResponse->get_data() : $getResponse;
         $this->assertTrue($getData['success']);
+        $this->assertEquals(1, $getData['page']);
+        $this->assertEquals(10, $getData['per_page']);
     }
 
     public function testNotFoundController() {
@@ -193,6 +203,10 @@ class RestSubsystemTest extends TestCase {
         $data = ($response instanceof \WP_REST_Response) ? $response->get_data() : $response;
         $this->assertTrue($data['success']);
         $this->assertEquals(42, $data['post_id']);
+
+        // Invalid ID rejection
+        $invalidResponse = $controller->getSuggestions(['post_id' => -1]);
+        $this->assertTrue(($invalidResponse instanceof \WP_Error) || (isset($invalidResponse['error'])));
     }
 
     public function testAnalyticsController() {
@@ -218,6 +232,14 @@ class RestSubsystemTest extends TestCase {
         $this->assertTrue($purgeData['success']);
         $this->assertEquals('all', $purgeData['type']);
 
+        // Tag and Post Purge
+        $postPurge = $controller->purgeCache([
+            'type'    => 'post',
+            'targets' => [42, 99],
+        ]);
+        $postPurgeData = ($postPurge instanceof \WP_REST_Response) ? $postPurge->get_data() : $postPurge;
+        $this->assertTrue($postPurgeData['success']);
+
         $preloadResponse = $controller->triggerPreload();
         $preloadData = ($preloadResponse instanceof \WP_REST_Response) ? $preloadResponse->get_data() : $preloadResponse;
         $this->assertTrue($preloadData['success']);
@@ -234,8 +256,9 @@ class RestSubsystemTest extends TestCase {
         $this->assertTrue($optimizeData['success']);
         $this->assertEquals(99, $optimizeData['attachment_id']);
 
+        // Bulk optimization with bounded IDs
         $bulkResponse = $controller->bulkOptimize([
-            'attachment_ids' => [101, 102],
+            'attachment_ids' => [101, 102, -5, 'invalid', 101],
             'batch_size'     => 5,
         ]);
         $bulkData = ($bulkResponse instanceof \WP_REST_Response) ? $bulkResponse->get_data() : $bulkResponse;
@@ -255,5 +278,17 @@ class RestSubsystemTest extends TestCase {
         $this->assertTrue($data['success']);
         $this->assertEquals('yoast', $data['source']);
         $this->assertEquals('completed', $data['status']);
+
+        // Unsupported source rejection
+        $invalidSource = $controller->executeMigration(['source' => 'unsupported_plugin']);
+        $this->assertTrue(($invalidSource instanceof \WP_Error) || (isset($invalidSource['error'])));
+    }
+
+    public function testPermissionWrappers() {
+        $controller = $this->router->getController('settings');
+        // Check permission methods execute cleanly
+        $this->assertTrue(is_bool($controller->checkAdminPermission(null)) || ($controller->checkAdminPermission(null) instanceof \WP_Error));
+        $this->assertTrue(is_bool($controller->checkEditorPermission(null)) || ($controller->checkEditorPermission(null) instanceof \WP_Error));
+        $this->assertTrue(is_bool($controller->checkUploadPermission(null)) || ($controller->checkUploadPermission(null) instanceof \WP_Error));
     }
 }

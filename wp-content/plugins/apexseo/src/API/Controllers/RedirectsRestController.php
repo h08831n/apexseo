@@ -66,13 +66,25 @@ class RedirectsRestController extends AbstractRestController {
      * @return \WP_REST_Response
      */
     public function getRedirects($request = null) {
+        $params  = $request instanceof \WP_REST_Request ? $request->get_params() : $request;
+        $page    = isset($params['page']) ? max(1, (int) $params['page']) : 1;
+        $perPage = isset($params['per_page']) ? max(1, min(100, (int) $params['per_page'])) : 100;
+        $offset  = ($page - 1) * $perPage;
+
         $table = $this->db->getPrefix() . 'apex_redirects';
-        $results = $this->db->getResults("SELECT * FROM {$table} ORDER BY id DESC LIMIT 100");
+        $total = (int) $this->db->getVar("SELECT COUNT(*) FROM {$table}");
+
+        $query   = $this->db->prepare("SELECT * FROM {$table} ORDER BY id DESC LIMIT %d OFFSET %d", $perPage, $offset);
+        $results = $this->db->getResults($query);
 
         return $this->success([
-            'success'   => true,
-            'redirects' => is_array($results) ? $results : [],
-            'count'     => is_array($results) ? count($results) : 0,
+            'success'     => true,
+            'redirects'   => is_array($results) ? $results : [],
+            'count'       => is_array($results) ? count($results) : 0,
+            'total'       => $total,
+            'page'        => $page,
+            'per_page'    => $perPage,
+            'total_pages' => ($total > 0) ? (int) ceil($total / $perPage) : 0,
         ]);
     }
 
@@ -95,22 +107,42 @@ class RedirectsRestController extends AbstractRestController {
         }
 
         // Normalize source path
-        $sourcePath = '/' . ltrim(parse_url($sourceUrl, PHP_URL_PATH), '/');
-        $sourceHash = md5($sourcePath);
+        $parsedPath = parse_url($sourceUrl, PHP_URL_PATH);
+        $sourcePath = '/' . ltrim(!empty($parsedPath) ? $parsedPath : $sourceUrl, '/');
+        $targetPath = '/' . ltrim(parse_url($targetUrl, PHP_URL_PATH) ?: $targetUrl, '/');
 
+        // Prevent direct redirect loops
+        if ($sourcePath === $targetPath || $sourceUrl === $targetUrl) {
+            return $this->error('apexseo_redirect_loop', 'Source URL cannot be identical to target URL.', 422);
+        }
+
+        $validCodes = [301, 302, 307, 308, 410, 451];
+        if (!in_array($statusCode, $validCodes, true)) {
+            $statusCode = 301;
+        }
+
+        $sourceHash = md5($sourcePath);
         $table = $this->db->getPrefix() . 'apex_redirects';
+
+        // Check for existing source hash
+        $existsQuery = $this->db->prepare("SELECT id FROM {$table} WHERE source_hash = %s LIMIT 1", $sourceHash);
+        $existingId = $this->db->getVar($existsQuery);
+        if ($existingId) {
+            return $this->error('apexseo_duplicate_redirect', 'A redirect for this source URL already exists.', 409);
+        }
+
         $inserted = $this->db->insert($table, [
             'source_url'  => $sourcePath,
             'source_hash' => $sourceHash,
             'target_url'  => sanitize_text_field($targetUrl),
-            'status_code' => in_array($statusCode, [301, 302, 307, 308]) ? $statusCode : 301,
+            'status_code' => $statusCode,
             'is_regex'    => $isRegex,
             'hits'        => 0,
             'created_at'  => gmdate('Y-m-d H:i:s'),
         ]);
 
         if (!$inserted) {
-            return $this->error('apexseo_redirect_save_failed', 'Failed to save redirect rule. Check for duplicates.', 500);
+            return $this->error('apexseo_redirect_save_failed', 'Failed to save redirect rule.', 500);
         }
 
         return $this->success([
@@ -129,18 +161,24 @@ class RedirectsRestController extends AbstractRestController {
      * @return \WP_REST_Response|\WP_Error
      */
     public function updateRedirect($request) {
-        $id     = $request instanceof \WP_REST_Request ? (int) $request->get_param('id') : (int) $request['id'];
+        $id     = $request instanceof \WP_REST_Request ? (int) $request->get_param('id') : (isset($request['id']) ? (int) $request['id'] : 0);
         $params = $request instanceof \WP_REST_Request ? $request->get_json_params() : $request;
 
-        if (!$id) {
+        if ($id <= 0) {
             return $this->error('apexseo_invalid_id', 'Valid redirect ID required.', 400);
         }
 
         $table = $this->db->getPrefix() . 'apex_redirects';
+        $existCheck = $this->db->getVar($this->db->prepare("SELECT id FROM {$table} WHERE id = %d", $id));
+        if (!$existCheck) {
+            return $this->error('apexseo_not_found', 'Redirect rule not found.', 404);
+        }
+
         $updateData = [];
 
         if (isset($params['source_url'])) {
-            $sourcePath = '/' . ltrim(parse_url($params['source_url'], PHP_URL_PATH), '/');
+            $parsedPath = parse_url($params['source_url'], PHP_URL_PATH);
+            $sourcePath = '/' . ltrim(!empty($parsedPath) ? $parsedPath : $params['source_url'], '/');
             $updateData['source_url']  = $sourcePath;
             $updateData['source_hash'] = md5($sourcePath);
         }
@@ -148,10 +186,11 @@ class RedirectsRestController extends AbstractRestController {
             $updateData['target_url'] = sanitize_text_field($params['target_url']);
         }
         if (isset($params['status_code'])) {
-            $updateData['status_code'] = (int) $params['status_code'];
+            $code = (int) $params['status_code'];
+            $updateData['status_code'] = in_array($code, [301, 302, 307, 308, 410, 451], true) ? $code : 301;
         }
         if (isset($params['is_regex'])) {
-            $updateData['is_regex'] = (int) $params['is_regex'];
+            $updateData['is_regex'] = !empty($params['is_regex']) ? 1 : 0;
         }
 
         if (empty($updateData)) {
@@ -174,13 +213,18 @@ class RedirectsRestController extends AbstractRestController {
      * @return \WP_REST_Response|\WP_Error
      */
     public function deleteRedirect($request) {
-        $id = $request instanceof \WP_REST_Request ? (int) $request->get_param('id') : (int) $request['id'];
+        $id = $request instanceof \WP_REST_Request ? (int) $request->get_param('id') : (isset($request['id']) ? (int) $request['id'] : 0);
 
-        if (!$id) {
+        if ($id <= 0) {
             return $this->error('apexseo_invalid_id', 'Valid redirect ID required.', 400);
         }
 
         $table = $this->db->getPrefix() . 'apex_redirects';
+        $existCheck = $this->db->getVar($this->db->prepare("SELECT id FROM {$table} WHERE id = %d", $id));
+        if (!$existCheck) {
+            return $this->error('apexseo_not_found', 'Redirect rule not found.', 404);
+        }
+
         $this->db->delete($table, ['id' => $id]);
 
         return $this->success([

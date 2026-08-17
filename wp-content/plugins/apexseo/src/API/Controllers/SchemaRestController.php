@@ -91,11 +91,9 @@ class SchemaRestController extends AbstractRestController {
         $table = $this->db->getPrefix() . 'apex_schema';
         $customSchemas = [];
 
-        if (function_exists('wp_cache_get')) {
-            $results = $this->db->getResults("SELECT * FROM {$table} ORDER BY id DESC LIMIT 100");
-            if (is_array($results)) {
-                $customSchemas = $results;
-            }
+        $results = $this->db->getResults("SELECT * FROM {$table} ORDER BY id DESC LIMIT 100");
+        if (is_array($results)) {
+            $customSchemas = $results;
         }
 
         return $this->success([
@@ -115,9 +113,12 @@ class SchemaRestController extends AbstractRestController {
         $params = $request instanceof \WP_REST_Request ? $request->get_json_params() : $request;
 
         $type       = isset($params['schema_type']) ? sanitize_text_field($params['schema_type']) : '';
-        $objectType = isset($params['object_type']) ? sanitize_text_field($params['object_type']) : 'global';
-        $objectId   = isset($params['object_id']) ? (int) $params['object_id'] : 0;
+        $rawObjType = isset($params['object_type']) ? sanitize_key($params['object_type']) : 'global';
+        $objectId   = isset($params['object_id']) ? max(0, (int) $params['object_id']) : 0;
         $schemaData = isset($params['schema_data']) ? $params['schema_data'] : [];
+
+        $validObjectTypes = ['global', 'post', 'term', 'user'];
+        $objectType = in_array($rawObjType, $validObjectTypes, true) ? $rawObjType : 'global';
 
         if (empty($type)) {
             return $this->error('apexseo_invalid_type', 'schema_type is required.', 422);
@@ -160,14 +161,19 @@ class SchemaRestController extends AbstractRestController {
      * @return \WP_REST_Response|\WP_Error
      */
     public function updateSchema($request) {
-        $id     = $request instanceof \WP_REST_Request ? (int) $request->get_param('id') : (int) $request['id'];
+        $id     = $request instanceof \WP_REST_Request ? (int) $request->get_param('id') : (isset($request['id']) ? (int) $request['id'] : 0);
         $params = $request instanceof \WP_REST_Request ? $request->get_json_params() : $request;
 
-        if (!$id) {
+        if ($id <= 0) {
             return $this->error('apexseo_invalid_id', 'Valid schema ID required.', 400);
         }
 
         $table = $this->db->getPrefix() . 'apex_schema';
+        $existCheck = $this->db->getVar($this->db->prepare("SELECT id FROM {$table} WHERE id = %d", $id));
+        if (!$existCheck) {
+            return $this->error('apexseo_not_found', 'Schema template not found.', 404);
+        }
+
         $updateData = [];
 
         if (isset($params['schema_type'])) {
@@ -176,12 +182,12 @@ class SchemaRestController extends AbstractRestController {
         if (isset($params['schema_data']) && is_array($params['schema_data'])) {
             $issues = $this->validator->validate($params['schema_data']);
             if (!empty($issues)) {
-                return $this->error('apexseo_schema_validation_failed', implode(' ', $issues), 422);
+                return $this->error('apexseo_schema_validation_failed', implode(' ', $issues), 422, ['validation_errors' => $issues]);
             }
             $updateData['schema_data'] = wp_json_encode($params['schema_data']);
         }
         if (isset($params['is_active'])) {
-            $updateData['is_active'] = (int) $params['is_active'];
+            $updateData['is_active'] = !empty($params['is_active']) ? 1 : 0;
         }
 
         if (empty($updateData)) {
@@ -204,13 +210,18 @@ class SchemaRestController extends AbstractRestController {
      * @return \WP_REST_Response|\WP_Error
      */
     public function deleteSchema($request) {
-        $id = $request instanceof \WP_REST_Request ? (int) $request->get_param('id') : (int) $request['id'];
+        $id = $request instanceof \WP_REST_Request ? (int) $request->get_param('id') : (isset($request['id']) ? (int) $request['id'] : 0);
 
-        if (!$id) {
+        if ($id <= 0) {
             return $this->error('apexseo_invalid_id', 'Valid schema ID required.', 400);
         }
 
         $table = $this->db->getPrefix() . 'apex_schema';
+        $existCheck = $this->db->getVar($this->db->prepare("SELECT id FROM {$table} WHERE id = %d", $id));
+        if (!$existCheck) {
+            return $this->error('apexseo_not_found', 'Schema template not found.', 404);
+        }
+
         $this->db->delete($table, ['id' => $id]);
 
         return $this->success([

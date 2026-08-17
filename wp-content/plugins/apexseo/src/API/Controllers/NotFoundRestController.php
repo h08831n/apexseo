@@ -52,13 +52,25 @@ class NotFoundRestController extends AbstractRestController {
      * @return \WP_REST_Response
      */
     public function get404Logs($request = null) {
-        $table = $this->db->getPrefix() . 'apex_404_logs';
-        $results = $this->db->getResults("SELECT * FROM {$table} ORDER BY hits DESC, last_accessed DESC LIMIT 100");
+        $params  = $request instanceof \WP_REST_Request ? $request->get_params() : $request;
+        $page    = isset($params['page']) ? max(1, (int) $params['page']) : 1;
+        $perPage = isset($params['per_page']) ? max(1, min(100, (int) $params['per_page'])) : 100;
+        $offset  = ($page - 1) * $perPage;
+
+        $table   = $this->db->getPrefix() . 'apex_404_logs';
+        $total   = (int) $this->db->getVar("SELECT COUNT(*) FROM {$table}");
+
+        $query   = $this->db->prepare("SELECT * FROM {$table} ORDER BY hits DESC, last_accessed DESC LIMIT %d OFFSET %d", $perPage, $offset);
+        $results = $this->db->getResults($query);
 
         return $this->success([
-            'success' => true,
-            'logs'    => is_array($results) ? $results : [],
-            'count'   => is_array($results) ? count($results) : 0,
+            'success'     => true,
+            'logs'        => is_array($results) ? $results : [],
+            'count'       => is_array($results) ? count($results) : 0,
+            'total'       => $total,
+            'page'        => $page,
+            'per_page'    => $perPage,
+            'total_pages' => ($total > 0) ? (int) ceil($total / $perPage) : 0,
         ]);
     }
 
@@ -69,12 +81,21 @@ class NotFoundRestController extends AbstractRestController {
      * @return \WP_REST_Response
      */
     public function clear404Logs($request = null) {
+        $params = $request instanceof \WP_REST_Request ? $request->get_params() : $request;
+        $id     = isset($params['id']) ? (int) $params['id'] : 0;
+
         $table = $this->db->getPrefix() . 'apex_404_logs';
-        $this->db->query("TRUNCATE TABLE {$table}");
+
+        if ($id > 0) {
+            $this->db->delete($table, ['id' => $id]);
+        } else {
+            $this->db->query("TRUNCATE TABLE {$table}");
+        }
 
         return $this->success([
             'success' => true,
             'cleared' => true,
+            'id'      => $id > 0 ? $id : 'all',
         ]);
     }
 }

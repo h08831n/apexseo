@@ -62,61 +62,102 @@ class MigrationRestController extends AbstractRestController {
      * @return \WP_REST_Response|\WP_Error
      */
     public function executeMigration($request) {
-        $params    = $request instanceof \WP_REST_Request ? $request->get_json_params() : $request;
-        $source    = isset($params['source']) ? $params['source'] : '';
-        $batchSize = isset($params['batch_size']) ? (int) $params['batch_size'] : 500;
-        $offset    = isset($params['offset']) ? (int) $params['offset'] : 0;
+        $params        = $request instanceof \WP_REST_Request ? $request->get_json_params() : $request;
+        $source        = isset($params['source']) ? sanitize_key($params['source']) : '';
+        $rawBatchSize  = isset($params['batch_size']) ? (int) $params['batch_size'] : 500;
+        $rawOffset     = isset($params['offset']) ? (int) $params['offset'] : 0;
 
-        $validSources = ['yoast', 'rank_math', 'aioseo', 'seopress', 'tsf', 'redirection', 'wp_rocket'];
-        if (!in_array($source, $validSources, true)) {
+        $batchSize = max(1, min(1000, $rawBatchSize));
+        $offset    = max(0, $rawOffset);
+
+        $sourceMetaKeys = [
+            'yoast'     => ['title' => '_yoast_wpseo_title', 'desc' => '_yoast_wpseo_metadesc', 'kw' => '_yoast_wpseo_focuskw'],
+            'rank_math' => ['title' => 'rank_math_title', 'desc' => 'rank_math_description', 'kw' => 'rank_math_focus_keyword'],
+            'aioseo'    => ['title' => '_aioseo_title', 'desc' => '_aioseo_description', 'kw' => '_aioseo_keywords'],
+            'seopress'  => ['title' => '_seopress_titles_title', 'desc' => '_seopress_titles_desc', 'kw' => '_seopress_analysis_target_kw'],
+            'tsf'       => ['title' => '_genesis_title', 'desc' => '_genesis_description', 'kw' => null],
+            'redirection' => ['title' => null, 'desc' => null, 'kw' => null],
+            'wp_rocket' => ['title' => null, 'desc' => null, 'kw' => null],
+        ];
+
+        if (!array_key_exists($source, $sourceMetaKeys)) {
             return $this->error('apexseo_invalid_migration_source', 'Unsupported migration source.', 422);
         }
 
         $migratedCount = 0;
-        $totalFound    = 0;
+        $errors        = [];
         $indexableTable = $this->db->getPrefix() . 'apex_indexables';
+        $postMetaTable  = $this->db->getPrefix() . 'postmeta';
 
-        // Migrate Yoast post meta
-        if ($source === 'yoast') {
-            $postMetaTable = $this->db->getPrefix() . 'postmeta';
-            $rows = $this->db->getResults("SELECT post_id, meta_key, meta_value FROM {$postMetaTable} WHERE meta_key IN ('_yoast_wpseo_title', '_yoast_wpseo_metadesc', '_yoast_wpseo_focuskw') LIMIT {$batchSize} OFFSET {$offset}");
-            
+        $keys = array_filter(array_values($sourceMetaKeys[$source]));
+
+        if (!empty($keys)) {
+            $inPlaceholders = implode(', ', array_fill(0, count($keys), '%s'));
+            $queryArgs = array_merge($keys, [$batchSize, $offset]);
+            $sql = "SELECT post_id, meta_key, meta_value FROM {$postMetaTable} WHERE meta_key IN ({$inPlaceholders}) ORDER BY post_id ASC LIMIT %d OFFSET %d";
+            $prepared = $this->db->prepare($sql, ...$queryArgs);
+            $rows = $this->db->getResults($prepared);
+
             if (is_array($rows)) {
-                $totalFound = count($rows);
+                $metaMap = $sourceMetaKeys[$source];
                 foreach ($rows as $row) {
                     $postId = (int) $row->post_id;
-                    if ($row->meta_key === '_yoast_wpseo_title') {
-                        $this->db->query("INSERT INTO {$indexableTable} (object_type, object_id, title) VALUES ('post', {$postId}, '" . addslashes($row->meta_value) . "') ON DUPLICATE KEY UPDATE title = VALUES(title)");
-                    } elseif ($row->meta_key === '_yoast_wpseo_metadesc') {
-                        $this->db->query("INSERT INTO {$indexableTable} (object_type, object_id, description) VALUES ('post', {$postId}, '" . addslashes($row->meta_value) . "') ON DUPLICATE KEY UPDATE description = VALUES(description)");
-                    } elseif ($row->meta_key === '_yoast_wpseo_focuskw') {
-                        $this->db->query("INSERT INTO {$indexableTable} (object_type, object_id, primary_focus_keyword) VALUES ('post', {$postId}, '" . addslashes($row->meta_value) . "') ON DUPLICATE KEY UPDATE primary_focus_keyword = VALUES(primary_focus_keyword)");
+                    $val    = (string) $row->meta_value;
+
+                    if (!empty($metaMap['title']) && $row->meta_key === $metaMap['title']) {
+                        $upsert = $this->db->prepare(
+                            "INSERT INTO {$indexableTable} (object_type, object_id, title) VALUES (%s, %d, %s) ON DUPLICATE KEY UPDATE title = VALUES(title)",
+                            'post',
+                            $postId,
+                            $val
+                        );
+                        $this->db->query($upsert);
+                        $migratedCount++;
+                    } elseif (!empty($metaMap['desc']) && $row->meta_key === $metaMap['desc']) {
+                        $upsert = $this->db->prepare(
+                            "INSERT INTO {$indexableTable} (object_type, object_id, description) VALUES (%s, %d, %s) ON DUPLICATE KEY UPDATE description = VALUES(description)",
+                            'post',
+                            $postId,
+                            $val
+                        );
+                        $this->db->query($upsert);
+                        $migratedCount++;
+                    } elseif (!empty($metaMap['kw']) && $row->meta_key === $metaMap['kw']) {
+                        $upsert = $this->db->prepare(
+                            "INSERT INTO {$indexableTable} (object_type, object_id, primary_focus_keyword) VALUES (%s, %d, %s) ON DUPLICATE KEY UPDATE primary_focus_keyword = VALUES(primary_focus_keyword)",
+                            'post',
+                            $postId,
+                            $val
+                        );
+                        $this->db->query($upsert);
+                        $migratedCount++;
                     }
-                    $migratedCount++;
                 }
             }
-        } elseif ($source === 'rank_math') {
-            $postMetaTable = $this->db->getPrefix() . 'postmeta';
-            $rows = $this->db->getResults("SELECT post_id, meta_key, meta_value FROM {$postMetaTable} WHERE meta_key IN ('rank_math_title', 'rank_math_description', 'rank_math_focus_keyword') LIMIT {$batchSize} OFFSET {$offset}");
-            
-            if (is_array($rows)) {
-                $totalFound = count($rows);
-                foreach ($rows as $row) {
-                    $postId = (int) $row->post_id;
-                    if ($row->meta_key === 'rank_math_title') {
-                        $this->db->query("INSERT INTO {$indexableTable} (object_type, object_id, title) VALUES ('post', {$postId}, '" . addslashes($row->meta_value) . "') ON DUPLICATE KEY UPDATE title = VALUES(title)");
-                    } elseif ($row->meta_key === 'rank_math_description') {
-                        $this->db->query("INSERT INTO {$indexableTable} (object_type, object_id, description) VALUES ('post', {$postId}, '" . addslashes($row->meta_value) . "') ON DUPLICATE KEY UPDATE description = VALUES(description)");
-                    } elseif ($row->meta_key === 'rank_math_focus_keyword') {
-                        $this->db->query("INSERT INTO {$indexableTable} (object_type, object_id, primary_focus_keyword) VALUES ('post', {$postId}, '" . addslashes($row->meta_value) . "') ON DUPLICATE KEY UPDATE primary_focus_keyword = VALUES(primary_focus_keyword)");
+        } elseif ($source === 'redirection') {
+            // Check for WordPress redirection plugin tables
+            $redirTable = $this->db->getPrefix() . 'redirection_items';
+            $apexRedirTable = $this->db->getPrefix() . 'apex_redirects';
+            if ($this->db->hasTable($redirTable)) {
+                $redirSql = $this->db->prepare("SELECT url, action_data, action_code FROM {$redirTable} LIMIT %d OFFSET %d", $batchSize, $offset);
+                $rows = $this->db->getResults($redirSql);
+                if (is_array($rows)) {
+                    foreach ($rows as $row) {
+                        $upsert = $this->db->prepare(
+                            "INSERT INTO {$apexRedirTable} (source_url, target_url, status_code, is_active) VALUES (%s, %s, %d, 1) ON DUPLICATE KEY UPDATE target_url = VALUES(target_url), status_code = VALUES(status_code)",
+                            (string) $row->url,
+                            (string) $row->action_data,
+                            (int) $row->action_code ?: 301
+                        );
+                        $this->db->query($upsert);
+                        $migratedCount++;
                     }
-                    $migratedCount++;
                 }
             }
         }
 
         $nextOffset = $offset + $migratedCount;
-        $isCompleted = $migratedCount < $batchSize;
+        $isCompleted = ($migratedCount < $batchSize);
 
         return $this->success([
             'success'          => true,
@@ -125,6 +166,8 @@ class MigrationRestController extends AbstractRestController {
             'migrated_records' => $migratedCount,
             'current_offset'   => $offset,
             'next_offset'      => $isCompleted ? null : $nextOffset,
+            'batch_size'       => $batchSize,
+            'errors'           => $errors,
         ]);
     }
 }

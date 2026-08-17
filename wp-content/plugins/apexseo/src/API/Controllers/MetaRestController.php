@@ -113,8 +113,13 @@ class MetaRestController extends AbstractRestController {
         $objectType = $request instanceof \WP_REST_Request ? $request->get_param('object_type') : (isset($request['object_type']) ? $request['object_type'] : 'post');
         $objectId   = $request instanceof \WP_REST_Request ? (int) $request->get_param('object_id') : (isset($request['object_id']) ? (int) $request['object_id'] : 0);
 
-        if (!$objectId) {
-            return $this->error('apexseo_invalid_id', 'Valid object_id required.', 400);
+        $validObjectTypes = ['post', 'term', 'user'];
+        if (!in_array($objectType, $validObjectTypes, true)) {
+            return $this->error('apexseo_invalid_object_type', 'Invalid object_type specified. Allowed: post, term, user.', 400);
+        }
+
+        if ($objectId <= 0) {
+            return $this->error('apexseo_invalid_id', 'Valid positive object_id required.', 400);
         }
 
         $indexable = $this->repository->find($objectType, $objectId);
@@ -146,12 +151,17 @@ class MetaRestController extends AbstractRestController {
      * @return \WP_REST_Response|\WP_Error
      */
     public function saveMeta($request) {
-        $objectType = $request instanceof \WP_REST_Request ? $request->get_param('object_type') : 'post';
-        $objectId   = $request instanceof \WP_REST_Request ? (int) $request->get_param('object_id') : 0;
+        $objectType = $request instanceof \WP_REST_Request ? $request->get_param('object_type') : (isset($request['object_type']) ? $request['object_type'] : 'post');
+        $objectId   = $request instanceof \WP_REST_Request ? (int) $request->get_param('object_id') : (isset($request['object_id']) ? (int) $request['object_id'] : 0);
         $params     = $request instanceof \WP_REST_Request ? $request->get_json_params() : $request;
 
-        if (!$objectId) {
-            return $this->error('apexseo_invalid_id', 'Valid object_id required.', 400);
+        $validObjectTypes = ['post', 'term', 'user'];
+        if (!in_array($objectType, $validObjectTypes, true)) {
+            return $this->error('apexseo_invalid_object_type', 'Invalid object_type specified. Allowed: post, term, user.', 400);
+        }
+
+        if ($objectId <= 0) {
+            return $this->error('apexseo_invalid_id', 'Valid positive object_id required.', 400);
         }
 
         $indexable = $this->repository->find($objectType, $objectId);

@@ -26,7 +26,7 @@ use ApexSEO\API\Controllers\MediaRestController;
 use ApexSEO\API\Controllers\MigrationRestController;
 
 /**
- * Central REST API Subsystem Router & Manager (APEX-091 through APEX-100).
+ * Central REST API Subsystem Router & Manager (APEX-169 through APEX-180).
  */
 class RestApiRouter implements ServiceContractInterface, HookableInterface {
     const NAMESPACE = 'apexseo/v1';

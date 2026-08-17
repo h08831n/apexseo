@@ -72,47 +72,75 @@ class MediaRestController extends AbstractRestController {
     public function optimizeSingle($request) {
         $attachmentId = $request instanceof \WP_REST_Request ? (int) $request->get_param('attachment_id') : (isset($request['attachment_id']) ? (int) $request['attachment_id'] : 0);
 
-        if (!$attachmentId) {
-            return $this->error('apexseo_invalid_attachment', 'Valid attachment_id required.', 400);
+        if ($attachmentId <= 0) {
+            return $this->error('apexseo_invalid_attachment', 'Valid positive attachment_id required.', 400);
+        }
+
+        // Validate that attachment exists and is an image when WP functions are present
+        if (function_exists('wp_attachment_is_image') && !wp_attachment_is_image($attachmentId)) {
+            return $this->error('apexseo_invalid_media_type', 'Target attachment is not a recognized image.', 422);
         }
 
         $result = $this->optimizer->optimizeAttachment($attachmentId);
 
-        if (!$result['success']) {
+        if (empty($result['success'])) {
             return $this->error('apexseo_optimization_failed', isset($result['error']) ? $result['error'] : 'Optimization failed', 500);
         }
 
         return $this->success([
             'success'       => true,
             'attachment_id' => $attachmentId,
-            'original_size' => isset($result['original_size']) ? $result['original_size'] : 0,
-            'optimized_size'=> isset($result['optimized_size']) ? $result['optimized_size'] : 0,
-            'saved_bytes'   => isset($result['saved_bytes']) ? $result['saved_bytes'] : 0,
-            'saved_percent' => isset($result['saved_percent']) ? $result['saved_percent'] : 0,
+            'original_size' => isset($result['original_size']) ? (int) $result['original_size'] : 0,
+            'optimized_size'=> isset($result['optimized_size']) ? (int) $result['optimized_size'] : 0,
+            'saved_bytes'   => isset($result['saved_bytes']) ? (int) $result['saved_bytes'] : 0,
+            'saved_percent' => isset($result['saved_percent']) ? (float) $result['saved_percent'] : 0.0,
             'webp_url'      => isset($result['webp_url']) ? $result['webp_url'] : null,
             'avif_url'      => isset($result['avif_url']) ? $result['avif_url'] : null,
         ]);
     }
 
     /**
-     * Enqueue or execute bulk media optimization batch (API-21).
+     * Execute synchronous batched media optimization (API-21).
      *
      * @param \WP_REST_Request $request
      * @return \WP_REST_Response|\WP_Error
      */
     public function bulkOptimize($request) {
         $params        = $request instanceof \WP_REST_Request ? $request->get_json_params() : $request;
-        $attachmentIds = isset($params['attachment_ids']) && is_array($params['attachment_ids']) ? $params['attachment_ids'] : [];
-        $batchSize     = isset($params['batch_size']) ? (int) $params['batch_size'] : 10;
+        $rawIds        = isset($params['attachment_ids']) && is_array($params['attachment_ids']) ? $params['attachment_ids'] : [];
+        $rawBatchSize  = isset($params['batch_size']) ? (int) $params['batch_size'] : 10;
 
+        // Clean, sanitize, deduplicate, and limit IDs
+        $cleanedIds = array_values(array_unique(array_filter(array_map('intval', $rawIds), function($id) {
+            return $id > 0;
+        })));
+
+        // Bound attachment IDs array to max 100
+        if (count($cleanedIds) > 100) {
+            $cleanedIds = array_slice($cleanedIds, 0, 100);
+        }
+
+        // Bound batch size: min 1, max 50
+        $batchSize = max(1, min(50, $rawBatchSize));
+
+        $batch = array_slice($cleanedIds, 0, $batchSize);
         $processed = [];
+        $errors    = [];
         $totalSavedBytes = 0;
 
-        foreach (array_slice($attachmentIds, 0, $batchSize) as $id) {
-            $res = $this->optimizer->optimizeAttachment((int) $id);
-            if ($res['success']) {
+        foreach ($batch as $id) {
+            // Check image format if WP function available
+            if (function_exists('wp_attachment_is_image') && !wp_attachment_is_image($id)) {
+                $errors[] = ['id' => $id, 'error' => 'Attachment is not an image'];
+                continue;
+            }
+
+            $res = $this->optimizer->optimizeAttachment($id);
+            if (!empty($res['success'])) {
                 $processed[] = $id;
-                $totalSavedBytes += isset($res['saved_bytes']) ? $res['saved_bytes'] : 0;
+                $totalSavedBytes += isset($res['saved_bytes']) ? (int) $res['saved_bytes'] : 0;
+            } else {
+                $errors[] = ['id' => $id, 'error' => isset($res['error']) ? $res['error'] : 'Optimization failed'];
             }
         }
 
@@ -120,8 +148,10 @@ class MediaRestController extends AbstractRestController {
             'success'           => true,
             'processed_count'   => count($processed),
             'processed_ids'     => $processed,
+            'errors'            => $errors,
             'total_saved_bytes' => $totalSavedBytes,
-            'has_more'          => count($attachmentIds) > $batchSize,
+            'has_more'          => count($cleanedIds) > $batchSize,
+            'remaining_count'   => max(0, count($cleanedIds) - count($processed) - count($errors)),
         ]);
     }
 }

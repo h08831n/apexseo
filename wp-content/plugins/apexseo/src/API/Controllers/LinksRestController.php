@@ -53,24 +53,31 @@ class LinksRestController extends AbstractRestController {
     public function getSuggestions($request) {
         $postId = $request instanceof \WP_REST_Request ? (int) $request->get_param('post_id') : (isset($request['post_id']) ? (int) $request['post_id'] : 0);
 
-        if (!$postId) {
-            return $this->error('apexseo_invalid_post_id', 'Valid post_id is required.', 400);
+        if ($postId <= 0) {
+            return $this->error('apexseo_invalid_post_id', 'Valid positive post_id is required.', 400);
         }
 
         $table = $this->db->getPrefix() . 'apex_indexables';
-        $current = $this->db->getRow("SELECT * FROM {$table} WHERE object_type = 'post' AND object_id = {$postId}");
+        $currentQuery = $this->db->prepare("SELECT * FROM {$table} WHERE object_type = %s AND object_id = %d LIMIT 1", 'post', $postId);
+        $current = $this->db->getRow($currentQuery);
 
         $suggestions = [];
-        $keyword = !empty($current->primary_focus_keyword) ? $current->primary_focus_keyword : '';
+        $keyword = (!empty($current) && !empty($current->primary_focus_keyword)) ? trim($current->primary_focus_keyword) : '';
 
         if (!empty($keyword)) {
-            $escaped = addslashes($keyword);
-            $query = "SELECT object_id, title, canonical_url, primary_focus_keyword 
-                      FROM {$table} 
-                      WHERE object_type = 'post' 
-                        AND object_id != {$postId} 
-                        AND (title LIKE '%{$escaped}%' OR primary_focus_keyword LIKE '%{$escaped}%') 
-                      LIMIT 10";
+            $likePattern = '%' . str_replace(['\\', '%', '_'], ['\\\\', '\\%', '\\_'], $keyword) . '%';
+            $query = $this->db->prepare(
+                "SELECT object_id, title, canonical_url, primary_focus_keyword 
+                 FROM {$table} 
+                 WHERE object_type = %s 
+                   AND object_id != %d 
+                   AND (title LIKE %s OR primary_focus_keyword LIKE %s) 
+                 LIMIT 10",
+                'post',
+                $postId,
+                $likePattern,
+                $likePattern
+            );
             $results = $this->db->getResults($query);
             if (is_array($results)) {
                 $suggestions = $results;
@@ -79,10 +86,14 @@ class LinksRestController extends AbstractRestController {
 
         // Fallback to recent relevant indexables if no keyword match
         if (empty($suggestions)) {
-            $query = "SELECT object_id, title, canonical_url 
-                      FROM {$table} 
-                      WHERE object_type = 'post' AND object_id != {$postId} 
-                      ORDER BY id DESC LIMIT 5";
+            $query = $this->db->prepare(
+                "SELECT object_id, title, canonical_url 
+                 FROM {$table} 
+                 WHERE object_type = %s AND object_id != %d 
+                 ORDER BY id DESC LIMIT 5",
+                'post',
+                $postId
+            );
             $results = $this->db->getResults($query);
             if (is_array($results)) {
                 $suggestions = $results;

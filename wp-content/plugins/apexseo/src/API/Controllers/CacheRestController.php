@@ -77,9 +77,16 @@ class CacheRestController extends AbstractRestController {
     public function purgeCache($request) {
         $startTime = microtime(true);
         $params  = $request instanceof \WP_REST_Request ? $request->get_json_params() : $request;
-        $type    = isset($params['type']) ? $params['type'] : 'all';
-        $targets = isset($params['targets']) && is_array($params['targets']) ? $params['targets'] : [];
+        $type    = isset($params['type']) ? sanitize_key($params['type']) : 'all';
+        $rawTargets = isset($params['targets']) && is_array($params['targets']) ? $params['targets'] : [];
 
+        $validTypes = ['all', 'post', 'urls', 'tag'];
+        if (!in_array($type, $validTypes, true)) {
+            $type = 'all';
+        }
+
+        // Bound targets to max 100
+        $targets = array_slice($rawTargets, 0, 100);
         $purgedCount = 0;
 
         if ($type === 'all') {
@@ -92,19 +99,38 @@ class CacheRestController extends AbstractRestController {
             }
         } elseif ($type === 'post') {
             foreach ($targets as $postId) {
-                $this->cacheEngine->delete("post_meta_{$postId}");
-                $this->cacheEngine->delete("schema_post_{$postId}");
+                $cleanId = (int) $postId;
+                if ($cleanId <= 0) {
+                    continue;
+                }
+                $this->cacheEngine->delete("post_meta_{$cleanId}");
+                $this->cacheEngine->delete("schema_post_{$cleanId}");
                 if ($this->integration && method_exists($this->integration, 'purgePost')) {
-                    $this->integration->purgePost((int) $postId);
+                    $this->integration->purgePost($cleanId);
                 }
                 $purgedCount++;
             }
         } elseif ($type === 'urls') {
             foreach ($targets as $url) {
-                $hash = md5($url);
+                if (empty($url) || !is_string($url)) {
+                    continue;
+                }
+                $cleanUrl = sanitize_text_field($url);
+                $hash = md5($cleanUrl);
                 $this->cacheEngine->delete("page_{$hash}");
                 if ($this->integration && method_exists($this->integration, 'purgeUrl')) {
-                    $this->integration->purgeUrl($url);
+                    $this->integration->purgeUrl($cleanUrl);
+                }
+                $purgedCount++;
+            }
+        } elseif ($type === 'tag') {
+            foreach ($targets as $tag) {
+                if (empty($tag) || !is_string($tag)) {
+                    continue;
+                }
+                $cleanTag = sanitize_key($tag);
+                if ($this->integration && method_exists($this->integration, 'purgeTag')) {
+                    $this->integration->purgeTag($cleanTag);
                 }
                 $purgedCount++;
             }
