@@ -1,0 +1,259 @@
+<?php
+namespace ApexSEO\Tests;
+
+use ApexSEO\Core\Security\SecurityManager;
+use ApexSEO\Core\Configuration\ConfigurationManager;
+use ApexSEO\Core\Database\DatabaseManager;
+use ApexSEO\SEO\Repository\IndexableRepository;
+use ApexSEO\SEO\Builder\IndexableBuilder;
+use ApexSEO\Schema\SchemaRegistry;
+use ApexSEO\Schema\Validator\SchemaValidator;
+use ApexSEO\Cache\Engine\CacheEngine;
+use ApexSEO\Media\Optimizer\ImageOptimizer;
+use ApexSEO\API\RestApiRouter;
+use ApexSEO\API\Controllers\SettingsRestController;
+use ApexSEO\API\Controllers\MetaRestController;
+use ApexSEO\API\Controllers\SchemaRestController;
+use ApexSEO\API\Controllers\RedirectsRestController;
+use ApexSEO\API\Controllers\NotFoundRestController;
+use ApexSEO\API\Controllers\LinksRestController;
+use ApexSEO\API\Controllers\AnalyticsRestController;
+use ApexSEO\API\Controllers\CacheRestController;
+use ApexSEO\API\Controllers\MediaRestController;
+use ApexSEO\API\Controllers\MigrationRestController;
+
+class RestSubsystemTest extends TestCase {
+    protected $security;
+    protected $config;
+    protected $db;
+    protected $indexableRepo;
+    protected $indexableBuilder;
+    protected $schemaRegistry;
+    protected $schemaValidator;
+    protected $cacheEngine;
+    protected $imageOptimizer;
+    protected $router;
+
+    public function setUp() {
+        parent::setUp();
+        $this->security         = new SecurityManager();
+        $this->config           = new ConfigurationManager();
+        $this->db               = new DatabaseManager();
+        $this->indexableRepo    = new IndexableRepository($this->db);
+        $this->indexableBuilder = new IndexableBuilder();
+        $this->schemaRegistry   = new SchemaRegistry();
+        $this->schemaValidator  = new SchemaValidator();
+        $this->cacheEngine      = new CacheEngine('memory');
+        $this->imageOptimizer   = new ImageOptimizer();
+
+        $this->router = new RestApiRouter(
+            $this->security,
+            $this->config,
+            $this->db,
+            $this->indexableRepo,
+            $this->indexableBuilder,
+            $this->schemaRegistry,
+            $this->schemaValidator,
+            $this->cacheEngine,
+            $this->imageOptimizer
+        );
+    }
+
+    public function testRestRouterInitialization() {
+        $controllers = $this->router->getControllers();
+        $this->assertEquals(10, count($controllers));
+        $this->assertInstanceOf(SettingsRestController::class, $this->router->getController('settings'));
+        $this->assertInstanceOf(MetaRestController::class, $this->router->getController('meta'));
+        $this->assertInstanceOf(SchemaRestController::class, $this->router->getController('schema'));
+        $this->assertInstanceOf(RedirectsRestController::class, $this->router->getController('redirects'));
+        $this->assertInstanceOf(NotFoundRestController::class, $this->router->getController('not_found'));
+        $this->assertInstanceOf(LinksRestController::class, $this->router->getController('links'));
+        $this->assertInstanceOf(AnalyticsRestController::class, $this->router->getController('analytics'));
+        $this->assertInstanceOf(CacheRestController::class, $this->router->getController('cache'));
+        $this->assertInstanceOf(MediaRestController::class, $this->router->getController('media'));
+        $this->assertInstanceOf(MigrationRestController::class, $this->router->getController('migration'));
+    }
+
+    public function testStatusEndpointResponse() {
+        $response = $this->router->getStatus();
+        $this->assertNotNull($response);
+        $data = ($response instanceof \WP_REST_Response) ? $response->get_data() : $response;
+        $this->assertEquals('apexseo/v1', $data['namespace']);
+        $this->assertEquals('active', $data['status']);
+        $this->assertEquals(22, $data['registered_apis']);
+    }
+
+    public function testSettingsControllerGetAndUpdate() {
+        $controller = $this->router->getController('settings');
+        $response = $controller->getSettings();
+        $data = ($response instanceof \WP_REST_Response) ? $response->get_data() : $response;
+        $this->assertTrue($data['success']);
+
+        $updateResponse = $controller->updateSettings([
+            'settings' => [
+                'general' => ['site_type' => 'Organization'],
+            ],
+        ]);
+        $updateData = ($updateResponse instanceof \WP_REST_Response) ? $updateResponse->get_data() : $updateResponse;
+        $this->assertTrue($updateData['success']);
+        $this->assertEquals('Organization', $this->config->get('general.site_type'));
+    }
+
+    public function testMetaControllerSaveAndGet() {
+        $controller = $this->router->getController('meta');
+
+        $saveResponse = $controller->saveMeta([
+            'object_type'            => 'post',
+            'object_id'              => 42,
+            'title'                  => 'Optimized REST Title',
+            'description'            => 'Clean REST SEO description.',
+            'canonical_url'          => 'https://example.com/rest-post-42/',
+            'primary_focus_keyword'  => 'enterprise rest api',
+        ]);
+        $saveData = ($saveResponse instanceof \WP_REST_Response) ? $saveResponse->get_data() : $saveResponse;
+        $this->assertTrue($saveData['success']);
+        $this->assertEquals('Optimized REST Title', $saveData['indexable']['title']);
+
+        $getResponse = $controller->getMeta([
+            'object_type' => 'post',
+            'object_id'   => 42,
+        ]);
+        $getData = ($getResponse instanceof \WP_REST_Response) ? $getResponse->get_data() : $getResponse;
+        $this->assertTrue($getData['success']);
+        $this->assertEquals('enterprise rest api', $getData['indexable']['primary_focus_keyword']);
+    }
+
+    public function testSchemaControllerCRUD() {
+        $controller = $this->router->getController('schema');
+
+        // GET available schema types
+        $listResponse = $controller->getSchemas();
+        $listData = ($listResponse instanceof \WP_REST_Response) ? $listResponse->get_data() : $listResponse;
+        $this->assertTrue($listData['success']);
+        $this->assertTrue(in_array('Article', $listData['supported_types']));
+        $this->assertTrue(in_array('Recipe', $listData['supported_types']));
+
+        // POST Create Valid Schema
+        $createResponse = $controller->createSchema([
+            'schema_type' => 'Article',
+            'schema_data' => [
+                '@type'    => 'Article',
+                'headline' => 'REST Schema Test',
+            ],
+        ]);
+        $createData = ($createResponse instanceof \WP_REST_Response) ? $createResponse->get_data() : $createResponse;
+        $this->assertTrue($createData['success']);
+
+        // POST Invalid Schema should be rejected
+        $invalidResponse = $controller->createSchema([
+            'schema_type' => 'Article',
+            'schema_data' => [
+                '@type' => 'Article', // Missing headline
+            ],
+        ]);
+        $isError = ($invalidResponse instanceof \WP_Error) || (isset($invalidResponse['error']));
+        $this->assertTrue($isError);
+    }
+
+    public function testRedirectsControllerCRUD() {
+        $controller = $this->router->getController('redirects');
+
+        // POST Create
+        $createResponse = $controller->createRedirect([
+            'source_url'  => 'https://example.com/old-rest-url/',
+            'target_url'  => 'https://example.com/new-rest-url/',
+            'status_code' => 301,
+        ]);
+        $createData = ($createResponse instanceof \WP_REST_Response) ? $createResponse->get_data() : $createResponse;
+        $this->assertTrue($createData['success']);
+        $this->assertEquals('/old-rest-url/', $createData['source_url']);
+
+        // GET List
+        $getResponse = $controller->getRedirects();
+        $getData = ($getResponse instanceof \WP_REST_Response) ? $getResponse->get_data() : $getResponse;
+        $this->assertTrue($getData['success']);
+    }
+
+    public function testNotFoundController() {
+        $controller = $this->router->getController('not_found');
+
+        $getResponse = $controller->get404Logs();
+        $getData = ($getResponse instanceof \WP_REST_Response) ? $getResponse->get_data() : $getResponse;
+        $this->assertTrue($getData['success']);
+
+        $clearResponse = $controller->clear404Logs();
+        $clearData = ($clearResponse instanceof \WP_REST_Response) ? $clearResponse->get_data() : $clearResponse;
+        $this->assertTrue($clearData['success']);
+    }
+
+    public function testLinksController() {
+        $controller = $this->router->getController('links');
+
+        $response = $controller->getSuggestions(['post_id' => 42]);
+        $data = ($response instanceof \WP_REST_Response) ? $response->get_data() : $response;
+        $this->assertTrue($data['success']);
+        $this->assertEquals(42, $data['post_id']);
+    }
+
+    public function testAnalyticsController() {
+        $controller = $this->router->getController('analytics');
+
+        $overviewResponse = $controller->getOverview();
+        $overviewData = ($overviewResponse instanceof \WP_REST_Response) ? $overviewResponse->get_data() : $overviewResponse;
+        $this->assertTrue($overviewData['success']);
+        $this->assertArrayHasKey('metrics', $overviewData);
+
+        $rankResponse = $controller->getRankTracker();
+        $rankData = ($rankResponse instanceof \WP_REST_Response) ? $rankResponse->get_data() : $rankResponse;
+        $this->assertTrue($rankData['success']);
+    }
+
+    public function testCacheControllerPurgeAndPreload() {
+        $controller = $this->router->getController('cache');
+
+        $purgeResponse = $controller->purgeCache([
+            'type' => 'all',
+        ]);
+        $purgeData = ($purgeResponse instanceof \WP_REST_Response) ? $purgeResponse->get_data() : $purgeResponse;
+        $this->assertTrue($purgeData['success']);
+        $this->assertEquals('all', $purgeData['type']);
+
+        $preloadResponse = $controller->triggerPreload();
+        $preloadData = ($preloadResponse instanceof \WP_REST_Response) ? $preloadResponse->get_data() : $preloadResponse;
+        $this->assertTrue($preloadData['success']);
+        $this->assertEquals('enqueued', $preloadData['status']);
+    }
+
+    public function testMediaControllerSingleAndBulk() {
+        $controller = $this->router->getController('media');
+
+        $optimizeResponse = $controller->optimizeSingle([
+            'attachment_id' => 99,
+        ]);
+        $optimizeData = ($optimizeResponse instanceof \WP_REST_Response) ? $optimizeResponse->get_data() : $optimizeResponse;
+        $this->assertTrue($optimizeData['success']);
+        $this->assertEquals(99, $optimizeData['attachment_id']);
+
+        $bulkResponse = $controller->bulkOptimize([
+            'attachment_ids' => [101, 102],
+            'batch_size'     => 5,
+        ]);
+        $bulkData = ($bulkResponse instanceof \WP_REST_Response) ? $bulkResponse->get_data() : $bulkResponse;
+        $this->assertTrue($bulkData['success']);
+        $this->assertEquals(2, $bulkData['processed_count']);
+    }
+
+    public function testMigrationControllerExecution() {
+        $controller = $this->router->getController('migration');
+
+        $response = $controller->executeMigration([
+            'source'     => 'yoast',
+            'batch_size' => 100,
+            'offset'     => 0,
+        ]);
+        $data = ($response instanceof \WP_REST_Response) ? $response->get_data() : $response;
+        $this->assertTrue($data['success']);
+        $this->assertEquals('yoast', $data['source']);
+        $this->assertEquals('completed', $data['status']);
+    }
+}

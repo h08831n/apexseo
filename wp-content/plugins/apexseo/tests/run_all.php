@@ -25,6 +25,7 @@ require_once __DIR__ . '/PerformanceSubsystemTest.php';
 require_once __DIR__ . '/MediaSubsystemTest.php';
 require_once __DIR__ . '/AiSubsystemTest.php';
 require_once __DIR__ . '/AnalyticsSubsystemTest.php';
+require_once __DIR__ . '/RestSubsystemTest.php';
 
 $testClasses = [
     ApexSEO\Tests\AutoloaderTest::class,
@@ -43,6 +44,7 @@ $testClasses = [
     ApexSEO\Tests\MediaSubsystemTest::class,
     ApexSEO\Tests\AiSubsystemTest::class,
     ApexSEO\Tests\AnalyticsSubsystemTest::class,
+    ApexSEO\Tests\RestSubsystemTest::class,
 ];
 
 echo "====================================================\n";
