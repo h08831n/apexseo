@@ -3,6 +3,15 @@ namespace ApexSEO\Core\CLI;
 
 use ApexSEO\Core\Contracts\ServiceContractInterface;
 use ApexSEO\Core\Contracts\HookableInterface;
+use ApexSEO\CLI\IndexCommand;
+use ApexSEO\CLI\CacheCommand;
+use ApexSEO\CLI\MediaCommand;
+use ApexSEO\CLI\RedirectCommand;
+use ApexSEO\CLI\DatabaseCommand;
+use ApexSEO\CLI\MigrateCommand;
+use ApexSEO\CLI\SitemapCommand;
+use ApexSEO\CLI\DoctorCommand;
+use ApexSEO\CLI\SchemaCommand;
 
 /**
  * WP-CLI Command Infrastructure and Root Namespace Manager.
@@ -16,6 +25,60 @@ class CliManager implements ServiceContractInterface, HookableInterface {
      * @var array
      */
     protected $commands = [];
+
+    /**
+     * Constructor.
+     */
+    public function __construct() {
+        $this->registerDefaultCommands();
+    }
+
+    /**
+     * Register core default subcommands.
+     *
+     * @return void
+     */
+    protected function registerDefaultCommands() {
+        $this->registerCommand('index', IndexCommand::class, [
+            'shortdesc' => 'Manage and rebuild Apex SEO indexables.',
+        ]);
+
+        $this->registerCommand('cache', CacheCommand::class, [
+            'shortdesc' => 'Purge, warmup, and preload cache layers.',
+        ]);
+
+        $this->registerCommand('media', MediaCommand::class, [
+            'shortdesc' => 'Optimize and restore WebP/AVIF media attachments.',
+        ]);
+
+        $this->registerCommand('redirect', RedirectCommand::class, [
+            'shortdesc' => 'Add and list 301/302 URL redirection rules.',
+        ]);
+
+        $this->registerCommand('db', DatabaseCommand::class, [
+            'shortdesc' => 'Clean old 404 logs, expired transients, and optimize database.',
+        ]);
+
+        $this->registerCommand('migrate', MigrateCommand::class, [
+            'shortdesc' => 'Import SEO metadata and redirects from legacy SEO plugins.',
+        ]);
+
+        $this->registerCommand('sitemap', SitemapCommand::class, [
+            'shortdesc' => 'Rebuild and cache XML sitemaps.',
+        ]);
+
+        $this->registerCommand('doctor', DoctorCommand::class, [
+            'shortdesc' => 'Diagnose system health and database integrity.',
+        ]);
+
+        $this->registerCommand('report', DoctorCommand::class, [
+            'shortdesc' => 'Output system report and environment diagnostics.',
+        ]);
+
+        $this->registerCommand('schema', SchemaCommand::class, [
+            'shortdesc' => 'Validate JSON-LD structured data schemas.',
+        ]);
+    }
 
     /**
      * {@inheritdoc}
@@ -89,3 +152,4 @@ class CliManager implements ServiceContractInterface, HookableInterface {
         return $this->commands;
     }
 }
+

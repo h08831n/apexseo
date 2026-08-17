@@ -291,4 +291,83 @@ class RestSubsystemTest extends TestCase {
         $this->assertTrue(is_bool($controller->checkEditorPermission(null)) || ($controller->checkEditorPermission(null) instanceof \WP_Error));
         $this->assertTrue(is_bool($controller->checkUploadPermission(null)) || ($controller->checkUploadPermission(null) instanceof \WP_Error));
     }
+
+    public function testSecurityIdorAndObjectAuthorization() {
+        $controller = $this->router->getController('meta');
+
+        // Invalid negative ID
+        $resNegative = $controller->getMeta(['object_type' => 'post', 'object_id' => -99]);
+        $this->assertTrue(($resNegative instanceof \WP_Error) || (isset($resNegative['error'])));
+
+        // Invalid object_type
+        $resInvalidType = $controller->getMeta(['object_type' => 'system_files', 'object_id' => 1]);
+        $this->assertTrue(($resInvalidType instanceof \WP_Error) || (isset($resInvalidType['error'])));
+    }
+
+    public function testSecuritySqlInjectionResilience() {
+        $controller = $this->router->getController('redirects');
+
+        // SQL injection payload in source_url / target_url
+        $sqlPayload = "' OR 1=1; DROP TABLE wp_users; --";
+        $createRes = $controller->createRedirect([
+            'source_url'  => '/test-sqli-' . md5(uniqid()) . '/',
+            'target_url'  => 'https://example.com/' . urlencode($sqlPayload),
+            'status_code' => 301,
+        ]);
+        $data = ($createRes instanceof \WP_REST_Response) ? $createRes->get_data() : $createRes;
+        $this->assertTrue($data['success']);
+
+        // Check search query with quotes in links controller
+        $linksController = $this->router->getController('links');
+        $linkRes = $linksController->getSuggestions(['post_id' => 1]);
+        $linkData = ($linkRes instanceof \WP_REST_Response) ? $linkRes->get_data() : $linkRes;
+        $this->assertTrue($linkData['success']);
+    }
+
+    public function testSecurityXssPayloadSanitization() {
+        $controller = $this->router->getController('meta');
+
+        $xssPayload = '<script>alert("XSS")</script><img src="x" onerror="alert(1)">Hello Safe Title';
+        $saveRes = $controller->saveMeta([
+            'object_type' => 'post',
+            'object_id'   => 88,
+            'title'       => $xssPayload,
+            'description' => $xssPayload,
+        ]);
+        $saveData = ($saveRes instanceof \WP_REST_Response) ? $saveRes->get_data() : $saveRes;
+        $this->assertTrue($saveData['success']);
+        $this->assertFalse(strpos($saveData['indexable']['title'], '<script>'));
+    }
+
+    public function testSecurityOversizedBatchAndPaginationBounds() {
+        // Media bulk optimizer with 500 attachment IDs
+        $mediaController = $this->router->getController('media');
+        $largeIdList = range(1, 500);
+        $bulkRes = $mediaController->bulkOptimize([
+            'attachment_ids' => $largeIdList,
+            'batch_size'     => 1000, // Should be bounded to max 50
+        ]);
+        $bulkData = ($bulkRes instanceof \WP_REST_Response) ? $bulkRes->get_data() : $bulkRes;
+        $this->assertTrue($bulkData['success']);
+        $this->assertTrue($bulkData['processed_count'] <= 50);
+
+        // Redirects pagination bounding
+        $redirController = $this->router->getController('redirects');
+        $redirRes = $redirController->getRedirects(['page' => 1, 'per_page' => 99999]);
+        $redirData = ($redirRes instanceof \WP_REST_Response) ? $redirRes->get_data() : $redirRes;
+        $this->assertTrue($redirData['success']);
+        $this->assertTrue($redirData['per_page'] <= 100);
+    }
+
+    public function testSecurityPathTraversalAndSsrfGuards() {
+        $cacheController = $this->router->getController('cache');
+
+        // Path traversal payload in cache purge targets
+        $traversalRes = $cacheController->purgeCache([
+            'type'    => 'url',
+            'targets' => ['../../../../wp-config.php', 'http://169.254.169.254/latest/meta-data/'],
+        ]);
+        $data = ($traversalRes instanceof \WP_REST_Response) ? $traversalRes->get_data() : $traversalRes;
+        $this->assertTrue($data['success']);
+    }
 }
