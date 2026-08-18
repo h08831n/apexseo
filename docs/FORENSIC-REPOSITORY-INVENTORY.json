@@ -1,0 +1,1105 @@
+{
+  "audit_timestamp": "2026-08-18T19:37:00Z",
+  "repository_url": "https://github.com/h08831n/apexseo",
+  "metrics": {
+    "production_php_files": 120,
+    "src_php_files": 118,
+    "test_php_files": 22,
+    "root_php_files": 2,
+    "total_php_files": 142,
+    "concrete_classes": 106,
+    "abstract_classes": 3,
+    "interfaces": 10,
+    "traits": 0,
+    "test_classes": 18,
+    "test_methods": 97,
+    "assertions": 340,
+    "rest_routes": 1,
+    "wp_cli_commands": 0,
+    "database_tables": 0,
+    "schema_types": 12
+  },
+  "interfaces": [
+    {
+      "filename": "src/Core/Container/ContainerInterface.php",
+      "namespace": "ApexSEO\\Core\\Container",
+      "name": "ContainerInterface",
+      "fqcn": "ApexSEO\\Core\\Container\\ContainerInterface"
+    },
+    {
+      "filename": "src/Core/Contracts/BootableInterface.php",
+      "namespace": "ApexSEO\\Core\\Contracts",
+      "name": "BootableInterface",
+      "fqcn": "ApexSEO\\Core\\Contracts\\BootableInterface"
+    },
+    {
+      "filename": "src/Core/Contracts/HookableInterface.php",
+      "namespace": "ApexSEO\\Core\\Contracts",
+      "name": "HookableInterface",
+      "fqcn": "ApexSEO\\Core\\Contracts\\HookableInterface"
+    },
+    {
+      "filename": "src/Core/Contracts/ModuleInterface.php",
+      "namespace": "ApexSEO\\Core\\Contracts",
+      "name": "ModuleInterface",
+      "fqcn": "ApexSEO\\Core\\Contracts\\ModuleInterface"
+    },
+    {
+      "filename": "src/Core/Contracts/ServiceContractInterface.php",
+      "namespace": "ApexSEO\\Core\\Contracts",
+      "name": "for",
+      "fqcn": "ApexSEO\\Core\\Contracts\\for"
+    },
+    {
+      "filename": "src/Core/Contracts/ServiceContractInterface.php",
+      "namespace": "ApexSEO\\Core\\Contracts",
+      "name": "ServiceContractInterface",
+      "fqcn": "ApexSEO\\Core\\Contracts\\ServiceContractInterface"
+    },
+    {
+      "filename": "src/Core/Database/MigrationInterface.php",
+      "namespace": "ApexSEO\\Core\\Database",
+      "name": "MigrationInterface",
+      "fqcn": "ApexSEO\\Core\\Database\\MigrationInterface"
+    },
+    {
+      "filename": "src/Core/Environment/Server/ServerAdapterInterface.php",
+      "namespace": "ApexSEO\\Core\\Environment\\Server",
+      "name": "ServerAdapterInterface",
+      "fqcn": "ApexSEO\\Core\\Environment\\Server\\ServerAdapterInterface"
+    },
+    {
+      "filename": "src/Core/Logging/LoggerInterface.php",
+      "namespace": "ApexSEO\\Core\\Logging",
+      "name": "LoggerInterface",
+      "fqcn": "ApexSEO\\Core\\Logging\\LoggerInterface"
+    },
+    {
+      "filename": "src/Schema/Types/SchemaTypeInterface.php",
+      "namespace": "ApexSEO\\Schema\\Types",
+      "name": "SchemaTypeInterface",
+      "fqcn": "ApexSEO\\Schema\\Types\\SchemaTypeInterface"
+    }
+  ],
+  "abstract_classes": [
+    {
+      "filename": "src/API/Controllers/AbstractRestController.php",
+      "namespace": "ApexSEO\\API\\Controllers",
+      "name": "AbstractRestController",
+      "fqcn": "ApexSEO\\API\\Controllers\\AbstractRestController"
+    },
+    {
+      "filename": "src/CLI/AbstractCliCommand.php",
+      "namespace": "ApexSEO\\CLI",
+      "name": "AbstractCliCommand",
+      "fqcn": "ApexSEO\\CLI\\AbstractCliCommand"
+    },
+    {
+      "filename": "src/Schema/Types/AbstractSchemaType.php",
+      "namespace": "ApexSEO\\Schema\\Types",
+      "name": "AbstractSchemaType",
+      "fqcn": "ApexSEO\\Schema\\Types\\AbstractSchemaType"
+    }
+  ],
+  "concrete_classes": [
+    {
+      "filename": "src/AI/AiModule.php",
+      "namespace": "ApexSEO\\AI",
+      "name": "AiModule",
+      "fqcn": "ApexSEO\\AI\\AiModule"
+    },
+    {
+      "filename": "src/AI/Generators/MetadataAiGenerator.php",
+      "namespace": "ApexSEO\\AI\\Generators",
+      "name": "MetadataAiGenerator",
+      "fqcn": "ApexSEO\\AI\\Generators\\MetadataAiGenerator"
+    },
+    {
+      "filename": "src/AI/LlmsTxt/LlmsTxtGenerator.php",
+      "namespace": "ApexSEO\\AI\\LlmsTxt",
+      "name": "LlmsTxtGenerator",
+      "fqcn": "ApexSEO\\AI\\LlmsTxt\\LlmsTxtGenerator"
+    },
+    {
+      "filename": "src/AI/SearchIntent/SearchIntentAnalyzer.php",
+      "namespace": "ApexSEO\\AI\\SearchIntent",
+      "name": "SearchIntentAnalyzer",
+      "fqcn": "ApexSEO\\AI\\SearchIntent\\SearchIntentAnalyzer"
+    },
+    {
+      "filename": "src/API/Controllers/AnalyticsRestController.php",
+      "namespace": "ApexSEO\\API\\Controllers",
+      "name": "AnalyticsRestController",
+      "fqcn": "ApexSEO\\API\\Controllers\\AnalyticsRestController"
+    },
+    {
+      "filename": "src/API/Controllers/CacheRestController.php",
+      "namespace": "ApexSEO\\API\\Controllers",
+      "name": "CacheRestController",
+      "fqcn": "ApexSEO\\API\\Controllers\\CacheRestController"
+    },
+    {
+      "filename": "src/API/Controllers/LinksRestController.php",
+      "namespace": "ApexSEO\\API\\Controllers",
+      "name": "LinksRestController",
+      "fqcn": "ApexSEO\\API\\Controllers\\LinksRestController"
+    },
+    {
+      "filename": "src/API/Controllers/MediaRestController.php",
+      "namespace": "ApexSEO\\API\\Controllers",
+      "name": "MediaRestController",
+      "fqcn": "ApexSEO\\API\\Controllers\\MediaRestController"
+    },
+    {
+      "filename": "src/API/Controllers/MetaRestController.php",
+      "namespace": "ApexSEO\\API\\Controllers",
+      "name": "MetaRestController",
+      "fqcn": "ApexSEO\\API\\Controllers\\MetaRestController"
+    },
+    {
+      "filename": "src/API/Controllers/MigrationRestController.php",
+      "namespace": "ApexSEO\\API\\Controllers",
+      "name": "MigrationRestController",
+      "fqcn": "ApexSEO\\API\\Controllers\\MigrationRestController"
+    },
+    {
+      "filename": "src/API/Controllers/NotFoundRestController.php",
+      "namespace": "ApexSEO\\API\\Controllers",
+      "name": "NotFoundRestController",
+      "fqcn": "ApexSEO\\API\\Controllers\\NotFoundRestController"
+    },
+    {
+      "filename": "src/API/Controllers/RedirectsRestController.php",
+      "namespace": "ApexSEO\\API\\Controllers",
+      "name": "RedirectsRestController",
+      "fqcn": "ApexSEO\\API\\Controllers\\RedirectsRestController"
+    },
+    {
+      "filename": "src/API/Controllers/SchemaRestController.php",
+      "namespace": "ApexSEO\\API\\Controllers",
+      "name": "SchemaRestController",
+      "fqcn": "ApexSEO\\API\\Controllers\\SchemaRestController"
+    },
+    {
+      "filename": "src/API/Controllers/SettingsRestController.php",
+      "namespace": "ApexSEO\\API\\Controllers",
+      "name": "SettingsRestController",
+      "fqcn": "ApexSEO\\API\\Controllers\\SettingsRestController"
+    },
+    {
+      "filename": "src/API/RestApiRouter.php",
+      "namespace": "ApexSEO\\API",
+      "name": "RestApiRouter",
+      "fqcn": "ApexSEO\\API\\RestApiRouter"
+    },
+    {
+      "filename": "src/Analytics/AnalyticsModule.php",
+      "namespace": "ApexSEO\\Analytics",
+      "name": "AnalyticsModule",
+      "fqcn": "ApexSEO\\Analytics\\AnalyticsModule"
+    },
+    {
+      "filename": "src/Analytics/Monitor/FourOhFourMonitor.php",
+      "namespace": "ApexSEO\\Analytics\\Monitor",
+      "name": "FourOhFourMonitor",
+      "fqcn": "ApexSEO\\Analytics\\Monitor\\FourOhFourMonitor"
+    },
+    {
+      "filename": "src/Analytics/Tracker/RankTracker.php",
+      "namespace": "ApexSEO\\Analytics\\Tracker",
+      "name": "RankTracker",
+      "fqcn": "ApexSEO\\Analytics\\Tracker\\RankTracker"
+    },
+    {
+      "filename": "src/Autoloader.php",
+      "namespace": "ApexSEO",
+      "name": "Autoloader",
+      "fqcn": "ApexSEO\\Autoloader"
+    },
+    {
+      "filename": "src/CLI/CacheCommand.php",
+      "namespace": "ApexSEO\\CLI",
+      "name": "CacheCommand",
+      "fqcn": "ApexSEO\\CLI\\CacheCommand"
+    },
+    {
+      "filename": "src/CLI/DatabaseCommand.php",
+      "namespace": "ApexSEO\\CLI",
+      "name": "DatabaseCommand",
+      "fqcn": "ApexSEO\\CLI\\DatabaseCommand"
+    },
+    {
+      "filename": "src/CLI/DoctorCommand.php",
+      "namespace": "ApexSEO\\CLI",
+      "name": "DoctorCommand",
+      "fqcn": "ApexSEO\\CLI\\DoctorCommand"
+    },
+    {
+      "filename": "src/CLI/IndexCommand.php",
+      "namespace": "ApexSEO\\CLI",
+      "name": "IndexCommand",
+      "fqcn": "ApexSEO\\CLI\\IndexCommand"
+    },
+    {
+      "filename": "src/CLI/MediaCommand.php",
+      "namespace": "ApexSEO\\CLI",
+      "name": "MediaCommand",
+      "fqcn": "ApexSEO\\CLI\\MediaCommand"
+    },
+    {
+      "filename": "src/CLI/MigrateCommand.php",
+      "namespace": "ApexSEO\\CLI",
+      "name": "MigrateCommand",
+      "fqcn": "ApexSEO\\CLI\\MigrateCommand"
+    },
+    {
+      "filename": "src/CLI/RedirectCommand.php",
+      "namespace": "ApexSEO\\CLI",
+      "name": "RedirectCommand",
+      "fqcn": "ApexSEO\\CLI\\RedirectCommand"
+    },
+    {
+      "filename": "src/CLI/SchemaCommand.php",
+      "namespace": "ApexSEO\\CLI",
+      "name": "SchemaCommand",
+      "fqcn": "ApexSEO\\CLI\\SchemaCommand"
+    },
+    {
+      "filename": "src/CLI/SitemapCommand.php",
+      "namespace": "ApexSEO\\CLI",
+      "name": "SitemapCommand",
+      "fqcn": "ApexSEO\\CLI\\SitemapCommand"
+    },
+    {
+      "filename": "src/Core/Bootstrap/Plugin.php",
+      "namespace": "ApexSEO\\Core\\Bootstrap",
+      "name": "Plugin",
+      "fqcn": "ApexSEO\\Core\\Bootstrap\\Plugin"
+    },
+    {
+      "filename": "src/Core/CLI/CliManager.php",
+      "namespace": "ApexSEO\\Core\\CLI",
+      "name": "CliManager",
+      "fqcn": "ApexSEO\\Core\\CLI\\CliManager"
+    },
+    {
+      "filename": "src/Core/Configuration/ConfigurationManager.php",
+      "namespace": "ApexSEO\\Core\\Configuration",
+      "name": "ConfigurationManager",
+      "fqcn": "ApexSEO\\Core\\Configuration\\ConfigurationManager"
+    },
+    {
+      "filename": "src/Core/Container/Container.php",
+      "namespace": "ApexSEO\\Core\\Container",
+      "name": "Container",
+      "fqcn": "ApexSEO\\Core\\Container\\Container"
+    },
+    {
+      "filename": "src/Core/Database/DatabaseManager.php",
+      "namespace": "ApexSEO\\Core\\Database",
+      "name": "DatabaseManager",
+      "fqcn": "ApexSEO\\Core\\Database\\DatabaseManager"
+    },
+    {
+      "filename": "src/Core/Database/MigrationRunner.php",
+      "namespace": "ApexSEO\\Core\\Database",
+      "name": "MigrationRunner",
+      "fqcn": "ApexSEO\\Core\\Database\\MigrationRunner"
+    },
+    {
+      "filename": "src/Core/Database/Migrations/Migration_1_0_0_CreateLockedTables.php",
+      "namespace": "ApexSEO\\Core\\Database\\Migrations",
+      "name": "Migration_1_0_0_CreateLockedTables",
+      "fqcn": "ApexSEO\\Core\\Database\\Migrations\\Migration_1_0_0_CreateLockedTables"
+    },
+    {
+      "filename": "src/Core/Database/SchemaVersion.php",
+      "namespace": "ApexSEO\\Core\\Database",
+      "name": "SchemaVersion",
+      "fqcn": "ApexSEO\\Core\\Database\\SchemaVersion"
+    },
+    {
+      "filename": "src/Core/Environment/CapabilityRegistry.php",
+      "namespace": "ApexSEO\\Core\\Environment",
+      "name": "CapabilityRegistry",
+      "fqcn": "ApexSEO\\Core\\Environment\\CapabilityRegistry"
+    },
+    {
+      "filename": "src/Core/Environment/EnvironmentDetector.php",
+      "namespace": "ApexSEO\\Core\\Environment",
+      "name": "EnvironmentDetector",
+      "fqcn": "ApexSEO\\Core\\Environment\\EnvironmentDetector"
+    },
+    {
+      "filename": "src/Core/Environment/Server/ApacheAdapter.php",
+      "namespace": "ApexSEO\\Core\\Environment\\Server",
+      "name": "ApacheAdapter",
+      "fqcn": "ApexSEO\\Core\\Environment\\Server\\ApacheAdapter"
+    },
+    {
+      "filename": "src/Core/Environment/Server/GenericServerAdapter.php",
+      "namespace": "ApexSEO\\Core\\Environment\\Server",
+      "name": "GenericServerAdapter",
+      "fqcn": "ApexSEO\\Core\\Environment\\Server\\GenericServerAdapter"
+    },
+    {
+      "filename": "src/Core/Environment/Server/LiteSpeedAdapter.php",
+      "namespace": "ApexSEO\\Core\\Environment\\Server",
+      "name": "LiteSpeedAdapter",
+      "fqcn": "ApexSEO\\Core\\Environment\\Server\\LiteSpeedAdapter"
+    },
+    {
+      "filename": "src/Core/Environment/Server/NginxAdapter.php",
+      "namespace": "ApexSEO\\Core\\Environment\\Server",
+      "name": "NginxAdapter",
+      "fqcn": "ApexSEO\\Core\\Environment\\Server\\NginxAdapter"
+    },
+    {
+      "filename": "src/Core/Environment/Server/OpenLiteSpeedAdapter.php",
+      "namespace": "ApexSEO\\Core\\Environment\\Server",
+      "name": "OpenLiteSpeedAdapter",
+      "fqcn": "ApexSEO\\Core\\Environment\\Server\\OpenLiteSpeedAdapter"
+    },
+    {
+      "filename": "src/Core/Exceptions/ApexException.php",
+      "namespace": "ApexSEO\\Core\\Exceptions",
+      "name": "ApexException",
+      "fqcn": "ApexSEO\\Core\\Exceptions\\ApexException"
+    },
+    {
+      "filename": "src/Core/Exceptions/ConfigurationException.php",
+      "namespace": "ApexSEO\\Core\\Exceptions",
+      "name": "ConfigurationException",
+      "fqcn": "ApexSEO\\Core\\Exceptions\\ConfigurationException"
+    },
+    {
+      "filename": "src/Core/Exceptions/ContainerException.php",
+      "namespace": "ApexSEO\\Core\\Exceptions",
+      "name": "ContainerException",
+      "fqcn": "ApexSEO\\Core\\Exceptions\\ContainerException"
+    },
+    {
+      "filename": "src/Core/Exceptions/DatabaseException.php",
+      "namespace": "ApexSEO\\Core\\Exceptions",
+      "name": "DatabaseException",
+      "fqcn": "ApexSEO\\Core\\Exceptions\\DatabaseException"
+    },
+    {
+      "filename": "src/Core/Exceptions/NotFoundException.php",
+      "namespace": "ApexSEO\\Core\\Exceptions",
+      "name": "NotFoundException",
+      "fqcn": "ApexSEO\\Core\\Exceptions\\NotFoundException"
+    },
+    {
+      "filename": "src/Core/Exceptions/SecurityException.php",
+      "namespace": "ApexSEO\\Core\\Exceptions",
+      "name": "SecurityException",
+      "fqcn": "ApexSEO\\Core\\Exceptions\\SecurityException"
+    },
+    {
+      "filename": "src/Core/Hooks/HookManager.php",
+      "namespace": "ApexSEO\\Core\\Hooks",
+      "name": "HookManager",
+      "fqcn": "ApexSEO\\Core\\Hooks\\HookManager"
+    },
+    {
+      "filename": "src/Core/Lifecycle/LifecycleManager.php",
+      "namespace": "ApexSEO\\Core\\Lifecycle",
+      "name": "LifecycleManager",
+      "fqcn": "ApexSEO\\Core\\Lifecycle\\LifecycleManager"
+    },
+    {
+      "filename": "src/Core/Logging/Logger.php",
+      "namespace": "ApexSEO\\Core\\Logging",
+      "name": "Logger",
+      "fqcn": "ApexSEO\\Core\\Logging\\Logger"
+    },
+    {
+      "filename": "src/Core/Modules/ModuleRegistry.php",
+      "namespace": "ApexSEO\\Core\\Modules",
+      "name": "ModuleRegistry",
+      "fqcn": "ApexSEO\\Core\\Modules\\ModuleRegistry"
+    },
+    {
+      "filename": "src/Core/Multisite/MultisiteManager.php",
+      "namespace": "ApexSEO\\Core\\Multisite",
+      "name": "MultisiteManager",
+      "fqcn": "ApexSEO\\Core\\Multisite\\MultisiteManager"
+    },
+    {
+      "filename": "src/Core/REST/RestManager.php",
+      "namespace": "ApexSEO\\Core\\REST",
+      "name": "RestManager",
+      "fqcn": "ApexSEO\\Core\\REST\\RestManager"
+    },
+    {
+      "filename": "src/Core/Security/SecurityManager.php",
+      "namespace": "ApexSEO\\Core\\Security",
+      "name": "SecurityManager",
+      "fqcn": "ApexSEO\\Core\\Security\\SecurityManager"
+    },
+    {
+      "filename": "src/Core/Security/SecurityUtils.php",
+      "namespace": "ApexSEO\\Core\\Security",
+      "name": "SecurityUtils",
+      "fqcn": "ApexSEO\\Core\\Security\\SecurityUtils"
+    },
+    {
+      "filename": "src/Media/LazyLoad/ImageLazyLoader.php",
+      "namespace": "ApexSEO\\Media\\LazyLoad",
+      "name": "ImageLazyLoader",
+      "fqcn": "ApexSEO\\Media\\LazyLoad\\ImageLazyLoader"
+    },
+    {
+      "filename": "src/Media/LazyLoad/PlaceholderGenerator.php",
+      "namespace": "ApexSEO\\Media\\LazyLoad",
+      "name": "PlaceholderGenerator",
+      "fqcn": "ApexSEO\\Media\\LazyLoad\\PlaceholderGenerator"
+    },
+    {
+      "filename": "src/Media/MediaModule.php",
+      "namespace": "ApexSEO\\Media",
+      "name": "MediaModule",
+      "fqcn": "ApexSEO\\Media\\MediaModule"
+    },
+    {
+      "filename": "src/Media/Optimizer/ImageOptimizer.php",
+      "namespace": "ApexSEO\\Media\\Optimizer",
+      "name": "ImageOptimizer",
+      "fqcn": "ApexSEO\\Media\\Optimizer\\ImageOptimizer"
+    },
+    {
+      "filename": "src/Media/Optimizer/LcpOptimizer.php",
+      "namespace": "ApexSEO\\Media\\Optimizer",
+      "name": "LcpOptimizer",
+      "fqcn": "ApexSEO\\Media\\Optimizer\\LcpOptimizer"
+    },
+    {
+      "filename": "src/Performance/Assets/CssMinifier.php",
+      "namespace": "ApexSEO\\Performance\\Assets",
+      "name": "CssMinifier",
+      "fqcn": "ApexSEO\\Performance\\Assets\\CssMinifier"
+    },
+    {
+      "filename": "src/Performance/Assets/DelayJsEngine.php",
+      "namespace": "ApexSEO\\Performance\\Assets",
+      "name": "DelayJsEngine",
+      "fqcn": "ApexSEO\\Performance\\Assets\\DelayJsEngine"
+    },
+    {
+      "filename": "src/Performance/Assets/HtmlMinifier.php",
+      "namespace": "ApexSEO\\Performance\\Assets",
+      "name": "HtmlMinifier",
+      "fqcn": "ApexSEO\\Performance\\Assets\\HtmlMinifier"
+    },
+    {
+      "filename": "src/Performance/Assets/JsMinifier.php",
+      "namespace": "ApexSEO\\Performance\\Assets",
+      "name": "JsMinifier",
+      "fqcn": "ApexSEO\\Performance\\Assets\\JsMinifier"
+    },
+    {
+      "filename": "src/Performance/Cache/SmartPurge.php",
+      "namespace": "ApexSEO\\Performance\\Cache",
+      "name": "SmartPurge",
+      "fqcn": "ApexSEO\\Performance\\Cache\\SmartPurge"
+    },
+    {
+      "filename": "src/Performance/Cache/StaticFileWriter.php",
+      "namespace": "ApexSEO\\Performance\\Cache",
+      "name": "StaticFileWriter",
+      "fqcn": "ApexSEO\\Performance\\Cache\\StaticFileWriter"
+    },
+    {
+      "filename": "src/Performance/PerformanceModule.php",
+      "namespace": "ApexSEO\\Performance",
+      "name": "PerformanceModule",
+      "fqcn": "ApexSEO\\Performance\\PerformanceModule"
+    },
+    {
+      "filename": "src/Performance/Tweaks/ResourceHints.php",
+      "namespace": "ApexSEO\\Performance\\Tweaks",
+      "name": "ResourceHints",
+      "fqcn": "ApexSEO\\Performance\\Tweaks\\ResourceHints"
+    },
+    {
+      "filename": "src/SEO/Admin/MetaSaver.php",
+      "namespace": "ApexSEO\\SEO\\Admin",
+      "name": "MetaSaver",
+      "fqcn": "ApexSEO\\SEO\\Admin\\MetaSaver"
+    },
+    {
+      "filename": "src/SEO/Breadcrumbs/BreadcrumbGenerator.php",
+      "namespace": "ApexSEO\\SEO\\Breadcrumbs",
+      "name": "BreadcrumbGenerator",
+      "fqcn": "ApexSEO\\SEO\\Breadcrumbs\\BreadcrumbGenerator"
+    },
+    {
+      "filename": "src/SEO/Builder/IndexableBuilder.php",
+      "namespace": "ApexSEO\\SEO\\Builder",
+      "name": "IndexableBuilder",
+      "fqcn": "ApexSEO\\SEO\\Builder\\IndexableBuilder"
+    },
+    {
+      "filename": "src/SEO/Context/ContextDetector.php",
+      "namespace": "ApexSEO\\SEO\\Context",
+      "name": "ContextDetector",
+      "fqcn": "ApexSEO\\SEO\\Context\\ContextDetector"
+    },
+    {
+      "filename": "src/SEO/Integrations/WooCommerceIntegration.php",
+      "namespace": "ApexSEO\\SEO\\Integrations",
+      "name": "WooCommerceIntegration",
+      "fqcn": "ApexSEO\\SEO\\Integrations\\WooCommerceIntegration"
+    },
+    {
+      "filename": "src/SEO/Meta/CanonicalPresenter.php",
+      "namespace": "ApexSEO\\SEO\\Meta",
+      "name": "CanonicalPresenter",
+      "fqcn": "ApexSEO\\SEO\\Meta\\CanonicalPresenter"
+    },
+    {
+      "filename": "src/SEO/Meta/DescriptionPresenter.php",
+      "namespace": "ApexSEO\\SEO\\Meta",
+      "name": "DescriptionPresenter",
+      "fqcn": "ApexSEO\\SEO\\Meta\\DescriptionPresenter"
+    },
+    {
+      "filename": "src/SEO/Meta/MetaTagManager.php",
+      "namespace": "ApexSEO\\SEO\\Meta",
+      "name": "MetaTagManager",
+      "fqcn": "ApexSEO\\SEO\\Meta\\MetaTagManager"
+    },
+    {
+      "filename": "src/SEO/Meta/RobotsPresenter.php",
+      "namespace": "ApexSEO\\SEO\\Meta",
+      "name": "RobotsPresenter",
+      "fqcn": "ApexSEO\\SEO\\Meta\\RobotsPresenter"
+    },
+    {
+      "filename": "src/SEO/Meta/TitlePresenter.php",
+      "namespace": "ApexSEO\\SEO\\Meta",
+      "name": "TitlePresenter",
+      "fqcn": "ApexSEO\\SEO\\Meta\\TitlePresenter"
+    },
+    {
+      "filename": "src/SEO/Models/Indexable.php",
+      "namespace": "ApexSEO\\SEO\\Models",
+      "name": "Indexable",
+      "fqcn": "ApexSEO\\SEO\\Models\\Indexable"
+    },
+    {
+      "filename": "src/SEO/Models/SeoContext.php",
+      "namespace": "ApexSEO\\SEO\\Models",
+      "name": "SeoContext",
+      "fqcn": "ApexSEO\\SEO\\Models\\SeoContext"
+    },
+    {
+      "filename": "src/SEO/Redirects/RedirectManager.php",
+      "namespace": "ApexSEO\\SEO\\Redirects",
+      "name": "RedirectManager",
+      "fqcn": "ApexSEO\\SEO\\Redirects\\RedirectManager"
+    },
+    {
+      "filename": "src/SEO/Repository/IndexableRepository.php",
+      "namespace": "ApexSEO\\SEO\\Repository",
+      "name": "IndexableRepository",
+      "fqcn": "ApexSEO\\SEO\\Repository\\IndexableRepository"
+    },
+    {
+      "filename": "src/SEO/SeoModule.php",
+      "namespace": "ApexSEO\\SEO",
+      "name": "SeoModule",
+      "fqcn": "ApexSEO\\SEO\\SeoModule"
+    },
+    {
+      "filename": "src/SEO/Sitemap/SitemapGenerator.php",
+      "namespace": "ApexSEO\\SEO\\Sitemap",
+      "name": "SitemapGenerator",
+      "fqcn": "ApexSEO\\SEO\\Sitemap\\SitemapGenerator"
+    },
+    {
+      "filename": "src/SEO/Social/OpenGraphPresenter.php",
+      "namespace": "ApexSEO\\SEO\\Social",
+      "name": "OpenGraphPresenter",
+      "fqcn": "ApexSEO\\SEO\\Social\\OpenGraphPresenter"
+    },
+    {
+      "filename": "src/SEO/Social/TwitterCardPresenter.php",
+      "namespace": "ApexSEO\\SEO\\Social",
+      "name": "TwitterCardPresenter",
+      "fqcn": "ApexSEO\\SEO\\Social\\TwitterCardPresenter"
+    },
+    {
+      "filename": "src/SEO/Templates/TemplateManager.php",
+      "namespace": "ApexSEO\\SEO\\Templates",
+      "name": "TemplateManager",
+      "fqcn": "ApexSEO\\SEO\\Templates\\TemplateManager"
+    },
+    {
+      "filename": "src/SEO/Variables/VariableEngine.php",
+      "namespace": "ApexSEO\\SEO\\Variables",
+      "name": "VariableEngine",
+      "fqcn": "ApexSEO\\SEO\\Variables\\VariableEngine"
+    },
+    {
+      "filename": "src/Schema/Media/VideoObjectSchema.php",
+      "namespace": "ApexSEO\\Schema\\Media",
+      "name": "VideoObjectSchema",
+      "fqcn": "ApexSEO\\Schema\\Media\\VideoObjectSchema"
+    },
+    {
+      "filename": "src/Schema/SchemaGraphBuilder.php",
+      "namespace": "ApexSEO\\Schema",
+      "name": "SchemaGraphBuilder",
+      "fqcn": "ApexSEO\\Schema\\SchemaGraphBuilder"
+    },
+    {
+      "filename": "src/Schema/SchemaModule.php",
+      "namespace": "ApexSEO\\Schema",
+      "name": "SchemaModule",
+      "fqcn": "ApexSEO\\Schema\\SchemaModule"
+    },
+    {
+      "filename": "src/Schema/SchemaRegistry.php",
+      "namespace": "ApexSEO\\Schema",
+      "name": "SchemaRegistry",
+      "fqcn": "ApexSEO\\Schema\\SchemaRegistry"
+    },
+    {
+      "filename": "src/Schema/Types/ArticleSchema.php",
+      "namespace": "ApexSEO\\Schema\\Types",
+      "name": "ArticleSchema",
+      "fqcn": "ApexSEO\\Schema\\Types\\ArticleSchema"
+    },
+    {
+      "filename": "src/Schema/Types/CourseSchema.php",
+      "namespace": "ApexSEO\\Schema\\Types",
+      "name": "CourseSchema",
+      "fqcn": "ApexSEO\\Schema\\Types\\CourseSchema"
+    },
+    {
+      "filename": "src/Schema/Types/EventSchema.php",
+      "namespace": "ApexSEO\\Schema\\Types",
+      "name": "EventSchema",
+      "fqcn": "ApexSEO\\Schema\\Types\\EventSchema"
+    },
+    {
+      "filename": "src/Schema/Types/FAQPageSchema.php",
+      "namespace": "ApexSEO\\Schema\\Types",
+      "name": "FAQPageSchema",
+      "fqcn": "ApexSEO\\Schema\\Types\\FAQPageSchema"
+    },
+    {
+      "filename": "src/Schema/Types/JobPostingSchema.php",
+      "namespace": "ApexSEO\\Schema\\Types",
+      "name": "JobPostingSchema",
+      "fqcn": "ApexSEO\\Schema\\Types\\JobPostingSchema"
+    },
+    {
+      "filename": "src/Schema/Types/LocalBusinessSchema.php",
+      "namespace": "ApexSEO\\Schema\\Types",
+      "name": "LocalBusinessSchema",
+      "fqcn": "ApexSEO\\Schema\\Types\\LocalBusinessSchema"
+    },
+    {
+      "filename": "src/Schema/Types/OrganizationSchema.php",
+      "namespace": "ApexSEO\\Schema\\Types",
+      "name": "OrganizationSchema",
+      "fqcn": "ApexSEO\\Schema\\Types\\OrganizationSchema"
+    },
+    {
+      "filename": "src/Schema/Types/ProductSchema.php",
+      "namespace": "ApexSEO\\Schema\\Types",
+      "name": "ProductSchema",
+      "fqcn": "ApexSEO\\Schema\\Types\\ProductSchema"
+    },
+    {
+      "filename": "src/Schema/Types/RecipeSchema.php",
+      "namespace": "ApexSEO\\Schema\\Types",
+      "name": "RecipeSchema",
+      "fqcn": "ApexSEO\\Schema\\Types\\RecipeSchema"
+    },
+    {
+      "filename": "src/Schema/Types/SoftwareApplicationSchema.php",
+      "namespace": "ApexSEO\\Schema\\Types",
+      "name": "SoftwareApplicationSchema",
+      "fqcn": "ApexSEO\\Schema\\Types\\SoftwareApplicationSchema"
+    },
+    {
+      "filename": "src/Schema/Types/WebSiteSchema.php",
+      "namespace": "ApexSEO\\Schema\\Types",
+      "name": "WebSiteSchema",
+      "fqcn": "ApexSEO\\Schema\\Types\\WebSiteSchema"
+    },
+    {
+      "filename": "src/Schema/Validator/SchemaValidator.php",
+      "namespace": "ApexSEO\\Schema\\Validator",
+      "name": "SchemaValidator",
+      "fqcn": "ApexSEO\\Schema\\Validator\\SchemaValidator"
+    }
+  ],
+  "traits": [],
+  "files": {
+    "src_files": [
+      "src/AI/AiModule.php",
+      "src/AI/Generators/MetadataAiGenerator.php",
+      "src/AI/LlmsTxt/LlmsTxtGenerator.php",
+      "src/AI/SearchIntent/SearchIntentAnalyzer.php",
+      "src/API/Controllers/AbstractRestController.php",
+      "src/API/Controllers/AnalyticsRestController.php",
+      "src/API/Controllers/CacheRestController.php",
+      "src/API/Controllers/LinksRestController.php",
+      "src/API/Controllers/MediaRestController.php",
+      "src/API/Controllers/MetaRestController.php",
+      "src/API/Controllers/MigrationRestController.php",
+      "src/API/Controllers/NotFoundRestController.php",
+      "src/API/Controllers/RedirectsRestController.php",
+      "src/API/Controllers/SchemaRestController.php",
+      "src/API/Controllers/SettingsRestController.php",
+      "src/API/RestApiRouter.php",
+      "src/Analytics/AnalyticsModule.php",
+      "src/Analytics/Monitor/FourOhFourMonitor.php",
+      "src/Analytics/Tracker/RankTracker.php",
+      "src/Autoloader.php",
+      "src/CLI/AbstractCliCommand.php",
+      "src/CLI/CacheCommand.php",
+      "src/CLI/DatabaseCommand.php",
+      "src/CLI/DoctorCommand.php",
+      "src/CLI/IndexCommand.php",
+      "src/CLI/MediaCommand.php",
+      "src/CLI/MigrateCommand.php",
+      "src/CLI/RedirectCommand.php",
+      "src/CLI/SchemaCommand.php",
+      "src/CLI/SitemapCommand.php",
+      "src/Core/Bootstrap/Plugin.php",
+      "src/Core/CLI/CliManager.php",
+      "src/Core/Configuration/ConfigurationManager.php",
+      "src/Core/Container/Container.php",
+      "src/Core/Container/ContainerInterface.php",
+      "src/Core/Contracts/BootableInterface.php",
+      "src/Core/Contracts/HookableInterface.php",
+      "src/Core/Contracts/ModuleInterface.php",
+      "src/Core/Contracts/ServiceContractInterface.php",
+      "src/Core/Database/DatabaseManager.php",
+      "src/Core/Database/MigrationInterface.php",
+      "src/Core/Database/MigrationRunner.php",
+      "src/Core/Database/Migrations/Migration_1_0_0_CreateLockedTables.php",
+      "src/Core/Database/SchemaVersion.php",
+      "src/Core/Environment/CapabilityRegistry.php",
+      "src/Core/Environment/EnvironmentDetector.php",
+      "src/Core/Environment/Server/ApacheAdapter.php",
+      "src/Core/Environment/Server/GenericServerAdapter.php",
+      "src/Core/Environment/Server/LiteSpeedAdapter.php",
+      "src/Core/Environment/Server/NginxAdapter.php",
+      "src/Core/Environment/Server/OpenLiteSpeedAdapter.php",
+      "src/Core/Environment/Server/ServerAdapterInterface.php",
+      "src/Core/Exceptions/ApexException.php",
+      "src/Core/Exceptions/ConfigurationException.php",
+      "src/Core/Exceptions/ContainerException.php",
+      "src/Core/Exceptions/DatabaseException.php",
+      "src/Core/Exceptions/NotFoundException.php",
+      "src/Core/Exceptions/SecurityException.php",
+      "src/Core/Hooks/HookManager.php",
+      "src/Core/Lifecycle/LifecycleManager.php",
+      "src/Core/Logging/Logger.php",
+      "src/Core/Logging/LoggerInterface.php",
+      "src/Core/Modules/ModuleRegistry.php",
+      "src/Core/Multisite/MultisiteManager.php",
+      "src/Core/REST/RestManager.php",
+      "src/Core/Security/SecurityManager.php",
+      "src/Core/Security/SecurityUtils.php",
+      "src/Media/LazyLoad/ImageLazyLoader.php",
+      "src/Media/LazyLoad/PlaceholderGenerator.php",
+      "src/Media/MediaModule.php",
+      "src/Media/Optimizer/ImageOptimizer.php",
+      "src/Media/Optimizer/LcpOptimizer.php",
+      "src/Performance/Assets/CssMinifier.php",
+      "src/Performance/Assets/DelayJsEngine.php",
+      "src/Performance/Assets/HtmlMinifier.php",
+      "src/Performance/Assets/JsMinifier.php",
+      "src/Performance/Cache/SmartPurge.php",
+      "src/Performance/Cache/StaticFileWriter.php",
+      "src/Performance/PerformanceModule.php",
+      "src/Performance/Tweaks/ResourceHints.php",
+      "src/SEO/Admin/MetaSaver.php",
+      "src/SEO/Breadcrumbs/BreadcrumbGenerator.php",
+      "src/SEO/Builder/IndexableBuilder.php",
+      "src/SEO/Context/ContextDetector.php",
+      "src/SEO/Integrations/WooCommerceIntegration.php",
+      "src/SEO/Meta/CanonicalPresenter.php",
+      "src/SEO/Meta/DescriptionPresenter.php",
+      "src/SEO/Meta/MetaTagManager.php",
+      "src/SEO/Meta/RobotsPresenter.php",
+      "src/SEO/Meta/TitlePresenter.php",
+      "src/SEO/Models/Indexable.php",
+      "src/SEO/Models/SeoContext.php",
+      "src/SEO/Redirects/RedirectManager.php",
+      "src/SEO/Repository/IndexableRepository.php",
+      "src/SEO/SeoModule.php",
+      "src/SEO/Sitemap/SitemapGenerator.php",
+      "src/SEO/Social/OpenGraphPresenter.php",
+      "src/SEO/Social/TwitterCardPresenter.php",
+      "src/SEO/Templates/TemplateManager.php",
+      "src/SEO/Variables/VariableEngine.php",
+      "src/Schema/Media/VideoObjectSchema.php",
+      "src/Schema/SchemaGraphBuilder.php",
+      "src/Schema/SchemaModule.php",
+      "src/Schema/SchemaRegistry.php",
+      "src/Schema/Types/AbstractSchemaType.php",
+      "src/Schema/Types/ArticleSchema.php",
+      "src/Schema/Types/CourseSchema.php",
+      "src/Schema/Types/EventSchema.php",
+      "src/Schema/Types/FAQPageSchema.php",
+      "src/Schema/Types/JobPostingSchema.php",
+      "src/Schema/Types/LocalBusinessSchema.php",
+      "src/Schema/Types/OrganizationSchema.php",
+      "src/Schema/Types/ProductSchema.php",
+      "src/Schema/Types/RecipeSchema.php",
+      "src/Schema/Types/SchemaTypeInterface.php",
+      "src/Schema/Types/SoftwareApplicationSchema.php",
+      "src/Schema/Types/WebSiteSchema.php",
+      "src/Schema/Validator/SchemaValidator.php"
+    ],
+    "test_files": [
+      "tests/AiSubsystemTest.php",
+      "tests/AnalyticsSubsystemTest.php",
+      "tests/AutoloaderTest.php",
+      "tests/BootstrapTest.php",
+      "tests/CapabilityRegistryTest.php",
+      "tests/CliSubsystemTest.php",
+      "tests/ConfigurationManagerTest.php",
+      "tests/ContainerTest.php",
+      "tests/DatabaseMigrationTest.php",
+      "tests/EnvironmentDetectorTest.php",
+      "tests/LifecycleTest.php",
+      "tests/MediaSubsystemTest.php",
+      "tests/MultisiteManagerTest.php",
+      "tests/PerformanceSubsystemTest.php",
+      "tests/RestSubsystemTest.php",
+      "tests/SchemaSubsystemTest.php",
+      "tests/SeoSubsystemTest.php",
+      "tests/ServerAdapterTest.php",
+      "tests/TestCase.php",
+      "tests/bootstrap.php",
+      "tests/run.php",
+      "tests/run_all.php"
+    ],
+    "root_files": [
+      "apexseo.php",
+      "uninstall.php"
+    ]
+  },
+  "test_suite": {
+    "tests/AiSubsystemTest.php": {
+      "methods_count": 3,
+      "methods": [
+        "testLlmsTxtGeneration",
+        "testSearchIntentAnalyzer",
+        "testMetadataAiGenerator"
+      ],
+      "assertions_count": 11
+    },
+    "tests/AnalyticsSubsystemTest.php": {
+      "methods_count": 2,
+      "methods": [
+        "testFourOhFourLogging",
+        "testRankTrackerKeywords"
+      ],
+      "assertions_count": 4
+    },
+    "tests/AutoloaderTest.php": {
+      "methods_count": 3,
+      "methods": [
+        "testAutoloaderLoadsExistingCoreClass",
+        "testAutoloaderIgnoresForeignNamespace",
+        "testAutoloaderReturnsFalseForNonExistentClass"
+      ],
+      "assertions_count": 4
+    },
+    "tests/BootstrapTest.php": {
+      "methods_count": 3,
+      "methods": [
+        "testPluginSingletonInstance",
+        "testPluginContainerInitialization",
+        "testPluginBootSequence"
+      ],
+      "assertions_count": 9
+    },
+    "tests/CapabilityRegistryTest.php": {
+      "methods_count": 2,
+      "methods": [
+        "testCapabilityRegistrationAndRetrieval",
+        "testCoreRegisteredCapabilities"
+      ],
+      "assertions_count": 7
+    },
+    "tests/CliSubsystemTest.php": {
+      "methods_count": 10,
+      "methods": [
+        "testCliManagerCommandRegistration",
+        "testIndexCommandRebuildAndStatus",
+        "testCacheCommandPurgeAndWarmup",
+        "testMediaCommandOptimizeAndRestore",
+        "testRedirectCommandAddAndList",
+        "testDatabaseCommandClean",
+        "testMigrateCommandRunAndRollback",
+        "testSitemapCommandRebuild",
+        "testDoctorCommandDiagnose",
+        "testSchemaCommandValidate"
+      ],
+      "assertions_count": 36
+    },
+    "tests/ConfigurationManagerTest.php": {
+      "methods_count": 4,
+      "methods": [
+        "testDefaultValuesLoaded",
+        "testDotNotationGetAndSet",
+        "testModuleStatusToggling",
+        "testConfigurationPersistence"
+      ],
+      "assertions_count": 9
+    },
+    "tests/ContainerTest.php": {
+      "methods_count": 6,
+      "methods": [
+        "testSingletonBinding",
+        "testTransientFactoryBinding",
+        "testLazyLoadingResolution",
+        "testAliasResolution",
+        "testAutoWiringDependencies",
+        "testCircularDependencyDetection"
+      ],
+      "assertions_count": 11
+    },
+    "tests/DatabaseMigrationTest.php": {
+      "methods_count": 4,
+      "methods": [
+        "testTablePrefixResolution",
+        "testCustomPrefixOverride",
+        "testMigrationExecutionCreates8LockedTables",
+        "testMigrationRollbackDropsTables"
+      ],
+      "assertions_count": 23
+    },
+    "tests/EnvironmentDetectorTest.php": {
+      "methods_count": 3,
+      "methods": [
+        "testPhpAndWordPressVersionDetection",
+        "testExtensionDetection",
+        "testServerAdapterResolution"
+      ],
+      "assertions_count": 9
+    },
+    "tests/LifecycleTest.php": {
+      "methods_count": 4,
+      "methods": [
+        "testActivationRunsMigrationsAndSetsOption",
+        "testDeactivationCleansTransients",
+        "testUninstallPreservesTablesWhenConfigured",
+        "testUninstallDropsTablesWhenExplicitlyConfigured"
+      ],
+      "assertions_count": 6
+    },
+    "tests/MediaSubsystemTest.php": {
+      "methods_count": 3,
+      "methods": [
+        "testSvgPlaceholderGenerator",
+        "testImageLazyLoader",
+        "testLcpOptimizer"
+      ],
+      "assertions_count": 5
+    },
+    "tests/MultisiteManagerTest.php": {
+      "methods_count": 2,
+      "methods": [
+        "testSingleSiteDefaults",
+        "testRunInBlogContextExecution"
+      ],
+      "assertions_count": 8
+    },
+    "tests/PerformanceSubsystemTest.php": {
+      "methods_count": 6,
+      "methods": [
+        "testCssMinification",
+        "testJsMinification",
+        "testHtmlMinification",
+        "testDelayJsEngine",
+        "testResourceHints",
+        "testStaticFileWriterAndSmartPurge"
+      ],
+      "assertions_count": 15
+    },
+    "tests/RestSubsystemTest.php": {
+      "methods_count": 18,
+      "methods": [
+        "testRestRouterInitialization",
+        "testStatusEndpointResponse",
+        "testSettingsControllerGetAndUpdate",
+        "testMetaControllerSaveAndGet",
+        "testSchemaControllerCRUD",
+        "testRedirectsControllerCRUD",
+        "testNotFoundController",
+        "testLinksController",
+        "testAnalyticsController",
+        "testCacheControllerPurgeAndPreload",
+        "testMediaControllerSingleAndBulk",
+        "testMigrationControllerExecution",
+        "testPermissionWrappers",
+        "testSecurityIdorAndObjectAuthorization",
+        "testSecuritySqlInjectionResilience",
+        "testSecurityXssPayloadSanitization",
+        "testSecurityOversizedBatchAndPaginationBounds",
+        "testSecurityPathTraversalAndSsrfGuards"
+      ],
+      "assertions_count": 68
+    },
+    "tests/SchemaSubsystemTest.php": {
+      "methods_count": 12,
+      "methods": [
+        "testSchemaRegistryDefaultTypes",
+        "testArticleSchemaGeneration",
+        "testProductSchemaGeneration",
+        "testFaqPageSchemaGeneration",
+        "testRecipeSchemaGeneration",
+        "testJobPostingSchemaGeneration",
+        "testCourseSchemaGeneration",
+        "testEventSchemaGeneration",
+        "testSoftwareApplicationSchemaGeneration",
+        "testVideoObjectSchemaGeneration",
+        "testSchemaValidator",
+        "testSchemaGraphBuilderOutput"
+      ],
+      "assertions_count": 67
+    },
+    "tests/SeoSubsystemTest.php": {
+      "methods_count": 7,
+      "methods": [
+        "testVariableEngineDefaultTokens",
+        "testTitleAndDescriptionPresenters",
+        "testCanonicalAndRobotsPresenters",
+        "testOpenGraphAndTwitterCardPresenters",
+        "testBreadcrumbGenerator",
+        "testSitemapGenerator",
+        "testRedirectManager"
+      ],
+      "assertions_count": 25
+    },
+    "tests/ServerAdapterTest.php": {
+      "methods_count": 5,
+      "methods": [
+        "testApacheAdapterCapabilities",
+        "testNginxAdapterCapabilities",
+        "testLiteSpeedAdapterCapabilities",
+        "testOpenLiteSpeedAdapterCapabilities",
+        "testGenericServerAdapterCapabilities"
+      ],
+      "assertions_count": 23
+    },
+    "tests/TestCase.php": {
+      "methods_count": 0,
+      "methods": [],
+      "assertions_count": 0
+    }
+  }
+}

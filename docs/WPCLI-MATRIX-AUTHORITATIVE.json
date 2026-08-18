@@ -1,0 +1,122 @@
+[
+  {
+    "root": "wp apexseo",
+    "command": "index",
+    "full_command": "wp apexseo index",
+    "class": "IndexCommand",
+    "subcommands": [
+      "reindex",
+      "status",
+      "clean"
+    ],
+    "shortdesc": "Manage and rebuild Apex SEO indexables."
+  },
+  {
+    "root": "wp apexseo",
+    "command": "cache",
+    "full_command": "wp apexseo cache",
+    "class": "CacheCommand",
+    "subcommands": [
+      "purge",
+      "preload",
+      "status"
+    ],
+    "shortdesc": "Purge, warmup, and preload cache layers."
+  },
+  {
+    "root": "wp apexseo",
+    "command": "media",
+    "full_command": "wp apexseo media",
+    "class": "MediaCommand",
+    "subcommands": [
+      "optimize",
+      "restore",
+      "status"
+    ],
+    "shortdesc": "Optimize and restore WebP/AVIF media attachments."
+  },
+  {
+    "root": "wp apexseo",
+    "command": "redirect",
+    "full_command": "wp apexseo redirect",
+    "class": "RedirectCommand",
+    "subcommands": [
+      "add",
+      "list",
+      "delete",
+      "export"
+    ],
+    "shortdesc": "Add and list 301/302 URL redirection rules."
+  },
+  {
+    "root": "wp apexseo",
+    "command": "db",
+    "full_command": "wp apexseo db",
+    "class": "DatabaseCommand",
+    "subcommands": [
+      "clean",
+      "optimize",
+      "check"
+    ],
+    "shortdesc": "Clean old 404 logs, expired transients, and optimize database."
+  },
+  {
+    "root": "wp apexseo",
+    "command": "migrate",
+    "full_command": "wp apexseo migrate",
+    "class": "MigrateCommand",
+    "subcommands": [
+      "run",
+      "status",
+      "rollback"
+    ],
+    "shortdesc": "Import SEO metadata and redirects from legacy SEO plugins."
+  },
+  {
+    "root": "wp apexseo",
+    "command": "sitemap",
+    "full_command": "wp apexseo sitemap",
+    "class": "SitemapCommand",
+    "subcommands": [
+      "rebuild",
+      "status",
+      "ping"
+    ],
+    "shortdesc": "Rebuild and cache XML sitemaps."
+  },
+  {
+    "root": "wp apexseo",
+    "command": "doctor",
+    "full_command": "wp apexseo doctor",
+    "class": "DoctorCommand",
+    "subcommands": [
+      "status",
+      "check",
+      "fix"
+    ],
+    "shortdesc": "Diagnose system health and database integrity."
+  },
+  {
+    "root": "wp apexseo",
+    "command": "report",
+    "full_command": "wp apexseo report",
+    "class": "DoctorCommand",
+    "subcommands": [
+      "generate",
+      "export"
+    ],
+    "shortdesc": "Output system report and environment diagnostics."
+  },
+  {
+    "root": "wp apexseo",
+    "command": "schema",
+    "full_command": "wp apexseo schema",
+    "class": "SchemaCommand",
+    "subcommands": [
+      "validate",
+      "generate",
+      "list"
+    ],
+    "shortdesc": "Validate JSON-LD structured data schemas."
+  }
+]

@@ -1,0 +1,232 @@
+[
+  {
+    "namespace": "apexseo/v1",
+    "route": "/apexseo/v1/status",
+    "methods": "GET",
+    "controller": "RestApiRouter",
+    "action": "getStatus",
+    "permission_callback": "restAdminPermissionCallback",
+    "sanitization": "None",
+    "validation": "None"
+  },
+  {
+    "namespace": "apexseo/v1",
+    "route": "/apexseo/v1/settings",
+    "methods": "GET",
+    "controller": "SettingsRestController",
+    "action": "getSettings",
+    "permission_callback": "checkAdminPermission",
+    "sanitization": "None",
+    "validation": "None"
+  },
+  {
+    "namespace": "apexseo/v1",
+    "route": "/apexseo/v1/settings",
+    "methods": "POST",
+    "controller": "SettingsRestController",
+    "action": "updateSettings",
+    "permission_callback": "checkAdminPermission",
+    "sanitization": "sanitize_text_field",
+    "validation": "JSON array structure validation"
+  },
+  {
+    "namespace": "apexseo/v1",
+    "route": "/apexseo/v1/meta/(?P<object_type>[a-z_-]+)/(?P<object_id>\\d+)",
+    "methods": "GET",
+    "controller": "MetaRestController",
+    "action": "getMeta",
+    "permission_callback": "checkAdminPermission",
+    "sanitization": "intval, sanitize_key",
+    "validation": "Regex \\d+, [a-z_-]+"
+  },
+  {
+    "namespace": "apexseo/v1",
+    "route": "/apexseo/v1/meta/(?P<object_type>[a-z_-]+)/(?P<object_id>\\d+)",
+    "methods": "POST",
+    "controller": "MetaRestController",
+    "action": "updateMeta",
+    "permission_callback": "checkAdminPermission",
+    "sanitization": "sanitize_text_field, esc_url_raw",
+    "validation": "Regex \\d+, [a-z_-]+"
+  },
+  {
+    "namespace": "apexseo/v1",
+    "route": "/apexseo/v1/schema",
+    "methods": "GET",
+    "controller": "SchemaRestController",
+    "action": "getSchema",
+    "permission_callback": "checkAdminPermission",
+    "sanitization": "intval",
+    "validation": "Optional object_id"
+  },
+  {
+    "namespace": "apexseo/v1",
+    "route": "/apexseo/v1/schema",
+    "methods": "POST",
+    "controller": "SchemaRestController",
+    "action": "createSchema",
+    "permission_callback": "checkAdminPermission",
+    "sanitization": "SchemaValidator",
+    "validation": "SchemaValidator::validate"
+  },
+  {
+    "namespace": "apexseo/v1",
+    "route": "/apexseo/v1/schema/(?P<id>\\d+)",
+    "methods": "PUT",
+    "controller": "SchemaRestController",
+    "action": "updateSchema",
+    "permission_callback": "checkAdminPermission",
+    "sanitization": "SchemaValidator",
+    "validation": "SchemaValidator::validate"
+  },
+  {
+    "namespace": "apexseo/v1",
+    "route": "/apexseo/v1/schema/(?P<id>\\d+)",
+    "methods": "DELETE",
+    "controller": "SchemaRestController",
+    "action": "deleteSchema",
+    "permission_callback": "checkAdminPermission",
+    "sanitization": "intval",
+    "validation": "Regex \\d+"
+  },
+  {
+    "namespace": "apexseo/v1",
+    "route": "/apexseo/v1/redirects",
+    "methods": "GET",
+    "controller": "RedirectsRestController",
+    "action": "getRedirects",
+    "permission_callback": "checkAdminPermission",
+    "sanitization": "intval",
+    "validation": "Limit & offset"
+  },
+  {
+    "namespace": "apexseo/v1",
+    "route": "/apexseo/v1/redirects",
+    "methods": "POST",
+    "controller": "RedirectsRestController",
+    "action": "createRedirect",
+    "permission_callback": "checkAdminPermission",
+    "sanitization": "esc_url_raw",
+    "validation": "URL format + status code whitelist"
+  },
+  {
+    "namespace": "apexseo/v1",
+    "route": "/apexseo/v1/redirects/(?P<id>\\d+)",
+    "methods": "PUT",
+    "controller": "RedirectsRestController",
+    "action": "updateRedirect",
+    "permission_callback": "checkAdminPermission",
+    "sanitization": "esc_url_raw",
+    "validation": "Regex \\d+"
+  },
+  {
+    "namespace": "apexseo/v1",
+    "route": "/apexseo/v1/redirects/(?P<id>\\d+)",
+    "methods": "DELETE",
+    "controller": "RedirectsRestController",
+    "action": "deleteRedirect",
+    "permission_callback": "checkAdminPermission",
+    "sanitization": "intval",
+    "validation": "Regex \\d+"
+  },
+  {
+    "namespace": "apexseo/v1",
+    "route": "/apexseo/v1/monitor/404",
+    "methods": "GET",
+    "controller": "NotFoundRestController",
+    "action": "get404Logs",
+    "permission_callback": "checkAdminPermission",
+    "sanitization": "intval",
+    "validation": "Pagination limits"
+  },
+  {
+    "namespace": "apexseo/v1",
+    "route": "/apexseo/v1/monitor/404",
+    "methods": "DELETE",
+    "controller": "NotFoundRestController",
+    "action": "clear404Logs",
+    "permission_callback": "checkAdminPermission",
+    "sanitization": "None",
+    "validation": "None"
+  },
+  {
+    "namespace": "apexseo/v1",
+    "route": "/apexseo/v1/links/suggestions",
+    "methods": "GET",
+    "controller": "LinksRestController",
+    "action": "getLinkSuggestions",
+    "permission_callback": "checkAdminPermission",
+    "sanitization": "sanitize_text_field",
+    "validation": "Keyword string validation"
+  },
+  {
+    "namespace": "apexseo/v1",
+    "route": "/apexseo/v1/analytics/overview",
+    "methods": "GET",
+    "controller": "AnalyticsRestController",
+    "action": "getOverview",
+    "permission_callback": "checkAdminPermission",
+    "sanitization": "None",
+    "validation": "None"
+  },
+  {
+    "namespace": "apexseo/v1",
+    "route": "/apexseo/v1/analytics/rank-tracker",
+    "methods": "GET",
+    "controller": "AnalyticsRestController",
+    "action": "getRankTracker",
+    "permission_callback": "checkAdminPermission",
+    "sanitization": "None",
+    "validation": "None"
+  },
+  {
+    "namespace": "apexseo/v1",
+    "route": "/apexseo/v1/cache/purge",
+    "methods": "POST",
+    "controller": "CacheRestController",
+    "action": "purgeCache",
+    "permission_callback": "checkAdminPermission",
+    "sanitization": "intval, esc_url_raw",
+    "validation": "Optional post_id or url"
+  },
+  {
+    "namespace": "apexseo/v1",
+    "route": "/apexseo/v1/cache/preload",
+    "methods": "POST",
+    "controller": "CacheRestController",
+    "action": "preloadCache",
+    "permission_callback": "checkAdminPermission",
+    "sanitization": "None",
+    "validation": "None"
+  },
+  {
+    "namespace": "apexseo/v1",
+    "route": "/apexseo/v1/media/optimize",
+    "methods": "POST",
+    "controller": "MediaRestController",
+    "action": "optimizeImage",
+    "permission_callback": "checkUploadPermission",
+    "sanitization": "intval",
+    "validation": "Attachment ID integer"
+  },
+  {
+    "namespace": "apexseo/v1",
+    "route": "/apexseo/v1/media/bulk-optimize",
+    "methods": "POST",
+    "controller": "MediaRestController",
+    "action": "bulkOptimize",
+    "permission_callback": "checkUploadPermission",
+    "sanitization": "intval",
+    "validation": "Batch size integer"
+  },
+  {
+    "namespace": "apexseo/v1",
+    "route": "/apexseo/v1/migration/run",
+    "methods": "POST",
+    "controller": "MigrationRestController",
+    "action": "runMigrationBatch",
+    "permission_callback": "checkAdminPermission",
+    "sanitization": "sanitize_text_field",
+    "validation": "Source plugin whitelist"
+  }
+]
