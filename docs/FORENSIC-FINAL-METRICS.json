@@ -1,0 +1,25 @@
+{
+  "total_capabilities": 198,
+  "implemented": 100,
+  "partial": 20,
+  "contract_only": 0,
+  "spec_only": 78,
+  "broken_implementation": 0,
+  "test_only": 0,
+  "implementation_percentage": 50.51,
+  "production_php_files": 78,
+  "test_files": 18,
+  "classes": 71,
+  "interfaces": 9,
+  "abstract_classes": 3,
+  "schema_types": 12,
+  "rest_routes": 23,
+  "wp_cli_commands": 10,
+  "database_tables": 8,
+  "security_findings": {
+    "critical": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 2
+  }
+}
