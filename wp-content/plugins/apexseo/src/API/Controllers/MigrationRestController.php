@@ -143,11 +143,16 @@ class MigrationRestController extends AbstractRestController {
                 $rows = $this->db->getResults($redirSql);
                 if (is_array($rows)) {
                     foreach ($rows as $row) {
+                        $sUrl = (string) $row->url;
+                        $sHash = md5($sUrl);
+                        $tUrl = (string) $row->action_data;
+                        $sCode = (int) $row->action_code ?: 301;
                         $upsert = $this->db->prepare(
-                            "INSERT INTO {$apexRedirTable} (source_url, target_url, status_code, is_active) VALUES (%s, %s, %d, 1) ON DUPLICATE KEY UPDATE target_url = VALUES(target_url), status_code = VALUES(status_code)",
-                            (string) $row->url,
-                            (string) $row->action_data,
-                            (int) $row->action_code ?: 301
+                            "INSERT INTO {$apexRedirTable} (source_url, source_url_hash, target_url, status_code, status, hits_count) VALUES (%s, %s, %s, %d, 'active', 0) ON DUPLICATE KEY UPDATE target_url = VALUES(target_url), status_code = VALUES(status_code)",
+                            $sUrl,
+                            $sHash,
+                            $tUrl,
+                            $sCode
                         );
                         $this->db->query($upsert);
                         $migratedCount++;

@@ -125,20 +125,21 @@ class RedirectsRestController extends AbstractRestController {
         $table = $this->db->getPrefix() . 'apex_redirects';
 
         // Check for existing source hash
-        $existsQuery = $this->db->prepare("SELECT id FROM {$table} WHERE source_hash = %s LIMIT 1", $sourceHash);
+        $existsQuery = $this->db->prepare("SELECT id FROM {$table} WHERE source_url_hash = %s LIMIT 1", $sourceHash);
         $existingId = $this->db->getVar($existsQuery);
         if ($existingId) {
             return $this->error('apexseo_duplicate_redirect', 'A redirect for this source URL already exists.', 409);
         }
 
         $inserted = $this->db->insert($table, [
-            'source_url'  => $sourcePath,
-            'source_hash' => $sourceHash,
-            'target_url'  => sanitize_text_field($targetUrl),
-            'status_code' => $statusCode,
-            'is_regex'    => $isRegex,
-            'hits'        => 0,
-            'created_at'  => gmdate('Y-m-d H:i:s'),
+            'source_url'      => $sourcePath,
+            'source_url_hash' => $sourceHash,
+            'target_url'      => sanitize_text_field($targetUrl),
+            'status_code'     => $statusCode,
+            'is_regex'        => $isRegex,
+            'status'          => 'active',
+            'hits_count'      => 0,
+            'created_at'      => gmdate('Y-m-d H:i:s'),
         ]);
 
         if (!$inserted) {
@@ -179,8 +180,8 @@ class RedirectsRestController extends AbstractRestController {
         if (isset($params['source_url'])) {
             $parsedPath = parse_url($params['source_url'], PHP_URL_PATH);
             $sourcePath = '/' . ltrim(!empty($parsedPath) ? $parsedPath : $params['source_url'], '/');
-            $updateData['source_url']  = $sourcePath;
-            $updateData['source_hash'] = md5($sourcePath);
+            $updateData['source_url']      = $sourcePath;
+            $updateData['source_url_hash'] = md5($sourcePath);
         }
         if (isset($params['target_url'])) {
             $updateData['target_url'] = sanitize_text_field($params['target_url']);

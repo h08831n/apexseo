@@ -46,10 +46,13 @@ class DoctorCommand extends AbstractCliCommand {
 
         $tables = [
             'apex_indexables',
+            'apex_schema',
             'apex_redirects',
             'apex_404_logs',
-            'apex_analytics_keywords',
-            'apex_schema_templates',
+            'apex_links',
+            'apex_image_history',
+            'apex_analytics',
+            'apex_rank_tracking',
         ];
 
         $allTablesOk = true;
@@ -79,7 +82,7 @@ class DoctorCommand extends AbstractCliCommand {
             [
                 'check'  => 'Database Tables',
                 'status' => $allTablesOk ? 'OK' : 'WARNING',
-                'value'  => $allTablesOk ? 'All 5 Core Tables Installed' : 'Some Tables Missing',
+                'value'  => $allTablesOk ? 'All 8 Locked Core Tables Installed' : 'Some Tables Missing',
             ],
             [
                 'check'  => 'Multisite Network',

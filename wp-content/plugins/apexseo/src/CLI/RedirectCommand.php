@@ -60,20 +60,21 @@ class RedirectCommand extends AbstractCliCommand {
         $sourceHash = md5($sourcePath);
 
         // Check if exists
-        $existing = $db->getVar($db->prepare("SELECT id FROM {$table} WHERE source_hash = %s LIMIT 1", $sourceHash));
+        $existing = $db->getVar($db->prepare("SELECT id FROM {$table} WHERE source_url_hash = %s LIMIT 1", $sourceHash));
         if ($existing) {
             $this->error(sprintf('Redirect rule for "%s" already exists (ID: %d).', $sourcePath, $existing));
             return 1;
         }
 
         $inserted = $db->insert($table, [
-            'source_url'  => $sourcePath,
-            'source_hash' => $sourceHash,
-            'target_url'  => sanitize_text_field($targetUrl),
-            'status_code' => $statusCode,
-            'is_regex'    => $isRegex,
-            'hits'        => 0,
-            'created_at'  => gmdate('Y-m-d H:i:s'),
+            'source_url'      => $sourcePath,
+            'source_url_hash' => $sourceHash,
+            'target_url'      => sanitize_text_field($targetUrl),
+            'status_code'     => $statusCode,
+            'is_regex'        => $isRegex,
+            'status'          => 'active',
+            'hits_count'      => 0,
+            'created_at'      => gmdate('Y-m-d H:i:s'),
         ]);
 
         if ($inserted) {
@@ -112,7 +113,7 @@ class RedirectCommand extends AbstractCliCommand {
         $db = $this->container->get(DatabaseManager::class);
         $table = $db->getPrefix() . 'apex_redirects';
 
-        $query = $db->prepare("SELECT id, source_url, target_url, status_code, hits, created_at FROM {$table} ORDER BY id DESC LIMIT %d", $perPage);
+        $query = $db->prepare("SELECT id, source_url, target_url, status_code, hits_count, status, created_at FROM {$table} ORDER BY id DESC LIMIT %d", $perPage);
         $results = $db->getResults($query);
 
         $items = [];
@@ -123,13 +124,14 @@ class RedirectCommand extends AbstractCliCommand {
                     'source_url'  => is_object($row) ? $row->source_url : $row['source_url'],
                     'target_url'  => is_object($row) ? $row->target_url : $row['target_url'],
                     'status_code' => is_object($row) ? $row->status_code : $row['status_code'],
-                    'hits'        => is_object($row) ? $row->hits : $row['hits'],
+                    'hits_count'  => is_object($row) ? $row->hits_count : $row['hits_count'],
+                    'status'      => is_object($row) ? $row->status : $row['status'],
                     'created_at'  => is_object($row) ? $row->created_at : $row['created_at'],
                 ];
             }
         }
 
-        $this->formatItems($format, $items, ['id', 'source_url', 'target_url', 'status_code', 'hits', 'created_at']);
+        $this->formatItems($format, $items, ['id', 'source_url', 'target_url', 'status_code', 'hits_count', 'status', 'created_at']);
         return 0;
     }
 }

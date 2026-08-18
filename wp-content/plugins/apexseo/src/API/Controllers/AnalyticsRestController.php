@@ -82,8 +82,8 @@ class AnalyticsRestController extends AbstractRestController {
      * @return \WP_REST_Response
      */
     public function getRankTracker($request = null) {
-        $table = $this->db->getPrefix() . 'apex_analytics_keywords';
-        $results = $this->db->getResults("SELECT * FROM {$table} ORDER BY position ASC LIMIT 100");
+        $table = $this->db->getPrefix() . 'apex_rank_tracking';
+        $results = $this->db->getResults("SELECT * FROM {$table} ORDER BY current_position ASC LIMIT 100");
 
         return $this->success([
             'success'  => true,

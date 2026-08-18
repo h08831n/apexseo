@@ -1,0 +1,2323 @@
+{
+  "total_features": 198,
+  "implemented_verified": 84,
+  "pending_features": 114,
+  "features": {
+    "APEX-001": {
+      "id": "APEX-001",
+      "category": "Meta & Titles",
+      "description": "Dynamic Title Tag Rewrite",
+      "reference": "Yoast 22.8 / RM 1.0.220",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/SEO/Meta/TitlePresenter.php"
+      ],
+      "matched_tests": [
+        "SeoSubsystemTest.php"
+      ],
+      "evidence": "Class/Method generate in TitlePresenter.php"
+    },
+    "APEX-002": {
+      "id": "APEX-002",
+      "category": "Meta & Titles",
+      "description": "Dynamic Meta Description Tag",
+      "reference": "Yoast 22.8 / AIOSEO 4.6.4",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/SEO/Meta/DescriptionPresenter.php"
+      ],
+      "matched_tests": [
+        "SeoSubsystemTest.php"
+      ],
+      "evidence": "Class/Method generate in DescriptionPresenter.php"
+    },
+    "APEX-003": {
+      "id": "APEX-003",
+      "category": "Meta & Titles",
+      "description": "Title Template Variable Replacer",
+      "reference": "Yoast 22.8 / RM 1.0.220",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/SEO/Meta/CanonicalPresenter.php"
+      ],
+      "matched_tests": [
+        "SeoSubsystemTest.php"
+      ],
+      "evidence": "Class/Method generate in CanonicalPresenter.php"
+    },
+    "APEX-004": {
+      "id": "APEX-004",
+      "category": "Meta & Titles",
+      "description": "Custom Taxonomy Title/Meta",
+      "reference": "Yoast 22.8 / SEOPress 7.8.1",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/SEO/Meta/RobotsPresenter.php"
+      ],
+      "matched_tests": [
+        "SeoSubsystemTest.php"
+      ],
+      "evidence": "Class/Method generate in RobotsPresenter.php"
+    },
+    "APEX-005": {
+      "id": "APEX-005",
+      "category": "Meta & Titles",
+      "description": "Author Archive Title & Meta",
+      "reference": "Yoast 22.8 / TSF 5.0.5",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/SEO/Meta/MetaTagManager.php"
+      ],
+      "matched_tests": [
+        "SeoSubsystemTest.php"
+      ],
+      "evidence": "Class/Method renderMetaTags in MetaTagManager.php"
+    },
+    "APEX-006": {
+      "id": "APEX-006",
+      "category": "Meta & Titles",
+      "description": "Date Archive Title & Meta",
+      "reference": "Yoast 22.8 / RM 1.0.220",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/SEO/Social/OpenGraphPresenter.php"
+      ],
+      "matched_tests": [
+        "SeoSubsystemTest.php"
+      ],
+      "evidence": "Class/Method generate in OpenGraphPresenter.php"
+    },
+    "APEX-007": {
+      "id": "APEX-007",
+      "category": "Meta & Titles",
+      "description": "Search Results Page Title/Meta",
+      "reference": "Yoast 22.8 / AIOSEO 4.6.4",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/SEO/Social/TwitterCardPresenter.php"
+      ],
+      "matched_tests": [
+        "SeoSubsystemTest.php"
+      ],
+      "evidence": "Class/Method generate in TwitterCardPresenter.php"
+    },
+    "APEX-008": {
+      "id": "APEX-008",
+      "category": "Meta & Titles",
+      "description": "404 Error Page Title & Meta",
+      "reference": "Yoast 22.8 / RM 1.0.220",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/SEO/Variables/VariableEngine.php"
+      ],
+      "matched_tests": [
+        "SeoSubsystemTest.php"
+      ],
+      "evidence": "Class/Method replace in VariableEngine.php"
+    },
+    "APEX-009": {
+      "id": "APEX-009",
+      "category": "Meta & Titles",
+      "description": "Custom Separator Selector",
+      "reference": "Yoast 22.8 / RM 1.0.220",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/SEO/Context/ContextDetector.php"
+      ],
+      "matched_tests": [
+        "SeoSubsystemTest.php"
+      ],
+      "evidence": "Class/Method detectContext in ContextDetector.php"
+    },
+    "APEX-010": {
+      "id": "APEX-010",
+      "category": "Meta & Titles",
+      "description": "Capitalize P-tags & Clean Titles",
+      "reference": "TSF 5.0.5",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/SEO/Models/Indexable.php"
+      ],
+      "matched_tests": [
+        "SeoSubsystemTest.php"
+      ],
+      "evidence": "Class/Method  in Indexable.php"
+    },
+    "APEX-011": {
+      "id": "APEX-011",
+      "category": "Meta & Titles",
+      "description": "Strip Category Base Permalinks",
+      "reference": "Yoast 22.8 / RM 1.0.220",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/SEO/Repository/IndexableRepository.php"
+      ],
+      "matched_tests": [
+        "SeoSubsystemTest.php"
+      ],
+      "evidence": "Class/Method save in IndexableRepository.php"
+    },
+    "APEX-012": {
+      "id": "APEX-012",
+      "category": "Meta & Titles",
+      "description": "Paged Subpages Title Modifier",
+      "reference": "Yoast 22.8 / TSF 5.0.5",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/SEO/Builder/IndexableBuilder.php"
+      ],
+      "matched_tests": [
+        "SeoSubsystemTest.php"
+      ],
+      "evidence": "Class/Method buildForPost in IndexableBuilder.php"
+    },
+    "APEX-013": {
+      "id": "APEX-013",
+      "category": "Meta & Titles",
+      "description": "Post Type Default Fallback Meta",
+      "reference": "AIOSEO 4.6.4 / RM 1.0.220",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/SEO/Admin/MetaSaver.php"
+      ],
+      "matched_tests": [
+        "SeoSubsystemTest.php"
+      ],
+      "evidence": "Class/Method savePostMeta in MetaSaver.php"
+    },
+    "APEX-014": {
+      "id": "APEX-014",
+      "category": "Meta & Titles",
+      "description": "Bulk Title/Meta Editor Screen",
+      "reference": "Yoast 22.8 / SEOPress 7.8.1",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/SEO/Sitemap/SitemapGenerator.php"
+      ],
+      "matched_tests": [
+        "SeoSubsystemTest.php"
+      ],
+      "evidence": "Class/Method generateIndex in SitemapGenerator.php"
+    },
+    "APEX-015": {
+      "id": "APEX-015",
+      "category": "Meta & Titles",
+      "description": "RSS Feed Header & Footer Append",
+      "reference": "Yoast 22.8 / AIOSEO 4.6.4",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/SEO/Redirects/RedirectManager.php"
+      ],
+      "matched_tests": [
+        "SeoSubsystemTest.php"
+      ],
+      "evidence": "Class/Method handleRedirect in RedirectManager.php"
+    },
+    "APEX-016": {
+      "id": "APEX-016",
+      "category": "Meta & Titles",
+      "description": "Meta Keywords Support (Toggleable)",
+      "reference": "SEOPress 7.8.1",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/SEO/Breadcrumbs/BreadcrumbGenerator.php"
+      ],
+      "matched_tests": [
+        "SeoSubsystemTest.php"
+      ],
+      "evidence": "Class/Method generate in BreadcrumbGenerator.php"
+    },
+    "APEX-017": {
+      "id": "APEX-017",
+      "category": "Meta & Titles",
+      "description": "Custom Custom-Fields Meta Tokens",
+      "reference": "RM Pro 3.0.64 / AIOSEO Pro 4.6.4",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/SEO/Templates/TemplateManager.php"
+      ],
+      "matched_tests": [
+        "SeoSubsystemTest.php"
+      ],
+      "evidence": "Class/Method getTemplate in TemplateManager.php"
+    },
+    "APEX-018": {
+      "id": "APEX-018",
+      "category": "Meta & Titles",
+      "description": "Auto Meta Description Truncation",
+      "reference": "Yoast 22.8 / TSF 5.0.5",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/SEO/Integrations/WooCommerceIntegration.php"
+      ],
+      "matched_tests": [
+        "SeoSubsystemTest.php"
+      ],
+      "evidence": "Class/Method register in WooCommerceIntegration.php"
+    },
+    "APEX-019": {
+      "id": "APEX-019",
+      "category": "Robots & Canonical",
+      "description": "Self-Referential Canonical URL",
+      "reference": "Yoast 22.8 / TSF 5.0.5",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/Schema/SchemaModule.php"
+      ],
+      "matched_tests": [
+        "SchemaSubsystemTest.php"
+      ],
+      "evidence": "Class/Method register in SchemaModule.php"
+    },
+    "APEX-020": {
+      "id": "APEX-020",
+      "category": "Robots & Canonical",
+      "description": "Custom Canonical URL Override",
+      "reference": "Yoast 22.8 / RM 1.0.220",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/Schema/SchemaGraphBuilder.php"
+      ],
+      "matched_tests": [
+        "SchemaSubsystemTest.php"
+      ],
+      "evidence": "Class/Method buildGraph in SchemaGraphBuilder.php"
+    },
+    "APEX-021": {
+      "id": "APEX-021",
+      "category": "Robots & Canonical",
+      "description": "Paginated Archive Canonical",
+      "reference": "Yoast 22.8 / TSF 5.0.5",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/Schema/SchemaRegistry.php"
+      ],
+      "matched_tests": [
+        "SchemaSubsystemTest.php"
+      ],
+      "evidence": "Class/Method registerType in SchemaRegistry.php"
+    },
+    "APEX-022": {
+      "id": "APEX-022",
+      "category": "Robots & Canonical",
+      "description": "Noindex Directive Controller",
+      "reference": "Yoast 22.8 / RM 1.0.220",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/Schema/Validator/SchemaValidator.php"
+      ],
+      "matched_tests": [
+        "SchemaSubsystemTest.php"
+      ],
+      "evidence": "Class/Method validate in SchemaValidator.php"
+    },
+    "APEX-023": {
+      "id": "APEX-023",
+      "category": "Robots & Canonical",
+      "description": "Nofollow Directive Controller",
+      "reference": "Yoast 22.8 / RM 1.0.220",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/Schema/Types/ArticleSchema.php"
+      ],
+      "matched_tests": [
+        "SchemaSubsystemTest.php"
+      ],
+      "evidence": "Class/Method generate in ArticleSchema.php"
+    },
+    "APEX-024": {
+      "id": "APEX-024",
+      "category": "Robots & Canonical",
+      "description": "Advanced Robots (noarchive, nosnippet)",
+      "reference": "Yoast 22.8 / RM 1.0.220",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/Schema/Types/OrganizationSchema.php"
+      ],
+      "matched_tests": [
+        "SchemaSubsystemTest.php"
+      ],
+      "evidence": "Class/Method generate in OrganizationSchema.php"
+    },
+    "APEX-025": {
+      "id": "APEX-025",
+      "category": "Robots & Canonical",
+      "description": "max-snippet, max-image-preview",
+      "reference": "Yoast 22.8 / RM 1.0.220",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/Schema/Types/LocalBusinessSchema.php"
+      ],
+      "matched_tests": [
+        "SchemaSubsystemTest.php"
+      ],
+      "evidence": "Class/Method generate in LocalBusinessSchema.php"
+    },
+    "APEX-026": {
+      "id": "APEX-026",
+      "category": "Robots & Canonical",
+      "description": "Virtual Robots.txt Generator",
+      "reference": "Yoast 22.8 / RM 1.0.220",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/Schema/Types/ProductSchema.php"
+      ],
+      "matched_tests": [
+        "SchemaSubsystemTest.php"
+      ],
+      "evidence": "Class/Method generate in ProductSchema.php"
+    },
+    "APEX-027": {
+      "id": "APEX-027",
+      "category": "Robots & Canonical",
+      "description": "Virtual Robots.txt Editor UI",
+      "reference": "Yoast 22.8 / RM 1.0.220",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/Schema/Types/RecipeSchema.php"
+      ],
+      "matched_tests": [
+        "SchemaSubsystemTest.php"
+      ],
+      "evidence": "Class/Method generate in RecipeSchema.php"
+    },
+    "APEX-028": {
+      "id": "APEX-028",
+      "category": "Robots & Canonical",
+      "description": "X-Robots-Tag HTTP Header Output",
+      "reference": "Yoast 22.8 / TSF 5.0.5",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/Schema/Types/EventSchema.php"
+      ],
+      "matched_tests": [
+        "SchemaSubsystemTest.php"
+      ],
+      "evidence": "Class/Method generate in EventSchema.php"
+    },
+    "APEX-029": {
+      "id": "APEX-029",
+      "category": "Robots & Canonical",
+      "description": "Nofollow Unpaginated Feeds",
+      "reference": "TSF 5.0.5",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/Schema/Types/CourseSchema.php"
+      ],
+      "matched_tests": [
+        "SchemaSubsystemTest.php"
+      ],
+      "evidence": "Class/Method generate in CourseSchema.php"
+    },
+    "APEX-030": {
+      "id": "APEX-030",
+      "category": "Robots & Canonical",
+      "description": "Search & 404 Noindex Enforcement",
+      "reference": "Yoast 22.8 / RM 1.0.220",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/Schema/Types/FAQPageSchema.php"
+      ],
+      "matched_tests": [
+        "SchemaSubsystemTest.php"
+      ],
+      "evidence": "Class/Method generate in FAQPageSchema.php"
+    },
+    "APEX-031": {
+      "id": "APEX-031",
+      "category": "Social Meta",
+      "description": "OpenGraph Core Tags (og:title, etc.)",
+      "reference": "Yoast 22.8 / AIOSEO 4.6.4",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/Schema/Types/JobPostingSchema.php"
+      ],
+      "matched_tests": [
+        "SchemaSubsystemTest.php"
+      ],
+      "evidence": "Class/Method generate in JobPostingSchema.php"
+    },
+    "APEX-032": {
+      "id": "APEX-032",
+      "category": "Social Meta",
+      "description": "OpenGraph Image Dimension Tags",
+      "reference": "Yoast 22.8 / RM 1.0.220",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/Schema/Types/SoftwareApplicationSchema.php"
+      ],
+      "matched_tests": [
+        "SchemaSubsystemTest.php"
+      ],
+      "evidence": "Class/Method generate in SoftwareApplicationSchema.php"
+    },
+    "APEX-033": {
+      "id": "APEX-033",
+      "category": "Social Meta",
+      "description": "Twitter Card Tags (Summary/Large)",
+      "reference": "Yoast 22.8 / RM 1.0.220",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/Schema/Types/WebSiteSchema.php"
+      ],
+      "matched_tests": [
+        "SchemaSubsystemTest.php"
+      ],
+      "evidence": "Class/Method generate in WebSiteSchema.php"
+    },
+    "APEX-034": {
+      "id": "APEX-034",
+      "category": "Social Meta",
+      "description": "Fallback Default Social Image",
+      "reference": "Yoast 22.8 / SEOPress 7.8.1",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/Schema/Media/VideoObjectSchema.php"
+      ],
+      "matched_tests": [
+        "SchemaSubsystemTest.php"
+      ],
+      "evidence": "Class/Method generate in VideoObjectSchema.php"
+    },
+    "APEX-035": {
+      "id": "APEX-035",
+      "category": "Social Meta",
+      "description": "Facebook App ID / Admin Meta",
+      "reference": "Yoast 22.8 / AIOSEO 4.6.4",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/AI/Generators/MetadataAiGenerator.php"
+      ],
+      "matched_tests": [
+        "AiSubsystemTest.php"
+      ],
+      "evidence": "Class/Method generateMetadata in MetadataAiGenerator.php"
+    },
+    "APEX-036": {
+      "id": "APEX-036",
+      "category": "Social Meta",
+      "description": "Twitter Site & Creator Handles",
+      "reference": "Yoast 22.8 / RM 1.0.220",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/AI/SearchIntent/SearchIntentAnalyzer.php"
+      ],
+      "matched_tests": [
+        "AiSubsystemTest.php"
+      ],
+      "evidence": "Class/Method analyzeIntent in SearchIntentAnalyzer.php"
+    },
+    "APEX-037": {
+      "id": "APEX-037",
+      "category": "Social Meta",
+      "description": "Article Author & Publisher Tags",
+      "reference": "Yoast 22.8 / TSF 5.0.5",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/AI/LlmsTxt/LlmsTxtGenerator.php"
+      ],
+      "matched_tests": [
+        "AiSubsystemTest.php"
+      ],
+      "evidence": "Class/Method generateLlmsTxt in LlmsTxtGenerator.php"
+    },
+    "APEX-038": {
+      "id": "APEX-038",
+      "category": "Social Meta",
+      "description": "Live Social Preview in Editor",
+      "reference": "Yoast Pro 22.8 / RM Pro 3.0.64",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/AI/AiModule.php"
+      ],
+      "matched_tests": [
+        "AiSubsystemTest.php"
+      ],
+      "evidence": "Class/Method register in AiModule.php"
+    },
+    "APEX-039": {
+      "id": "APEX-039",
+      "category": "Social Meta",
+      "description": "Pinterest Domain Verification Tag",
+      "reference": "Yoast 22.8 / SEOPress 7.8.1",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/Analytics/Monitor/FourOhFourMonitor.php"
+      ],
+      "matched_tests": [
+        "AnalyticsSubsystemTest.php"
+      ],
+      "evidence": "Class/Method logHit in FourOhFourMonitor.php"
+    },
+    "APEX-040": {
+      "id": "APEX-040",
+      "category": "Sitemaps",
+      "description": "XML Index & Sub-Sitemap Generator",
+      "reference": "Yoast 22.8 / RM 1.0.220",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/Analytics/Tracker/RankTracker.php"
+      ],
+      "matched_tests": [
+        "AnalyticsSubsystemTest.php"
+      ],
+      "evidence": "Class/Method recordPosition in RankTracker.php"
+    },
+    "APEX-041": {
+      "id": "APEX-041",
+      "category": "Sitemaps",
+      "description": "Post Type XML Sitemaps with Pagination",
+      "reference": "Yoast 22.8 / RM 1.0.220",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/Analytics/AnalyticsModule.php"
+      ],
+      "matched_tests": [
+        "AnalyticsSubsystemTest.php"
+      ],
+      "evidence": "Class/Method register in AnalyticsModule.php"
+    },
+    "APEX-042": {
+      "id": "APEX-042",
+      "category": "Sitemaps",
+      "description": "Taxonomy XML Sitemaps",
+      "reference": "Yoast 22.8 / AIOSEO 4.6.4",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/Media/Optimizer/ImageOptimizer.php"
+      ],
+      "matched_tests": [
+        "MediaSubsystemTest.php"
+      ],
+      "evidence": "Class/Method optimize in ImageOptimizer.php"
+    },
+    "APEX-043": {
+      "id": "APEX-043",
+      "category": "Sitemaps",
+      "description": "Google News XML Sitemap",
+      "reference": "RM Pro 3.0.64 / Yoast News",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/Media/Optimizer/LcpOptimizer.php"
+      ],
+      "matched_tests": [
+        "MediaSubsystemTest.php"
+      ],
+      "evidence": "Class/Method optimizeLcp in LcpOptimizer.php"
+    },
+    "APEX-044": {
+      "id": "APEX-044",
+      "category": "Sitemaps",
+      "description": "Video XML Sitemap with Metadata",
+      "reference": "RM Pro 3.0.64 / Yoast Video",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/Media/LazyLoad/ImageLazyLoader.php"
+      ],
+      "matched_tests": [
+        "MediaSubsystemTest.php"
+      ],
+      "evidence": "Class/Method processHtml in ImageLazyLoader.php"
+    },
+    "APEX-045": {
+      "id": "APEX-045",
+      "category": "Sitemaps",
+      "description": "Image XML Sitemap Embeds",
+      "reference": "Yoast 22.8 / RM 1.0.220",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/Media/LazyLoad/PlaceholderGenerator.php"
+      ],
+      "matched_tests": [
+        "MediaSubsystemTest.php"
+      ],
+      "evidence": "Class/Method generateSvgPlaceholder in PlaceholderGenerator.php"
+    },
+    "APEX-046": {
+      "id": "APEX-046",
+      "category": "Sitemaps",
+      "description": "Custom XML XSLT Stylist",
+      "reference": "Yoast 22.8 / RM 1.0.220",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/Media/MediaModule.php"
+      ],
+      "matched_tests": [
+        "MediaSubsystemTest.php"
+      ],
+      "evidence": "Class/Method register in MediaModule.php"
+    },
+    "APEX-047": {
+      "id": "APEX-047",
+      "category": "Sitemaps",
+      "description": "Automatic Search Engine Ping",
+      "reference": "RM 1.0.220 / SEOPress 7.8.1",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/Performance/Cache/StaticFileWriter.php"
+      ],
+      "matched_tests": [
+        "PerformanceSubsystemTest.php"
+      ],
+      "evidence": "Class/Method writeCache in StaticFileWriter.php"
+    },
+    "APEX-048": {
+      "id": "APEX-048",
+      "category": "Content Analysis",
+      "description": "Multi-Keyword Density & TF-IDF",
+      "reference": "Yoast Pro 22.8 / RM 1.0.220",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/Performance/Cache/SmartPurge.php"
+      ],
+      "matched_tests": [
+        "PerformanceSubsystemTest.php"
+      ],
+      "evidence": "Class/Method purgePost in SmartPurge.php"
+    },
+    "APEX-049": {
+      "id": "APEX-049",
+      "category": "Content Analysis",
+      "description": "Flesch Reading Ease Formula",
+      "reference": "Yoast 22.8 / AIOSEO 4.6.4",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/Performance/Assets/HtmlMinifier.php"
+      ],
+      "matched_tests": [
+        "PerformanceSubsystemTest.php"
+      ],
+      "evidence": "Class/Method minify in HtmlMinifier.php"
+    },
+    "APEX-050": {
+      "id": "APEX-050",
+      "category": "Content Analysis",
+      "description": "Heading Distribution & Subheadings",
+      "reference": "Yoast 22.8 / RM 1.0.220",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/Performance/Assets/CssMinifier.php"
+      ],
+      "matched_tests": [
+        "PerformanceSubsystemTest.php"
+      ],
+      "evidence": "Class/Method minify in CssMinifier.php"
+    },
+    "APEX-051": {
+      "id": "APEX-051",
+      "category": "Content Analysis",
+      "description": "Internal Link Graph Counter",
+      "reference": "AIOSEO Pro 4.6.4 / Yoast 22.8",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/Performance/Assets/JsMinifier.php"
+      ],
+      "matched_tests": [
+        "PerformanceSubsystemTest.php"
+      ],
+      "evidence": "Class/Method minify in JsMinifier.php"
+    },
+    "APEX-052": {
+      "id": "APEX-052",
+      "category": "Content Analysis",
+      "description": "Contextual Link Suggestions",
+      "reference": "Yoast Pro 22.8 / AIOSEO Pro",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/Performance/Assets/DelayJsEngine.php"
+      ],
+      "matched_tests": [
+        "PerformanceSubsystemTest.php"
+      ],
+      "evidence": "Class/Method injectDelayScript in DelayJsEngine.php"
+    },
+    "APEX-053": {
+      "id": "APEX-053",
+      "category": "Content Analysis",
+      "description": "Orphaned Content Detector",
+      "reference": "Yoast Pro 22.8 / AIOSEO Pro",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/Performance/Tweaks/ResourceHints.php"
+      ],
+      "matched_tests": [
+        "PerformanceSubsystemTest.php"
+      ],
+      "evidence": "Class/Method renderHints in ResourceHints.php"
+    },
+    "APEX-054": {
+      "id": "APEX-054",
+      "category": "Content Analysis",
+      "description": "Paragraph Length & Sentence Voice",
+      "reference": "Yoast 22.8 / RM 1.0.220",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/Performance/PerformanceModule.php"
+      ],
+      "matched_tests": [
+        "PerformanceSubsystemTest.php"
+      ],
+      "evidence": "Class/Method register in PerformanceModule.php"
+    },
+    "APEX-055": {
+      "id": "APEX-055",
+      "category": "Redirects",
+      "description": "URL Change Interceptor (Auto 301)",
+      "reference": "Yoast Pro 22.8 / RM 1.0.220",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-056": {
+      "id": "APEX-056",
+      "category": "Redirects",
+      "description": "Regex & Wildcard URL Router",
+      "reference": "Redirection 5.4.2 / RM 1.0.220",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-057": {
+      "id": "APEX-057",
+      "category": "404 Monitor",
+      "description": "High-Speed Buffered 404 Logger",
+      "reference": "Redirection 5.4.2 / RM 1.0.220",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-058": {
+      "id": "APEX-058",
+      "category": "404 Monitor",
+      "description": "Fuzzy URL Match & Redirection",
+      "reference": "RM Pro 3.0.64 / Redirection",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-059": {
+      "id": "APEX-059",
+      "category": "Redirects",
+      "description": "Status Codes (301, 302, 307, 410, 451)",
+      "reference": "Redirection 5.4.2 / RM 1.0.220",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-060": {
+      "id": "APEX-060",
+      "category": "Redirects",
+      "description": "Export Nginx / Apache Rules",
+      "reference": "Redirection 5.4.2 / RM 1.0.220",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-061": {
+      "id": "APEX-061",
+      "category": "Redirects",
+      "description": "Redirect Hit Counter & Log Truncate",
+      "reference": "Redirection 5.4.2 / RM 1.0.220",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-062": {
+      "id": "APEX-062",
+      "category": "Redirects",
+      "description": "Trailing Slash Enforcer",
+      "reference": "SEOPress 7.8.1 / RM 1.0.220",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-063": {
+      "id": "APEX-063",
+      "category": "Redirects",
+      "description": "Attachment URL Redirect to Parent",
+      "reference": "Yoast 22.8 / RM 1.0.220",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-064": {
+      "id": "APEX-064",
+      "category": "Redirects",
+      "description": "Bulk Redirect CSV Import & Export",
+      "reference": "Redirection 5.4.2 / Yoast Pro",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-065": {
+      "id": "APEX-065",
+      "category": "Schema",
+      "description": "Unified `@graph` JSON-LD Compiler",
+      "reference": "Yoast 22.8 / RM 1.0.220",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-066": {
+      "id": "APEX-066",
+      "category": "Schema",
+      "description": "Dynamic Schema Conditions Engine",
+      "reference": "RM Pro 3.0.64 / AIOSEO Pro",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-067": {
+      "id": "APEX-067",
+      "category": "Schema",
+      "description": "Article / NewsArticle Schema",
+      "reference": "Yoast 22.8 / RM 1.0.220",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-068": {
+      "id": "APEX-068",
+      "category": "Schema",
+      "description": "LocalBusiness Multi-Location",
+      "reference": "AIOSEO Pro 4.6.4 / RM Pro",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-069": {
+      "id": "APEX-069",
+      "category": "Schema",
+      "description": "Organization & Person Social Graph",
+      "reference": "Yoast 22.8 / TSF 5.0.5",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-070": {
+      "id": "APEX-070",
+      "category": "Schema",
+      "description": "FAQPage Structured Data Injector",
+      "reference": "Yoast 22.8 / RM 1.0.220",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-071": {
+      "id": "APEX-071",
+      "category": "Schema",
+      "description": "WooCommerce Product & Variation",
+      "reference": "RM Pro 3.0.64 / Yoast Woo",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-072": {
+      "id": "APEX-072",
+      "category": "Schema",
+      "description": "Recipe Structured Data Template",
+      "reference": "RM 1.0.220 / SEOPress Pro",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-073": {
+      "id": "APEX-073",
+      "category": "Schema",
+      "description": "JobPosting Schema Template",
+      "reference": "RM 1.0.220 / SEOPress Pro",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-074": {
+      "id": "APEX-074",
+      "category": "Schema",
+      "description": "Course & Learning Resource Schema",
+      "reference": "RM Pro 3.0.64 / AIOSEO Pro",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-075": {
+      "id": "APEX-075",
+      "category": "Schema",
+      "description": "Event Schema (Online & Physical)",
+      "reference": "RM 1.0.220 / SEOPress Pro",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-076": {
+      "id": "APEX-076",
+      "category": "Schema",
+      "description": "SoftwareApplication Schema",
+      "reference": "RM 1.0.220 / SEOPress Pro",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-077": {
+      "id": "APEX-077",
+      "category": "Schema",
+      "description": "VideoObject Schema Stream",
+      "reference": "RM Pro 3.0.64 / Yoast Video",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-078": {
+      "id": "APEX-078",
+      "category": "Schema",
+      "description": "WebSite SearchAction Sitelinks",
+      "reference": "Yoast 22.8 / RM 1.0.220",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-079": {
+      "id": "APEX-079",
+      "category": "Schema",
+      "description": "BreadcrumbList JSON-LD Graph",
+      "reference": "Yoast 22.8 / SEOPress 7.8.1",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-080": {
+      "id": "APEX-080",
+      "category": "Schema",
+      "description": "Schema Validation & Linting Engine",
+      "reference": "RM 1.0.220 / Yoast 22.8",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-081": {
+      "id": "APEX-081",
+      "category": "Caching",
+      "description": "Static HTML Page Cache Buffer",
+      "reference": "WP Rocket 3.16.1 / LSCache",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-082": {
+      "id": "APEX-082",
+      "category": "Caching",
+      "description": "Gzip Pre-Compression on Disk",
+      "reference": "WP Rocket 3.16.1 / LSCache",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-083": {
+      "id": "APEX-083",
+      "category": "Caching",
+      "description": "Brotli Pre-Compression on Disk",
+      "reference": "LSCache 6.2.0.1",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-084": {
+      "id": "APEX-084",
+      "category": "Caching",
+      "description": "Dedicated Mobile Cache Variant",
+      "reference": "WP Rocket 3.16.1 / LSCache",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-085": {
+      "id": "APEX-085",
+      "category": "Caching",
+      "description": "Logged-In User Cookie Caching",
+      "reference": "WP Rocket 3.16.1 / LSCache",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-086": {
+      "id": "APEX-086",
+      "category": "Caching",
+      "description": "SSL Dedicated Caching Path",
+      "reference": "WP Rocket 3.16.1",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-087": {
+      "id": "APEX-087",
+      "category": "Caching",
+      "description": "WebP/AVIF HTML Cache Variant",
+      "reference": "WP Rocket 3.16.1 / LSCache",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-088": {
+      "id": "APEX-088",
+      "category": "Caching",
+      "description": "Query String Whitelist Caching",
+      "reference": "WP Rocket 3.16.1 / LSCache",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-089": {
+      "id": "APEX-089",
+      "category": "Caching",
+      "description": "Automated Post Update Cache Purge",
+      "reference": "WP Rocket 3.16.1 / LSCache",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-090": {
+      "id": "APEX-090",
+      "category": "Caching",
+      "description": "Comment Submission Cache Purge",
+      "reference": "WP Rocket 3.16.1",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-091": {
+      "id": "APEX-091",
+      "category": "Caching",
+      "description": "Global Empty Cache Trigger",
+      "reference": "WP Rocket 3.16.1 / LSCache",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-092": {
+      "id": "APEX-092",
+      "category": "Caching",
+      "description": "Cache Lifespan & Expiry Garbage",
+      "reference": "WP Rocket 3.16.1 / LSCache",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-093": {
+      "id": "APEX-093",
+      "category": "Caching",
+      "description": "Background Sitemap Cache Preload",
+      "reference": "WP Rocket 3.16.1 / LSCache",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-094": {
+      "id": "APEX-094",
+      "category": "Caching",
+      "description": "WooCommerce Cart Cache Exclusions",
+      "reference": "WP Rocket 3.16.1 / LSCache",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-095": {
+      "id": "APEX-095",
+      "category": "Caching",
+      "description": "REST API Endpoint Output Cache",
+      "reference": "LSCache 6.2.0.1",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-096": {
+      "id": "APEX-096",
+      "category": "Caching",
+      "description": "Instant Hover / Click Preloader",
+      "reference": "LSCache 6.2.0.1 / Flying Pages",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-097": {
+      "id": "APEX-097",
+      "category": "Caching",
+      "description": "Advanced Cache Bypass Rules",
+      "reference": "WP Rocket 3.16.1 / LSCache",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-098": {
+      "id": "APEX-098",
+      "category": "Caching",
+      "description": "Cache Warm-up Concurrency Limiter",
+      "reference": "WP Rocket 3.16.1",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-099": {
+      "id": "APEX-099",
+      "category": "Asset Optimization",
+      "description": "CSS Minification Engine",
+      "reference": "WP Rocket 3.16.1 / LSCache",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-100": {
+      "id": "APEX-100",
+      "category": "Asset Optimization",
+      "description": "JS Minification Engine",
+      "reference": "WP Rocket 3.16.1 / LSCache",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-101": {
+      "id": "APEX-101",
+      "category": "Asset Optimization",
+      "description": "CSS File Combination & Bundle",
+      "reference": "WP Rocket 3.16.1 / LSCache",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-102": {
+      "id": "APEX-102",
+      "category": "Asset Optimization",
+      "description": "JS File Combination & Bundle",
+      "reference": "WP Rocket 3.16.1 / LSCache",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-103": {
+      "id": "APEX-103",
+      "category": "Asset Optimization",
+      "description": "Critical CSS Local Extraction",
+      "reference": "WP Rocket 3.16.1 / LSCache",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-104": {
+      "id": "APEX-104",
+      "category": "Asset Optimization",
+      "description": "Unused CSS (RUCSS) Local Cleaner",
+      "reference": "WP Rocket 3.16.1 / LSCache",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-105": {
+      "id": "APEX-105",
+      "category": "Asset Optimization",
+      "description": "Load JavaScript Deferred",
+      "reference": "WP Rocket 3.16.1 / LSCache",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-106": {
+      "id": "APEX-106",
+      "category": "Asset Optimization",
+      "description": "Delay JS Execution on Interaction",
+      "reference": "WP Rocket 3.16.1 / LSCache",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-107": {
+      "id": "APEX-107",
+      "category": "Asset Optimization",
+      "description": "Script & Style Exclusion Regex",
+      "reference": "WP Rocket 3.16.1 / LSCache",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-108": {
+      "id": "APEX-108",
+      "category": "Asset Optimization",
+      "description": "Safe Mode / Rollback on Script Error",
+      "reference": "WP Rocket 3.16.1",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-109": {
+      "id": "APEX-109",
+      "category": "Asset Optimization",
+      "description": "Local Google Fonts Hosting",
+      "reference": "LSCache 6.2.0.1 / WP Rocket",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-110": {
+      "id": "APEX-110",
+      "category": "Asset Optimization",
+      "description": "Font-Display: Swap Injector",
+      "reference": "WP Rocket 3.16.1 / LSCache",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-111": {
+      "id": "APEX-111",
+      "category": "Asset Optimization",
+      "description": "Local Gravatar Avatar Caching",
+      "reference": "LSCache 6.2.0.1",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-112": {
+      "id": "APEX-112",
+      "category": "Asset Optimization",
+      "description": "HTML Output Minification",
+      "reference": "LSCache 6.2.0.1 / WP Rocket",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-113": {
+      "id": "APEX-113",
+      "category": "Asset Optimization",
+      "description": "DNS Prefetch & Preconnect Inserter",
+      "reference": "WP Rocket 3.16.1",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-114": {
+      "id": "APEX-114",
+      "category": "Asset Optimization",
+      "description": "Strip WordPress Core Emojis",
+      "reference": "WP Rocket 3.16.1 / LSCache",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-115": {
+      "id": "APEX-115",
+      "category": "Asset Optimization",
+      "description": "Strip WordPress Core OEmbeds",
+      "reference": "WP Rocket 3.16.1 / LSCache",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-116": {
+      "id": "APEX-116",
+      "category": "Asset Optimization",
+      "description": "Heartbeat Frequency Control",
+      "reference": "WP Rocket 3.16.1 / LSCache",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-117": {
+      "id": "APEX-117",
+      "category": "Media Optimization",
+      "description": "Local GD/Imagick WebP Converter",
+      "reference": "LSCache 6.2.0.1 / ShortPixel",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-118": {
+      "id": "APEX-118",
+      "category": "Media Optimization",
+      "description": "Local GD/Imagick AVIF Converter",
+      "reference": "LSCache 6.2.0.1",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-119": {
+      "id": "APEX-119",
+      "category": "Media Optimization",
+      "description": "`<picture>` Tag HTML Rewriter",
+      "reference": "WP Rocket 3.16.1 / LSCache",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-120": {
+      "id": "APEX-120",
+      "category": "Media Optimization",
+      "description": "Bulk Image Optimization Queue",
+      "reference": "LSCache 6.2.0.1",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-121": {
+      "id": "APEX-121",
+      "category": "Media Optimization",
+      "description": "Auto-Optimize on Media Upload",
+      "reference": "LSCache 6.2.0.1 / Imagify",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-122": {
+      "id": "APEX-122",
+      "category": "Media Optimization",
+      "description": "Add Missing `width` & `height`",
+      "reference": "WP Rocket 3.16.1",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-123": {
+      "id": "APEX-123",
+      "category": "Media Optimization",
+      "description": "LCP Featured Image Preload (`fetchpriority`)",
+      "reference": "WP Rocket 3.16.1 / LSCache",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-124": {
+      "id": "APEX-124",
+      "category": "Media Optimization",
+      "description": "Original Image Backup & Restore",
+      "reference": "LSCache 6.2.0.1",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-125": {
+      "id": "APEX-125",
+      "category": "Media Optimization",
+      "description": "Quality Lossy/Lossless Selector",
+      "reference": "LSCache 6.2.0.1",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-126": {
+      "id": "APEX-126",
+      "category": "Media Optimization",
+      "description": "Strip EXIF Image Metadata",
+      "reference": "LSCache 6.2.0.1",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-127": {
+      "id": "APEX-127",
+      "category": "Media Optimization",
+      "description": "Image History & Savings Tracker",
+      "reference": "LSCache 6.2.0.1",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-128": {
+      "id": "APEX-128",
+      "category": "Media Optimization",
+      "description": "SVG Upload Sanitization",
+      "reference": "SEOPress 7.8.1",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-129": {
+      "id": "APEX-129",
+      "category": "Media Optimization",
+      "description": "Resize Large Image Threshold",
+      "reference": "WP Core 5.3+ / LSCache",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-130": {
+      "id": "APEX-130",
+      "category": "Media Optimization",
+      "description": "Cloud QUIC.cloud Image Converter",
+      "reference": "LSCache 6.2.0.1",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-131": {
+      "id": "APEX-131",
+      "category": "Lazy Loading",
+      "description": "Native & JS Fallback Image LazyLoad",
+      "reference": "WP Rocket 3.16.1 / LSCache",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-132": {
+      "id": "APEX-132",
+      "category": "Lazy Loading",
+      "description": "LazyLoad Iframes & Video Players",
+      "reference": "WP Rocket 3.16.1 / LSCache",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-133": {
+      "id": "APEX-133",
+      "category": "Lazy Loading",
+      "description": "YouTube Preview Thumbnail Mockup",
+      "reference": "WP Rocket 3.16.1",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-134": {
+      "id": "APEX-134",
+      "category": "Lazy Loading",
+      "description": "Inline SVG Aspect-Ratio Placeholder",
+      "reference": "LSCache 6.2.0.1",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-135": {
+      "id": "APEX-135",
+      "category": "Lazy Loading",
+      "description": "LazyLoad CSS Background Images",
+      "reference": "WP Rocket 3.16.1",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-136": {
+      "id": "APEX-136",
+      "category": "Lazy Loading",
+      "description": "Exclude First N Images from LazyLoad",
+      "reference": "WP Rocket 3.16.1 / LSCache",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-137": {
+      "id": "APEX-137",
+      "category": "Lazy Loading",
+      "description": "Custom Class/Attribute Lazy Exclude",
+      "reference": "WP Rocket 3.16.1",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-138": {
+      "id": "APEX-138",
+      "category": "Lazy Loading",
+      "description": "LQIP Low Quality Base64 Generator",
+      "reference": "LSCache 6.2.0.1 / QUIC.cloud",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-139": {
+      "id": "APEX-139",
+      "category": "Database",
+      "description": "Post Revisions Cleanup",
+      "reference": "WP Rocket 3.16.1 / LSCache",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-140": {
+      "id": "APEX-140",
+      "category": "Database",
+      "description": "Auto-Drafts & Trashed Posts Cleanup",
+      "reference": "WP Rocket 3.16.1 / LSCache",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-141": {
+      "id": "APEX-141",
+      "category": "Database",
+      "description": "Spam & Trashed Comments Cleanup",
+      "reference": "WP Rocket 3.16.1 / LSCache",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-142": {
+      "id": "APEX-142",
+      "category": "Database",
+      "description": "Expired Transients SQL Cleanup",
+      "reference": "WP Rocket 3.16.1 / LSCache",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-143": {
+      "id": "APEX-143",
+      "category": "Database",
+      "description": "All Transients Bulk Cleanup",
+      "reference": "WP Rocket 3.16.1 / LSCache",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-144": {
+      "id": "APEX-144",
+      "category": "Database",
+      "description": "InnoDB / MyISAM `OPTIMIZE TABLE`",
+      "reference": "WP Rocket 3.16.1 / LSCache",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-145": {
+      "id": "APEX-145",
+      "category": "Database",
+      "description": "Trackbacks & Pingbacks Cleanup",
+      "reference": "LSCache 6.2.0.1",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-146": {
+      "id": "APEX-146",
+      "category": "Database",
+      "description": "MyISAM to InnoDB Engine Converter",
+      "reference": "LSCache 6.2.0.1",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-147": {
+      "id": "APEX-147",
+      "category": "Database",
+      "description": "Automated Scheduled Cron DB Clean",
+      "reference": "WP Rocket 3.16.1",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-148": {
+      "id": "APEX-148",
+      "category": "Database",
+      "description": "Database Dry-Run Cleanup Preview",
+      "reference": "Advanced DB Cleaner",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-149": {
+      "id": "APEX-149",
+      "category": "Server Integration",
+      "description": "Apache `.htaccess` Expiration Rules",
+      "reference": "WP Rocket 3.16.1 / LSCache",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/Core/Environment/Server/ApacheAdapter.php"
+      ],
+      "matched_tests": [
+        "ServerAdapterTest.php"
+      ],
+      "evidence": "Class/Method writeHtaccessRules in ApacheAdapter.php"
+    },
+    "APEX-150": {
+      "id": "APEX-150",
+      "category": "Server Integration",
+      "description": "Nginx Direct Cache `try_files` Config",
+      "reference": "Nginx FastCGI Cache",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/Core/Environment/Server/NginxAdapter.php"
+      ],
+      "matched_tests": [
+        "ServerAdapterTest.php"
+      ],
+      "evidence": "Class/Method generateConfigSnippet in NginxAdapter.php"
+    },
+    "APEX-151": {
+      "id": "APEX-151",
+      "category": "Server Integration",
+      "description": "LiteSpeed `X-LiteSpeed-Cache-Control`",
+      "reference": "LSCache 6.2.0.1",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/Core/Environment/Server/LiteSpeedAdapter.php"
+      ],
+      "matched_tests": [
+        "ServerAdapterTest.php"
+      ],
+      "evidence": "Class/Method setCacheHeaders in LiteSpeedAdapter.php"
+    },
+    "APEX-152": {
+      "id": "APEX-152",
+      "category": "Server Integration",
+      "description": "LiteSpeed Tagged Cache Purge Header",
+      "reference": "LSCache 6.2.0.1",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/Core/Environment/Server/OpenLiteSpeedAdapter.php"
+      ],
+      "matched_tests": [
+        "ServerAdapterTest.php"
+      ],
+      "evidence": "Class/Method purgeTags in OpenLiteSpeedAdapter.php"
+    },
+    "APEX-153": {
+      "id": "APEX-153",
+      "category": "Server Integration",
+      "description": "Varnish Reverse Proxy HTTP `PURGE`",
+      "reference": "WP Rocket 3.16.1",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-154": {
+      "id": "APEX-154",
+      "category": "Server Integration",
+      "description": "Cloudflare Zone Cache API Purge",
+      "reference": "WP Rocket 3.16.1 / LSCache",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-155": {
+      "id": "APEX-155",
+      "category": "Server Integration",
+      "description": "Redis Persistent Object Cache Driver",
+      "reference": "LSCache 6.2.0.1 / Redis Cache",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-156": {
+      "id": "APEX-156",
+      "category": "Server Integration",
+      "description": "Memcached Object Cache Driver",
+      "reference": "LSCache 6.2.0.1 / Memcached",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-157": {
+      "id": "APEX-157",
+      "category": "Server Integration",
+      "description": "CDN Hostname URL Rewriting",
+      "reference": "WP Rocket 3.16.1 / LSCache",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-158": {
+      "id": "APEX-158",
+      "category": "Server Integration",
+      "description": "ESI Edge Fragment Staging (LSWS)",
+      "reference": "LSCache 6.2.0.1",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-159": {
+      "id": "APEX-159",
+      "category": "Analytics",
+      "description": "Google Analytics 4 (GA4) Tag Injector",
+      "reference": "SEOPress 7.8.1 / RM 1.0.220",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-160": {
+      "id": "APEX-160",
+      "category": "Analytics",
+      "description": "Local GA4 `gtag.js` Script Host",
+      "reference": "SEOPress Pro 7.8.1",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-161": {
+      "id": "APEX-161",
+      "category": "Analytics",
+      "description": "IP Anonymization & GDPR Cookie Guard",
+      "reference": "SEOPress 7.8.1",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-162": {
+      "id": "APEX-162",
+      "category": "Analytics",
+      "description": "Google Search Console OAuth2 Client",
+      "reference": "RM Pro 3.0.64",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-163": {
+      "id": "APEX-163",
+      "category": "Analytics",
+      "description": "Search Console Keyword Rank Tracker",
+      "reference": "RM Pro 3.0.64",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-164": {
+      "id": "APEX-164",
+      "category": "Analytics",
+      "description": "GSC URL Inspection API Integration",
+      "reference": "SEOPress Pro 7.8.1",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-165": {
+      "id": "APEX-165",
+      "category": "Analytics",
+      "description": "Search Console Impressions/Clicks DB",
+      "reference": "RM Pro 3.0.64",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-166": {
+      "id": "APEX-166",
+      "category": "Analytics",
+      "description": "Top Winning / Losing Keywords Matrix",
+      "reference": "RM Pro 3.0.64",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-167": {
+      "id": "APEX-167",
+      "category": "Analytics",
+      "description": "Google Tag Manager (GTM) Container",
+      "reference": "SEOPress 7.8.1",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-168": {
+      "id": "APEX-168",
+      "category": "Analytics",
+      "description": "Matomo / Piwik Self-Hosted Analytics",
+      "reference": "SEOPress 7.8.1",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-169": {
+      "id": "APEX-169",
+      "category": "REST API",
+      "description": "REST Settings Controller",
+      "reference": "Yoast 22.8 / RM 1.0.220",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/API/Controllers/SettingsRestController.php"
+      ],
+      "matched_tests": [
+        "RestSubsystemTest.php"
+      ],
+      "evidence": "Class/Method getSettings in SettingsRestController.php"
+    },
+    "APEX-170": {
+      "id": "APEX-170",
+      "category": "REST API",
+      "description": "REST Meta Reader & Mutator Endpoint",
+      "reference": "Yoast 22.8 / AIOSEO Pro",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/API/Controllers/MetaRestController.php"
+      ],
+      "matched_tests": [
+        "RestSubsystemTest.php"
+      ],
+      "evidence": "Class/Method getMeta in MetaRestController.php"
+    },
+    "APEX-171": {
+      "id": "APEX-171",
+      "category": "REST API",
+      "description": "REST Dynamic Schema CRUD Endpoint",
+      "reference": "RM Pro 3.0.64",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/API/Controllers/SchemaRestController.php"
+      ],
+      "matched_tests": [
+        "RestSubsystemTest.php"
+      ],
+      "evidence": "Class/Method getSchema in SchemaRestController.php"
+    },
+    "APEX-172": {
+      "id": "APEX-172",
+      "category": "REST API",
+      "description": "REST Redirect Management Endpoint",
+      "reference": "Redirection 5.4.2 / RM 1.0.220",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/API/Controllers/RedirectsRestController.php"
+      ],
+      "matched_tests": [
+        "RestSubsystemTest.php"
+      ],
+      "evidence": "Class/Method getRedirects in RedirectsRestController.php"
+    },
+    "APEX-173": {
+      "id": "APEX-173",
+      "category": "REST API",
+      "description": "REST 404 Monitor Log Endpoint",
+      "reference": "Redirection 5.4.2 / RM 1.0.220",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/API/Controllers/NotFoundRestController.php"
+      ],
+      "matched_tests": [
+        "RestSubsystemTest.php"
+      ],
+      "evidence": "Class/Method get404Logs in NotFoundRestController.php"
+    },
+    "APEX-174": {
+      "id": "APEX-174",
+      "category": "REST API",
+      "description": "REST Link Suggestions Query Endpoint",
+      "reference": "AIOSEO Pro 4.6.4",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/API/Controllers/LinksRestController.php"
+      ],
+      "matched_tests": [
+        "RestSubsystemTest.php"
+      ],
+      "evidence": "Class/Method getLinkSuggestions in LinksRestController.php"
+    },
+    "APEX-175": {
+      "id": "APEX-175",
+      "category": "REST API",
+      "description": "Headless Complete SEO Meta & JSON-LD",
+      "reference": "AIOSEO Pro 4.6.4 / Yoast 22.8",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/API/Controllers/MetaRestController.php"
+      ],
+      "matched_tests": [
+        "RestSubsystemTest.php"
+      ],
+      "evidence": "Class/Method getHeadlessMeta in MetaRestController.php"
+    },
+    "APEX-176": {
+      "id": "APEX-176",
+      "category": "REST API",
+      "description": "REST Cache Purge & Preload Trigger",
+      "reference": "WP Rocket 3.16.1 / LSCache",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/API/Controllers/CacheRestController.php"
+      ],
+      "matched_tests": [
+        "RestSubsystemTest.php"
+      ],
+      "evidence": "Class/Method purgeCache in CacheRestController.php"
+    },
+    "APEX-177": {
+      "id": "APEX-177",
+      "category": "REST API",
+      "description": "REST Media Image Optimize Action",
+      "reference": "LSCache 6.2.0.1",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/API/Controllers/MediaRestController.php"
+      ],
+      "matched_tests": [
+        "RestSubsystemTest.php"
+      ],
+      "evidence": "Class/Method optimizeImage in MediaRestController.php"
+    },
+    "APEX-178": {
+      "id": "APEX-178",
+      "category": "REST API",
+      "description": "REST Migration Batch Worker Endpoint",
+      "reference": "Yoast 22.8 / RM 1.0.220",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/API/Controllers/MigrationRestController.php"
+      ],
+      "matched_tests": [
+        "RestSubsystemTest.php"
+      ],
+      "evidence": "Class/Method runMigrationBatch in MigrationRestController.php"
+    },
+    "APEX-179": {
+      "id": "APEX-179",
+      "category": "REST API",
+      "description": "REST Analytics Overview API",
+      "reference": "RM Pro 3.0.64",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/API/Controllers/AnalyticsRestController.php"
+      ],
+      "matched_tests": [
+        "RestSubsystemTest.php"
+      ],
+      "evidence": "Class/Method getOverview in AnalyticsRestController.php"
+    },
+    "APEX-180": {
+      "id": "APEX-180",
+      "category": "REST API",
+      "description": "REST Rank Tracker Query API",
+      "reference": "RM Pro 3.0.64",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/API/Controllers/AnalyticsRestController.php"
+      ],
+      "matched_tests": [
+        "RestSubsystemTest.php"
+      ],
+      "evidence": "Class/Method getRankTracker in AnalyticsRestController.php"
+    },
+    "APEX-181": {
+      "id": "APEX-181",
+      "category": "WP-CLI",
+      "description": "`wp apex cache purge` Subcommand",
+      "reference": "WP Rocket 3.16.1 / LSCache",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/CLI/CacheCommand.php"
+      ],
+      "matched_tests": [
+        "CliSubsystemTest.php"
+      ],
+      "evidence": "Class/Method purge in CacheCommand.php"
+    },
+    "APEX-182": {
+      "id": "APEX-182",
+      "category": "WP-CLI",
+      "description": "`wp apex cache preload` Subcommand",
+      "reference": "WP Rocket 3.16.1 / LSCache",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/CLI/CacheCommand.php"
+      ],
+      "matched_tests": [
+        "CliSubsystemTest.php"
+      ],
+      "evidence": "Class/Method preload in CacheCommand.php"
+    },
+    "APEX-183": {
+      "id": "APEX-183",
+      "category": "WP-CLI",
+      "description": "`wp apex index reindex` Subcommand",
+      "reference": "Yoast 22.8 / RM 1.0.220",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/CLI/IndexCommand.php"
+      ],
+      "matched_tests": [
+        "CliSubsystemTest.php"
+      ],
+      "evidence": "Class/Method reindex in IndexCommand.php"
+    },
+    "APEX-184": {
+      "id": "APEX-184",
+      "category": "WP-CLI",
+      "description": "`wp apex media optimize` Subcommand",
+      "reference": "LSCache 6.2.0.1",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/CLI/MediaCommand.php"
+      ],
+      "matched_tests": [
+        "CliSubsystemTest.php"
+      ],
+      "evidence": "Class/Method optimize in MediaCommand.php"
+    },
+    "APEX-185": {
+      "id": "APEX-185",
+      "category": "WP-CLI",
+      "description": "`wp apex redirect add` Subcommand",
+      "reference": "Redirection 5.4.2 / RM 1.0.220",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/CLI/RedirectCommand.php"
+      ],
+      "matched_tests": [
+        "CliSubsystemTest.php"
+      ],
+      "evidence": "Class/Method add in RedirectCommand.php"
+    },
+    "APEX-186": {
+      "id": "APEX-186",
+      "category": "WP-CLI",
+      "description": "`wp apex redirect list` Subcommand",
+      "reference": "Redirection 5.4.2",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/CLI/RedirectCommand.php"
+      ],
+      "matched_tests": [
+        "CliSubsystemTest.php"
+      ],
+      "evidence": "Class/Method list in RedirectCommand.php"
+    },
+    "APEX-187": {
+      "id": "APEX-187",
+      "category": "WP-CLI",
+      "description": "`wp apex db clean` Subcommand",
+      "reference": "WP Rocket 3.16.1 / LSCache",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/CLI/DatabaseCommand.php"
+      ],
+      "matched_tests": [
+        "CliSubsystemTest.php"
+      ],
+      "evidence": "Class/Method clean in DatabaseCommand.php"
+    },
+    "APEX-188": {
+      "id": "APEX-188",
+      "category": "WP-CLI",
+      "description": "`wp apex migrate run` Subcommand",
+      "reference": "Yoast 22.8 / RM 1.0.220",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/CLI/MigrateCommand.php"
+      ],
+      "matched_tests": [
+        "CliSubsystemTest.php"
+      ],
+      "evidence": "Class/Method run in MigrateCommand.php"
+    },
+    "APEX-189": {
+      "id": "APEX-189",
+      "category": "WP-CLI",
+      "description": "`wp apex sitemap rebuild` Subcommand",
+      "reference": "Yoast 22.8 / RM 1.0.220",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/CLI/SitemapCommand.php"
+      ],
+      "matched_tests": [
+        "CliSubsystemTest.php"
+      ],
+      "evidence": "Class/Method rebuild in SitemapCommand.php"
+    },
+    "APEX-190": {
+      "id": "APEX-190",
+      "category": "WP-CLI",
+      "description": "`wp apex doctor` Diagnostic Command",
+      "reference": "Yoast 22.8 / LSCache",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/CLI/DoctorCommand.php"
+      ],
+      "matched_tests": [
+        "CliSubsystemTest.php"
+      ],
+      "evidence": "Class/Method status in DoctorCommand.php"
+    },
+    "APEX-191": {
+      "id": "APEX-191",
+      "category": "Core Architecture",
+      "description": "PSR-11 Dependency Injection Container",
+      "reference": "Symfony DI / Yoast 22.8",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/Core/Bootstrap/Plugin.php"
+      ],
+      "matched_tests": [
+        "BootstrapTest.php"
+      ],
+      "evidence": "Class/Method boot in Plugin.php"
+    },
+    "APEX-192": {
+      "id": "APEX-192",
+      "category": "Core Architecture",
+      "description": "Multi-Source Migration Engine",
+      "reference": "Yoast 22.8 / RM 1.0.220",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/Core/Database/MigrationRunner.php"
+      ],
+      "matched_tests": [
+        "DatabaseMigrationTest.php"
+      ],
+      "evidence": "Class/Method runMigrations in MigrationRunner.php"
+    },
+    "APEX-193": {
+      "id": "APEX-193",
+      "category": "Core Architecture",
+      "description": "Active Plugin Conflict Detector",
+      "reference": "WP Rocket 3.16.1 / LSCache",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-194": {
+      "id": "APEX-194",
+      "category": "Core Architecture",
+      "description": "Multisite Network Management",
+      "reference": "Yoast 22.8 / RM 1.0.220",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/Core/Multisite/MultisiteManager.php"
+      ],
+      "matched_tests": [
+        "MultisiteManagerTest.php"
+      ],
+      "evidence": "Class/Method switchBlog in MultisiteManager.php"
+    },
+    "APEX-195": {
+      "id": "APEX-195",
+      "category": "Core Architecture",
+      "description": "White Label Admin Interface",
+      "reference": "SEOPress Pro 7.8.1",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-196": {
+      "id": "APEX-196",
+      "category": "Core Architecture",
+      "description": "Settings Backup, Import & Export",
+      "reference": "Yoast 22.8 / RM 1.0.220",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-197": {
+      "id": "APEX-197",
+      "category": "Core Architecture",
+      "description": "Action Scheduler Background Queue",
+      "reference": "WooCommerce / ActionScheduler",
+      "status": "NOT_YET_IMPLEMENTED",
+      "matched_files": [],
+      "matched_tests": [],
+      "evidence": ""
+    },
+    "APEX-198": {
+      "id": "APEX-198",
+      "category": "Core Architecture",
+      "description": "Diagnostic System Health Reporter",
+      "reference": "LSCache 6.2.0.1 / Yoast 22.8",
+      "status": "IMPLEMENTED_VERIFIED",
+      "matched_files": [
+        "wp-content/plugins/apexseo/src/Core/Environment/EnvironmentDetector.php"
+      ],
+      "matched_tests": [
+        "EnvironmentDetectorTest.php"
+      ],
+      "evidence": "Class/Method detectAll in EnvironmentDetector.php"
+    }
+  }
+}

@@ -89,7 +89,7 @@ class NotFoundRestController extends AbstractRestController {
         if ($id > 0) {
             $this->db->delete($table, ['id' => $id]);
         } else {
-            $this->db->query("TRUNCATE TABLE {$table}");
+            $this->db->query("DELETE FROM {$table}");
         }
 
         return $this->success([
