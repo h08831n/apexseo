@@ -43,7 +43,7 @@ class RestSubsystemTest extends TestCase {
         $this->indexableBuilder = new IndexableBuilder();
         $this->schemaRegistry   = new SchemaRegistry();
         $this->schemaValidator  = new SchemaValidator();
-        $this->cacheEngine      = new CacheEngine('memory');
+        $this->cacheEngine      = null;
         $this->imageOptimizer   = new ImageOptimizer();
 
         $this->router = new RestApiRouter(

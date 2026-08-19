@@ -40,6 +40,17 @@ class IndexableRepository {
     }
 
     /**
+     * Alias for findByObject.
+     *
+     * @param string $objectType
+     * @param int $objectId
+     * @return Indexable|null
+     */
+    public function find($objectType, $objectId) {
+        return $this->findByObject($objectType, $objectId);
+    }
+
+    /**
      * Find an indexable record by its object type and ID.
      *
      * @param string $objectType e.g. 'post', 'term', 'user'

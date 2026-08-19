@@ -83,7 +83,7 @@ class PerformanceSubsystemTest extends TestCase {
     public function testStaticFileWriterAndSmartPurge() {
         $tempDir = sys_get_temp_dir() . '/apex_test_cache_' . uniqid();
         $writer = new StaticFileWriter($tempDir);
-        $serverAdapter = new DirectServerAdapter();
+        $serverAdapter = new \ApexSEO\Core\Environment\Server\GenericServerAdapter();
         $purge = new SmartPurge($writer, $serverAdapter);
 
         $htmlContent = '<html><body>Cached Page</body></html>';

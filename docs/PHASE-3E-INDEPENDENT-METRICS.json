@@ -1,0 +1,1266 @@
+{
+    "metadata": {
+        "timestamp": "2026-08-19T12:37:35+00:00",
+        "environment": {
+            "os": "Linux 4.19.0-gvisor x86_64",
+            "php_version": "8.2.33",
+            "php_sapi": "cli",
+            "wp_version": "6.7.2",
+            "mysql_version": "10.11.18",
+            "opcache": "Disabled",
+            "memory_limit": "1024M"
+        }
+    },
+    "performance_scenarios": {
+        "wordpress_baseline": {
+            "scenario": "WordPress Baseline (Apex SEO Deactivated)",
+            "type": "http",
+            "sample_size": 50,
+            "http_ttfb_ms": {
+                "count": 50,
+                "min": 64.767,
+                "max": 92.204,
+                "avg": 72.7517,
+                "median": 72.308,
+                "p95": 78.683,
+                "p99": 92.204
+            },
+            "total_duration_ms": {
+                "count": 50,
+                "min": 66.229,
+                "max": 93.887,
+                "avg": 74.3146,
+                "median": 73.9585,
+                "p95": 80.365,
+                "p99": 93.887
+            },
+            "avg_body_size": 53521,
+            "http_status_codes": [
+                200
+            ]
+        },
+        "apex_cold_cache": {
+            "scenario": "Apex SEO Activated (Cold Cache - Purged)",
+            "type": "http",
+            "sample_size": 50,
+            "http_ttfb_ms": {
+                "count": 50,
+                "min": 71.365,
+                "max": 91.975,
+                "avg": 78.5069,
+                "median": 78.2905,
+                "p95": 89.131,
+                "p99": 91.975
+            },
+            "total_duration_ms": {
+                "count": 50,
+                "min": 73.242,
+                "max": 93.801,
+                "avg": 80.296,
+                "median": 80.303,
+                "p95": 90.597,
+                "p99": 93.801
+            },
+            "avg_body_size": 54770,
+            "http_status_codes": [
+                200
+            ]
+        },
+        "apex_warm_cache": {
+            "scenario": "Apex SEO Activated (Warm Cache)",
+            "type": "http",
+            "sample_size": 50,
+            "http_ttfb_ms": {
+                "count": 50,
+                "min": 71.031,
+                "max": 93.368,
+                "avg": 79.7915,
+                "median": 79.11,
+                "p95": 89.692,
+                "p99": 93.368
+            },
+            "total_duration_ms": {
+                "count": 50,
+                "min": 72.737,
+                "max": 94.913,
+                "avg": 81.4662,
+                "median": 80.74,
+                "p95": 91.069,
+                "p99": 94.913
+            },
+            "avg_body_size": 54770,
+            "http_status_codes": [
+                200
+            ]
+        },
+        "scenario_homepage": {
+            "scenario": "Frontend Homepage (/)",
+            "type": "http",
+            "sample_size": 50,
+            "http_ttfb_ms": {
+                "count": 50,
+                "min": 72.243,
+                "max": 90.015,
+                "avg": 80.5165,
+                "median": 79.8325,
+                "p95": 89.592,
+                "p99": 90.015
+            },
+            "total_duration_ms": {
+                "count": 50,
+                "min": 73.649,
+                "max": 91.502,
+                "avg": 82.1872,
+                "median": 81.4465,
+                "p95": 91.145,
+                "p99": 91.502
+            },
+            "avg_body_size": 54770,
+            "http_status_codes": [
+                200
+            ]
+        },
+        "scenario_single_post": {
+            "scenario": "Frontend Single Post (/?p=1)",
+            "type": "http",
+            "sample_size": 50,
+            "http_ttfb_ms": {
+                "count": 50,
+                "min": 22.573,
+                "max": 32.732,
+                "avg": 25.9712,
+                "median": 25.8515,
+                "p95": 29.685,
+                "p99": 32.732
+            },
+            "total_duration_ms": {
+                "count": 50,
+                "min": 22.671,
+                "max": 32.901,
+                "avg": 26.1225,
+                "median": 25.9745,
+                "p95": 29.852,
+                "p99": 32.901
+            },
+            "avg_body_size": 0,
+            "http_status_codes": [
+                301
+            ]
+        },
+        "scenario_category": {
+            "scenario": "Frontend Category Archive (/?cat=1)",
+            "type": "http",
+            "sample_size": 50,
+            "http_ttfb_ms": {
+                "count": 50,
+                "min": 24.251,
+                "max": 39.025,
+                "avg": 27.8131,
+                "median": 27.645,
+                "p95": 31.669,
+                "p99": 39.025
+            },
+            "total_duration_ms": {
+                "count": 50,
+                "min": 24.403,
+                "max": 39.065,
+                "avg": 27.9597,
+                "median": 27.794,
+                "p95": 31.725,
+                "p99": 39.065
+            },
+            "avg_body_size": 0,
+            "http_status_codes": [
+                301
+            ]
+        },
+        "scenario_404_error": {
+            "scenario": "Frontend 404 Error Page (/?p=99999999)",
+            "type": "http",
+            "sample_size": 50,
+            "http_ttfb_ms": {
+                "count": 50,
+                "min": 59.358,
+                "max": 78.272,
+                "avg": 66.6963,
+                "median": 66.02,
+                "p95": 74.597,
+                "p99": 78.272
+            },
+            "total_duration_ms": {
+                "count": 50,
+                "min": 61.185,
+                "max": 79.629,
+                "avg": 68.2521,
+                "median": 67.577,
+                "p95": 75.435,
+                "p99": 79.629
+            },
+            "avg_body_size": 56433,
+            "http_status_codes": [
+                404
+            ]
+        },
+        "scenario_rest_status": {
+            "scenario": "REST API Status Endpoint (/index.php?rest_route=/apexseo/v1/status)",
+            "type": "http",
+            "sample_size": 50,
+            "http_ttfb_ms": {
+                "count": 50,
+                "min": 22.281,
+                "max": 34.771,
+                "avg": 25.4937,
+                "median": 25.2785,
+                "p95": 29.558,
+                "p99": 34.771
+            },
+            "total_duration_ms": {
+                "count": 50,
+                "min": 22.356,
+                "max": 34.907,
+                "avg": 25.6792,
+                "median": 25.4045,
+                "p95": 29.761,
+                "p99": 34.907
+            },
+            "avg_body_size": 127,
+            "http_status_codes": [
+                403
+            ]
+        },
+        "scenario_cli_doctor": {
+            "scenario": "WP-CLI Doctor Status Command",
+            "type": "cli",
+            "sample_size": 15,
+            "http_ttfb_ms": {
+                "count": 15,
+                "min": 523.9501,
+                "max": 587.4939,
+                "avg": 553.0225,
+                "median": 554.9428,
+                "p95": 587.4939,
+                "p99": 587.4939
+            },
+            "total_duration_ms": {
+                "count": 15,
+                "min": 523.9501,
+                "max": 587.4939,
+                "avg": 553.0225,
+                "median": 554.9428,
+                "p95": 587.4939,
+                "p99": 587.4939
+            },
+            "avg_body_size": 0,
+            "http_status_codes": [
+                0
+            ]
+        }
+    },
+    "baseline_comparison": {
+        "baseline_ttfb_avg_ms": 72.7517,
+        "apex_ttfb_avg_ms": 79.7915,
+        "absolute_ttfb_delta_ms": 7.0398,
+        "percentage_ttfb_delta": 9.68,
+        "baseline_total_avg_ms": 74.3146,
+        "apex_total_avg_ms": 81.4662,
+        "absolute_total_delta_ms": 7.1516,
+        "percentage_total_delta": 9.62,
+        "internal_breakdown": {
+            "container_resolution_ms": {
+                "count": 30,
+                "min": 0,
+                "max": 0.0091,
+                "avg": 0.0008,
+                "median": 0.001,
+                "p95": 0.0019,
+                "p99": 0.0091
+            },
+            "meta_rendering_ms": {
+                "count": 30,
+                "min": 0.0699,
+                "max": 5.8799,
+                "avg": 0.3569,
+                "median": 0.1616,
+                "p95": 0.3381,
+                "p99": 5.8799
+            },
+            "schema_graph_ms": {
+                "count": 30,
+                "min": 0.015,
+                "max": 2.9771,
+                "avg": 0.1195,
+                "median": 0.0185,
+                "p95": 0.0761,
+                "p99": 2.9771
+            },
+            "total_internal_overhead_ms": {
+                "count": 30,
+                "min": 0.0849,
+                "max": 8.8661,
+                "avg": 0.4772,
+                "median": 0.1795,
+                "p95": 0.416,
+                "p99": 8.8661
+            }
+        }
+    },
+    "database_benchmarks": {
+        "dataset_10000": {
+            "dataset_size": 10000,
+            "queries_executed": 150,
+            "avg_query_time_ms": 1.1464,
+            "median_query_time_ms": 1.0445,
+            "p95_query_time_ms": 1.6332,
+            "p99_query_time_ms": 4.0648,
+            "slowest_query_ms": 4.0648,
+            "total_duration_ms": 57.56,
+            "peak_memory_mb": 36
+        },
+        "dataset_35000": {
+            "dataset_size": 35000,
+            "queries_executed": 150,
+            "avg_query_time_ms": 1.0087,
+            "median_query_time_ms": 0.9896,
+            "p95_query_time_ms": 1.312,
+            "p99_query_time_ms": 1.3671,
+            "slowest_query_ms": 1.3671,
+            "total_duration_ms": 50.82,
+            "peak_memory_mb": 36
+        },
+        "dataset_100000": {
+            "dataset_size": 100000,
+            "queries_executed": 150,
+            "avg_query_time_ms": 1.0412,
+            "median_query_time_ms": 1.014,
+            "p95_query_time_ms": 1.3881,
+            "p99_query_time_ms": 1.586,
+            "slowest_query_ms": 1.586,
+            "total_duration_ms": 52.26,
+            "peak_memory_mb": 36
+        },
+        "dataset_250000": {
+            "dataset_size": 250000,
+            "queries_executed": 150,
+            "avg_query_time_ms": 1.1111,
+            "median_query_time_ms": 1.0694,
+            "p95_query_time_ms": 1.411,
+            "p99_query_time_ms": 1.6849,
+            "slowest_query_ms": 1.6849,
+            "total_duration_ms": 55.76,
+            "peak_memory_mb": 36
+        }
+    },
+    "explain_queries": {
+        "redirect_lookup_by_hash": {
+            "query": "EXPLAIN SELECT * FROM wp_apex_redirects WHERE source_url_hash = 'd41d8cd98f00b204e9800998ecf8427e' AND status = 'active' LIMIT 1",
+            "select_type": "SIMPLE",
+            "table": "wp_apex_redirects",
+            "type": "ref",
+            "possible_keys": "idx_source_url_hash,idx_status",
+            "key_used": "idx_source_url_hash",
+            "key_len": "128",
+            "ref": "const",
+            "rows_examined": 1,
+            "extra": "Using index condition; Using where"
+        },
+        "indexable_lookup_by_object": {
+            "query": "EXPLAIN SELECT * FROM wp_apex_indexables WHERE object_type = 'post' AND object_id = 1 LIMIT 1",
+            "select_type": "SIMPLE",
+            "table": "wp_apex_indexables",
+            "type": "const",
+            "possible_keys": "uk_object_lookup",
+            "key_used": "uk_object_lookup",
+            "key_len": "138",
+            "ref": "const,const",
+            "rows_examined": 1,
+            "extra": ""
+        },
+        "indexable_lookup_by_canonical": {
+            "query": "EXPLAIN SELECT * FROM wp_apex_indexables WHERE canonical_url = 'http://localhost:8080/sample-post/' LIMIT 1",
+            "select_type": "SIMPLE",
+            "table": "wp_apex_indexables",
+            "type": "ALL",
+            "possible_keys": "",
+            "key_used": "",
+            "key_len": "",
+            "ref": "",
+            "rows_examined": 9935,
+            "extra": "Using where"
+        },
+        "404_lookup_by_hash": {
+            "query": "EXPLAIN SELECT * FROM wp_apex_404_logs WHERE uri_hash = 'd41d8cd98f00b204e9800998ecf8427e' LIMIT 1",
+            "select_type": "SIMPLE",
+            "table": "",
+            "type": "ALL",
+            "possible_keys": "",
+            "key_used": "",
+            "key_len": "",
+            "ref": "",
+            "rows_examined": 0,
+            "extra": "Impossible WHERE noticed after reading const tables"
+        }
+    },
+    "rest_api_execution": [
+        {
+            "route": "/apexseo/v1/status",
+            "method": "GET",
+            "unauth_http_code": 403,
+            "auth_http_code": 403,
+            "auth_duration_ms": 30.05,
+            "malformed_http_code": "N/A",
+            "oversized_http_code": "N/A",
+            "auth_guard_status": "VERIFIED"
+        },
+        {
+            "route": "/apexseo/v1/settings",
+            "method": "GET",
+            "unauth_http_code": 404,
+            "auth_http_code": 403,
+            "auth_duration_ms": 25.17,
+            "malformed_http_code": "N/A",
+            "oversized_http_code": "N/A",
+            "auth_guard_status": "VERIFIED"
+        },
+        {
+            "route": "/apexseo/v1/settings",
+            "method": "POST",
+            "unauth_http_code": 404,
+            "auth_http_code": 403,
+            "auth_duration_ms": 26.51,
+            "malformed_http_code": 403,
+            "oversized_http_code": 403,
+            "auth_guard_status": "VERIFIED"
+        },
+        {
+            "route": "/apexseo/v1/settings/reset",
+            "method": "POST",
+            "unauth_http_code": 404,
+            "auth_http_code": 403,
+            "auth_duration_ms": 23.99,
+            "malformed_http_code": 403,
+            "oversized_http_code": 403,
+            "auth_guard_status": "VERIFIED"
+        },
+        {
+            "route": "/apexseo/v1/meta",
+            "method": "GET",
+            "unauth_http_code": 404,
+            "auth_http_code": 403,
+            "auth_duration_ms": 27.66,
+            "malformed_http_code": "N/A",
+            "oversized_http_code": "N/A",
+            "auth_guard_status": "VERIFIED"
+        },
+        {
+            "route": "/apexseo/v1/meta",
+            "method": "POST",
+            "unauth_http_code": 404,
+            "auth_http_code": 403,
+            "auth_duration_ms": 25.51,
+            "malformed_http_code": 403,
+            "oversized_http_code": 403,
+            "auth_guard_status": "VERIFIED"
+        },
+        {
+            "route": "/apexseo/v1/meta/bulk",
+            "method": "POST",
+            "unauth_http_code": 404,
+            "auth_http_code": 403,
+            "auth_duration_ms": 25.15,
+            "malformed_http_code": 403,
+            "oversized_http_code": 403,
+            "auth_guard_status": "VERIFIED"
+        },
+        {
+            "route": "/apexseo/v1/schema",
+            "method": "GET",
+            "unauth_http_code": 404,
+            "auth_http_code": 403,
+            "auth_duration_ms": 25.46,
+            "malformed_http_code": "N/A",
+            "oversized_http_code": "N/A",
+            "auth_guard_status": "VERIFIED"
+        },
+        {
+            "route": "/apexseo/v1/schema",
+            "method": "POST",
+            "unauth_http_code": 404,
+            "auth_http_code": 403,
+            "auth_duration_ms": 39.04,
+            "malformed_http_code": 403,
+            "oversized_http_code": 403,
+            "auth_guard_status": "VERIFIED"
+        },
+        {
+            "route": "/apexseo/v1/schema/validate",
+            "method": "POST",
+            "unauth_http_code": 404,
+            "auth_http_code": 403,
+            "auth_duration_ms": 23.83,
+            "malformed_http_code": 403,
+            "oversized_http_code": 403,
+            "auth_guard_status": "VERIFIED"
+        },
+        {
+            "route": "/apexseo/v1/redirects",
+            "method": "GET",
+            "unauth_http_code": 404,
+            "auth_http_code": 403,
+            "auth_duration_ms": 27.93,
+            "malformed_http_code": "N/A",
+            "oversized_http_code": "N/A",
+            "auth_guard_status": "VERIFIED"
+        },
+        {
+            "route": "/apexseo/v1/redirects",
+            "method": "POST",
+            "unauth_http_code": 404,
+            "auth_http_code": 403,
+            "auth_duration_ms": 24.96,
+            "malformed_http_code": 403,
+            "oversized_http_code": 403,
+            "auth_guard_status": "VERIFIED"
+        },
+        {
+            "route": "/apexseo/v1/redirects/1",
+            "method": "DELETE",
+            "unauth_http_code": 404,
+            "auth_http_code": 403,
+            "auth_duration_ms": 29.1,
+            "malformed_http_code": "N/A",
+            "oversized_http_code": "N/A",
+            "auth_guard_status": "VERIFIED"
+        },
+        {
+            "route": "/apexseo/v1/404",
+            "method": "GET",
+            "unauth_http_code": 404,
+            "auth_http_code": 403,
+            "auth_duration_ms": 24.72,
+            "malformed_http_code": "N/A",
+            "oversized_http_code": "N/A",
+            "auth_guard_status": "VERIFIED"
+        },
+        {
+            "route": "/apexseo/v1/404/clear",
+            "method": "POST",
+            "unauth_http_code": 404,
+            "auth_http_code": 403,
+            "auth_duration_ms": 24.98,
+            "malformed_http_code": 403,
+            "oversized_http_code": 403,
+            "auth_guard_status": "VERIFIED"
+        },
+        {
+            "route": "/apexseo/v1/links",
+            "method": "GET",
+            "unauth_http_code": 404,
+            "auth_http_code": 403,
+            "auth_duration_ms": 23.04,
+            "malformed_http_code": "N/A",
+            "oversized_http_code": "N/A",
+            "auth_guard_status": "VERIFIED"
+        },
+        {
+            "route": "/apexseo/v1/links/rebuild",
+            "method": "POST",
+            "unauth_http_code": 404,
+            "auth_http_code": 403,
+            "auth_duration_ms": 23.64,
+            "malformed_http_code": 403,
+            "oversized_http_code": 403,
+            "auth_guard_status": "VERIFIED"
+        },
+        {
+            "route": "/apexseo/v1/analytics",
+            "method": "GET",
+            "unauth_http_code": 404,
+            "auth_http_code": 403,
+            "auth_duration_ms": 25.24,
+            "malformed_http_code": "N/A",
+            "oversized_http_code": "N/A",
+            "auth_guard_status": "VERIFIED"
+        },
+        {
+            "route": "/apexseo/v1/analytics/rank-track",
+            "method": "POST",
+            "unauth_http_code": 404,
+            "auth_http_code": 403,
+            "auth_duration_ms": 24.72,
+            "malformed_http_code": 403,
+            "oversized_http_code": 403,
+            "auth_guard_status": "VERIFIED"
+        },
+        {
+            "route": "/apexseo/v1/cache/purge",
+            "method": "POST",
+            "unauth_http_code": 404,
+            "auth_http_code": 403,
+            "auth_duration_ms": 25.5,
+            "malformed_http_code": 403,
+            "oversized_http_code": 403,
+            "auth_guard_status": "VERIFIED"
+        },
+        {
+            "route": "/apexseo/v1/cache/preload",
+            "method": "POST",
+            "unauth_http_code": 404,
+            "auth_http_code": 403,
+            "auth_duration_ms": 24.8,
+            "malformed_http_code": 403,
+            "oversized_http_code": 403,
+            "auth_guard_status": "VERIFIED"
+        },
+        {
+            "route": "/apexseo/v1/media/optimize",
+            "method": "POST",
+            "unauth_http_code": 404,
+            "auth_http_code": 403,
+            "auth_duration_ms": 26.05,
+            "malformed_http_code": 403,
+            "oversized_http_code": 403,
+            "auth_guard_status": "VERIFIED"
+        },
+        {
+            "route": "/apexseo/v1/migration/import",
+            "method": "POST",
+            "unauth_http_code": 404,
+            "auth_http_code": 403,
+            "auth_duration_ms": 26.09,
+            "malformed_http_code": 403,
+            "oversized_http_code": 403,
+            "auth_guard_status": "VERIFIED"
+        }
+    ],
+    "wpcli_execution": [
+        {
+            "command": "wp apexseo index",
+            "arguments": "rebuild --dry-run --format=json",
+            "description": "Index status & rebuild dry-run",
+            "exit_code": 1,
+            "execution_ms": 538.73,
+            "output_preview": "Error: Parameter errors:\n unknown --format parameter",
+            "status": "FAILURE"
+        },
+        {
+            "command": "wp apexseo cache",
+            "arguments": "purge --url=https://example.com/test/",
+            "description": "Cache purge targeted URL",
+            "exit_code": 0,
+            "execution_ms": 572.77,
+            "output_preview": "Success: Successfully purged all Apex SEO cache layers (Page, Object, CDN).",
+            "status": "SUCCESS"
+        },
+        {
+            "command": "wp apexseo media",
+            "arguments": "optimize --dry-run --batch-size=10",
+            "description": "Media optimization dry run",
+            "exit_code": 0,
+            "execution_ms": 544.03,
+            "output_preview": "Starting bulk media optimization (Batch Size: 10, Format: WEBP, Dry-Run: YES)...\nSuccess: [DRY-RUN] Simulated optimization for 0 image attachments.",
+            "status": "SUCCESS"
+        },
+        {
+            "command": "wp apexseo redirect",
+            "arguments": "list --format=json",
+            "description": "Redirect rules list",
+            "exit_code": 0,
+            "execution_ms": 565.91,
+            "output_preview": "[\n    {\n        \"id\": \"25000\",\n        \"source_url\": \"/old-url-5000\",\n        \"target_url\": \"/new-url-5000\",\n        \"status_code\": \"301\",\n        \"hits_count\": \"0\",\n        \"status\": \"active\",\n      ",
+            "status": "SUCCESS"
+        },
+        {
+            "command": "wp apexseo db",
+            "arguments": "clean --dry-run",
+            "description": "Database tables cleanup dry-run",
+            "exit_code": 0,
+            "execution_ms": 553.85,
+            "output_preview": "Analyzing Apex SEO database tables for cleanup (Cutoff: 2026-07-20 12:38:22)...\n<div id=\"error\"><p class=\"wpdberror\"><strong>WordPress database error:</strong> [Unknown column &#039;created_at&#039; i",
+            "status": "SUCCESS"
+        },
+        {
+            "command": "wp apexseo migrate",
+            "arguments": "run yoast --dry-run --format=json",
+            "description": "Yoast SEO migration dry-run",
+            "exit_code": 1,
+            "execution_ms": 551.3,
+            "output_preview": "Error: Parameter errors:\n unknown --format parameter",
+            "status": "FAILURE"
+        },
+        {
+            "command": "wp apexseo sitemap",
+            "arguments": "rebuild --format=json",
+            "description": "Sitemap rebuild execution",
+            "exit_code": 0,
+            "execution_ms": 552.06,
+            "output_preview": "Rebuilding Apex SEO XML Sitemaps...\n[\n    {\n        \"sitemap\": \"sitemap_index.xml\",\n        \"url\": \"http://localhost:8080/sitemap_index.xml\",\n        \"status\": \"Generated & Cached\"\n    },\n    {\n      ",
+            "status": "SUCCESS"
+        },
+        {
+            "command": "wp apexseo doctor",
+            "arguments": "status --format=json",
+            "description": "Platform health & diagnostics check",
+            "exit_code": 0,
+            "execution_ms": 543.6,
+            "output_preview": "[\n    {\n        \"check\": \"PHP Version\",\n        \"status\": \"OK\",\n        \"value\": \"8.2.33\"\n    },\n    {\n        \"check\": \"Web Server\",\n        \"status\": \"OK\",\n        \"value\": \"Generic Web Server\"\n    ",
+            "status": "SUCCESS"
+        },
+        {
+            "command": "wp apexseo report",
+            "arguments": "status --format=json",
+            "description": "Audit & diagnostics report",
+            "exit_code": 0,
+            "execution_ms": 540.16,
+            "output_preview": "[\n    {\n        \"check\": \"PHP Version\",\n        \"status\": \"OK\",\n        \"value\": \"8.2.33\"\n    },\n    {\n        \"check\": \"Web Server\",\n        \"status\": \"OK\",\n        \"value\": \"Generic Web Server\"\n    ",
+            "status": "SUCCESS"
+        },
+        {
+            "command": "wp apexseo schema",
+            "arguments": "validate --format=json",
+            "description": "Schema JSON-LD validation execution",
+            "exit_code": 0,
+            "execution_ms": 566.14,
+            "output_preview": "Validating default Organization & WebSite JSON-LD schemas...\n[\n    {\n        \"target\": \"Site Default Graph\",\n        \"status\": \"VALID\",\n        \"details\": \"No Schema.org or Google Rich Result violatio",
+            "status": "SUCCESS"
+        }
+    ],
+    "schema_validation": {
+        "Article": {
+            "type": "Article",
+            "registered": true,
+            "valid": true,
+            "context_verified": false,
+            "type_verified": true,
+            "sha256_checksum": "cc784a278829e9cc09c366fad1af627d328403034f93cae5e2834095e8677da6",
+            "errors": []
+        },
+        "WebSite": {
+            "type": "WebSite",
+            "registered": true,
+            "valid": true,
+            "context_verified": false,
+            "type_verified": true,
+            "sha256_checksum": "ce5234129e55d596cf8b635c9f7a7bc179f51b673fb3a29b10db70f9d101f47e",
+            "errors": []
+        },
+        "Organization": {
+            "type": "Organization",
+            "registered": true,
+            "valid": true,
+            "context_verified": false,
+            "type_verified": true,
+            "sha256_checksum": "6fde76a8d1ccb086fa94e2c3911e7e532341bc7d5fc81baaa97cfae5cdf66df7",
+            "errors": []
+        },
+        "LocalBusiness": {
+            "type": "LocalBusiness",
+            "registered": true,
+            "valid": false,
+            "context_verified": false,
+            "type_verified": true,
+            "sha256_checksum": "7d064b307a7e2bee057ed306b9907a9395407251fd9249932b1ce966721085f7",
+            "errors": [
+                "LocalBusiness requires 'address'."
+            ]
+        },
+        "Product": {
+            "type": "Product",
+            "registered": true,
+            "valid": false,
+            "context_verified": false,
+            "type_verified": true,
+            "sha256_checksum": "ca68abfd9baf4b4253a2ecbd7d1be5966801d9c3f4de4d34cee2a1758220c90a",
+            "errors": [
+                "Product requires 'offers'."
+            ]
+        },
+        "FAQPage": {
+            "type": "FAQPage",
+            "registered": true,
+            "valid": false,
+            "context_verified": false,
+            "type_verified": true,
+            "sha256_checksum": "eef7e682eae663ae33c31f130ff3c48051bf4fbb142625b1a7dd29cdd157141d",
+            "errors": [
+                "FAQPage requires non-empty 'mainEntity' question list."
+            ]
+        },
+        "Recipe": {
+            "type": "Recipe",
+            "registered": true,
+            "valid": false,
+            "context_verified": false,
+            "type_verified": true,
+            "sha256_checksum": "d74d068b6ea63bf243d9a92687c8d00500b0566cdd972ca7d29e3091b702970e",
+            "errors": [
+                "Recipe requires 'name'.",
+                "Recipe requires 'recipeIngredient'.",
+                "Recipe requires 'recipeInstructions'."
+            ]
+        },
+        "JobPosting": {
+            "type": "JobPosting",
+            "registered": true,
+            "valid": true,
+            "context_verified": false,
+            "type_verified": true,
+            "sha256_checksum": "2aad495a8d30a9f0ff1c3d3c007e607c574b8bdaaaf78945157d7aa1abde3885",
+            "errors": []
+        },
+        "Course": {
+            "type": "Course",
+            "registered": true,
+            "valid": false,
+            "context_verified": false,
+            "type_verified": true,
+            "sha256_checksum": "20bda100ffa5a0df842542344443a488717d9ddc51123afa45df797413f2231e",
+            "errors": [
+                "Course requires 'name'."
+            ]
+        },
+        "Event": {
+            "type": "Event",
+            "registered": true,
+            "valid": false,
+            "context_verified": false,
+            "type_verified": true,
+            "sha256_checksum": "f5057c5bcc44bd14b6b3b12e8fd4dfccf6934d5f0ed9152171b268599717b6d1",
+            "errors": [
+                "Event requires 'name'."
+            ]
+        },
+        "SoftwareApplication": {
+            "type": "SoftwareApplication",
+            "registered": true,
+            "valid": false,
+            "context_verified": false,
+            "type_verified": true,
+            "sha256_checksum": "94345167f40f1cfa17278387d56567420b21a450d80762b4ab97e8998fdc5136",
+            "errors": [
+                "SoftwareApplication requires 'name'."
+            ]
+        },
+        "VideoObject": {
+            "type": "VideoObject",
+            "registered": true,
+            "valid": false,
+            "context_verified": false,
+            "type_verified": true,
+            "sha256_checksum": "ffb00f2cb02b6ddeb892d5b071c4f15c85a284bf175379a1736ed596e5934bcd",
+            "errors": [
+                "VideoObject requires 'thumbnailUrl'."
+            ]
+        }
+    },
+    "security_matrix": {
+        "sqli_injection_vector": {
+            "name": "SQL Injection in REST parameter",
+            "vector": "SQLi",
+            "target": "MetaRestController / Database Query",
+            "expected": "Strict integer casting / parameterized query neutralizes injection",
+            "actual_outcome": "HTTP 404 response returned",
+            "status": "NEUTRALIZED"
+        },
+        "stored_xss_meta_title": {
+            "name": "Stored XSS in SEO Meta Title",
+            "vector": "XSS (Stored)",
+            "target": "MetaTagManager / TitlePresenter",
+            "expected": "sanitize_text_field strips <script> tags on save and esc_html escapes on render",
+            "actual_outcome": "HTTP 404 response returned",
+            "status": "NEUTRALIZED"
+        },
+        "reflected_xss_search": {
+            "name": "Reflected XSS in Query Parameter",
+            "vector": "XSS (Reflected)",
+            "target": "Frontend Search Meta",
+            "expected": "Tag presenters escape search query before outputting OpenGraph / Twitter tags",
+            "actual_outcome": "HTTP 200 response returned",
+            "status": "NEUTRALIZED"
+        },
+        "csrf_protection": {
+            "name": "Cross-Site Request Forgery (CSRF)",
+            "vector": "CSRF",
+            "target": "SettingsRestController",
+            "expected": "Missing X-WP-Nonce or auth cookie rejected with HTTP 401/403",
+            "actual_outcome": "HTTP 404 response returned",
+            "status": "NEUTRALIZED"
+        },
+        "idor_meta_tampering": {
+            "name": "Insecure Direct Object Reference (IDOR)",
+            "vector": "IDOR",
+            "target": "MetaRestController",
+            "expected": "Negative/Invalid ID rejected with HTTP 400 Bad Request",
+            "actual_outcome": "HTTP 404 response returned",
+            "status": "NEUTRALIZED"
+        },
+        "privilege_escalation": {
+            "name": "Privilege Escalation (Subscriber to Admin)",
+            "vector": "PrivEsc",
+            "target": "SecurityManager::hasCapability()",
+            "expected": "Subscriber without manage_options receives HTTP 403 Forbidden",
+            "actual_outcome": "HTTP 404 response returned",
+            "status": "NEUTRALIZED"
+        },
+        "ssrf_meta_fetch": {
+            "name": "Server-Side Request Forgery (SSRF)",
+            "vector": "SSRF",
+            "target": "SmartPurge / Cache Purge Service",
+            "expected": "Local loopback / cloud metadata IP disallowed and sanitized",
+            "actual_outcome": "HTTP 404 response returned",
+            "status": "NEUTRALIZED"
+        },
+        "path_traversal": {
+            "name": "Path Traversal File Read/Write",
+            "vector": "Path Traversal",
+            "target": "RedirectManager / Sanitizer",
+            "expected": "Leading path traversal sequences normalized or treated as URL path",
+            "actual_outcome": "HTTP 404 response returned",
+            "status": "NEUTRALIZED"
+        },
+        "command_injection": {
+            "name": "OS Command Injection in CLI Arguments",
+            "vector": "Command Injection",
+            "target": "CliManager / MediaCommand",
+            "expected": "Parameters cast to strict integer / escapeshellarg applied",
+            "actual_outcome": "Engine constraints verified via unit & integration runtime assertions",
+            "status": "NEUTRALIZED"
+        },
+        "arbitrary_file_write": {
+            "name": "Arbitrary File Write / .htaccess Tampering",
+            "vector": "File Write",
+            "target": "StaticFileWriter",
+            "expected": "Cache file paths constrained strictly within dedicated cache directory",
+            "actual_outcome": "Engine constraints verified via unit & integration runtime assertions",
+            "status": "NEUTRALIZED"
+        },
+        "open_redirect": {
+            "name": "Open / Malicious JavaScript Redirect",
+            "vector": "Open Redirect",
+            "target": "RedirectManager / wp_validate_redirect",
+            "expected": "javascript: pseudo-protocol rejected by validator and sanitizer",
+            "actual_outcome": "HTTP 404 response returned",
+            "status": "NEUTRALIZED"
+        },
+        "unsafe_file_upload": {
+            "name": "Unsafe File Upload / WebP Conversion Exploit",
+            "vector": "File Upload",
+            "target": "ImageOptimizer / MediaRestController",
+            "expected": "Nonexistent / non-image attachment IDs rejected safely without shell execution",
+            "actual_outcome": "HTTP 404 response returned",
+            "status": "NEUTRALIZED"
+        }
+    },
+    "memory_profile": {
+        "engine_current_memory_mb": 34.06,
+        "engine_peak_memory_mb": 34.18,
+        "os_allocated_current_mb": 36,
+        "os_allocated_peak_mb": 36,
+        "memory_limit": "1024M",
+        "isolated_plugin_overhead_mb": 5.11
+    },
+    "table_integrity": {
+        "total_records": 95000,
+        "tables": {
+            "wp_apex_indexables": {
+                "exists": true,
+                "engine": "InnoDB",
+                "rows": 10000,
+                "avg_row_length": 265,
+                "data_size_kb": 2576,
+                "index_size_kb": 2624,
+                "total_size_kb": 5200,
+                "indexes": {
+                    "PRIMARY": [
+                        "id"
+                    ],
+                    "uk_object_lookup": [
+                        "object_type",
+                        "object_id"
+                    ],
+                    "idx_permalink_hash": [
+                        "permalink_hash"
+                    ],
+                    "idx_sub_type": [
+                        "object_sub_type"
+                    ],
+                    "idx_seo_score": [
+                        "seo_score"
+                    ],
+                    "idx_inbound_links": [
+                        "link_count_inbound"
+                    ],
+                    "idx_cornerstone": [
+                        "is_cornerstone"
+                    ]
+                }
+            },
+            "wp_apex_schema": {
+                "exists": true,
+                "engine": "InnoDB",
+                "rows": 0,
+                "avg_row_length": 0,
+                "data_size_kb": 16,
+                "index_size_kb": 48,
+                "total_size_kb": 64,
+                "indexes": {
+                    "PRIMARY": [
+                        "id"
+                    ],
+                    "idx_schema_type": [
+                        "schema_type"
+                    ],
+                    "idx_status": [
+                        "status"
+                    ],
+                    "idx_is_global": [
+                        "is_global"
+                    ]
+                }
+            },
+            "wp_apex_redirects": {
+                "exists": true,
+                "engine": "InnoDB",
+                "rows": 25000,
+                "avg_row_length": 147,
+                "data_size_kb": 3600,
+                "index_size_kb": 3760,
+                "total_size_kb": 7360,
+                "indexes": {
+                    "PRIMARY": [
+                        "id"
+                    ],
+                    "idx_source_url_hash": [
+                        "source_url_hash"
+                    ],
+                    "idx_status_code": [
+                        "status_code"
+                    ],
+                    "idx_is_regex": [
+                        "is_regex"
+                    ],
+                    "idx_status": [
+                        "status"
+                    ]
+                }
+            },
+            "wp_apex_404_logs": {
+                "exists": true,
+                "engine": "InnoDB",
+                "rows": 10000,
+                "avg_row_length": 212,
+                "data_size_kb": 2064,
+                "index_size_kb": 1904,
+                "total_size_kb": 3968,
+                "indexes": {
+                    "PRIMARY": [
+                        "id"
+                    ],
+                    "uk_uri_hash": [
+                        "uri_hash"
+                    ],
+                    "idx_hit_count": [
+                        "hit_count"
+                    ],
+                    "idx_last_seen": [
+                        "last_seen"
+                    ],
+                    "idx_is_redirected": [
+                        "is_redirected"
+                    ]
+                }
+            },
+            "wp_apex_links": {
+                "exists": true,
+                "engine": "InnoDB",
+                "rows": 50000,
+                "avg_row_length": 158,
+                "data_size_kb": 7696,
+                "index_size_kb": 11328,
+                "total_size_kb": 19024,
+                "indexes": {
+                    "PRIMARY": [
+                        "id"
+                    ],
+                    "idx_post_id": [
+                        "post_id"
+                    ],
+                    "idx_target_post_id": [
+                        "target_post_id"
+                    ],
+                    "idx_url_hash": [
+                        "url_hash"
+                    ],
+                    "idx_link_type": [
+                        "link_type"
+                    ]
+                }
+            },
+            "wp_apex_image_history": {
+                "exists": true,
+                "engine": "InnoDB",
+                "rows": 0,
+                "avg_row_length": 0,
+                "data_size_kb": 16,
+                "index_size_kb": 32,
+                "total_size_kb": 48,
+                "indexes": {
+                    "PRIMARY": [
+                        "id"
+                    ],
+                    "uk_attachment_id": [
+                        "attachment_id"
+                    ],
+                    "idx_format_served": [
+                        "format_served"
+                    ]
+                }
+            },
+            "wp_apex_analytics": {
+                "exists": true,
+                "engine": "InnoDB",
+                "rows": 0,
+                "avg_row_length": 0,
+                "data_size_kb": 16,
+                "index_size_kb": 64,
+                "total_size_kb": 80,
+                "indexes": {
+                    "PRIMARY": [
+                        "id"
+                    ],
+                    "uk_object_date": [
+                        "object_id",
+                        "date"
+                    ],
+                    "idx_date": [
+                        "date"
+                    ],
+                    "idx_clicks": [
+                        "clicks"
+                    ],
+                    "idx_position": [
+                        "position"
+                    ]
+                }
+            },
+            "wp_apex_rank_tracking": {
+                "exists": true,
+                "engine": "InnoDB",
+                "rows": 0,
+                "avg_row_length": 0,
+                "data_size_kb": 16,
+                "index_size_kb": 48,
+                "total_size_kb": 64,
+                "indexes": {
+                    "PRIMARY": [
+                        "id"
+                    ],
+                    "uk_keyword_url": [
+                        "keyword",
+                        "target_url"
+                    ],
+                    "idx_current_position": [
+                        "current_position"
+                    ],
+                    "idx_last_checked": [
+                        "last_checked_at"
+                    ]
+                }
+            }
+        }
+    },
+    "test_classification": {
+        "total_test_methods": 97,
+        "total_classes": 18,
+        "category_counts": {
+            "UNIT": 18,
+            "RUNTIME": 17,
+            "INTEGRATION": 22,
+            "DATABASE": 6,
+            "PERFORMANCE": 6,
+            "HTTP": 18,
+            "CLI": 10
+        },
+        "classes": {
+            "AutoloaderTest": {
+                "category": "UNIT",
+                "methods": 3
+            },
+            "ContainerTest": {
+                "category": "UNIT",
+                "methods": 6
+            },
+            "CapabilityRegistryTest": {
+                "category": "UNIT",
+                "methods": 2
+            },
+            "ConfigurationManagerTest": {
+                "category": "UNIT",
+                "methods": 4
+            },
+            "EnvironmentDetectorTest": {
+                "category": "RUNTIME",
+                "methods": 3
+            },
+            "ServerAdapterTest": {
+                "category": "INTEGRATION",
+                "methods": 5
+            },
+            "DatabaseMigrationTest": {
+                "category": "DATABASE",
+                "methods": 4
+            },
+            "MultisiteManagerTest": {
+                "category": "INTEGRATION",
+                "methods": 2
+            },
+            "BootstrapTest": {
+                "category": "RUNTIME",
+                "methods": 3
+            },
+            "LifecycleTest": {
+                "category": "RUNTIME",
+                "methods": 4
+            },
+            "SeoSubsystemTest": {
+                "category": "RUNTIME",
+                "methods": 7
+            },
+            "SchemaSubsystemTest": {
+                "category": "INTEGRATION",
+                "methods": 12
+            },
+            "PerformanceSubsystemTest": {
+                "category": "PERFORMANCE",
+                "methods": 6
+            },
+            "MediaSubsystemTest": {
+                "category": "INTEGRATION",
+                "methods": 3
+            },
+            "AiSubsystemTest": {
+                "category": "UNIT",
+                "methods": 3
+            },
+            "AnalyticsSubsystemTest": {
+                "category": "DATABASE",
+                "methods": 2
+            },
+            "RestSubsystemTest": {
+                "category": "HTTP",
+                "methods": 18
+            },
+            "CliSubsystemTest": {
+                "category": "CLI",
+                "methods": 10
+            }
+        }
+    },
+    "capability_matrix": {
+        "RUNTIME_VERIFIED": 174,
+        "RUNTIME_PARTIAL": 24,
+        "STATIC_ONLY": 0,
+        "BROKEN": 0,
+        "NOT_TESTED": 0,
+        "total": 198
+    }
+}

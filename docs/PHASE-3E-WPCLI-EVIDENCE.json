@@ -1,0 +1,92 @@
+[
+    {
+        "command": "wp apexseo index",
+        "arguments": "rebuild --dry-run --format=json",
+        "description": "Index status & rebuild dry-run",
+        "exit_code": 1,
+        "execution_ms": 538.73,
+        "output_preview": "Error: Parameter errors:\n unknown --format parameter",
+        "status": "FAILURE"
+    },
+    {
+        "command": "wp apexseo cache",
+        "arguments": "purge --url=https://example.com/test/",
+        "description": "Cache purge targeted URL",
+        "exit_code": 0,
+        "execution_ms": 572.77,
+        "output_preview": "Success: Successfully purged all Apex SEO cache layers (Page, Object, CDN).",
+        "status": "SUCCESS"
+    },
+    {
+        "command": "wp apexseo media",
+        "arguments": "optimize --dry-run --batch-size=10",
+        "description": "Media optimization dry run",
+        "exit_code": 0,
+        "execution_ms": 544.03,
+        "output_preview": "Starting bulk media optimization (Batch Size: 10, Format: WEBP, Dry-Run: YES)...\nSuccess: [DRY-RUN] Simulated optimization for 0 image attachments.",
+        "status": "SUCCESS"
+    },
+    {
+        "command": "wp apexseo redirect",
+        "arguments": "list --format=json",
+        "description": "Redirect rules list",
+        "exit_code": 0,
+        "execution_ms": 565.91,
+        "output_preview": "[\n    {\n        \"id\": \"25000\",\n        \"source_url\": \"/old-url-5000\",\n        \"target_url\": \"/new-url-5000\",\n        \"status_code\": \"301\",\n        \"hits_count\": \"0\",\n        \"status\": \"active\",\n      ",
+        "status": "SUCCESS"
+    },
+    {
+        "command": "wp apexseo db",
+        "arguments": "clean --dry-run",
+        "description": "Database tables cleanup dry-run",
+        "exit_code": 0,
+        "execution_ms": 553.85,
+        "output_preview": "Analyzing Apex SEO database tables for cleanup (Cutoff: 2026-07-20 12:38:22)...\n<div id=\"error\"><p class=\"wpdberror\"><strong>WordPress database error:</strong> [Unknown column &#039;created_at&#039; i",
+        "status": "SUCCESS"
+    },
+    {
+        "command": "wp apexseo migrate",
+        "arguments": "run yoast --dry-run --format=json",
+        "description": "Yoast SEO migration dry-run",
+        "exit_code": 1,
+        "execution_ms": 551.3,
+        "output_preview": "Error: Parameter errors:\n unknown --format parameter",
+        "status": "FAILURE"
+    },
+    {
+        "command": "wp apexseo sitemap",
+        "arguments": "rebuild --format=json",
+        "description": "Sitemap rebuild execution",
+        "exit_code": 0,
+        "execution_ms": 552.06,
+        "output_preview": "Rebuilding Apex SEO XML Sitemaps...\n[\n    {\n        \"sitemap\": \"sitemap_index.xml\",\n        \"url\": \"http://localhost:8080/sitemap_index.xml\",\n        \"status\": \"Generated & Cached\"\n    },\n    {\n      ",
+        "status": "SUCCESS"
+    },
+    {
+        "command": "wp apexseo doctor",
+        "arguments": "status --format=json",
+        "description": "Platform health & diagnostics check",
+        "exit_code": 0,
+        "execution_ms": 543.6,
+        "output_preview": "[\n    {\n        \"check\": \"PHP Version\",\n        \"status\": \"OK\",\n        \"value\": \"8.2.33\"\n    },\n    {\n        \"check\": \"Web Server\",\n        \"status\": \"OK\",\n        \"value\": \"Generic Web Server\"\n    ",
+        "status": "SUCCESS"
+    },
+    {
+        "command": "wp apexseo report",
+        "arguments": "status --format=json",
+        "description": "Audit & diagnostics report",
+        "exit_code": 0,
+        "execution_ms": 540.16,
+        "output_preview": "[\n    {\n        \"check\": \"PHP Version\",\n        \"status\": \"OK\",\n        \"value\": \"8.2.33\"\n    },\n    {\n        \"check\": \"Web Server\",\n        \"status\": \"OK\",\n        \"value\": \"Generic Web Server\"\n    ",
+        "status": "SUCCESS"
+    },
+    {
+        "command": "wp apexseo schema",
+        "arguments": "validate --format=json",
+        "description": "Schema JSON-LD validation execution",
+        "exit_code": 0,
+        "execution_ms": 566.14,
+        "output_preview": "Validating default Organization & WebSite JSON-LD schemas...\n[\n    {\n        \"target\": \"Site Default Graph\",\n        \"status\": \"VALID\",\n        \"details\": \"No Schema.org or Google Rich Result violatio",
+        "status": "SUCCESS"
+    }
+]

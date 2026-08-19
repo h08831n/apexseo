@@ -300,6 +300,15 @@ class DatabaseManager implements ServiceContractInterface {
     }
 
     /**
+     * Get last insert ID.
+     *
+     * @return int
+     */
+    public function getInsertId() {
+        return isset($this->wpdb->insert_id) ? (int) $this->wpdb->insert_id : 0;
+    }
+
+    /**
      * Get raw underlying $wpdb instance.
      *
      * @return object

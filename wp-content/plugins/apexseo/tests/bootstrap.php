@@ -20,6 +20,19 @@ if (!defined('APEXSEO_DB_VERSION')) {
     define('APEXSEO_DB_VERSION', '1.0.0');
 }
 
+if (!defined('OBJECT')) {
+    define('OBJECT', 'OBJECT');
+}
+if (!defined('ARRAY_A')) {
+    define('ARRAY_A', 'ARRAY_A');
+}
+if (!defined('ARRAY_N')) {
+    define('ARRAY_N', 'ARRAY_N');
+}
+if (!defined('OBJECT_K')) {
+    define('OBJECT_K', 'OBJECT_K');
+}
+
 // Global Options Mock Store
 global $mock_wp_options, $mock_wp_hooks, $mock_wp_transients, $wp_version;
 $mock_wp_options = [];
@@ -46,7 +59,8 @@ if (!class_exists('wpdb')) {
             if (is_array($args[0]) && count($args) === 1) {
                 $args = $args[0];
             }
-            return vsprintf(str_replace(['%s', '%d', '%f'], ["'%s'", "%d", "%f"], $query), $args);
+            $sanitized = preg_replace('/%(?![sdfF%])/', '%%', $query);
+            return vsprintf(str_replace(['%s', '%d', '%f', '%F'], ["'%s'", "%d", "%f", "%F"], $sanitized), $args);
         }
 
         public function query($sql) {
@@ -252,6 +266,42 @@ if (!function_exists('esc_html')) {
     }
 }
 
+if (!function_exists('esc_attr')) {
+    function esc_attr($text) {
+        return htmlspecialchars((string) $text, ENT_QUOTES, 'UTF-8');
+    }
+}
+
+if (!function_exists('esc_url')) {
+    function esc_url($url) {
+        return filter_var((string)$url, FILTER_SANITIZE_URL);
+    }
+}
+
+if (!function_exists('wp_json_encode')) {
+    function wp_json_encode($data, $options = 0, $depth = 512) {
+        return json_encode($data, $options, $depth);
+    }
+}
+
+if (!function_exists('sanitize_key')) {
+    function sanitize_key($key) {
+        return strtolower(preg_replace('/[^a-z0-9_\-]/i', '', (string)$key));
+    }
+}
+
+if (!function_exists('sanitize_title')) {
+    function sanitize_title($title) {
+        return strtolower(preg_replace('/[^a-z0-9_\-]/i', '-', (string)$title));
+    }
+}
+
+if (!function_exists('wp_kses_post')) {
+    function wp_kses_post($data) {
+        return strip_tags((string)$data, '<p><a><b><strong><i><em><ul><ol><li><h1><h2><h3><h4><h5><h6><blockquote><img><br>');
+    }
+}
+
 if (!function_exists('register_activation_hook')) {
     function register_activation_hook($file, $callback) {}
 }
@@ -281,6 +331,110 @@ if (!function_exists('plugin_basename')) {
 if (!function_exists('trailingslashit')) {
     function trailingslashit($string) {
         return rtrim($string, '/\\') . '/';
+    }
+}
+
+if (!function_exists('strip_shortcodes')) {
+    function strip_shortcodes($content) {
+        return preg_replace('/\[[\w_-]+[^\]]*\](?:.*?\[\/[\w_-]+\])?/s', '', (string)$content);
+    }
+}
+
+if (!function_exists('wp_strip_all_tags')) {
+    function wp_strip_all_tags($text, $remove_breaks = false) {
+        $text = preg_replace('@<(script|style)[^>]*?>.*?</\\1>@si', '', (string)$text);
+        $text = strip_tags($text);
+        if ($remove_breaks) {
+            $text = preg_replace('/[\r\n\t ]+/', ' ', $text);
+        }
+        return trim($text);
+    }
+}
+
+if (!function_exists('sanitize_text_field')) {
+    function sanitize_text_field($str) {
+        return filter_var((string)$str, FILTER_DEFAULT);
+    }
+}
+
+if (!function_exists('get_bloginfo')) {
+    function get_bloginfo($show = 'name') {
+        if ($show === 'name') return 'Apex Test Site';
+        if ($show === 'description') return 'Apex Test Tagline';
+        if ($show === 'url') return 'https://example.com';
+        return 'https://example.com';
+    }
+}
+
+if (!function_exists('home_url')) {
+    function home_url($path = '') {
+        return 'https://example.com' . ($path ? '/' . ltrim($path, '/') : '');
+    }
+}
+
+if (!function_exists('site_url')) {
+    function site_url($path = '') {
+        return 'https://example.com' . ($path ? '/' . ltrim($path, '/') : '');
+    }
+}
+
+if (!class_exists('WP_REST_Response')) {
+    class WP_REST_Response {
+        protected $data;
+        protected $status;
+        public function __construct($data = null, $status = 200) {
+            $this->data = $data;
+            $this->status = $status;
+        }
+        public function get_data() { return $this->data; }
+        public function get_status() { return $this->status; }
+        public function set_data($data) { $this->data = $data; }
+        public function set_status($status) { $this->status = $status; }
+    }
+}
+
+if (!class_exists('WP_REST_Request')) {
+    class WP_REST_Request {
+        protected $params = [];
+        protected $method = 'GET';
+        public function __construct($method = 'GET', $route = '') {
+            $this->method = $method;
+        }
+        public function set_param($key, $value) { $this->params[$key] = $value; }
+        public function get_param($key) { return isset($this->params[$key]) ? $this->params[$key] : null; }
+        public function get_params() { return $this->params; }
+        public function get_json_params() { return $this->params; }
+    }
+}
+
+if (!class_exists('WP_Error')) {
+    class WP_Error {
+        protected $code;
+        protected $message;
+        protected $data;
+        public function __construct($code = '', $message = '', $data = '') {
+            $this->code = $code;
+            $this->message = $message;
+            $this->data = $data;
+        }
+        public function get_error_code() { return $this->code; }
+        public function get_error_message() { return $this->message; }
+        public function get_error_data() { return $this->data; }
+    }
+}
+
+if (!function_exists('rest_ensure_response')) {
+    function rest_ensure_response($response) {
+        if ($response instanceof WP_REST_Response) {
+            return $response;
+        }
+        return new WP_REST_Response($response);
+    }
+}
+
+if (!function_exists('is_wp_error')) {
+    function is_wp_error($thing) {
+        return ($thing instanceof WP_Error);
     }
 }
 

@@ -161,6 +161,64 @@ abstract class TestCase {
     }
 
     /**
+     * Assert array has key.
+     */
+    public function assertArrayHasKey($key, $array, $message = '') {
+        self::$assertionCount++;
+        if (!is_array($array) || !array_key_exists($key, $array)) {
+            $msg = !empty($message) ? $message : sprintf('Failed asserting that array has key [%s].', (string)$key);
+            throw new Exception($msg);
+        }
+    }
+
+    /**
+     * Assert array does not have key.
+     */
+    public function assertArrayNotHasKey($key, $array, $message = '') {
+        self::$assertionCount++;
+        if (is_array($array) && array_key_exists($key, $array)) {
+            $msg = !empty($message) ? $message : sprintf('Failed asserting that array does not have key [%s].', (string)$key);
+            throw new Exception($msg);
+        }
+    }
+
+    /**
+     * Assert string contains.
+     */
+    public function assertStringContains($needle, $haystack, $message = '') {
+        self::$assertionCount++;
+        if (strpos((string)$haystack, (string)$needle) === false) {
+            $msg = !empty($message) ? $message : sprintf('Failed asserting that [%s] contains [%s].', (string)$haystack, (string)$needle);
+            throw new Exception($msg);
+        }
+    }
+
+    /**
+     * Assert string contains string.
+     */
+    public function assertStringContainsString($needle, $haystack, $message = '') {
+        $this->assertStringContains($needle, $haystack, $message);
+    }
+
+    /**
+     * Assert string does not contain.
+     */
+    public function assertStringNotContains($needle, $haystack, $message = '') {
+        self::$assertionCount++;
+        if (strpos((string)$haystack, (string)$needle) !== false) {
+            $msg = !empty($message) ? $message : sprintf('Failed asserting that [%s] does not contain [%s].', (string)$haystack, (string)$needle);
+            throw new Exception($msg);
+        }
+    }
+
+    /**
+     * Assert string does not contain string.
+     */
+    public function assertStringNotContainsString($needle, $haystack, $message = '') {
+        $this->assertStringNotContains($needle, $haystack, $message);
+    }
+
+    /**
      * Expect an exception class.
      */
     public function expectException($exceptionClass) {

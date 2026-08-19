@@ -1,8 +1,8 @@
 <?php
 namespace ApexSEO\Tests;
 
-use ApexSEO\Analytics\Monitoring\FourOhFourMonitor;
-use ApexSEO\Analytics\Tracking\RankTracker;
+use ApexSEO\Analytics\Monitor\FourOhFourMonitor;
+use ApexSEO\Analytics\Tracker\RankTracker;
 use ApexSEO\Core\Database\DatabaseManager;
 
 class AnalyticsSubsystemTest extends TestCase {
@@ -10,21 +10,21 @@ class AnalyticsSubsystemTest extends TestCase {
         $db = new DatabaseManager();
         $monitor = new FourOhFourMonitor($db);
 
-        $logged = $monitor->log404('/missing-broken-link/', 'https://google.com', 'Mozilla/5.0');
-        $this->assertTrue($logged);
-
-        $recent = $monitor->getRecent404s(10);
+        $monitor->record404('/missing-broken-link/', '127.0.0.1', 'Mozilla/5.0');
+        $recent = $monitor->getRecent404s();
         $this->assertTrue(is_array($recent));
+        $this->assertCount(1, $recent);
+        $this->assertEquals('/missing-broken-link/', $recent[0]['url']);
     }
 
     public function testRankTrackerKeywords() {
         $db = new DatabaseManager();
         $tracker = new RankTracker($db);
 
-        $id = $tracker->trackKeyword('fastest seo plugin', 'https://example.com/fast-seo/');
-        $this->assertTrue(is_numeric($id) || $id === true);
-
-        $history = $tracker->recordRankPosition(1, 3);
-        $this->assertTrue($history);
+        $tracker->trackKeyword('fastest seo plugin', 3, 'https://example.com/fast-seo/');
+        $keywords = $tracker->getTrackedKeywords();
+        $this->assertTrue(is_array($keywords));
+        $this->assertCount(1, $keywords);
+        $this->assertEquals(3, $keywords[0]['position']);
     }
 }

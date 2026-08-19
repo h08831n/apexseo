@@ -1,0 +1,46 @@
+{
+    "dataset_10000": {
+        "dataset_size": 10000,
+        "queries_executed": 150,
+        "avg_query_time_ms": 1.1464,
+        "median_query_time_ms": 1.0445,
+        "p95_query_time_ms": 1.6332,
+        "p99_query_time_ms": 4.0648,
+        "slowest_query_ms": 4.0648,
+        "total_duration_ms": 57.56,
+        "peak_memory_mb": 36
+    },
+    "dataset_35000": {
+        "dataset_size": 35000,
+        "queries_executed": 150,
+        "avg_query_time_ms": 1.0087,
+        "median_query_time_ms": 0.9896,
+        "p95_query_time_ms": 1.312,
+        "p99_query_time_ms": 1.3671,
+        "slowest_query_ms": 1.3671,
+        "total_duration_ms": 50.82,
+        "peak_memory_mb": 36
+    },
+    "dataset_100000": {
+        "dataset_size": 100000,
+        "queries_executed": 150,
+        "avg_query_time_ms": 1.0412,
+        "median_query_time_ms": 1.014,
+        "p95_query_time_ms": 1.3881,
+        "p99_query_time_ms": 1.586,
+        "slowest_query_ms": 1.586,
+        "total_duration_ms": 52.26,
+        "peak_memory_mb": 36
+    },
+    "dataset_250000": {
+        "dataset_size": 250000,
+        "queries_executed": 150,
+        "avg_query_time_ms": 1.1111,
+        "median_query_time_ms": 1.0694,
+        "p95_query_time_ms": 1.411,
+        "p99_query_time_ms": 1.6849,
+        "slowest_query_ms": 1.6849,
+        "total_duration_ms": 55.76,
+        "peak_memory_mb": 36
+    }
+}
