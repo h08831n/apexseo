@@ -23,10 +23,10 @@ class ImageOptimizer implements ServiceContractInterface {
     /**
      * Constructor.
      *
-     * @param EnvironmentDetector $env
+     * @param EnvironmentDetector|null $env
      */
-    public function __construct(EnvironmentDetector $env) {
-        $this->env = $env;
+    public function __construct(EnvironmentDetector $env = null) {
+        $this->env = $env !== null ? $env : new EnvironmentDetector();
     }
 
     /**

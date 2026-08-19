@@ -23,7 +23,7 @@ class VideoObjectSchema extends AbstractSchemaType {
      * @param array $context
      * @return bool
      */
-    public function isApplicable(array $context) {
+    public function isApplicable(array $context = []) {
         return !empty($context['has_video']) || !empty($context['video_url']) || (!empty($context['schema_type']) && $context['schema_type'] === 'VideoObject');
     }
 
@@ -33,7 +33,7 @@ class VideoObjectSchema extends AbstractSchemaType {
      * @param array $context
      * @return array
      */
-    public function generate(array $context) {
+    public function generate(array $context = []) {
         $canonical = $this->getCanonicalUrl($context);
         $data = [
             '@type'        => 'VideoObject',

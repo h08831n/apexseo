@@ -99,9 +99,6 @@ class CliManager implements ServiceContractInterface, HookableInterface {
             return;
         }
 
-        // Register root command handler
-        \WP_CLI::add_command(self::ROOT_COMMAND, [$this, 'rootCommand']);
-
         foreach ($this->commands as $subcommand => $definition) {
             \WP_CLI::add_command(
                 self::ROOT_COMMAND . ' ' . $subcommand,

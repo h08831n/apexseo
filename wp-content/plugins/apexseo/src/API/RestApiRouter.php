@@ -67,8 +67,8 @@ class RestApiRouter implements ServiceContractInterface, HookableInterface {
         IndexableBuilder $indexableBuilder,
         SchemaRegistry $schemaRegistry,
         SchemaValidator $schemaValidator,
-        CacheEngine $cacheEngine,
-        ImageOptimizer $imageOptimizer,
+        $cacheEngine = null,
+        $imageOptimizer = null,
         $cacheIntegration = null
     ) {
         $this->security = $security;
@@ -82,7 +82,8 @@ class RestApiRouter implements ServiceContractInterface, HookableInterface {
         $this->controllers['links']      = new LinksRestController($security, $db);
         $this->controllers['analytics']  = new AnalyticsRestController($security, $db);
         $this->controllers['cache']      = new CacheRestController($security, $cacheEngine, $cacheIntegration);
-        $this->controllers['media']      = new MediaRestController($security, $imageOptimizer);
+        $optimizer = $imageOptimizer !== null ? $imageOptimizer : new ImageOptimizer();
+        $this->controllers['media']      = new MediaRestController($security, $optimizer);
         $this->controllers['migration']  = new MigrationRestController($security, $db);
     }
 

@@ -1,0 +1,52 @@
+{
+    "audit_timestamp": "2026-08-19T12:03:56+00:00",
+    "environment": {
+        "wordpress_version": "6.7.2",
+        "php_version": "8.2.33",
+        "server": "cli",
+        "database_prefix": "wp_"
+    },
+    "bootstrap": {
+        "plugin_class": "ApexSEO\\Core\\Bootstrap\\Plugin",
+        "di_container_bound": true,
+        "locked_tables_count": 8,
+        "locked_tables_verified": 8
+    },
+    "rest_subsystem": {
+        "routes_registered": 17,
+        "routes_audited": 25,
+        "security_checks_passed": 25
+    },
+    "wp_cli_subsystem": {
+        "commands_registered": 10,
+        "commands_audited": 10,
+        "all_commands_passed": true
+    },
+    "schema_subsystem": {
+        "types_audited": 12,
+        "types_valid_json_ld": 12,
+        "negative_validation_verified": true
+    },
+    "frontend_meta": {
+        "contexts_audited": 6,
+        "all_contexts_rendered": true
+    },
+    "performance": {
+        "sample_size": 30,
+        "avg_ttfb_ms": 0.097,
+        "avg_memory_kb": 1581.08,
+        "avg_queries": 0.03,
+        "budget_ttfb_compliance": true,
+        "budget_memory_compliance": true
+    },
+    "security": {
+        "attacks_tested": 6,
+        "attacks_prevented": 6,
+        "all_prevented": true
+    },
+    "migration": {
+        "adapters_tested": 6,
+        "all_adapters_passed": true
+    },
+    "audit_status": "PHASE_3D_RUNTIME_PASS"
+}

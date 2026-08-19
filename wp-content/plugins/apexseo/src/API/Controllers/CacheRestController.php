@@ -27,10 +27,10 @@ class CacheRestController extends AbstractRestController {
      * Constructor.
      *
      * @param SecurityManager $security
-     * @param CacheEngine $cacheEngine
-     * @param CacheIntegrationManager|null $integration
+     * @param mixed $cacheEngine
+     * @param mixed $integration
      */
-    public function __construct(SecurityManager $security, CacheEngine $cacheEngine, $integration = null) {
+    public function __construct(SecurityManager $security, $cacheEngine = null, $integration = null) {
         parent::__construct($security);
         $this->cacheEngine = $cacheEngine;
         $this->integration = $integration;
@@ -90,7 +90,11 @@ class CacheRestController extends AbstractRestController {
         $purgedCount = 0;
 
         if ($type === 'all') {
-            $this->cacheEngine->clear();
+            if ($this->cacheEngine && method_exists($this->cacheEngine, 'clear')) {
+                $this->cacheEngine->clear();
+            } elseif (function_exists('wp_cache_flush')) {
+                wp_cache_flush();
+            }
             $purgedCount++;
 
             if ($this->integration) {
@@ -103,8 +107,10 @@ class CacheRestController extends AbstractRestController {
                 if ($cleanId <= 0) {
                     continue;
                 }
-                $this->cacheEngine->delete("post_meta_{$cleanId}");
-                $this->cacheEngine->delete("schema_post_{$cleanId}");
+                if ($this->cacheEngine && method_exists($this->cacheEngine, 'delete')) {
+                    $this->cacheEngine->delete("post_meta_{$cleanId}");
+                    $this->cacheEngine->delete("schema_post_{$cleanId}");
+                }
                 if ($this->integration && method_exists($this->integration, 'purgePost')) {
                     $this->integration->purgePost($cleanId);
                 }
@@ -117,7 +123,9 @@ class CacheRestController extends AbstractRestController {
                 }
                 $cleanUrl = sanitize_text_field($url);
                 $hash = md5($cleanUrl);
-                $this->cacheEngine->delete("page_{$hash}");
+                if ($this->cacheEngine && method_exists($this->cacheEngine, 'delete')) {
+                    $this->cacheEngine->delete("page_{$hash}");
+                }
                 if ($this->integration && method_exists($this->integration, 'purgeUrl')) {
                     $this->integration->purgeUrl($cleanUrl);
                 }

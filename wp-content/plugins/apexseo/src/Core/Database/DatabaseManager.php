@@ -217,6 +217,53 @@ class DatabaseManager implements ServiceContractInterface {
     }
 
     /**
+     * Insert a row into a table.
+     *
+     * @param string $table
+     * @param array $data
+     * @param array|null $format
+     * @return int|false
+     */
+    public function insert($table, array $data, $format = null) {
+        if (is_object($this->wpdb) && method_exists($this->wpdb, 'insert')) {
+            return $this->wpdb->insert($table, $data, $format);
+        }
+        return false;
+    }
+
+    /**
+     * Update a row in a table.
+     *
+     * @param string $table
+     * @param array $data
+     * @param array $where
+     * @param array|null $format
+     * @param array|null $where_format
+     * @return int|false
+     */
+    public function update($table, array $data, array $where, $format = null, $where_format = null) {
+        if (is_object($this->wpdb) && method_exists($this->wpdb, 'update')) {
+            return $this->wpdb->update($table, $data, $where, $format, $where_format);
+        }
+        return false;
+    }
+
+    /**
+     * Delete rows from a table.
+     *
+     * @param string $table
+     * @param array $where
+     * @param array|null $where_format
+     * @return int|false
+     */
+    public function delete($table, array $where, $where_format = null) {
+        if (is_object($this->wpdb) && method_exists($this->wpdb, 'delete')) {
+            return $this->wpdb->delete($table, $where, $where_format);
+        }
+        return false;
+    }
+
+    /**
      * Determine if the database engine supports transactions (e.g. InnoDB).
      *
      * @return bool

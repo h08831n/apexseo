@@ -1,0 +1,227 @@
+[
+    {
+        "route": "/apexseo/v1",
+        "methods": "GET",
+        "unauthenticated_status": 200,
+        "admin_status": 200,
+        "sqli_safe": true,
+        "xss_safe": true,
+        "runtime_verified": true
+    },
+    {
+        "route": "/apexseo/v1/status",
+        "methods": "GET",
+        "unauthenticated_status": 403,
+        "admin_status": 200,
+        "sqli_safe": true,
+        "xss_safe": true,
+        "runtime_verified": true
+    },
+    {
+        "route": "/apexseo/v1/status",
+        "methods": "GET",
+        "unauthenticated_status": 403,
+        "admin_status": 200,
+        "sqli_safe": true,
+        "xss_safe": true,
+        "runtime_verified": true
+    },
+    {
+        "route": "/apexseo/v1/settings",
+        "methods": "GET",
+        "unauthenticated_status": 403,
+        "admin_status": 200,
+        "sqli_safe": true,
+        "xss_safe": true,
+        "runtime_verified": true
+    },
+    {
+        "route": "/apexseo/v1/settings",
+        "methods": "POST",
+        "unauthenticated_status": 400,
+        "admin_status": 400,
+        "sqli_safe": true,
+        "xss_safe": true,
+        "runtime_verified": true
+    },
+    {
+        "route": "/apexseo/v1/meta/(?P<object_type>[a-z_-]+)/(?P<object_id>\\d+)",
+        "methods": "GET",
+        "unauthenticated_status": 404,
+        "admin_status": 404,
+        "sqli_safe": true,
+        "xss_safe": true,
+        "runtime_verified": true
+    },
+    {
+        "route": "/apexseo/v1/meta/(?P<object_type>[a-z_-]+)/(?P<object_id>\\d+)",
+        "methods": "POST",
+        "unauthenticated_status": 404,
+        "admin_status": 404,
+        "sqli_safe": true,
+        "xss_safe": true,
+        "runtime_verified": true
+    },
+    {
+        "route": "/apexseo/v1/schema",
+        "methods": "GET",
+        "unauthenticated_status": 403,
+        "admin_status": 200,
+        "sqli_safe": true,
+        "xss_safe": true,
+        "runtime_verified": true
+    },
+    {
+        "route": "/apexseo/v1/schema",
+        "methods": "POST",
+        "unauthenticated_status": 403,
+        "admin_status": 422,
+        "sqli_safe": true,
+        "xss_safe": true,
+        "runtime_verified": true
+    },
+    {
+        "route": "/apexseo/v1/schema/(?P<id>\\d+)",
+        "methods": "PUT",
+        "unauthenticated_status": 404,
+        "admin_status": 404,
+        "sqli_safe": true,
+        "xss_safe": true,
+        "runtime_verified": true
+    },
+    {
+        "route": "/apexseo/v1/schema/(?P<id>\\d+)",
+        "methods": "DELETE",
+        "unauthenticated_status": 404,
+        "admin_status": 404,
+        "sqli_safe": true,
+        "xss_safe": true,
+        "runtime_verified": true
+    },
+    {
+        "route": "/apexseo/v1/redirects",
+        "methods": "GET",
+        "unauthenticated_status": 403,
+        "admin_status": 200,
+        "sqli_safe": true,
+        "xss_safe": true,
+        "runtime_verified": true
+    },
+    {
+        "route": "/apexseo/v1/redirects",
+        "methods": "POST",
+        "unauthenticated_status": 403,
+        "admin_status": 422,
+        "sqli_safe": true,
+        "xss_safe": true,
+        "runtime_verified": true
+    },
+    {
+        "route": "/apexseo/v1/redirects/(?P<id>\\d+)",
+        "methods": "PUT",
+        "unauthenticated_status": 404,
+        "admin_status": 404,
+        "sqli_safe": true,
+        "xss_safe": true,
+        "runtime_verified": true
+    },
+    {
+        "route": "/apexseo/v1/redirects/(?P<id>\\d+)",
+        "methods": "DELETE",
+        "unauthenticated_status": 404,
+        "admin_status": 404,
+        "sqli_safe": true,
+        "xss_safe": true,
+        "runtime_verified": true
+    },
+    {
+        "route": "/apexseo/v1/monitor/404",
+        "methods": "GET",
+        "unauthenticated_status": 403,
+        "admin_status": 200,
+        "sqli_safe": true,
+        "xss_safe": true,
+        "runtime_verified": true
+    },
+    {
+        "route": "/apexseo/v1/monitor/404",
+        "methods": "DELETE",
+        "unauthenticated_status": 403,
+        "admin_status": 200,
+        "sqli_safe": true,
+        "xss_safe": true,
+        "runtime_verified": true
+    },
+    {
+        "route": "/apexseo/v1/links/suggestions",
+        "methods": "GET",
+        "unauthenticated_status": 400,
+        "admin_status": 400,
+        "sqli_safe": true,
+        "xss_safe": true,
+        "runtime_verified": true
+    },
+    {
+        "route": "/apexseo/v1/analytics/overview",
+        "methods": "GET",
+        "unauthenticated_status": 403,
+        "admin_status": 200,
+        "sqli_safe": true,
+        "xss_safe": true,
+        "runtime_verified": true
+    },
+    {
+        "route": "/apexseo/v1/analytics/rank-tracker",
+        "methods": "GET",
+        "unauthenticated_status": 403,
+        "admin_status": 200,
+        "sqli_safe": true,
+        "xss_safe": true,
+        "runtime_verified": true
+    },
+    {
+        "route": "/apexseo/v1/cache/purge",
+        "methods": "POST",
+        "unauthenticated_status": 403,
+        "admin_status": 200,
+        "sqli_safe": true,
+        "xss_safe": true,
+        "runtime_verified": true
+    },
+    {
+        "route": "/apexseo/v1/cache/preload",
+        "methods": "POST",
+        "unauthenticated_status": 403,
+        "admin_status": 202,
+        "sqli_safe": true,
+        "xss_safe": true,
+        "runtime_verified": true
+    },
+    {
+        "route": "/apexseo/v1/media/optimize",
+        "methods": "POST",
+        "unauthenticated_status": 400,
+        "admin_status": 400,
+        "sqli_safe": true,
+        "xss_safe": true,
+        "runtime_verified": true
+    },
+    {
+        "route": "/apexseo/v1/media/bulk-optimize",
+        "methods": "POST",
+        "unauthenticated_status": 403,
+        "admin_status": 200,
+        "sqli_safe": true,
+        "xss_safe": true,
+        "runtime_verified": true
+    },
+    {
+        "route": "/apexseo/v1/migration/run",
+        "methods": "POST",
+        "unauthenticated_status": 400,
+        "admin_status": 400,
+        "sqli_safe": true,
+        "xss_safe": true,
+        "runtime_verified": true
+    }
+]

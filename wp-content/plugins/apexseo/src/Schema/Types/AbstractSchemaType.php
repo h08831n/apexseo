@@ -28,4 +28,20 @@ abstract class AbstractSchemaType implements SchemaTypeInterface {
         }
         return $clean;
     }
+
+    /**
+     * Resolve canonical URL safely from context or home URL.
+     *
+     * @param array $context
+     * @return string
+     */
+    protected function getCanonicalUrl(array $context = []) {
+        if (!empty($context['canonical_url'])) {
+            return $context['canonical_url'];
+        }
+        if (!empty($context['url'])) {
+            return $context['url'];
+        }
+        return function_exists('home_url') ? home_url('/') : 'https://example.com/';
+    }
 }

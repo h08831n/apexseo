@@ -198,6 +198,15 @@ class ConfigurationManager implements ServiceContractInterface {
     }
 
     /**
+     * Get all settings across all domains.
+     *
+     * @return array
+     */
+    public function getAll() {
+        return $this->settings;
+    }
+
+    /**
      * Check if a module is enabled in configuration.
      *
      * @param string $moduleId Module ID (e.g., 'seo', 'perf', 'cache').

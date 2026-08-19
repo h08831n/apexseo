@@ -1,0 +1,26 @@
+{
+    "sample_size": 30,
+    "avg_ttfb_ms": 0.097,
+    "min_ttfb_ms": 0.048,
+    "max_ttfb_ms": 1.118,
+    "avg_memory_kb": 1581.08,
+    "peak_memory_kb": 1751.02,
+    "avg_queries_per_head": 0.03,
+    "cold_request_ms": 1.118,
+    "warm_request_ms": 0.097,
+    "db_benchmarks": {
+        "synthetic_records_inserted": 35000,
+        "insert_duration_sec": 0.979,
+        "redirect_indexed_lookup_ms": 11.245,
+        "indexable_indexed_lookup_ms": 17.772
+    },
+    "budget_compliance": {
+        "ttfb_budget_ms": 50,
+        "ttfb_actual_ms": 0.097,
+        "ttfb_passed": true,
+        "memory_budget_mb": 15,
+        "memory_actual_mb": 1.54,
+        "memory_passed": true
+    },
+    "measured_status": "RUNTIME_MEASURED"
+}

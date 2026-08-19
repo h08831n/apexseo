@@ -222,6 +222,15 @@ class EnvironmentDetector implements ServiceContractInterface {
     }
 
     /**
+     * Get detected server type identifier (e.g. 'nginx', 'apache', 'litespeed', 'generic').
+     *
+     * @return string
+     */
+    public function getServerType() {
+        return $this->getServerAdapter()->getName();
+    }
+
+    /**
      * Set explicit server adapter (useful for testing).
      *
      * @param ServerAdapterInterface $adapter

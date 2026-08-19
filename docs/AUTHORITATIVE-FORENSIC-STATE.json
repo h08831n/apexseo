@@ -76,7 +76,7 @@
       "callback": "RestApiRouter::getStatus",
       "permission_callback": "SecurityManager::restAdminPermissionCallback",
       "source": "src/API/RestApiRouter.php",
-      "source_hash": "b8564b98fac503779843b6e5c085ddf7a7a7ade1d0345b644e4366225e3bea1c"
+      "source_hash": "0445ceacad1c330a5d0518b16556d85514e37734d1bb8ae2356d5937829af702"
     },
     {
       "namespace": "apexseo/v1",
@@ -103,7 +103,7 @@
       "callback": "CacheRestController::purgeCache",
       "permission_callback": "checkAdminPermission",
       "source": "src/API/Controllers/CacheRestController.php",
-      "source_hash": "35582000ed38fb8aadf7c1ba19910c3180ba639e1f197ce222dd017beac05b26"
+      "source_hash": "bd2817ada106c94eff0f1f87debfb74992b934fe5c7e015574a5d87990ece7bf"
     },
     {
       "namespace": "apexseo/v1",
@@ -112,7 +112,7 @@
       "callback": "CacheRestController::triggerPreload",
       "permission_callback": "checkAdminPermission",
       "source": "src/API/Controllers/CacheRestController.php",
-      "source_hash": "35582000ed38fb8aadf7c1ba19910c3180ba639e1f197ce222dd017beac05b26"
+      "source_hash": "bd2817ada106c94eff0f1f87debfb74992b934fe5c7e015574a5d87990ece7bf"
     },
     {
       "namespace": "apexseo/v1",
@@ -175,7 +175,7 @@
       "callback": "NotFoundRestController::get404Logs",
       "permission_callback": "checkAdminPermission",
       "source": "src/API/Controllers/NotFoundRestController.php",
-      "source_hash": "4dd2bb7d491df869f424313d6f24a6ae6b28413fe74e705bacb806c2c3d41d6c"
+      "source_hash": "79c9fbbe37adb3497bfb28091a89a635aaa41d9e0536eab1e9b1239db4d9851a"
     },
     {
       "namespace": "apexseo/v1",
@@ -184,7 +184,7 @@
       "callback": "NotFoundRestController::clear404Logs",
       "permission_callback": "checkAdminPermission",
       "source": "src/API/Controllers/NotFoundRestController.php",
-      "source_hash": "4dd2bb7d491df869f424313d6f24a6ae6b28413fe74e705bacb806c2c3d41d6c"
+      "source_hash": "79c9fbbe37adb3497bfb28091a89a635aaa41d9e0536eab1e9b1239db4d9851a"
     },
     {
       "namespace": "apexseo/v1",
@@ -348,12 +348,12 @@
     {
       "schema_type": "CourseSchema",
       "source": "src/Schema/Types/CourseSchema.php",
-      "source_hash": "0e14295b1c8b318f076d761f88ddc8d2c9ad4cf897126735b395e6bc507732b7"
+      "source_hash": "fc92151c45f7f9e2301e817eaa839216c94e860f09384b03c8d2fdb07a6db481"
     },
     {
       "schema_type": "EventSchema",
       "source": "src/Schema/Types/EventSchema.php",
-      "source_hash": "845a4da7d05246fa20cb537472d3d5179f479cbac12574714060b398727c15f3"
+      "source_hash": "a435bc0ee9c001dc1aabbb51d74d627c0baca56a935b9e9abb5c5f1f1501454a"
     },
     {
       "schema_type": "FAQPageSchema",
@@ -363,7 +363,7 @@
     {
       "schema_type": "JobPostingSchema",
       "source": "src/Schema/Types/JobPostingSchema.php",
-      "source_hash": "ac3d2b087dceae5329f2320f792c1646bd16c515afbfc708bd7b3cadcf7f8ab5"
+      "source_hash": "6c838eed43462852874e6a94f7373470e744cda1d8ef8bc2645b2eb87b58aa13"
     },
     {
       "schema_type": "LocalBusinessSchema",
@@ -383,12 +383,12 @@
     {
       "schema_type": "RecipeSchema",
       "source": "src/Schema/Types/RecipeSchema.php",
-      "source_hash": "b39f297769108801031af65bafaa678455ce546738afec885713b8e76b654944"
+      "source_hash": "c06d4ab2aace8d7c376a1acaf4d156b07a0fa9cc6606217347940d2e466fb8b0"
     },
     {
       "schema_type": "SoftwareApplicationSchema",
       "source": "src/Schema/Types/SoftwareApplicationSchema.php",
-      "source_hash": "d18bdcb635a5cbece35f2802865af1ae418b6503de1ac891f7a6eb746a21506b"
+      "source_hash": "be0a2bbdf65f257d2894d38d9e03fa33e6045e4f42e51e997231be07c15c41b1"
     },
     {
       "schema_type": "WebSiteSchema",
@@ -398,11 +398,23 @@
     {
       "schema_type": "VideoObjectSchema",
       "source": "src/Schema/Media/VideoObjectSchema.php",
-      "source_hash": "f245c239c1e3b22b1d56921d2ba304626f36371941f9c5c00c55720ae68dc85f"
+      "source_hash": "32deb7f9d6b1811435f383e900302c69cb87fb715b44e52619015adc9301972d"
     }
   ],
   "source_file_hashes": {
     "src/Autoloader.php": "cbba6a4eff2fa8b2294c0fd5561f7ba3e8a630377bd8118221d002940ed76c2c",
+    "src/API/RestApiRouter.php": "0445ceacad1c330a5d0518b16556d85514e37734d1bb8ae2356d5937829af702",
+    "src/API/Controllers/AbstractRestController.php": "eb6118d88d63bce0e696d2349f96fa5138a125bc5cb11b7b0f0a51a05cd1b9df",
+    "src/API/Controllers/AnalyticsRestController.php": "fb028e001a4d787d6ba8b76ae016731b57a280e1e4de83446ce685c84a42b21d",
+    "src/API/Controllers/CacheRestController.php": "bd2817ada106c94eff0f1f87debfb74992b934fe5c7e015574a5d87990ece7bf",
+    "src/API/Controllers/LinksRestController.php": "32df8336f36e8c97e6c73844bfd935342a8d274db5b46701864df6ac03861f86",
+    "src/API/Controllers/MediaRestController.php": "ec15e15b6edc2d3b955262f14c41787a6f01c241c8af17113d3f898baf26c9e3",
+    "src/API/Controllers/MetaRestController.php": "5cccc520af256c00179a5cddbda25f9e93fd7ee520a2bb9e64b0d6f4f715490f",
+    "src/API/Controllers/MigrationRestController.php": "29094b2dd0eb1d51a0239548f04632294fbc6d674c7ec472ca1f289510e200c7",
+    "src/API/Controllers/NotFoundRestController.php": "79c9fbbe37adb3497bfb28091a89a635aaa41d9e0536eab1e9b1239db4d9851a",
+    "src/API/Controllers/RedirectsRestController.php": "b66c8b8684a28ccec653f14a0237dc41a9efe9a8e741f4003dd810da0210ccad",
+    "src/API/Controllers/SchemaRestController.php": "89754fe1c779903c3bec939837850632a0083aa2e8ec15ee412d4002f5457d58",
+    "src/API/Controllers/SettingsRestController.php": "cb1e4cca65f627761ea7848359c44e5e4d89ab5741374236c7c46005371db6e1",
     "src/CLI/AbstractCliCommand.php": "94e9edec2e01d608c33a5e2632fd64e37dc0096bb7364b4f2a272d3877319ffc",
     "src/CLI/CacheCommand.php": "1278d6aa9c6c255ca5d2ee9de0e11ffd0369e1721414c6fb61e7a9bb8e7a3292",
     "src/CLI/DatabaseCommand.php": "b9ac5e5c5c21358b0635bff36f5aa8477a16c43ff67331fd191403c52f3de805",
@@ -413,113 +425,101 @@
     "src/CLI/RedirectCommand.php": "ed65de1347b04443f5603269b0d6acda501830bc40fa1769784e6845b452bdc3",
     "src/CLI/SchemaCommand.php": "b275439e9c95354c92fbdcdee271cf64a568d4b45a8e52b86c7d2723eb99c710",
     "src/CLI/SitemapCommand.php": "fb243f8660881ce24ed3dd6d6a4b398ed103d91edaab8273d9ee5e7d755ab38b",
-    "src/API/RestApiRouter.php": "b8564b98fac503779843b6e5c085ddf7a7a7ade1d0345b644e4366225e3bea1c",
-    "src/API/Controllers/AbstractRestController.php": "eb6118d88d63bce0e696d2349f96fa5138a125bc5cb11b7b0f0a51a05cd1b9df",
-    "src/API/Controllers/AnalyticsRestController.php": "fb028e001a4d787d6ba8b76ae016731b57a280e1e4de83446ce685c84a42b21d",
-    "src/API/Controllers/CacheRestController.php": "35582000ed38fb8aadf7c1ba19910c3180ba639e1f197ce222dd017beac05b26",
-    "src/API/Controllers/LinksRestController.php": "32df8336f36e8c97e6c73844bfd935342a8d274db5b46701864df6ac03861f86",
-    "src/API/Controllers/MediaRestController.php": "ec15e15b6edc2d3b955262f14c41787a6f01c241c8af17113d3f898baf26c9e3",
-    "src/API/Controllers/MetaRestController.php": "5cccc520af256c00179a5cddbda25f9e93fd7ee520a2bb9e64b0d6f4f715490f",
-    "src/API/Controllers/MigrationRestController.php": "29094b2dd0eb1d51a0239548f04632294fbc6d674c7ec472ca1f289510e200c7",
-    "src/API/Controllers/NotFoundRestController.php": "4dd2bb7d491df869f424313d6f24a6ae6b28413fe74e705bacb806c2c3d41d6c",
-    "src/API/Controllers/RedirectsRestController.php": "b66c8b8684a28ccec653f14a0237dc41a9efe9a8e741f4003dd810da0210ccad",
-    "src/API/Controllers/SchemaRestController.php": "89754fe1c779903c3bec939837850632a0083aa2e8ec15ee412d4002f5457d58",
-    "src/API/Controllers/SettingsRestController.php": "cb1e4cca65f627761ea7848359c44e5e4d89ab5741374236c7c46005371db6e1",
-    "src/Core/Multisite/MultisiteManager.php": "78cadc90d05715f97344d6070a534eacd65b4ddb0f4217038828a588404e1970",
-    "src/Core/Logging/Logger.php": "88d1eb56925fbda1f8acca6ee0de7bec9f47af6aa592f21ead38bd83e0a3ef9d",
-    "src/Core/Logging/LoggerInterface.php": "4d347044e69a6d44241ebc925ac84e410bc0d1c5dd6ae22e5f23be19cc706ed6",
+    "src/SEO/SeoModule.php": "e538d041ee67dd7780010d6cc7c48315a6470fd488df9d7d85e1eeebd26a2894",
+    "src/SEO/Breadcrumbs/BreadcrumbGenerator.php": "1a83da441a2986b08f97aa4598dc71b4ce9f8d22308dcb221d4eaecfb33037e8",
+    "src/SEO/Admin/MetaSaver.php": "5d020dba6f158f382640e54cb14deb9bd33ebebd58a8f0a453acf7e09b8b1229",
+    "src/SEO/Variables/VariableEngine.php": "96c92ae3617e37d5e502ef565b7ad608113673bd04fc23601908f1eee89c6100",
+    "src/SEO/Meta/CanonicalPresenter.php": "174571bbcd9517a85c616e49f10784efb16f397a1cd4d87c6af48a7faeb8f377",
+    "src/SEO/Meta/DescriptionPresenter.php": "a85858d80b69c71914fb7c3d0b68fcd26213817d7c865de4552cb0e4b4a5b157",
+    "src/SEO/Meta/MetaTagManager.php": "28348f9699b1dd573754fbdc2ff32c937245f85898ca942c728ff6257a81b620",
+    "src/SEO/Meta/RobotsPresenter.php": "1a495df20b56583249320b6da4eaf30a4cd49e2a65028511ec262400ae700cfb",
+    "src/SEO/Meta/TitlePresenter.php": "936c432ba5e4d3b9d77ec43a6e2a47b79815c00f3df78a6f0a2f52439afc4004",
+    "src/SEO/Social/OpenGraphPresenter.php": "577f55bcb124bd6b54718e66c272a22471763e659f1ae7491ec81baeafdade6a",
+    "src/SEO/Social/TwitterCardPresenter.php": "9addde94d89630e391212bbbd5c1bb9ead041b9f12fbfa0ec96c5594904fc887",
+    "src/SEO/Builder/IndexableBuilder.php": "4b059c68cc0823c5b16db59fc70027de588e43073dfbd21ed94a19f0103fa3eb",
+    "src/SEO/Models/Indexable.php": "111f0a31f0b6b486d9c56ceac7392f36211fccbe4b21cfb58ac7e3c2318e6ad7",
+    "src/SEO/Models/SeoContext.php": "1781d783cbd976d1f55b5eda0813afd60f784baf3d02e1b12e202f9187ef621b",
+    "src/SEO/Repository/IndexableRepository.php": "66b9f636aee87d5b1a7e1826b43f8f4f5f7edce7a32a49d4cafd04eb95e851e1",
+    "src/SEO/Templates/TemplateManager.php": "a86b3f44dad0162d764b892d5c3264bc097895953e9bc6d1ed723309b0bca090",
+    "src/SEO/Sitemap/SitemapGenerator.php": "35e912b54c9ffbcb5278a4e19020d7bd2d360a5733ce67f72194fefe567d5f0d",
+    "src/SEO/Redirects/RedirectManager.php": "59ae80243139ffcb37ad8a921a1ca8cf3a83906e9a278995fa5e5a4eab8eb3bb",
+    "src/SEO/Integrations/WooCommerceIntegration.php": "022af52209483a2b21c9beb550870e41e0daf4a506688d265a6c898d687d081b",
+    "src/SEO/Context/ContextDetector.php": "efca6c8de00b7bf752e4df53a7f3e068c542994abafa475b50eaf52c31c3a663",
+    "src/Core/Bootstrap/Plugin.php": "58eed9e3a19328f52f4f10c82d3a96a5cc1a9edb651ba0a8f5a1da99765d03e6",
     "src/Core/Environment/CapabilityRegistry.php": "2bb25ff5183133b32c30bab648ca127ff472f6cf60d75597222e441f80df716a",
-    "src/Core/Environment/EnvironmentDetector.php": "d253a5f6333c6c4372a59bc51ec4aaa34ecf580b16f5b268020bc170b3dd43d8",
+    "src/Core/Environment/EnvironmentDetector.php": "9f98f94766e1ff3765f9bc74b3fff98a7d87aca605984668598c601b0b066a58",
     "src/Core/Environment/Server/ApacheAdapter.php": "53e1493d77f11511b91f6c037bb5f65fc239a3712360e57d03e1947d5a624923",
     "src/Core/Environment/Server/GenericServerAdapter.php": "a9e98814603bca23155de08ab52c6b79701a154c5c62dbb87c2b9fbfb8620473",
     "src/Core/Environment/Server/LiteSpeedAdapter.php": "3a681a184b828c7fa6dfe3d99114a9597b657f1a6707e61f66aab726efa14709",
     "src/Core/Environment/Server/NginxAdapter.php": "97df53e143f677e1e11b87a87da3b21a9e2177bc96b42766d7a89b28e35e6b67",
     "src/Core/Environment/Server/OpenLiteSpeedAdapter.php": "195e52a040d8cc110b70c7284fc5ef97927dc094b88e474fbc006b58ae2a78f8",
     "src/Core/Environment/Server/ServerAdapterInterface.php": "8f702194cdc922bcf12e0c0fc88ca793fa263fdd2b2824607a113c9032eead89",
+    "src/Core/Contracts/BootableInterface.php": "ca82531a25b50e957f3ff9498f9d86be5050c70cf9f17c9f2701820564712a5e",
+    "src/Core/Contracts/HookableInterface.php": "db154e5d9861f47a148e7c05f2e16aa3218b6a05dfd65e4409646935c7f65ab9",
+    "src/Core/Contracts/ModuleInterface.php": "e23ba99ffe8c9c49b65c0d6b7f93d4959484ae438b0a05160886d298c293801f",
+    "src/Core/Contracts/ServiceContractInterface.php": "11dd76f96d7fcf850bc8dc5f898f14df179916139ce1a306522621e9b19c3ebf",
+    "src/Core/Logging/Logger.php": "88d1eb56925fbda1f8acca6ee0de7bec9f47af6aa592f21ead38bd83e0a3ef9d",
+    "src/Core/Logging/LoggerInterface.php": "4d347044e69a6d44241ebc925ac84e410bc0d1c5dd6ae22e5f23be19cc706ed6",
+    "src/Core/Database/DatabaseManager.php": "52503ef9c54213a65e3372accbae82bdc0f6dcf89b2ff3a2eccd934dbfef4efd",
+    "src/Core/Database/MigrationInterface.php": "62959596551b69e5d987dafd3f06b6001b5c32b783fe2a120f160cdc6ce40801",
+    "src/Core/Database/MigrationRunner.php": "09584dbabc60785522e588613ed6d14142c4cfa10c98da91bb9eab757dc4b374",
+    "src/Core/Database/SchemaVersion.php": "177d6bd4495be7b1f8f1eba82dbf58cd481d7f6aa27603cecb1d5a91cb167e8d",
+    "src/Core/Database/Migrations/Migration_1_0_0_CreateLockedTables.php": "7878a8f41c6ec9b196297249a02ed7ca3090ad463bf8983dc5b0790e2222850e",
     "src/Core/Exceptions/ApexException.php": "d402e53d92c5c9468c39211ff0142af001a781687de7632ae497867f8b3b912c",
     "src/Core/Exceptions/ConfigurationException.php": "793426a73f5684d387dffc8c88deb363913db797833bace250b6a90cc876e875",
     "src/Core/Exceptions/ContainerException.php": "9f492f8f7c4b4402c8667a77498d6d14a352a355dd49a88b13ef64ea26614a47",
     "src/Core/Exceptions/DatabaseException.php": "81e55f71d35cdc7642310bfe4b551d28ea526101fc1a75d2a37752cba8e1cd3c",
     "src/Core/Exceptions/NotFoundException.php": "65d2db35e6780ca84a4b7d30c7edd7a2839fe6cd42f77b2fd0aea214e794e205",
     "src/Core/Exceptions/SecurityException.php": "f062a7780ad7fdf9ad5a12255ee2b10569f767692272a170cc4ad530c747ab53",
-    "src/Core/Container/Container.php": "8d58fdd9f3382fc40e5bd93999fac9b6ad5bd8152d86c4c7d1414bbeb3db48e1",
-    "src/Core/Container/ContainerInterface.php": "a5a4a0371489149388f646446dac1f241dd72e0272ba3913e43d99612074a673",
-    "src/Core/CLI/CliManager.php": "821c407cfdda94dd0fd4a8fdb1fc3b30a0a71cfc4124cca1926d64563d439134",
-    "src/Core/Database/DatabaseManager.php": "3c53e20b78801cb6614365c96be8d87d033800c0325a4553694c9b9ea445a8c4",
-    "src/Core/Database/MigrationInterface.php": "62959596551b69e5d987dafd3f06b6001b5c32b783fe2a120f160cdc6ce40801",
-    "src/Core/Database/MigrationRunner.php": "09584dbabc60785522e588613ed6d14142c4cfa10c98da91bb9eab757dc4b374",
-    "src/Core/Database/SchemaVersion.php": "177d6bd4495be7b1f8f1eba82dbf58cd481d7f6aa27603cecb1d5a91cb167e8d",
-    "src/Core/Database/Migrations/Migration_1_0_0_CreateLockedTables.php": "7878a8f41c6ec9b196297249a02ed7ca3090ad463bf8983dc5b0790e2222850e",
-    "src/Core/Contracts/BootableInterface.php": "ca82531a25b50e957f3ff9498f9d86be5050c70cf9f17c9f2701820564712a5e",
-    "src/Core/Contracts/HookableInterface.php": "db154e5d9861f47a148e7c05f2e16aa3218b6a05dfd65e4409646935c7f65ab9",
-    "src/Core/Contracts/ModuleInterface.php": "e23ba99ffe8c9c49b65c0d6b7f93d4959484ae438b0a05160886d298c293801f",
-    "src/Core/Contracts/ServiceContractInterface.php": "11dd76f96d7fcf850bc8dc5f898f14df179916139ce1a306522621e9b19c3ebf",
+    "src/Core/CLI/CliManager.php": "7c495a6e9a6eac85b254caf83beb8114a3ed21846a28f0054e93672c23726a25",
+    "src/Core/Configuration/ConfigurationManager.php": "e4b5d83a45760770d8bbbdef7e75b3893fba41cbf585fe3892abcf29dda0e625",
     "src/Core/Security/SecurityManager.php": "df9df1d68dd0ca375e82595e6ba5a684801b8051e80a82a889beae115c307417",
     "src/Core/Security/SecurityUtils.php": "0ccad05ffa6470e9feedde0351d73a3bfe325c9e2963700676e79ac0b3a8107b",
-    "src/Core/Modules/ModuleRegistry.php": "13d7fa3d7d4e1fd8e9219b0112af5b7f9c55c8b6fedf01e65351a7569d78879f",
-    "src/Core/Lifecycle/LifecycleManager.php": "1423dfd26cf7582c34977abe4ec156995713c5cbe4ec7646009b29bb8a73c36b",
-    "src/Core/Bootstrap/Plugin.php": "58eed9e3a19328f52f4f10c82d3a96a5cc1a9edb651ba0a8f5a1da99765d03e6",
-    "src/Core/REST/RestManager.php": "e425ad8ef25549508724fc1d16b3e9a8e2807765f0db6255cd633fd1d405af24",
-    "src/Core/Configuration/ConfigurationManager.php": "1a5238b6d2d227bba8f70664dcc453e58e5607d2905b675d8fe9523211131386",
+    "src/Core/Multisite/MultisiteManager.php": "78cadc90d05715f97344d6070a534eacd65b4ddb0f4217038828a588404e1970",
     "src/Core/Hooks/HookManager.php": "2bc94f47e7d54fe27210e011931bf55f5ee032e1d520bf9e4211cfedb6e755bb",
-    "src/SEO/SeoModule.php": "e538d041ee67dd7780010d6cc7c48315a6470fd488df9d7d85e1eeebd26a2894",
-    "src/SEO/Meta/CanonicalPresenter.php": "174571bbcd9517a85c616e49f10784efb16f397a1cd4d87c6af48a7faeb8f377",
-    "src/SEO/Meta/DescriptionPresenter.php": "a85858d80b69c71914fb7c3d0b68fcd26213817d7c865de4552cb0e4b4a5b157",
-    "src/SEO/Meta/MetaTagManager.php": "28348f9699b1dd573754fbdc2ff32c937245f85898ca942c728ff6257a81b620",
-    "src/SEO/Meta/RobotsPresenter.php": "1a495df20b56583249320b6da4eaf30a4cd49e2a65028511ec262400ae700cfb",
-    "src/SEO/Meta/TitlePresenter.php": "936c432ba5e4d3b9d77ec43a6e2a47b79815c00f3df78a6f0a2f52439afc4004",
-    "src/SEO/Models/Indexable.php": "111f0a31f0b6b486d9c56ceac7392f36211fccbe4b21cfb58ac7e3c2318e6ad7",
-    "src/SEO/Models/SeoContext.php": "1781d783cbd976d1f55b5eda0813afd60f784baf3d02e1b12e202f9187ef621b",
-    "src/SEO/Context/ContextDetector.php": "efca6c8de00b7bf752e4df53a7f3e068c542994abafa475b50eaf52c31c3a663",
-    "src/SEO/Repository/IndexableRepository.php": "66b9f636aee87d5b1a7e1826b43f8f4f5f7edce7a32a49d4cafd04eb95e851e1",
-    "src/SEO/Templates/TemplateManager.php": "a86b3f44dad0162d764b892d5c3264bc097895953e9bc6d1ed723309b0bca090",
-    "src/SEO/Variables/VariableEngine.php": "96c92ae3617e37d5e502ef565b7ad608113673bd04fc23601908f1eee89c6100",
-    "src/SEO/Social/OpenGraphPresenter.php": "577f55bcb124bd6b54718e66c272a22471763e659f1ae7491ec81baeafdade6a",
-    "src/SEO/Social/TwitterCardPresenter.php": "9addde94d89630e391212bbbd5c1bb9ead041b9f12fbfa0ec96c5594904fc887",
-    "src/SEO/Redirects/RedirectManager.php": "59ae80243139ffcb37ad8a921a1ca8cf3a83906e9a278995fa5e5a4eab8eb3bb",
-    "src/SEO/Breadcrumbs/BreadcrumbGenerator.php": "1a83da441a2986b08f97aa4598dc71b4ce9f8d22308dcb221d4eaecfb33037e8",
-    "src/SEO/Sitemap/SitemapGenerator.php": "35e912b54c9ffbcb5278a4e19020d7bd2d360a5733ce67f72194fefe567d5f0d",
-    "src/SEO/Builder/IndexableBuilder.php": "4b059c68cc0823c5b16db59fc70027de588e43073dfbd21ed94a19f0103fa3eb",
-    "src/SEO/Integrations/WooCommerceIntegration.php": "022af52209483a2b21c9beb550870e41e0daf4a506688d265a6c898d687d081b",
-    "src/SEO/Admin/MetaSaver.php": "5d020dba6f158f382640e54cb14deb9bd33ebebd58a8f0a453acf7e09b8b1229",
-    "src/AI/AiModule.php": "66bd05149101a760f56299a5575e79c310492c7c3ea5fba0d549a12b65e9e858",
-    "src/AI/LlmsTxt/LlmsTxtGenerator.php": "194c1b22b8264fa98f653239616b9c4ad88bac731b5372c75e31b4435bc4386a",
-    "src/AI/Generators/MetadataAiGenerator.php": "ebc10fa938bcfc1be8cc7e83e428f03101eacab92ab6bbf44bff1ee1661b2e8a",
-    "src/AI/SearchIntent/SearchIntentAnalyzer.php": "dde9c6279fe1c6ed56d41c895fde0363de6182248fc02d1b8a06b988d7a3c435",
+    "src/Core/REST/RestManager.php": "e425ad8ef25549508724fc1d16b3e9a8e2807765f0db6255cd633fd1d405af24",
+    "src/Core/Modules/ModuleRegistry.php": "13d7fa3d7d4e1fd8e9219b0112af5b7f9c55c8b6fedf01e65351a7569d78879f",
+    "src/Core/Container/Container.php": "8d58fdd9f3382fc40e5bd93999fac9b6ad5bd8152d86c4c7d1414bbeb3db48e1",
+    "src/Core/Container/ContainerInterface.php": "a5a4a0371489149388f646446dac1f241dd72e0272ba3913e43d99612074a673",
+    "src/Core/Lifecycle/LifecycleManager.php": "1423dfd26cf7582c34977abe4ec156995713c5cbe4ec7646009b29bb8a73c36b",
     "src/Schema/SchemaGraphBuilder.php": "4d68dac9845c0a6fcd7100d9f0383db20df9c775219dd4d0e8a816e12bc233ab",
     "src/Schema/SchemaModule.php": "04ede6a62683c73c349c57cae3bb5643744427521e2584dcf6fbdfbbd26506de",
     "src/Schema/SchemaRegistry.php": "ecf77f795c516fde5da993284a31ce5b44c20248302a4382057a5a9163a5e3e4",
-    "src/Schema/Types/AbstractSchemaType.php": "d5a8eaeb114b0752ff87159367bc237c812ffa7d89888c73e6d7721c9cf0ac14",
+    "src/Schema/Types/AbstractSchemaType.php": "be11bf979d5ec6fe41b38dcfb971c0e7a451587d6287061b7cd8666f10ba6bfa",
     "src/Schema/Types/ArticleSchema.php": "94d1584e26d27f759e98bcd5569118343131e53c274a2fdabf58b1d381f547fb",
-    "src/Schema/Types/CourseSchema.php": "0e14295b1c8b318f076d761f88ddc8d2c9ad4cf897126735b395e6bc507732b7",
-    "src/Schema/Types/EventSchema.php": "845a4da7d05246fa20cb537472d3d5179f479cbac12574714060b398727c15f3",
+    "src/Schema/Types/CourseSchema.php": "fc92151c45f7f9e2301e817eaa839216c94e860f09384b03c8d2fdb07a6db481",
+    "src/Schema/Types/EventSchema.php": "a435bc0ee9c001dc1aabbb51d74d627c0baca56a935b9e9abb5c5f1f1501454a",
     "src/Schema/Types/FAQPageSchema.php": "87fae7ce733e7b967f6d78e74efac4bc879479db0c3852642c64546e32d85498",
-    "src/Schema/Types/JobPostingSchema.php": "ac3d2b087dceae5329f2320f792c1646bd16c515afbfc708bd7b3cadcf7f8ab5",
+    "src/Schema/Types/JobPostingSchema.php": "6c838eed43462852874e6a94f7373470e744cda1d8ef8bc2645b2eb87b58aa13",
     "src/Schema/Types/LocalBusinessSchema.php": "3300881159150f15dabe6499475f42a9987ea147b3a511a139a55f76abbe4842",
     "src/Schema/Types/OrganizationSchema.php": "3c2edb1e36a41054991e2e697b62020303fc28feaefc69a9bb998010ab36bd75",
     "src/Schema/Types/ProductSchema.php": "cf2783ed6295bfff0da3325b6dc0459ec8b140ebd6b2e2f7ef4f88f897a595a6",
-    "src/Schema/Types/RecipeSchema.php": "b39f297769108801031af65bafaa678455ce546738afec885713b8e76b654944",
+    "src/Schema/Types/RecipeSchema.php": "c06d4ab2aace8d7c376a1acaf4d156b07a0fa9cc6606217347940d2e466fb8b0",
     "src/Schema/Types/SchemaTypeInterface.php": "1affeba7e226c8d81de1612d3eaa1915bde05e1ba3c583da4cf282a4cdcf7793",
-    "src/Schema/Types/SoftwareApplicationSchema.php": "d18bdcb635a5cbece35f2802865af1ae418b6503de1ac891f7a6eb746a21506b",
+    "src/Schema/Types/SoftwareApplicationSchema.php": "be0a2bbdf65f257d2894d38d9e03fa33e6045e4f42e51e997231be07c15c41b1",
     "src/Schema/Types/WebSiteSchema.php": "6902e15a2847fcf64908292893a0abb9732c3d29d0b7874b6d930e80994b0dee",
-    "src/Schema/Media/VideoObjectSchema.php": "f245c239c1e3b22b1d56921d2ba304626f36371941f9c5c00c55720ae68dc85f",
     "src/Schema/Validator/SchemaValidator.php": "aed9d97707e5e72e15a756b6dfad661f88a86abd771c8af8b78270f5caa778c6",
+    "src/Schema/Media/VideoObjectSchema.php": "32deb7f9d6b1811435f383e900302c69cb87fb715b44e52619015adc9301972d",
     "src/Media/MediaModule.php": "483c47bc193a89415d8b53dafeef8a109cfdb894324758c643251bf0d7c6bdcc",
-    "src/Media/Optimizer/ImageOptimizer.php": "51cab1180949cd872bf5e028eb9ce6a8f7acca02cf44d7da9853d38ed14c4953",
-    "src/Media/Optimizer/LcpOptimizer.php": "fbb10181bf1644f821296f5e74ecc6c645a65a06f12f2973604d5b53b95f3cd6",
     "src/Media/LazyLoad/ImageLazyLoader.php": "5c70c43cd93e07ec94e439638f6f2368ec7898dd85b5a545dd9ddbb2e24ea9db",
     "src/Media/LazyLoad/PlaceholderGenerator.php": "143918d00aa25f81f452e44c37cd56c31d0d72f4883aebdc8492252919bb92b5",
+    "src/Media/Optimizer/ImageOptimizer.php": "6c90fbd0b2549cf49d70f8a29629f4383955319fc55b5186635bda83d4af20af",
+    "src/Media/Optimizer/LcpOptimizer.php": "fbb10181bf1644f821296f5e74ecc6c645a65a06f12f2973604d5b53b95f3cd6",
     "src/Performance/PerformanceModule.php": "c67b1a7361e43480877aad0737bc3fb7abb05ac3b993873adccefee558f18b23",
+    "src/Performance/Tweaks/ResourceHints.php": "cc32a037d421ba78a3ee5a9503f2cf985ed706233661b876160591de5851e14b",
     "src/Performance/Assets/CssMinifier.php": "535f3e890f19eb03faebcc30f9b7ff65f14f8037dd8fbd14e849432bf77dd7a1",
     "src/Performance/Assets/DelayJsEngine.php": "df6e8c0e288fc861543dfc6c411473e4a1c3ddfa73506a47af5716a0a51724de",
     "src/Performance/Assets/HtmlMinifier.php": "2e7304bbe6d296bd16caa09f165ea566aad07955fe3b17ef02efddade506dc72",
     "src/Performance/Assets/JsMinifier.php": "f004a188ad5da35221724d241c6ed61aec370c9618d1c43aec5963d77efd185a",
-    "src/Performance/Tweaks/ResourceHints.php": "cc32a037d421ba78a3ee5a9503f2cf985ed706233661b876160591de5851e14b",
     "src/Performance/Cache/SmartPurge.php": "e0b58c73c0a5418c3ddd44ccffbcc86b5d28e609530be67215c0be1605c933ec",
     "src/Performance/Cache/StaticFileWriter.php": "e50d11983c6c04c133f78a20e923e2df74d7015849830a18795ea1f2a6f5e311",
     "src/Analytics/AnalyticsModule.php": "d1db14caea31cbd6812c1409cf479a1368100c453f3945154cce410d00f852d2",
     "src/Analytics/Monitor/FourOhFourMonitor.php": "e8b4e8149d9fbce6b388e2b55fb66cf9ddfe8a7a3d8321dd4c922a88d79daa25",
     "src/Analytics/Tracker/RankTracker.php": "d23630f7c14f2519ff1bf701983ec9df5b0075cc99943d9bf67e5ab4c8971a64",
+    "src/AI/AiModule.php": "66bd05149101a760f56299a5575e79c310492c7c3ea5fba0d549a12b65e9e858",
+    "src/AI/Generators/MetadataAiGenerator.php": "ebc10fa938bcfc1be8cc7e83e428f03101eacab92ab6bbf44bff1ee1661b2e8a",
+    "src/AI/LlmsTxt/LlmsTxtGenerator.php": "194c1b22b8264fa98f653239616b9c4ad88bac731b5372c75e31b4435bc4386a",
+    "src/AI/SearchIntent/SearchIntentAnalyzer.php": "dde9c6279fe1c6ed56d41c895fde0363de6182248fc02d1b8a06b988d7a3c435",
     "apexseo.php": "63e746579dc636d2238929bda12588c1911a4ea30828b9b9141392cf78a8745d",
     "uninstall.php": "bd159558f7f781c0fd2fe744f8558d24aeb9dce037e1421412d281c1e4b20db5"
   },
@@ -699,7 +699,7 @@
       "missing_work": "Custom HTML entity separator selection UI",
       "source_hashes": {
         "src/SEO/Variables/VariableEngine.php": "96c92ae3617e37d5e502ef565b7ad608113673bd04fc23601908f1eee89c6100",
-        "src/Core/Configuration/ConfigurationManager.php": "1a5238b6d2d227bba8f70664dcc453e58e5607d2905b675d8fe9523211131386"
+        "src/Core/Configuration/ConfigurationManager.php": "e4b5d83a45760770d8bbbdef7e75b3893fba41cbf585fe3892abcf29dda0e625"
       },
       "sha256": "96c92ae3617e37d5e502ef565b7ad608113673bd04fc23601908f1eee89c6100"
     },
@@ -1704,9 +1704,9 @@
       "evidence": "Generates Recipe schema with cookTime, prepTime, recipeIngredient, nutrition",
       "missing_work": "Step-by-step HowToStep instructions array parser",
       "source_hashes": {
-        "src/Schema/Types/RecipeSchema.php": "b39f297769108801031af65bafaa678455ce546738afec885713b8e76b654944"
+        "src/Schema/Types/RecipeSchema.php": "c06d4ab2aace8d7c376a1acaf4d156b07a0fa9cc6606217347940d2e466fb8b0"
       },
-      "sha256": "b39f297769108801031af65bafaa678455ce546738afec885713b8e76b654944"
+      "sha256": "c06d4ab2aace8d7c376a1acaf4d156b07a0fa9cc6606217347940d2e466fb8b0"
     },
     "APEX-073": {
       "id": "APEX-073",
@@ -1721,9 +1721,9 @@
       "evidence": "Generates JobPosting schema with title, hiringOrganization, jobLocation, baseSalary",
       "missing_work": "Remote work jobLocationType TELECOMMUTE support",
       "source_hashes": {
-        "src/Schema/Types/JobPostingSchema.php": "ac3d2b087dceae5329f2320f792c1646bd16c515afbfc708bd7b3cadcf7f8ab5"
+        "src/Schema/Types/JobPostingSchema.php": "6c838eed43462852874e6a94f7373470e744cda1d8ef8bc2645b2eb87b58aa13"
       },
-      "sha256": "ac3d2b087dceae5329f2320f792c1646bd16c515afbfc708bd7b3cadcf7f8ab5"
+      "sha256": "6c838eed43462852874e6a94f7373470e744cda1d8ef8bc2645b2eb87b58aa13"
     },
     "APEX-074": {
       "id": "APEX-074",
@@ -1738,9 +1738,9 @@
       "evidence": "Generates Course schema with courseCode, provider, hasCourseInstance",
       "missing_work": "Course prerequisite credential requirements",
       "source_hashes": {
-        "src/Schema/Types/CourseSchema.php": "0e14295b1c8b318f076d761f88ddc8d2c9ad4cf897126735b395e6bc507732b7"
+        "src/Schema/Types/CourseSchema.php": "fc92151c45f7f9e2301e817eaa839216c94e860f09384b03c8d2fdb07a6db481"
       },
-      "sha256": "0e14295b1c8b318f076d761f88ddc8d2c9ad4cf897126735b395e6bc507732b7"
+      "sha256": "fc92151c45f7f9e2301e817eaa839216c94e860f09384b03c8d2fdb07a6db481"
     },
     "APEX-075": {
       "id": "APEX-075",
@@ -1755,9 +1755,9 @@
       "evidence": "Generates Event schema with startDate, endDate, location (Place/Virtual), offers",
       "missing_work": "Event attendance mode (Mixed, Online, Offline)",
       "source_hashes": {
-        "src/Schema/Types/EventSchema.php": "845a4da7d05246fa20cb537472d3d5179f479cbac12574714060b398727c15f3"
+        "src/Schema/Types/EventSchema.php": "a435bc0ee9c001dc1aabbb51d74d627c0baca56a935b9e9abb5c5f1f1501454a"
       },
-      "sha256": "845a4da7d05246fa20cb537472d3d5179f479cbac12574714060b398727c15f3"
+      "sha256": "a435bc0ee9c001dc1aabbb51d74d627c0baca56a935b9e9abb5c5f1f1501454a"
     },
     "APEX-076": {
       "id": "APEX-076",
@@ -1772,9 +1772,9 @@
       "evidence": "Generates SoftwareApplication schema with operatingSystem, applicationCategory, offers",
       "missing_work": "Software screenshot image gallery nodes",
       "source_hashes": {
-        "src/Schema/Types/SoftwareApplicationSchema.php": "d18bdcb635a5cbece35f2802865af1ae418b6503de1ac891f7a6eb746a21506b"
+        "src/Schema/Types/SoftwareApplicationSchema.php": "be0a2bbdf65f257d2894d38d9e03fa33e6045e4f42e51e997231be07c15c41b1"
       },
-      "sha256": "d18bdcb635a5cbece35f2802865af1ae418b6503de1ac891f7a6eb746a21506b"
+      "sha256": "be0a2bbdf65f257d2894d38d9e03fa33e6045e4f42e51e997231be07c15c41b1"
     },
     "APEX-077": {
       "id": "APEX-077",
@@ -1789,9 +1789,9 @@
       "evidence": "Generates VideoObject schema with name, description, thumbnailUrl, uploadDate",
       "missing_work": "Video clip / seekToAction key moments specification",
       "source_hashes": {
-        "src/Schema/Media/VideoObjectSchema.php": "f245c239c1e3b22b1d56921d2ba304626f36371941f9c5c00c55720ae68dc85f"
+        "src/Schema/Media/VideoObjectSchema.php": "32deb7f9d6b1811435f383e900302c69cb87fb715b44e52619015adc9301972d"
       },
-      "sha256": "f245c239c1e3b22b1d56921d2ba304626f36371941f9c5c00c55720ae68dc85f"
+      "sha256": "32deb7f9d6b1811435f383e900302c69cb87fb715b44e52619015adc9301972d"
     },
     "APEX-078": {
       "id": "APEX-078",
@@ -2041,7 +2041,7 @@
       "missing_work": "Asynchronous multi-threaded cURL preloader queue",
       "source_hashes": {
         "src/CLI/CacheCommand.php": "1278d6aa9c6c255ca5d2ee9de0e11ffd0369e1721414c6fb61e7a9bb8e7a3292",
-        "src/API/Controllers/CacheRestController.php": "35582000ed38fb8aadf7c1ba19910c3180ba639e1f197ce222dd017beac05b26"
+        "src/API/Controllers/CacheRestController.php": "bd2817ada106c94eff0f1f87debfb74992b934fe5c7e015574a5d87990ece7bf"
       },
       "sha256": "1278d6aa9c6c255ca5d2ee9de0e11ffd0369e1721414c6fb61e7a9bb8e7a3292"
     },
@@ -2401,9 +2401,9 @@
       "evidence": "Converts JPEG/PNG images to WebP format using GD imagecreatefromjpeg / imagewebp",
       "missing_work": "ICC color profile preservation during WebP conversion",
       "source_hashes": {
-        "src/Media/Optimizer/ImageOptimizer.php": "51cab1180949cd872bf5e028eb9ce6a8f7acca02cf44d7da9853d38ed14c4953"
+        "src/Media/Optimizer/ImageOptimizer.php": "6c90fbd0b2549cf49d70f8a29629f4383955319fc55b5186635bda83d4af20af"
       },
-      "sha256": "51cab1180949cd872bf5e028eb9ce6a8f7acca02cf44d7da9853d38ed14c4953"
+      "sha256": "6c90fbd0b2549cf49d70f8a29629f4383955319fc55b5186635bda83d4af20af"
     },
     "APEX-118": {
       "id": "APEX-118",
@@ -2418,9 +2418,9 @@
       "evidence": "Converts images to AVIF format if imageavif() supported by server environment",
       "missing_work": "AVIF quality vs compression speed tuning parameters",
       "source_hashes": {
-        "src/Media/Optimizer/ImageOptimizer.php": "51cab1180949cd872bf5e028eb9ce6a8f7acca02cf44d7da9853d38ed14c4953"
+        "src/Media/Optimizer/ImageOptimizer.php": "6c90fbd0b2549cf49d70f8a29629f4383955319fc55b5186635bda83d4af20af"
       },
-      "sha256": "51cab1180949cd872bf5e028eb9ce6a8f7acca02cf44d7da9853d38ed14c4953"
+      "sha256": "6c90fbd0b2549cf49d70f8a29629f4383955319fc55b5186635bda83d4af20af"
     },
     "APEX-119": {
       "id": "APEX-119",
@@ -2526,9 +2526,9 @@
       "evidence": "Allows configuring lossy/lossless compression quality (1-100)",
       "missing_work": "Separate quality sliders for JPEG, WebP, and AVIF in UI",
       "source_hashes": {
-        "src/Media/Optimizer/ImageOptimizer.php": "51cab1180949cd872bf5e028eb9ce6a8f7acca02cf44d7da9853d38ed14c4953"
+        "src/Media/Optimizer/ImageOptimizer.php": "6c90fbd0b2549cf49d70f8a29629f4383955319fc55b5186635bda83d4af20af"
       },
-      "sha256": "51cab1180949cd872bf5e028eb9ce6a8f7acca02cf44d7da9853d38ed14c4953"
+      "sha256": "6c90fbd0b2549cf49d70f8a29629f4383955319fc55b5186635bda83d4af20af"
     },
     "APEX-126": {
       "id": "APEX-126",
@@ -2543,9 +2543,9 @@
       "evidence": "Strips EXIF metadata during image resampling to minimize filesize",
       "missing_work": "Preserve copyright and geolocation EXIF toggle",
       "source_hashes": {
-        "src/Media/Optimizer/ImageOptimizer.php": "51cab1180949cd872bf5e028eb9ce6a8f7acca02cf44d7da9853d38ed14c4953"
+        "src/Media/Optimizer/ImageOptimizer.php": "6c90fbd0b2549cf49d70f8a29629f4383955319fc55b5186635bda83d4af20af"
       },
-      "sha256": "51cab1180949cd872bf5e028eb9ce6a8f7acca02cf44d7da9853d38ed14c4953"
+      "sha256": "6c90fbd0b2549cf49d70f8a29629f4383955319fc55b5186635bda83d4af20af"
     },
     "APEX-127": {
       "id": "APEX-127",
@@ -3264,9 +3264,9 @@
       "evidence": "Returns paginated 404 access logs and supports log cleanup",
       "missing_work": "One-click convert 404 log entry to 301 redirect",
       "source_hashes": {
-        "src/API/Controllers/NotFoundRestController.php": "4dd2bb7d491df869f424313d6f24a6ae6b28413fe74e705bacb806c2c3d41d6c"
+        "src/API/Controllers/NotFoundRestController.php": "79c9fbbe37adb3497bfb28091a89a635aaa41d9e0536eab1e9b1239db4d9851a"
       },
-      "sha256": "4dd2bb7d491df869f424313d6f24a6ae6b28413fe74e705bacb806c2c3d41d6c"
+      "sha256": "79c9fbbe37adb3497bfb28091a89a635aaa41d9e0536eab1e9b1239db4d9851a"
     },
     "APEX-174": {
       "id": "APEX-174",
@@ -3315,9 +3315,9 @@
       "evidence": "Triggers global or post-specific static file cache purge and preloading",
       "missing_work": "Asynchronous job status polling endpoint",
       "source_hashes": {
-        "src/API/Controllers/CacheRestController.php": "35582000ed38fb8aadf7c1ba19910c3180ba639e1f197ce222dd017beac05b26"
+        "src/API/Controllers/CacheRestController.php": "bd2817ada106c94eff0f1f87debfb74992b934fe5c7e015574a5d87990ece7bf"
       },
-      "sha256": "35582000ed38fb8aadf7c1ba19910c3180ba639e1f197ce222dd017beac05b26"
+      "sha256": "bd2817ada106c94eff0f1f87debfb74992b934fe5c7e015574a5d87990ece7bf"
     },
     "APEX-177": {
       "id": "APEX-177",
@@ -3681,9 +3681,9 @@
       "evidence": "Detects PHP version, web server (Apache, Nginx, LiteSpeed), GD, Imagick, MySQL",
       "missing_work": "Detection of OPcache memory limits and max_execution_time",
       "source_hashes": {
-        "src/Core/Environment/EnvironmentDetector.php": "d253a5f6333c6c4372a59bc51ec4aaa34ecf580b16f5b268020bc170b3dd43d8"
+        "src/Core/Environment/EnvironmentDetector.php": "9f98f94766e1ff3765f9bc74b3fff98a7d87aca605984668598c601b0b066a58"
       },
-      "sha256": "d253a5f6333c6c4372a59bc51ec4aaa34ecf580b16f5b268020bc170b3dd43d8"
+      "sha256": "9f98f94766e1ff3765f9bc74b3fff98a7d87aca605984668598c601b0b066a58"
     }
   }
 }

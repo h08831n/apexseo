@@ -60,7 +60,7 @@ class NotFoundRestController extends AbstractRestController {
         $table   = $this->db->getPrefix() . 'apex_404_logs';
         $total   = (int) $this->db->getVar("SELECT COUNT(*) FROM {$table}");
 
-        $query   = $this->db->prepare("SELECT * FROM {$table} ORDER BY hits DESC, last_accessed DESC LIMIT %d OFFSET %d", $perPage, $offset);
+        $query   = $this->db->prepare("SELECT * FROM {$table} ORDER BY hit_count DESC, last_seen DESC LIMIT %d OFFSET %d", $perPage, $offset);
         $results = $this->db->getResults($query);
 
         return $this->success([
