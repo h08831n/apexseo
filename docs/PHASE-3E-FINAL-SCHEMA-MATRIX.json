@@ -1,0 +1,109 @@
+{
+  "audit_version": "3E-FINAL",
+  "generated_at": "2026-08-21T06:46:25Z",
+  "schema_engine": {
+    "graph_builder_class": "ApexSEO\\Schema\\SchemaGraphBuilder",
+    "registry_class": "ApexSEO\\Schema\\SchemaRegistry",
+    "validator_class": "ApexSEO\\Schema\\Validator\\SchemaValidator",
+    "supported_types_count": 12,
+    "graph_context": "https://schema.org"
+  },
+  "schemas": [
+    {
+      "name": "Article",
+      "class": "ApexSEO\\Schema\\Types\\ArticleSchema",
+      "type": "Article",
+      "id_pattern": "{#url}#/schema/article",
+      "google_rich_results_eligible": true,
+      "required_properties": ["headline", "image", "datePublished", "dateModified", "author", "publisher"]
+    },
+    {
+      "name": "WebSite",
+      "class": "ApexSEO\\Schema\\Types\\WebSiteSchema",
+      "type": "WebSite",
+      "id_pattern": "{#home_url}#/schema/website",
+      "google_rich_results_eligible": true,
+      "required_properties": ["name", "url", "potentialAction"]
+    },
+    {
+      "name": "Organization",
+      "class": "ApexSEO\\Schema\\Types\\OrganizationSchema",
+      "type": "Organization",
+      "id_pattern": "{#home_url}#/schema/organization",
+      "google_rich_results_eligible": true,
+      "required_properties": ["name", "url", "logo"]
+    },
+    {
+      "name": "LocalBusiness",
+      "class": "ApexSEO\\Schema\\Types\\LocalBusinessSchema",
+      "type": "LocalBusiness",
+      "id_pattern": "{#home_url}#/schema/localbusiness",
+      "google_rich_results_eligible": true,
+      "required_properties": ["name", "address", "telephone"]
+    },
+    {
+      "name": "Product",
+      "class": "ApexSEO\\Schema\\Types\\ProductSchema",
+      "type": "Product",
+      "id_pattern": "{#url}#/schema/product",
+      "google_rich_results_eligible": true,
+      "required_properties": ["name", "image", "offers"]
+    },
+    {
+      "name": "FAQPage",
+      "class": "ApexSEO\\Schema\\Types\\FAQPageSchema",
+      "type": "FAQPage",
+      "id_pattern": "{#url}#/schema/faq",
+      "google_rich_results_eligible": true,
+      "required_properties": ["mainEntity"]
+    },
+    {
+      "name": "Recipe",
+      "class": "ApexSEO\\Schema\\Types\\RecipeSchema",
+      "type": "Recipe",
+      "id_pattern": "{#url}#/schema/recipe",
+      "google_rich_results_eligible": true,
+      "required_properties": ["name", "image", "recipeIngredient", "recipeInstructions"]
+    },
+    {
+      "name": "JobPosting",
+      "class": "ApexSEO\\Schema\\Types\\JobPostingSchema",
+      "type": "JobPosting",
+      "id_pattern": "{#url}#/schema/job",
+      "google_rich_results_eligible": true,
+      "required_properties": ["title", "description", "datePosted", "hiringOrganization", "jobLocation"]
+    },
+    {
+      "name": "Course",
+      "class": "ApexSEO\\Schema\\Types\\CourseSchema",
+      "type": "Course",
+      "id_pattern": "{#url}#/schema/course",
+      "google_rich_results_eligible": true,
+      "required_properties": ["name", "description", "provider"]
+    },
+    {
+      "name": "Event",
+      "class": "ApexSEO\\Schema\\Types\\EventSchema",
+      "type": "Event",
+      "id_pattern": "{#url}#/schema/event",
+      "google_rich_results_eligible": true,
+      "required_properties": ["name", "startDate", "location"]
+    },
+    {
+      "name": "SoftwareApplication",
+      "class": "ApexSEO\\Schema\\Types\\SoftwareApplicationSchema",
+      "type": "SoftwareApplication",
+      "id_pattern": "{#url}#/schema/software",
+      "google_rich_results_eligible": true,
+      "required_properties": ["name", "operatingSystem", "applicationCategory"]
+    },
+    {
+      "name": "VideoObject",
+      "class": "ApexSEO\\Schema\\Media\\VideoObjectSchema",
+      "type": "VideoObject",
+      "id_pattern": "{#url}#/schema/video",
+      "google_rich_results_eligible": true,
+      "required_properties": ["name", "description", "thumbnailUrl", "uploadDate"]
+    }
+  ]
+}

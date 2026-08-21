@@ -1,0 +1,1282 @@
+{
+    "timestamp": "2026-08-21T06:46:25+00:00",
+    "production_php_files": 120,
+    "production_src_php_files": 118,
+    "production_root_php_files": 2,
+    "test_php_files": 22,
+    "interfaces_count": 9,
+    "concrete_classes_count": 266,
+    "abstract_classes_count": 3,
+    "schema_types_count": 12,
+    "rest_routes_count": 23,
+    "cli_command_suites_count": 10,
+    "database_tables_count": 8,
+    "test_methods_count": 97,
+    "assertions_count": 341,
+    "files": {
+        "production": [
+            "/app/applet/wp-content/plugins/apexseo/apexseo.php",
+            "/app/applet/wp-content/plugins/apexseo/src/AI/AiModule.php",
+            "/app/applet/wp-content/plugins/apexseo/src/AI/Generators/MetadataAiGenerator.php",
+            "/app/applet/wp-content/plugins/apexseo/src/AI/LlmsTxt/LlmsTxtGenerator.php",
+            "/app/applet/wp-content/plugins/apexseo/src/AI/SearchIntent/SearchIntentAnalyzer.php",
+            "/app/applet/wp-content/plugins/apexseo/src/API/Controllers/AbstractRestController.php",
+            "/app/applet/wp-content/plugins/apexseo/src/API/Controllers/AnalyticsRestController.php",
+            "/app/applet/wp-content/plugins/apexseo/src/API/Controllers/CacheRestController.php",
+            "/app/applet/wp-content/plugins/apexseo/src/API/Controllers/LinksRestController.php",
+            "/app/applet/wp-content/plugins/apexseo/src/API/Controllers/MediaRestController.php",
+            "/app/applet/wp-content/plugins/apexseo/src/API/Controllers/MetaRestController.php",
+            "/app/applet/wp-content/plugins/apexseo/src/API/Controllers/MigrationRestController.php",
+            "/app/applet/wp-content/plugins/apexseo/src/API/Controllers/NotFoundRestController.php",
+            "/app/applet/wp-content/plugins/apexseo/src/API/Controllers/RedirectsRestController.php",
+            "/app/applet/wp-content/plugins/apexseo/src/API/Controllers/SchemaRestController.php",
+            "/app/applet/wp-content/plugins/apexseo/src/API/Controllers/SettingsRestController.php",
+            "/app/applet/wp-content/plugins/apexseo/src/API/RestApiRouter.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Analytics/AnalyticsModule.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Analytics/Monitor/FourOhFourMonitor.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Analytics/Tracker/RankTracker.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Autoloader.php",
+            "/app/applet/wp-content/plugins/apexseo/src/CLI/AbstractCliCommand.php",
+            "/app/applet/wp-content/plugins/apexseo/src/CLI/CacheCommand.php",
+            "/app/applet/wp-content/plugins/apexseo/src/CLI/DatabaseCommand.php",
+            "/app/applet/wp-content/plugins/apexseo/src/CLI/DoctorCommand.php",
+            "/app/applet/wp-content/plugins/apexseo/src/CLI/IndexCommand.php",
+            "/app/applet/wp-content/plugins/apexseo/src/CLI/MediaCommand.php",
+            "/app/applet/wp-content/plugins/apexseo/src/CLI/MigrateCommand.php",
+            "/app/applet/wp-content/plugins/apexseo/src/CLI/RedirectCommand.php",
+            "/app/applet/wp-content/plugins/apexseo/src/CLI/SchemaCommand.php",
+            "/app/applet/wp-content/plugins/apexseo/src/CLI/SitemapCommand.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Core/Bootstrap/Plugin.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Core/CLI/CliManager.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Core/Configuration/ConfigurationManager.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Core/Container/Container.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Core/Container/ContainerInterface.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Core/Contracts/BootableInterface.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Core/Contracts/HookableInterface.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Core/Contracts/ModuleInterface.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Core/Contracts/ServiceContractInterface.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Core/Database/DatabaseManager.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Core/Database/MigrationInterface.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Core/Database/MigrationRunner.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Core/Database/Migrations/Migration_1_0_0_CreateLockedTables.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Core/Database/SchemaVersion.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Core/Environment/CapabilityRegistry.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Core/Environment/EnvironmentDetector.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Core/Environment/Server/ApacheAdapter.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Core/Environment/Server/GenericServerAdapter.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Core/Environment/Server/LiteSpeedAdapter.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Core/Environment/Server/NginxAdapter.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Core/Environment/Server/OpenLiteSpeedAdapter.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Core/Environment/Server/ServerAdapterInterface.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Core/Exceptions/ApexException.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Core/Exceptions/ConfigurationException.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Core/Exceptions/ContainerException.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Core/Exceptions/DatabaseException.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Core/Exceptions/NotFoundException.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Core/Exceptions/SecurityException.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Core/Hooks/HookManager.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Core/Lifecycle/LifecycleManager.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Core/Logging/Logger.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Core/Logging/LoggerInterface.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Core/Modules/ModuleRegistry.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Core/Multisite/MultisiteManager.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Core/REST/RestManager.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Core/Security/SecurityManager.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Core/Security/SecurityUtils.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Media/LazyLoad/ImageLazyLoader.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Media/LazyLoad/PlaceholderGenerator.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Media/MediaModule.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Media/Optimizer/ImageOptimizer.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Media/Optimizer/LcpOptimizer.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Performance/Assets/CssMinifier.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Performance/Assets/DelayJsEngine.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Performance/Assets/HtmlMinifier.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Performance/Assets/JsMinifier.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Performance/Cache/SmartPurge.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Performance/Cache/StaticFileWriter.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Performance/PerformanceModule.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Performance/Tweaks/ResourceHints.php",
+            "/app/applet/wp-content/plugins/apexseo/src/SEO/Admin/MetaSaver.php",
+            "/app/applet/wp-content/plugins/apexseo/src/SEO/Breadcrumbs/BreadcrumbGenerator.php",
+            "/app/applet/wp-content/plugins/apexseo/src/SEO/Builder/IndexableBuilder.php",
+            "/app/applet/wp-content/plugins/apexseo/src/SEO/Context/ContextDetector.php",
+            "/app/applet/wp-content/plugins/apexseo/src/SEO/Integrations/WooCommerceIntegration.php",
+            "/app/applet/wp-content/plugins/apexseo/src/SEO/Meta/CanonicalPresenter.php",
+            "/app/applet/wp-content/plugins/apexseo/src/SEO/Meta/DescriptionPresenter.php",
+            "/app/applet/wp-content/plugins/apexseo/src/SEO/Meta/MetaTagManager.php",
+            "/app/applet/wp-content/plugins/apexseo/src/SEO/Meta/RobotsPresenter.php",
+            "/app/applet/wp-content/plugins/apexseo/src/SEO/Meta/TitlePresenter.php",
+            "/app/applet/wp-content/plugins/apexseo/src/SEO/Models/Indexable.php",
+            "/app/applet/wp-content/plugins/apexseo/src/SEO/Models/SeoContext.php",
+            "/app/applet/wp-content/plugins/apexseo/src/SEO/Redirects/RedirectManager.php",
+            "/app/applet/wp-content/plugins/apexseo/src/SEO/Repository/IndexableRepository.php",
+            "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php",
+            "/app/applet/wp-content/plugins/apexseo/src/SEO/Sitemap/SitemapGenerator.php",
+            "/app/applet/wp-content/plugins/apexseo/src/SEO/Social/OpenGraphPresenter.php",
+            "/app/applet/wp-content/plugins/apexseo/src/SEO/Social/TwitterCardPresenter.php",
+            "/app/applet/wp-content/plugins/apexseo/src/SEO/Templates/TemplateManager.php",
+            "/app/applet/wp-content/plugins/apexseo/src/SEO/Variables/VariableEngine.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Schema/Media/VideoObjectSchema.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Schema/SchemaGraphBuilder.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Schema/SchemaModule.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Schema/SchemaRegistry.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Schema/Types/AbstractSchemaType.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Schema/Types/ArticleSchema.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Schema/Types/CourseSchema.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Schema/Types/EventSchema.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Schema/Types/FAQPageSchema.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Schema/Types/JobPostingSchema.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Schema/Types/LocalBusinessSchema.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Schema/Types/OrganizationSchema.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Schema/Types/ProductSchema.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Schema/Types/RecipeSchema.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Schema/Types/SchemaTypeInterface.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Schema/Types/SoftwareApplicationSchema.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Schema/Types/WebSiteSchema.php",
+            "/app/applet/wp-content/plugins/apexseo/src/Schema/Validator/SchemaValidator.php",
+            "/app/applet/wp-content/plugins/apexseo/uninstall.php"
+        ],
+        "tests": [
+            "/app/applet/wp-content/plugins/apexseo/tests/AiSubsystemTest.php",
+            "/app/applet/wp-content/plugins/apexseo/tests/AnalyticsSubsystemTest.php",
+            "/app/applet/wp-content/plugins/apexseo/tests/AutoloaderTest.php",
+            "/app/applet/wp-content/plugins/apexseo/tests/BootstrapTest.php",
+            "/app/applet/wp-content/plugins/apexseo/tests/CapabilityRegistryTest.php",
+            "/app/applet/wp-content/plugins/apexseo/tests/CliSubsystemTest.php",
+            "/app/applet/wp-content/plugins/apexseo/tests/ConfigurationManagerTest.php",
+            "/app/applet/wp-content/plugins/apexseo/tests/ContainerTest.php",
+            "/app/applet/wp-content/plugins/apexseo/tests/DatabaseMigrationTest.php",
+            "/app/applet/wp-content/plugins/apexseo/tests/EnvironmentDetectorTest.php",
+            "/app/applet/wp-content/plugins/apexseo/tests/LifecycleTest.php",
+            "/app/applet/wp-content/plugins/apexseo/tests/MediaSubsystemTest.php",
+            "/app/applet/wp-content/plugins/apexseo/tests/MultisiteManagerTest.php",
+            "/app/applet/wp-content/plugins/apexseo/tests/PerformanceSubsystemTest.php",
+            "/app/applet/wp-content/plugins/apexseo/tests/RestSubsystemTest.php",
+            "/app/applet/wp-content/plugins/apexseo/tests/SchemaSubsystemTest.php",
+            "/app/applet/wp-content/plugins/apexseo/tests/SeoSubsystemTest.php",
+            "/app/applet/wp-content/plugins/apexseo/tests/ServerAdapterTest.php",
+            "/app/applet/wp-content/plugins/apexseo/tests/TestCase.php",
+            "/app/applet/wp-content/plugins/apexseo/tests/bootstrap.php",
+            "/app/applet/wp-content/plugins/apexseo/tests/run.php",
+            "/app/applet/wp-content/plugins/apexseo/tests/run_all.php"
+        ],
+        "interfaces": [
+            {
+                "name": "ApexSEO\\Core\\Container\\ContainerInterface",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Container/ContainerInterface.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Contracts\\BootableInterface",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Contracts/BootableInterface.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Contracts\\HookableInterface",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Contracts/HookableInterface.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Contracts\\ModuleInterface",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Contracts/ModuleInterface.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Contracts\\ServiceContractInterface",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Contracts/ServiceContractInterface.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Database\\MigrationInterface",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Database/MigrationInterface.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Environment\\Server\\ServerAdapterInterface",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Environment/Server/ServerAdapterInterface.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Logging\\LoggerInterface",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Logging/LoggerInterface.php"
+            },
+            {
+                "name": "ApexSEO\\Schema\\Types\\SchemaTypeInterface",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Schema/Types/SchemaTypeInterface.php"
+            }
+        ],
+        "concrete_classes": [
+            {
+                "name": "ApexSEO\\AI\\AiModule",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/AI/AiModule.php"
+            },
+            {
+                "name": "ApexSEO\\AI\\LlmsTxtGenerator",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/AI/AiModule.php"
+            },
+            {
+                "name": "ApexSEO\\AI\\SearchIntentAnalyzer",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/AI/AiModule.php"
+            },
+            {
+                "name": "ApexSEO\\AI\\ContainerInterface",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/AI/AiModule.php"
+            },
+            {
+                "name": "ApexSEO\\AI\\boot",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/AI/AiModule.php"
+            },
+            {
+                "name": "ApexSEO\\AI\\generateLlmsTxt",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/AI/AiModule.php"
+            },
+            {
+                "name": "ApexSEO\\AI\\Generators\\MetadataAiGenerator",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/AI/Generators/MetadataAiGenerator.php"
+            },
+            {
+                "name": "ApexSEO\\AI\\LlmsTxt\\LlmsTxtGenerator",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/AI/LlmsTxt/LlmsTxtGenerator.php"
+            },
+            {
+                "name": "ApexSEO\\AI\\SearchIntent\\SearchIntentAnalyzer",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/AI/SearchIntent/SearchIntentAnalyzer.php"
+            },
+            {
+                "name": "ApexSEO\\API\\Controllers\\AnalyticsRestController",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/API/Controllers/AnalyticsRestController.php"
+            },
+            {
+                "name": "ApexSEO\\API\\Controllers\\CacheRestController",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/API/Controllers/CacheRestController.php"
+            },
+            {
+                "name": "ApexSEO\\API\\Controllers\\LinksRestController",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/API/Controllers/LinksRestController.php"
+            },
+            {
+                "name": "ApexSEO\\API\\Controllers\\MediaRestController",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/API/Controllers/MediaRestController.php"
+            },
+            {
+                "name": "ApexSEO\\API\\Controllers\\MetaRestController",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/API/Controllers/MetaRestController.php"
+            },
+            {
+                "name": "ApexSEO\\API\\Controllers\\MigrationRestController",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/API/Controllers/MigrationRestController.php"
+            },
+            {
+                "name": "ApexSEO\\API\\Controllers\\NotFoundRestController",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/API/Controllers/NotFoundRestController.php"
+            },
+            {
+                "name": "ApexSEO\\API\\Controllers\\RedirectsRestController",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/API/Controllers/RedirectsRestController.php"
+            },
+            {
+                "name": "ApexSEO\\API\\Controllers\\SchemaRestController",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/API/Controllers/SchemaRestController.php"
+            },
+            {
+                "name": "ApexSEO\\API\\Controllers\\SettingsRestController",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/API/Controllers/SettingsRestController.php"
+            },
+            {
+                "name": "ApexSEO\\API\\RestApiRouter",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/API/RestApiRouter.php"
+            },
+            {
+                "name": "ApexSEO\\Analytics\\AnalyticsModule",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Analytics/AnalyticsModule.php"
+            },
+            {
+                "name": "ApexSEO\\Analytics\\ContainerInterface",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Analytics/AnalyticsModule.php"
+            },
+            {
+                "name": "ApexSEO\\Analytics\\singleton",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Analytics/AnalyticsModule.php"
+            },
+            {
+                "name": "ApexSEO\\Analytics\\ContainerInterface",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Analytics/AnalyticsModule.php"
+            },
+            {
+                "name": "ApexSEO\\Analytics\\boot",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Analytics/AnalyticsModule.php"
+            },
+            {
+                "name": "ApexSEO\\Analytics\\record404",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Analytics/AnalyticsModule.php"
+            },
+            {
+                "name": "ApexSEO\\Analytics\\Monitor\\FourOhFourMonitor",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Analytics/Monitor/FourOhFourMonitor.php"
+            },
+            {
+                "name": "ApexSEO\\Analytics\\Tracker\\RankTracker",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Analytics/Tracker/RankTracker.php"
+            },
+            {
+                "name": "ApexSEO\\Autoloader",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Autoloader.php"
+            },
+            {
+                "name": "ApexSEO\\CLI\\CacheCommand",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/CLI/CacheCommand.php"
+            },
+            {
+                "name": "ApexSEO\\CLI\\container",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/CLI/CacheCommand.php"
+            },
+            {
+                "name": "ApexSEO\\CLI\\null",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/CLI/CacheCommand.php"
+            },
+            {
+                "name": "ApexSEO\\CLI\\DatabaseCommand",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/CLI/DatabaseCommand.php"
+            },
+            {
+                "name": "ApexSEO\\CLI\\getPrefix",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/CLI/DatabaseCommand.php"
+            },
+            {
+                "name": "ApexSEO\\CLI\\DoctorCommand",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/CLI/DoctorCommand.php"
+            },
+            {
+                "name": "ApexSEO\\CLI\\container",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/CLI/DoctorCommand.php"
+            },
+            {
+                "name": "ApexSEO\\CLI\\EnvironmentDetector",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/CLI/DoctorCommand.php"
+            },
+            {
+                "name": "ApexSEO\\CLI\\true",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/CLI/DoctorCommand.php"
+            },
+            {
+                "name": "ApexSEO\\CLI\\IndexCommand",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/CLI/IndexCommand.php"
+            },
+            {
+                "name": "ApexSEO\\CLI\\container",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/CLI/IndexCommand.php"
+            },
+            {
+                "name": "ApexSEO\\CLI\\container",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/CLI/IndexCommand.php"
+            },
+            {
+                "name": "ApexSEO\\CLI\\line",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/CLI/IndexCommand.php"
+            },
+            {
+                "name": "ApexSEO\\CLI\\getPrefix",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/CLI/IndexCommand.php"
+            },
+            {
+                "name": "ApexSEO\\CLI\\MediaCommand",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/CLI/MediaCommand.php"
+            },
+            {
+                "name": "ApexSEO\\CLI\\container",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/CLI/MediaCommand.php"
+            },
+            {
+                "name": "ApexSEO\\CLI\\ImageOptimizer",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/CLI/MediaCommand.php"
+            },
+            {
+                "name": "ApexSEO\\CLI\\getPrefix",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/CLI/MediaCommand.php"
+            },
+            {
+                "name": "ApexSEO\\CLI\\container",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/CLI/MediaCommand.php"
+            },
+            {
+                "name": "ApexSEO\\CLI\\ImageOptimizer",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/CLI/MediaCommand.php"
+            },
+            {
+                "name": "ApexSEO\\CLI\\MigrateCommand",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/CLI/MigrateCommand.php"
+            },
+            {
+                "name": "ApexSEO\\CLI\\getPrefix",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/CLI/MigrateCommand.php"
+            },
+            {
+                "name": "ApexSEO\\CLI\\RedirectCommand",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/CLI/RedirectCommand.php"
+            },
+            {
+                "name": "ApexSEO\\CLI\\getPrefix",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/CLI/RedirectCommand.php"
+            },
+            {
+                "name": "ApexSEO\\CLI\\getPrefix",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/CLI/RedirectCommand.php"
+            },
+            {
+                "name": "ApexSEO\\CLI\\SchemaCommand",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/CLI/SchemaCommand.php"
+            },
+            {
+                "name": "ApexSEO\\CLI\\container",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/CLI/SchemaCommand.php"
+            },
+            {
+                "name": "ApexSEO\\CLI\\SchemaValidator",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/CLI/SchemaCommand.php"
+            },
+            {
+                "name": "ApexSEO\\CLI\\container",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/CLI/SchemaCommand.php"
+            },
+            {
+                "name": "ApexSEO\\CLI\\null",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/CLI/SchemaCommand.php"
+            },
+            {
+                "name": "ApexSEO\\CLI\\SitemapCommand",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/CLI/SitemapCommand.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Bootstrap\\Plugin",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Bootstrap/Plugin.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Bootstrap\\set",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Bootstrap/Plugin.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Bootstrap\\singleton",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Bootstrap/Plugin.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Bootstrap\\EnvironmentDetector",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Bootstrap/Plugin.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Bootstrap\\ContainerInterface",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Bootstrap/Plugin.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Bootstrap\\getServerAdapter",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Bootstrap/Plugin.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Bootstrap\\ContainerInterface",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Bootstrap/Plugin.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Bootstrap\\singleton",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Bootstrap/Plugin.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Bootstrap\\ConfigurationManager",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Bootstrap/Plugin.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Bootstrap\\ContainerInterface",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Bootstrap/Plugin.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Bootstrap\\get",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Bootstrap/Plugin.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Bootstrap\\LoggerInterface",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Bootstrap/Plugin.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Bootstrap\\singleton",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Bootstrap/Plugin.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Bootstrap\\DatabaseManager",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Bootstrap/Plugin.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Bootstrap\\ContainerInterface",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Bootstrap/Plugin.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Bootstrap\\singleton",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Bootstrap/Plugin.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Bootstrap\\ContainerInterface",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Bootstrap/Plugin.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Bootstrap\\get",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Bootstrap/Plugin.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Bootstrap\\singleton",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Bootstrap/Plugin.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Bootstrap\\SecurityManager",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Bootstrap/Plugin.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Bootstrap\\HookManager",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Bootstrap/Plugin.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Bootstrap\\ContainerInterface",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Bootstrap/Plugin.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Bootstrap\\get",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Bootstrap/Plugin.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Bootstrap\\registerModule",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Bootstrap/Plugin.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Bootstrap\\ContainerInterface",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Bootstrap/Plugin.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Bootstrap\\singleton",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Bootstrap/Plugin.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Bootstrap\\CliManager",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Bootstrap/Plugin.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Bootstrap\\registerHooks",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Bootstrap/Plugin.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Bootstrap\\registerHooks",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Bootstrap/Plugin.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Bootstrap\\get",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Bootstrap/Plugin.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Bootstrap\\registerServices",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Bootstrap/Plugin.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\CLI\\CliManager",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/CLI/CliManager.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\CLI\\registerCommand",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/CLI/CliManager.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\CLI\\registerCommand",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/CLI/CliManager.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\CLI\\registerCommand",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/CLI/CliManager.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\CLI\\registerCommand",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/CLI/CliManager.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\CLI\\registerCommand",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/CLI/CliManager.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\CLI\\registerCommand",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/CLI/CliManager.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\CLI\\registerCommand",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/CLI/CliManager.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\CLI\\registerCommand",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/CLI/CliManager.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\CLI\\registerCommand",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/CLI/CliManager.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\CLI\\registerHooks",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/CLI/CliManager.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Configuration\\ConfigurationManager",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Configuration/ConfigurationManager.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Container\\Container",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Container/Container.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Database\\DatabaseManager",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Database/DatabaseManager.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Database\\MigrationRunner",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Database/MigrationRunner.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Database\\Migrations\\Migration_1_0_0_CreateLockedTables",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Database/Migrations/Migration_1_0_0_CreateLockedTables.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Database\\SchemaVersion",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Database/SchemaVersion.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Environment\\CapabilityRegistry",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Environment/CapabilityRegistry.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Environment\\EnvironmentDetector",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Environment/EnvironmentDetector.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Environment\\Server\\ApacheAdapter",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Environment/Server/ApacheAdapter.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Environment\\Server\\GenericServerAdapter",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Environment/Server/GenericServerAdapter.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Environment\\Server\\LiteSpeedAdapter",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Environment/Server/LiteSpeedAdapter.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Environment\\Server\\NginxAdapter",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Environment/Server/NginxAdapter.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Environment\\Server\\OpenLiteSpeedAdapter",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Environment/Server/OpenLiteSpeedAdapter.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Exceptions\\ApexException",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Exceptions/ApexException.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Exceptions\\ConfigurationException",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Exceptions/ConfigurationException.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Exceptions\\ContainerException",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Exceptions/ContainerException.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Exceptions\\DatabaseException",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Exceptions/DatabaseException.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Exceptions\\NotFoundException",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Exceptions/NotFoundException.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Exceptions\\SecurityException",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Exceptions/SecurityException.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Hooks\\HookManager",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Hooks/HookManager.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Lifecycle\\LifecycleManager",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Lifecycle/LifecycleManager.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Lifecycle\\get",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Lifecycle/LifecycleManager.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Lifecycle\\get",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Lifecycle/LifecycleManager.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Lifecycle\\isMultisite",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Lifecycle/LifecycleManager.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Lifecycle\\get",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Lifecycle/LifecycleManager.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Lifecycle\\get",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Lifecycle/LifecycleManager.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Lifecycle\\get",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Lifecycle/LifecycleManager.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Lifecycle\\get",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Lifecycle/LifecycleManager.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Logging\\Logger",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Logging/Logger.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Modules\\ModuleRegistry",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Modules/ModuleRegistry.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Multisite\\MultisiteManager",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Multisite/MultisiteManager.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\REST\\RestManager",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/REST/RestManager.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Security\\SecurityManager",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Security/SecurityManager.php"
+            },
+            {
+                "name": "ApexSEO\\Core\\Security\\SecurityUtils",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Core/Security/SecurityUtils.php"
+            },
+            {
+                "name": "ApexSEO\\Media\\LazyLoad\\ImageLazyLoader",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Media/LazyLoad/ImageLazyLoader.php"
+            },
+            {
+                "name": "ApexSEO\\Media\\LazyLoad\\PlaceholderGenerator",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Media/LazyLoad/PlaceholderGenerator.php"
+            },
+            {
+                "name": "ApexSEO\\Media\\MediaModule",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Media/MediaModule.php"
+            },
+            {
+                "name": "ApexSEO\\Media\\PlaceholderGenerator",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Media/MediaModule.php"
+            },
+            {
+                "name": "ApexSEO\\Media\\ContainerInterface",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Media/MediaModule.php"
+            },
+            {
+                "name": "ApexSEO\\Media\\singleton",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Media/MediaModule.php"
+            },
+            {
+                "name": "ApexSEO\\Media\\ContainerInterface",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Media/MediaModule.php"
+            },
+            {
+                "name": "ApexSEO\\Media\\singleton",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Media/MediaModule.php"
+            },
+            {
+                "name": "ApexSEO\\Media\\LcpOptimizer",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Media/MediaModule.php"
+            },
+            {
+                "name": "ApexSEO\\Media\\processHtml",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Media/MediaModule.php"
+            },
+            {
+                "name": "ApexSEO\\Media\\Optimizer\\ImageOptimizer",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Media/Optimizer/ImageOptimizer.php"
+            },
+            {
+                "name": "ApexSEO\\Media\\Optimizer\\LcpOptimizer",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Media/Optimizer/LcpOptimizer.php"
+            },
+            {
+                "name": "ApexSEO\\Performance\\Assets\\CssMinifier",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Performance/Assets/CssMinifier.php"
+            },
+            {
+                "name": "ApexSEO\\Performance\\Assets\\DelayJsEngine",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Performance/Assets/DelayJsEngine.php"
+            },
+            {
+                "name": "ApexSEO\\Performance\\Assets\\HtmlMinifier",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Performance/Assets/HtmlMinifier.php"
+            },
+            {
+                "name": "ApexSEO\\Performance\\Assets\\JsMinifier",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Performance/Assets/JsMinifier.php"
+            },
+            {
+                "name": "ApexSEO\\Performance\\Cache\\SmartPurge",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Performance/Cache/SmartPurge.php"
+            },
+            {
+                "name": "ApexSEO\\Performance\\Cache\\StaticFileWriter",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Performance/Cache/StaticFileWriter.php"
+            },
+            {
+                "name": "ApexSEO\\Performance\\PerformanceModule",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Performance/PerformanceModule.php"
+            },
+            {
+                "name": "ApexSEO\\Performance\\CssMinifier",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Performance/PerformanceModule.php"
+            },
+            {
+                "name": "ApexSEO\\Performance\\JsMinifier",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Performance/PerformanceModule.php"
+            },
+            {
+                "name": "ApexSEO\\Performance\\HtmlMinifier",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Performance/PerformanceModule.php"
+            },
+            {
+                "name": "ApexSEO\\Performance\\DelayJsEngine",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Performance/PerformanceModule.php"
+            },
+            {
+                "name": "ApexSEO\\Performance\\ResourceHints",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Performance/PerformanceModule.php"
+            },
+            {
+                "name": "ApexSEO\\Performance\\StaticFileWriter",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Performance/PerformanceModule.php"
+            },
+            {
+                "name": "ApexSEO\\Performance\\ContainerInterface",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Performance/PerformanceModule.php"
+            },
+            {
+                "name": "ApexSEO\\Performance\\get",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Performance/PerformanceModule.php"
+            },
+            {
+                "name": "ApexSEO\\Performance\\has",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Performance/PerformanceModule.php"
+            },
+            {
+                "name": "ApexSEO\\Performance\\get",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Performance/PerformanceModule.php"
+            },
+            {
+                "name": "ApexSEO\\Performance\\null",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Performance/PerformanceModule.php"
+            },
+            {
+                "name": "ApexSEO\\Performance\\renderHtml",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Performance/PerformanceModule.php"
+            },
+            {
+                "name": "ApexSEO\\Performance\\Tweaks\\ResourceHints",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Performance/Tweaks/ResourceHints.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\Admin\\MetaSaver",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/Admin/MetaSaver.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\Breadcrumbs\\BreadcrumbGenerator",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/Breadcrumbs/BreadcrumbGenerator.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\Builder\\IndexableBuilder",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/Builder/IndexableBuilder.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\Context\\ContextDetector",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/Context/ContextDetector.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\Integrations\\WooCommerceIntegration",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/Integrations/WooCommerceIntegration.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\Meta\\CanonicalPresenter",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/Meta/CanonicalPresenter.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\Meta\\DescriptionPresenter",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/Meta/DescriptionPresenter.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\Meta\\MetaTagManager",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/Meta/MetaTagManager.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\Meta\\RobotsPresenter",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/Meta/RobotsPresenter.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\Meta\\TitlePresenter",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/Meta/TitlePresenter.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\Models\\Indexable",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/Models/Indexable.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\Models\\SeoContext",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/Models/SeoContext.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\Redirects\\RedirectManager",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/Redirects/RedirectManager.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\Repository\\IndexableRepository",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/Repository/IndexableRepository.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\SeoModule",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\VariableEngine",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\ContainerInterface",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\get",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\null",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\ContainerInterface",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\singleton",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\ContainerInterface",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\get",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\singleton",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\ContainerInterface",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\singleton",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\ContainerInterface",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\get",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\singleton",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\ContainerInterface",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\get",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\singleton",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\CanonicalPresenter",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\RobotsPresenter",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\ContainerInterface",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\singleton",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\ContainerInterface",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\singleton",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\BreadcrumbGenerator",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\SitemapGenerator",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\ContainerInterface",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\singleton",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\WooCommerceIntegration",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\ContainerInterface",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\get",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\get",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\get",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\get",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\get",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\get",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\get",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\singleton",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\ContainerInterface",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\get",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\boot",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\get",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\outputHead",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\has",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\get",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\get",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\render",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\get",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\savePostMeta",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\get",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\saveTermMeta",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\get",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\saveTermMeta",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\get",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\deletePostIndexable",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\get",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\deleteTermIndexable",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\get",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\interceptAndRedirect",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/SeoModule.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\Sitemap\\SitemapGenerator",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/Sitemap/SitemapGenerator.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\Social\\OpenGraphPresenter",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/Social/OpenGraphPresenter.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\Social\\TwitterCardPresenter",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/Social/TwitterCardPresenter.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\Templates\\TemplateManager",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/Templates/TemplateManager.php"
+            },
+            {
+                "name": "ApexSEO\\SEO\\Variables\\VariableEngine",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/SEO/Variables/VariableEngine.php"
+            },
+            {
+                "name": "ApexSEO\\Schema\\Media\\VideoObjectSchema",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Schema/Media/VideoObjectSchema.php"
+            },
+            {
+                "name": "ApexSEO\\Schema\\SchemaGraphBuilder",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Schema/SchemaGraphBuilder.php"
+            },
+            {
+                "name": "ApexSEO\\Schema\\SchemaModule",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Schema/SchemaModule.php"
+            },
+            {
+                "name": "ApexSEO\\Schema\\SchemaRegistry",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Schema/SchemaModule.php"
+            },
+            {
+                "name": "ApexSEO\\Schema\\ContainerInterface",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Schema/SchemaModule.php"
+            },
+            {
+                "name": "ApexSEO\\Schema\\boot",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Schema/SchemaModule.php"
+            },
+            {
+                "name": "ApexSEO\\Schema\\renderScript",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Schema/SchemaModule.php"
+            },
+            {
+                "name": "ApexSEO\\Schema\\SchemaRegistry",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Schema/SchemaRegistry.php"
+            },
+            {
+                "name": "ApexSEO\\Schema\\Types\\ArticleSchema",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Schema/Types/ArticleSchema.php"
+            },
+            {
+                "name": "ApexSEO\\Schema\\Types\\CourseSchema",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Schema/Types/CourseSchema.php"
+            },
+            {
+                "name": "ApexSEO\\Schema\\Types\\EventSchema",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Schema/Types/EventSchema.php"
+            },
+            {
+                "name": "ApexSEO\\Schema\\Types\\FAQPageSchema",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Schema/Types/FAQPageSchema.php"
+            },
+            {
+                "name": "ApexSEO\\Schema\\Types\\JobPostingSchema",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Schema/Types/JobPostingSchema.php"
+            },
+            {
+                "name": "ApexSEO\\Schema\\Types\\LocalBusinessSchema",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Schema/Types/LocalBusinessSchema.php"
+            },
+            {
+                "name": "ApexSEO\\Schema\\Types\\OrganizationSchema",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Schema/Types/OrganizationSchema.php"
+            },
+            {
+                "name": "ApexSEO\\Schema\\Types\\ProductSchema",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Schema/Types/ProductSchema.php"
+            },
+            {
+                "name": "ApexSEO\\Schema\\Types\\RecipeSchema",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Schema/Types/RecipeSchema.php"
+            },
+            {
+                "name": "ApexSEO\\Schema\\Types\\SoftwareApplicationSchema",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Schema/Types/SoftwareApplicationSchema.php"
+            },
+            {
+                "name": "ApexSEO\\Schema\\Types\\WebSiteSchema",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Schema/Types/WebSiteSchema.php"
+            },
+            {
+                "name": "ApexSEO\\Schema\\Validator\\SchemaValidator",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Schema/Validator/SchemaValidator.php"
+            }
+        ],
+        "abstract_classes": [
+            {
+                "name": "ApexSEO\\API\\Controllers\\AbstractRestController",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/API/Controllers/AbstractRestController.php"
+            },
+            {
+                "name": "ApexSEO\\CLI\\AbstractCliCommand",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/CLI/AbstractCliCommand.php"
+            },
+            {
+                "name": "ApexSEO\\Schema\\Types\\AbstractSchemaType",
+                "file": "/app/applet/wp-content/plugins/apexseo/src/Schema/Types/AbstractSchemaType.php"
+            }
+        ]
+    }
+}

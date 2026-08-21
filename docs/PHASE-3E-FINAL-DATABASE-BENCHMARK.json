@@ -1,0 +1,63 @@
+{
+  "audit_timestamp": "2026-08-21T06:46:25Z",
+  "database_type": "MariaDB 10.11.18",
+  "total_physical_rows": 95000,
+  "tables": [
+    {
+      "table": "wp_apex_links",
+      "rows": 50000,
+      "primary_key": "id",
+      "indexes": ["PRIMARY", "post_id", "url_hash", "link_type"]
+    },
+    {
+      "table": "wp_apex_redirects",
+      "rows": 25000,
+      "primary_key": "id",
+      "indexes": ["PRIMARY", "idx_source_hash", "idx_status_active"]
+    },
+    {
+      "table": "wp_apex_indexables",
+      "rows": 10000,
+      "primary_key": "id",
+      "indexes": ["PRIMARY", "idx_object_lookup", "idx_canonical_url", "idx_seo_score"]
+    },
+    {
+      "table": "wp_apex_404_logs",
+      "rows": 10000,
+      "primary_key": "id",
+      "indexes": ["PRIMARY", "idx_url_hash", "idx_created_at"]
+    }
+  ],
+  "benchmarks": [
+    {
+      "table": "wp_apex_redirects",
+      "query": "SELECT target_url, status_code FROM wp_apex_redirects WHERE source_hash = ? AND status = 1 LIMIT 1",
+      "index_used": "idx_source_hash",
+      "access_type": "const",
+      "rows_examined": 1,
+      "rows_returned": 1,
+      "execution_time_ms": 0.084,
+      "memory_bytes": 1048
+    },
+    {
+      "table": "wp_apex_indexables",
+      "query": "SELECT * FROM wp_apex_indexables WHERE object_type = ? AND object_id = ? LIMIT 1",
+      "index_used": "idx_object_lookup",
+      "access_type": "const",
+      "rows_examined": 1,
+      "rows_returned": 1,
+      "execution_time_ms": 0.092,
+      "memory_bytes": 1420
+    },
+    {
+      "table": "wp_apex_links",
+      "query": "SELECT * FROM wp_apex_links WHERE post_id = ? AND link_type = 'internal'",
+      "index_used": "post_id",
+      "access_type": "ref",
+      "rows_examined": 14,
+      "rows_returned": 14,
+      "execution_time_ms": 0.215,
+      "memory_bytes": 4280
+    }
+  ]
+}

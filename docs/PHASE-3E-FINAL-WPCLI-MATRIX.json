@@ -1,0 +1,92 @@
+{
+    "index": {
+        "command": "wp apexseo index",
+        "subcommand_tested": "status --format=json",
+        "handler_class": "ApexSEO\\CLI\\IndexCommand",
+        "exit_code": 127,
+        "execution_ms": 2.5041,
+        "raw_output": "sh: 1: wp: not found",
+        "status": "FAILED"
+    },
+    "cache": {
+        "command": "wp apexseo cache",
+        "subcommand_tested": "purge --url=https://example.com/test/ --dry-run",
+        "handler_class": "ApexSEO\\CLI\\CacheCommand",
+        "exit_code": 127,
+        "execution_ms": 3.166,
+        "raw_output": "sh: 1: wp: not found",
+        "status": "FAILED"
+    },
+    "media": {
+        "command": "wp apexseo media",
+        "subcommand_tested": "optimize --dry-run --batch-size=10",
+        "handler_class": "ApexSEO\\CLI\\MediaCommand",
+        "exit_code": 127,
+        "execution_ms": 3.315,
+        "raw_output": "sh: 1: wp: not found",
+        "status": "FAILED"
+    },
+    "redirect": {
+        "command": "wp apexseo redirect",
+        "subcommand_tested": "list --format=json",
+        "handler_class": "ApexSEO\\CLI\\RedirectCommand",
+        "exit_code": 127,
+        "execution_ms": 3.4189,
+        "raw_output": "sh: 1: wp: not found",
+        "status": "FAILED"
+    },
+    "db": {
+        "command": "wp apexseo db",
+        "subcommand_tested": "clean --dry-run",
+        "handler_class": "ApexSEO\\CLI\\DatabaseCommand",
+        "exit_code": 127,
+        "execution_ms": 2.326,
+        "raw_output": "sh: 1: wp: not found",
+        "status": "FAILED"
+    },
+    "migrate": {
+        "command": "wp apexseo migrate",
+        "subcommand_tested": "run yoast --dry-run",
+        "handler_class": "ApexSEO\\CLI\\MigrateCommand",
+        "exit_code": 127,
+        "execution_ms": 2.6009,
+        "raw_output": "sh: 1: wp: not found",
+        "status": "FAILED"
+    },
+    "sitemap": {
+        "command": "wp apexseo sitemap",
+        "subcommand_tested": "rebuild --dry-run",
+        "handler_class": "ApexSEO\\CLI\\SitemapCommand",
+        "exit_code": 127,
+        "execution_ms": 2.739,
+        "raw_output": "sh: 1: wp: not found",
+        "status": "FAILED"
+    },
+    "doctor": {
+        "command": "wp apexseo doctor",
+        "subcommand_tested": "status --format=json",
+        "handler_class": "ApexSEO\\CLI\\DoctorCommand",
+        "exit_code": 127,
+        "execution_ms": 2.2371,
+        "raw_output": "sh: 1: wp: not found",
+        "status": "FAILED"
+    },
+    "report": {
+        "command": "wp apexseo report",
+        "subcommand_tested": "status --format=json",
+        "handler_class": "ApexSEO\\CLI\\ReportCommand",
+        "exit_code": 127,
+        "execution_ms": 1.837,
+        "raw_output": "sh: 1: wp: not found",
+        "status": "FAILED"
+    },
+    "schema": {
+        "command": "wp apexseo schema",
+        "subcommand_tested": "validate --format=json",
+        "handler_class": "ApexSEO\\CLI\\SchemaCommand",
+        "exit_code": 127,
+        "execution_ms": 2.7661,
+        "raw_output": "sh: 1: wp: not found",
+        "status": "FAILED"
+    }
+}

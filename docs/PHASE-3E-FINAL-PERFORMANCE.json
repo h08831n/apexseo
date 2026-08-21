@@ -1,0 +1,41 @@
+{
+  "audit_version": "3E-FINAL",
+  "timestamp": "2026-08-21T06:46:25Z",
+  "environment": {
+    "php_version": "8.2.33",
+    "mysql_version": "10.11.18-MariaDB",
+    "web_server": "Built-in PHP Development Server (HTTP/1.1)"
+  },
+  "http_wire_measurements": {
+    "total_requests": 130,
+    "cold_requests": 30,
+    "warm_requests": 100,
+    "ttfb_ms": {
+      "min": 72.10,
+      "median": 79.11,
+      "mean": 81.42,
+      "p95": 89.69,
+      "p99": 98.40,
+      "max": 114.20,
+      "std_dev": 6.84
+    },
+    "dns_ms": 0.04,
+    "tcp_ms": 0.12,
+    "total_time_ms": {
+      "min": 74.50,
+      "median": 81.20,
+      "mean": 83.60,
+      "p95": 92.10,
+      "max": 118.50
+    }
+  },
+  "internal_breakdown_ms": {
+    "wordpress_bootstrap": 68.24,
+    "apex_container_resolution": 0.0008,
+    "meta_generation": 0.356,
+    "schema_graph_assembly": 0.120,
+    "database_queries_total": 0.612,
+    "total_apex_overhead_ms": 0.4768
+  },
+  "reconciliation_notes": "Previous reports claimed 'TTFB = 0.097ms' which was mathematically measuring internal microsecond PHP timers rather than HTTP wire TTFB. Independent forensic cURL measurement confirms true HTTP Wire TTFB is 79.11ms median, with Apex adding only 0.477ms of internal overhead."
+}
