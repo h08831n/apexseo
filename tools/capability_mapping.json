@@ -1,0 +1,2447 @@
+{
+    "APEX-001": {
+        "id": "APEX-001",
+        "target_files": [
+            "src/SEO/Meta/TitlePresenter.php",
+            "src/SEO/Meta/MetaTagManager.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\SEO\\Meta\\TitlePresenter",
+            "ApexSEO\\SEO\\Meta\\MetaTagManager"
+        ],
+        "target_methods": [
+            "TitlePresenter::render",
+            "TitlePresenter::renderHtmlTag",
+            "MetaTagManager::renderHead"
+        ],
+        "target_entrypoints": [
+            "WordPress wp_head action hook or pre_get_document_title filter"
+        ],
+        "target_tests": [
+            "testTitleAndDescriptionPresenters"
+        ]
+    },
+    "APEX-002": {
+        "id": "APEX-002",
+        "target_files": [
+            "src/SEO/Meta/DescriptionPresenter.php",
+            "src/SEO/Meta/MetaTagManager.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\SEO\\Meta\\DescriptionPresenter",
+            "ApexSEO\\SEO\\Meta\\MetaTagManager"
+        ],
+        "target_methods": [
+            "DescriptionPresenter::render",
+            "DescriptionPresenter::renderHtmlTag",
+            "DescriptionPresenter::cleanDescription"
+        ],
+        "target_entrypoints": [
+            "WordPress wp_head action hook"
+        ],
+        "target_tests": [
+            "testTitleAndDescriptionPresenters"
+        ]
+    },
+    "APEX-003": {
+        "id": "APEX-003",
+        "target_files": [
+            "src/SEO/Variables/VariableEngine.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\SEO\\Variables\\VariableEngine"
+        ],
+        "target_methods": [
+            "VariableEngine::registerCoreVariables",
+            "VariableEngine::registerVariable",
+            "VariableEngine::replace"
+        ],
+        "target_entrypoints": [
+            "MetaTagManager / TitlePresenter / DescriptionPresenter invocation"
+        ],
+        "target_tests": [
+            "testVariableEngineDefaultTokens"
+        ]
+    },
+    "APEX-004": {
+        "id": "APEX-004",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-005": {
+        "id": "APEX-005",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-006": {
+        "id": "APEX-006",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-007": {
+        "id": "APEX-007",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-008": {
+        "id": "APEX-008",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-009": {
+        "id": "APEX-009",
+        "target_files": [
+            "src/SEO/Templates/TemplateManager.php",
+            "src/SEO/Variables/VariableEngine.php",
+            "src/Core/Configuration/ConfigurationManager.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\SEO\\Templates\\TemplateManager",
+            "ApexSEO\\SEO\\Variables\\VariableEngine"
+        ],
+        "target_methods": [
+            "TemplateManager::getTitleSeparator",
+            "VariableEngine::replace",
+            "VariableEngine::cleanDanglingSeparators"
+        ],
+        "target_entrypoints": [
+            "Plugin bootstrap and template evaluation"
+        ],
+        "target_tests": [
+            "testVariableEngineDefaultTokens"
+        ]
+    },
+    "APEX-010": {
+        "id": "APEX-010",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-011": {
+        "id": "APEX-011",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-012": {
+        "id": "APEX-012",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-013": {
+        "id": "APEX-013",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-014": {
+        "id": "APEX-014",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-015": {
+        "id": "APEX-015",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-016": {
+        "id": "APEX-016",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-017": {
+        "id": "APEX-017",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-018": {
+        "id": "APEX-018",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-019": {
+        "id": "APEX-019",
+        "target_files": [
+            "src/SEO/Meta/CanonicalPresenter.php",
+            "src/SEO/Meta/MetaTagManager.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\SEO\\Meta\\CanonicalPresenter",
+            "ApexSEO\\SEO\\Meta\\MetaTagManager"
+        ],
+        "target_methods": [
+            "CanonicalPresenter::render",
+            "CanonicalPresenter::cleanUrl",
+            "CanonicalPresenter::renderHtmlTag"
+        ],
+        "target_entrypoints": [
+            "WordPress wp_head action hook"
+        ],
+        "target_tests": [
+            "testCanonicalAndRobotsPresenters"
+        ]
+    },
+    "APEX-020": {
+        "id": "APEX-020",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-021": {
+        "id": "APEX-021",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-022": {
+        "id": "APEX-022",
+        "target_files": [
+            "src/SEO/Meta/RobotsPresenter.php",
+            "src/SEO/Meta/MetaTagManager.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\SEO\\Meta\\RobotsPresenter",
+            "ApexSEO\\SEO\\Meta\\MetaTagManager"
+        ],
+        "target_methods": [
+            "RobotsPresenter::getDirectives",
+            "RobotsPresenter::render",
+            "RobotsPresenter::renderHtmlTag"
+        ],
+        "target_entrypoints": [
+            "WordPress wp_head action hook"
+        ],
+        "target_tests": [
+            "testCanonicalAndRobotsPresenters"
+        ]
+    },
+    "APEX-023": {
+        "id": "APEX-023",
+        "target_files": [
+            "src/SEO/Meta/RobotsPresenter.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\SEO\\Meta\\RobotsPresenter"
+        ],
+        "target_methods": [
+            "RobotsPresenter::getDirectives",
+            "RobotsPresenter::render"
+        ],
+        "target_entrypoints": [
+            "WordPress wp_head action hook"
+        ],
+        "target_tests": [
+            "testCanonicalAndRobotsPresenters"
+        ]
+    },
+    "APEX-024": {
+        "id": "APEX-024",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-025": {
+        "id": "APEX-025",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-026": {
+        "id": "APEX-026",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-027": {
+        "id": "APEX-027",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-028": {
+        "id": "APEX-028",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-029": {
+        "id": "APEX-029",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-030": {
+        "id": "APEX-030",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-031": {
+        "id": "APEX-031",
+        "target_files": [
+            "src/SEO/Social/OpenGraphPresenter.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\SEO\\Social\\OpenGraphPresenter"
+        ],
+        "target_methods": [
+            "OpenGraphPresenter::buildTags",
+            "OpenGraphPresenter::render"
+        ],
+        "target_entrypoints": [
+            "WordPress wp_head action hook"
+        ],
+        "target_tests": [
+            "testOpenGraphAndTwitterCardPresenters"
+        ]
+    },
+    "APEX-032": {
+        "id": "APEX-032",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-033": {
+        "id": "APEX-033",
+        "target_files": [
+            "src/SEO/Social/TwitterCardPresenter.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\SEO\\Social\\TwitterCardPresenter"
+        ],
+        "target_methods": [
+            "TwitterCardPresenter::buildTags",
+            "TwitterCardPresenter::render"
+        ],
+        "target_entrypoints": [
+            "WordPress wp_head action hook"
+        ],
+        "target_tests": [
+            "testOpenGraphAndTwitterCardPresenters"
+        ]
+    },
+    "APEX-034": {
+        "id": "APEX-034",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-035": {
+        "id": "APEX-035",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-036": {
+        "id": "APEX-036",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-037": {
+        "id": "APEX-037",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-038": {
+        "id": "APEX-038",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-039": {
+        "id": "APEX-039",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-040": {
+        "id": "APEX-040",
+        "target_files": [
+            "src/SEO/Sitemap/SitemapGenerator.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\SEO\\Sitemap\\SitemapGenerator"
+        ],
+        "target_methods": [
+            "SitemapGenerator::renderIndexSitemap",
+            "SitemapGenerator::renderUrlSitemap"
+        ],
+        "target_entrypoints": [
+            "HTTP request to /sitemap_index.xml or /sitemap.xml rewrite endpoint"
+        ],
+        "target_tests": [
+            "testSitemapGenerator"
+        ]
+    },
+    "APEX-041": {
+        "id": "APEX-041",
+        "target_files": [
+            "src/SEO/Sitemap/SitemapGenerator.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\SEO\\Sitemap\\SitemapGenerator"
+        ],
+        "target_methods": [
+            "SitemapGenerator::renderUrlSitemap"
+        ],
+        "target_entrypoints": [
+            "HTTP request to /post-sitemap.xml or /post-sitemap1.xml"
+        ],
+        "target_tests": [
+            "testSitemapGenerator"
+        ]
+    },
+    "APEX-042": {
+        "id": "APEX-042",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-043": {
+        "id": "APEX-043",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-044": {
+        "id": "APEX-044",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-045": {
+        "id": "APEX-045",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-046": {
+        "id": "APEX-046",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-047": {
+        "id": "APEX-047",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-048": {
+        "id": "APEX-048",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-049": {
+        "id": "APEX-049",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-050": {
+        "id": "APEX-050",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-051": {
+        "id": "APEX-051",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-052": {
+        "id": "APEX-052",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-053": {
+        "id": "APEX-053",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-054": {
+        "id": "APEX-054",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-055": {
+        "id": "APEX-055",
+        "target_files": [
+            "src/SEO/Redirects/RedirectManager.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\SEO\\Redirects\\RedirectManager"
+        ],
+        "target_methods": [
+            "RedirectManager::addRedirect",
+            "RedirectManager::matchRedirect",
+            "RedirectManager::interceptAndRedirect"
+        ],
+        "target_entrypoints": [
+            "template_redirect WordPress action hook"
+        ],
+        "target_tests": [
+            "testRedirectManager"
+        ]
+    },
+    "APEX-056": {
+        "id": "APEX-056",
+        "target_files": [
+            "src/SEO/Redirects/RedirectManager.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\SEO\\Redirects\\RedirectManager"
+        ],
+        "target_methods": [
+            "RedirectManager::addRedirect",
+            "RedirectManager::matchRedirect"
+        ],
+        "target_entrypoints": [
+            "template_redirect hook"
+        ],
+        "target_tests": [
+            "testRedirectManager"
+        ]
+    },
+    "APEX-057": {
+        "id": "APEX-057",
+        "target_files": [
+            "src/SEO/Redirects/RedirectManager.php",
+            "src/Core/Security/SecurityUtils.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\SEO\\Redirects\\RedirectManager",
+            "ApexSEO\\Core\\Security\\SecurityUtils"
+        ],
+        "target_methods": [
+            "RedirectManager::matchRedirect",
+            "SecurityUtils::isValidRegex",
+            "SecurityUtils::safePregMatch"
+        ],
+        "target_entrypoints": [
+            "template_redirect hook"
+        ],
+        "target_tests": [
+            "testRedirectsControllerCRUD"
+        ]
+    },
+    "APEX-058": {
+        "id": "APEX-058",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-059": {
+        "id": "APEX-059",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-060": {
+        "id": "APEX-060",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-061": {
+        "id": "APEX-061",
+        "target_files": [
+            "src/Analytics/Monitor/FourOhFourMonitor.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\Analytics\\Monitor\\FourOhFourMonitor"
+        ],
+        "target_methods": [
+            "FourOhFourMonitor::record404",
+            "FourOhFourMonitor::getRecent404s"
+        ],
+        "target_entrypoints": [
+            "template_redirect action hook when is_404() is true"
+        ],
+        "target_tests": [
+            "testFourOhFourLogging"
+        ]
+    },
+    "APEX-062": {
+        "id": "APEX-062",
+        "target_files": [
+            "src/API/Controllers/NotFoundRestController.php",
+            "src/SEO/Redirects/RedirectManager.php",
+            "src/Analytics/Monitor/FourOhFourMonitor.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\API\\Controllers\\NotFoundRestController"
+        ],
+        "target_methods": [
+            "NotFoundRestController::get404Logs",
+            "NotFoundRestController::clear404Logs"
+        ],
+        "target_entrypoints": [
+            "REST API request to /wp-json/apexseo/v1/404s"
+        ],
+        "target_tests": [
+            "testNotFoundController"
+        ]
+    },
+    "APEX-063": {
+        "id": "APEX-063",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-064": {
+        "id": "APEX-064",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-065": {
+        "id": "APEX-065",
+        "target_files": [
+            "src/Schema/SchemaGraphBuilder.php",
+            "src/Schema/SchemaRegistry.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\Schema\\SchemaGraphBuilder",
+            "ApexSEO\\Schema\\SchemaRegistry"
+        ],
+        "target_methods": [
+            "SchemaGraphBuilder::buildGraph",
+            "SchemaGraphBuilder::renderScript"
+        ],
+        "target_entrypoints": [
+            "WordPress wp_head action hook"
+        ],
+        "target_tests": [
+            "testSchemaGraphBuilderOutput"
+        ]
+    },
+    "APEX-066": {
+        "id": "APEX-066",
+        "target_files": [
+            "src/Schema/SchemaRegistry.php",
+            "src/Schema/Types/SchemaTypeInterface.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\Schema\\SchemaRegistry"
+        ],
+        "target_methods": [
+            "SchemaRegistry::register",
+            "SchemaRegistry::getType",
+            "SchemaRegistry::getRegisteredTypes"
+        ],
+        "target_entrypoints": [
+            "SchemaModule boot and SchemaGraphBuilder execution"
+        ],
+        "target_tests": [
+            "testSchemaRegistryDefaultTypes"
+        ]
+    },
+    "APEX-067": {
+        "id": "APEX-067",
+        "target_files": [
+            "src/Schema/Types/ArticleSchema.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\Schema\\Types\\ArticleSchema"
+        ],
+        "target_methods": [
+            "ArticleSchema::isApplicable",
+            "ArticleSchema::generate"
+        ],
+        "target_entrypoints": [
+            "SchemaGraphBuilder::buildGraph"
+        ],
+        "target_tests": [
+            "testArticleSchemaGeneration"
+        ]
+    },
+    "APEX-068": {
+        "id": "APEX-068",
+        "target_files": [
+            "src/Schema/Types/OrganizationSchema.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\Schema\\Types\\OrganizationSchema"
+        ],
+        "target_methods": [
+            "OrganizationSchema::generate",
+            "OrganizationSchema::isApplicable"
+        ],
+        "target_entrypoints": [
+            "SchemaGraphBuilder on homepage or publisher reference"
+        ],
+        "target_tests": [
+            "testSchemaRegistryDefaultTypes"
+        ]
+    },
+    "APEX-069": {
+        "id": "APEX-069",
+        "target_files": [
+            "src/Schema/Types/LocalBusinessSchema.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\Schema\\Types\\LocalBusinessSchema"
+        ],
+        "target_methods": [
+            "LocalBusinessSchema::generate",
+            "LocalBusinessSchema::isApplicable"
+        ],
+        "target_entrypoints": [
+            "SchemaGraphBuilder for local business pages"
+        ],
+        "target_tests": [
+            "testSchemaRegistryDefaultTypes"
+        ]
+    },
+    "APEX-070": {
+        "id": "APEX-070",
+        "target_files": [
+            "src/Schema/Types/ProductSchema.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\Schema\\Types\\ProductSchema"
+        ],
+        "target_methods": [
+            "ProductSchema::generate",
+            "ProductSchema::isApplicable"
+        ],
+        "target_entrypoints": [
+            "SchemaGraphBuilder on WooCommerce single product pages"
+        ],
+        "target_tests": [
+            "testProductSchemaGeneration"
+        ]
+    },
+    "APEX-071": {
+        "id": "APEX-071",
+        "target_files": [
+            "src/Schema/Types/FAQPageSchema.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\Schema\\Types\\FAQPageSchema"
+        ],
+        "target_methods": [
+            "FAQPageSchema::generate",
+            "FAQPageSchema::isApplicable"
+        ],
+        "target_entrypoints": [
+            "SchemaGraphBuilder on FAQ pages or posts with FAQ block"
+        ],
+        "target_tests": [
+            "testFaqPageSchemaGeneration"
+        ]
+    },
+    "APEX-072": {
+        "id": "APEX-072",
+        "target_files": [
+            "src/Schema/Types/RecipeSchema.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\Schema\\Types\\RecipeSchema"
+        ],
+        "target_methods": [
+            "RecipeSchema::generate",
+            "RecipeSchema::isApplicable"
+        ],
+        "target_entrypoints": [
+            "SchemaGraphBuilder on recipe posts"
+        ],
+        "target_tests": [
+            "testRecipeSchemaGeneration"
+        ]
+    },
+    "APEX-073": {
+        "id": "APEX-073",
+        "target_files": [
+            "src/Schema/Types/JobPostingSchema.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\Schema\\Types\\JobPostingSchema"
+        ],
+        "target_methods": [
+            "JobPostingSchema::generate",
+            "JobPostingSchema::isApplicable"
+        ],
+        "target_entrypoints": [
+            "SchemaGraphBuilder on job listing pages"
+        ],
+        "target_tests": [
+            "testJobPostingSchemaGeneration"
+        ]
+    },
+    "APEX-074": {
+        "id": "APEX-074",
+        "target_files": [
+            "src/Schema/Types/CourseSchema.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\Schema\\Types\\CourseSchema"
+        ],
+        "target_methods": [
+            "CourseSchema::generate",
+            "CourseSchema::isApplicable"
+        ],
+        "target_entrypoints": [
+            "SchemaGraphBuilder on course pages"
+        ],
+        "target_tests": [
+            "testCourseSchemaGeneration"
+        ]
+    },
+    "APEX-075": {
+        "id": "APEX-075",
+        "target_files": [
+            "src/Schema/Types/EventSchema.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\Schema\\Types\\EventSchema"
+        ],
+        "target_methods": [
+            "EventSchema::generate",
+            "EventSchema::isApplicable"
+        ],
+        "target_entrypoints": [
+            "SchemaGraphBuilder on event pages"
+        ],
+        "target_tests": [
+            "testEventSchemaGeneration"
+        ]
+    },
+    "APEX-076": {
+        "id": "APEX-076",
+        "target_files": [
+            "src/Schema/Types/SoftwareApplicationSchema.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\Schema\\Types\\SoftwareApplicationSchema"
+        ],
+        "target_methods": [
+            "SoftwareApplicationSchema::generate",
+            "SoftwareApplicationSchema::isApplicable"
+        ],
+        "target_entrypoints": [
+            "SchemaGraphBuilder on app pages"
+        ],
+        "target_tests": [
+            "testSoftwareApplicationSchemaGeneration"
+        ]
+    },
+    "APEX-077": {
+        "id": "APEX-077",
+        "target_files": [
+            "src/Schema/Media/VideoObjectSchema.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\Schema\\Media\\VideoObjectSchema"
+        ],
+        "target_methods": [
+            "VideoObjectSchema::generate",
+            "VideoObjectSchema::isApplicable"
+        ],
+        "target_entrypoints": [
+            "SchemaGraphBuilder on pages containing embedded videos"
+        ],
+        "target_tests": [
+            "testVideoObjectSchemaGeneration"
+        ]
+    },
+    "APEX-078": {
+        "id": "APEX-078",
+        "target_files": [
+            "src/Schema/Types/WebSiteSchema.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\Schema\\Types\\WebSiteSchema"
+        ],
+        "target_methods": [
+            "WebSiteSchema::generate",
+            "WebSiteSchema::isApplicable"
+        ],
+        "target_entrypoints": [
+            "SchemaGraphBuilder on all pages"
+        ],
+        "target_tests": [
+            "testSchemaRegistryDefaultTypes"
+        ]
+    },
+    "APEX-079": {
+        "id": "APEX-079",
+        "target_files": [
+            "src/Schema/Validator/SchemaValidator.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\Schema\\Validator\\SchemaValidator"
+        ],
+        "target_methods": [
+            "SchemaValidator::validate"
+        ],
+        "target_entrypoints": [
+            "Schema creation REST endpoint and schema preview"
+        ],
+        "target_tests": [
+            "testSchemaValidator"
+        ]
+    },
+    "APEX-080": {
+        "id": "APEX-080",
+        "target_files": [
+            "src/SEO/Breadcrumbs/BreadcrumbGenerator.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\SEO\\Breadcrumbs\\BreadcrumbGenerator"
+        ],
+        "target_methods": [
+            "BreadcrumbGenerator::getBreadcrumbItems",
+            "BreadcrumbGenerator::renderHtml",
+            "BreadcrumbGenerator::generateSchema"
+        ],
+        "target_entrypoints": [
+            "Theme template tag or breadcrumb shortcode / schema graph builder"
+        ],
+        "target_tests": [
+            "testBreadcrumbGenerator"
+        ]
+    },
+    "APEX-081": {
+        "id": "APEX-081",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-082": {
+        "id": "APEX-082",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-083": {
+        "id": "APEX-083",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-084": {
+        "id": "APEX-084",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-085": {
+        "id": "APEX-085",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-086": {
+        "id": "APEX-086",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-087": {
+        "id": "APEX-087",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-088": {
+        "id": "APEX-088",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-089": {
+        "id": "APEX-089",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-090": {
+        "id": "APEX-090",
+        "target_files": [
+            "src/Performance/Cache/StaticFileWriter.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\Performance\\Cache\\StaticFileWriter"
+        ],
+        "target_methods": [
+            "StaticFileWriter::writeCache",
+            "StaticFileWriter::readCache",
+            "StaticFileWriter::purge"
+        ],
+        "target_entrypoints": [
+            "shutdown / template_redirect output buffering hook"
+        ],
+        "target_tests": [
+            "testStaticFileWriterAndSmartPurge"
+        ]
+    },
+    "APEX-091": {
+        "id": "APEX-091",
+        "target_files": [
+            "src/Performance/Cache/SmartPurge.php",
+            "src/Performance/Cache/StaticFileWriter.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\Performance\\Cache\\SmartPurge"
+        ],
+        "target_methods": [
+            "SmartPurge::purgePost",
+            "SmartPurge::purgeAll"
+        ],
+        "target_entrypoints": [
+            "save_post, edit_terms, comment_post WordPress hooks"
+        ],
+        "target_tests": [
+            "testStaticFileWriterAndSmartPurge"
+        ]
+    },
+    "APEX-092": {
+        "id": "APEX-092",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-093": {
+        "id": "APEX-093",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-094": {
+        "id": "APEX-094",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-095": {
+        "id": "APEX-095",
+        "target_files": [
+            "src/Performance/Assets/CssMinifier.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\Performance\\Assets\\CssMinifier"
+        ],
+        "target_methods": [
+            "CssMinifier::minify"
+        ],
+        "target_entrypoints": [
+            "Asset pipeline during page rendering or asset build"
+        ],
+        "target_tests": [
+            "testCssMinification"
+        ]
+    },
+    "APEX-096": {
+        "id": "APEX-096",
+        "target_files": [
+            "src/Performance/Assets/JsMinifier.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\Performance\\Assets\\JsMinifier"
+        ],
+        "target_methods": [
+            "JsMinifier::minify"
+        ],
+        "target_entrypoints": [
+            "Asset pipeline during page rendering"
+        ],
+        "target_tests": [
+            "testJsMinification"
+        ]
+    },
+    "APEX-097": {
+        "id": "APEX-097",
+        "target_files": [
+            "src/Performance/Assets/HtmlMinifier.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\Performance\\Assets\\HtmlMinifier"
+        ],
+        "target_methods": [
+            "HtmlMinifier::minify"
+        ],
+        "target_entrypoints": [
+            "Output buffering filter before sending response"
+        ],
+        "target_tests": [
+            "testHtmlMinification"
+        ]
+    },
+    "APEX-098": {
+        "id": "APEX-098",
+        "target_files": [
+            "src/Performance/Assets/DelayJsEngine.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\Performance\\Assets\\DelayJsEngine"
+        ],
+        "target_methods": [
+            "DelayJsEngine::processHtml"
+        ],
+        "target_entrypoints": [
+            "Output buffer processing filter"
+        ],
+        "target_tests": [
+            "testDelayJsEngine"
+        ]
+    },
+    "APEX-099": {
+        "id": "APEX-099",
+        "target_files": [
+            "src/Performance/Tweaks/ResourceHints.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\Performance\\Tweaks\\ResourceHints"
+        ],
+        "target_methods": [
+            "ResourceHints::render"
+        ],
+        "target_entrypoints": [
+            "WordPress wp_head action hook"
+        ],
+        "target_tests": [
+            "testResourceHints"
+        ]
+    },
+    "APEX-100": {
+        "id": "APEX-100",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-101": {
+        "id": "APEX-101",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-102": {
+        "id": "APEX-102",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-103": {
+        "id": "APEX-103",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-104": {
+        "id": "APEX-104",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-105": {
+        "id": "APEX-105",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-106": {
+        "id": "APEX-106",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-107": {
+        "id": "APEX-107",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-108": {
+        "id": "APEX-108",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-109": {
+        "id": "APEX-109",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-110": {
+        "id": "APEX-110",
+        "target_files": [
+            "src/AI/LlmsTxt/LlmsTxtGenerator.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\AI\\LlmsTxt\\LlmsTxtGenerator"
+        ],
+        "target_methods": [
+            "LlmsTxtGenerator::generateLlmsTxt",
+            "LlmsTxtGenerator::generateLlmsFullTxt"
+        ],
+        "target_entrypoints": [
+            "WordPress template_redirect hook on /llms.txt URI"
+        ],
+        "target_tests": [
+            "testLlmsTxtGeneration"
+        ]
+    },
+    "APEX-111": {
+        "id": "APEX-111",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-112": {
+        "id": "APEX-112",
+        "target_files": [
+            "src/AI/SearchIntent/SearchIntentAnalyzer.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\AI\\SearchIntent\\SearchIntentAnalyzer"
+        ],
+        "target_methods": [
+            "SearchIntentAnalyzer::analyze",
+            "SearchIntentAnalyzer::getIntentSuggestions"
+        ],
+        "target_entrypoints": [
+            "REST API / Admin content editor analysis trigger"
+        ],
+        "target_tests": [
+            "testSearchIntentAnalyzer"
+        ]
+    },
+    "APEX-113": {
+        "id": "APEX-113",
+        "target_files": [
+            "src/AI/Generators/MetadataAiGenerator.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\AI\\Generators\\MetadataAiGenerator"
+        ],
+        "target_methods": [
+            "MetadataAiGenerator::generateTitleCandidates",
+            "MetadataAiGenerator::generateDescriptionCandidates"
+        ],
+        "target_entrypoints": [
+            "REST API / Admin AI assist button"
+        ],
+        "target_tests": [
+            "testMetadataAiGenerator"
+        ]
+    },
+    "APEX-114": {
+        "id": "APEX-114",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-115": {
+        "id": "APEX-115",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-116": {
+        "id": "APEX-116",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-117": {
+        "id": "APEX-117",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-118": {
+        "id": "APEX-118",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-119": {
+        "id": "APEX-119",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-120": {
+        "id": "APEX-120",
+        "target_files": [
+            "src/Media/Optimizer/ImageOptimizer.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\Media\\Optimizer\\ImageOptimizer"
+        ],
+        "target_methods": [
+            "ImageOptimizer::supportsWebP",
+            "ImageOptimizer::supportsAvif",
+            "ImageOptimizer::convertToWebP",
+            "ImageOptimizer::optimizeAttachment"
+        ],
+        "target_entrypoints": [
+            "wp_generate_attachment_metadata hook or CLI / REST optimization trigger"
+        ],
+        "target_tests": [
+            "testMediaCommandOptimizeAndRestore"
+        ]
+    },
+    "APEX-121": {
+        "id": "APEX-121",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-122": {
+        "id": "APEX-122",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-123": {
+        "id": "APEX-123",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-124": {
+        "id": "APEX-124",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-125": {
+        "id": "APEX-125",
+        "target_files": [
+            "src/Media/Optimizer/LcpOptimizer.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\Media\\Optimizer\\LcpOptimizer"
+        ],
+        "target_methods": [
+            "LcpOptimizer::optimizeLcpImages"
+        ],
+        "target_entrypoints": [
+            "the_content filter or output buffer filter"
+        ],
+        "target_tests": [
+            "testLcpOptimizer"
+        ]
+    },
+    "APEX-126": {
+        "id": "APEX-126",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-127": {
+        "id": "APEX-127",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-128": {
+        "id": "APEX-128",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-129": {
+        "id": "APEX-129",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-130": {
+        "id": "APEX-130",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-131": {
+        "id": "APEX-131",
+        "target_files": [
+            "src/Media/LazyLoad/ImageLazyLoader.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\Media\\LazyLoad\\ImageLazyLoader"
+        ],
+        "target_methods": [
+            "ImageLazyLoader::processHtml"
+        ],
+        "target_entrypoints": [
+            "the_content filter or output buffer hook"
+        ],
+        "target_tests": [
+            "testImageLazyLoader"
+        ]
+    },
+    "APEX-132": {
+        "id": "APEX-132",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-133": {
+        "id": "APEX-133",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-134": {
+        "id": "APEX-134",
+        "target_files": [
+            "src/Media/LazyLoad/PlaceholderGenerator.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\Media\\LazyLoad\\PlaceholderGenerator"
+        ],
+        "target_methods": [
+            "PlaceholderGenerator::generateSvgPlaceholder"
+        ],
+        "target_entrypoints": [
+            "ImageLazyLoader when placeholder option is active"
+        ],
+        "target_tests": [
+            "testSvgPlaceholderGenerator"
+        ]
+    },
+    "APEX-135": {
+        "id": "APEX-135",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-136": {
+        "id": "APEX-136",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-137": {
+        "id": "APEX-137",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-138": {
+        "id": "APEX-138",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-139": {
+        "id": "APEX-139",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-140": {
+        "id": "APEX-140",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-141": {
+        "id": "APEX-141",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-142": {
+        "id": "APEX-142",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-143": {
+        "id": "APEX-143",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-144": {
+        "id": "APEX-144",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-145": {
+        "id": "APEX-145",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-146": {
+        "id": "APEX-146",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-147": {
+        "id": "APEX-147",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-148": {
+        "id": "APEX-148",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-149": {
+        "id": "APEX-149",
+        "target_files": [
+            "src/Core/Environment/Server/ApacheAdapter.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\Core\\Environment\\Server\\ApacheAdapter"
+        ],
+        "target_methods": [
+            "ApacheAdapter::getServerType",
+            "ApacheAdapter::supportsHtaccess",
+            "ApacheAdapter::supportsNginxDirectives"
+        ],
+        "target_entrypoints": [
+            "EnvironmentDetector resolution during boot"
+        ],
+        "target_tests": [
+            "testApacheAdapterCapabilities"
+        ]
+    },
+    "APEX-150": {
+        "id": "APEX-150",
+        "target_files": [
+            "src/Core/Environment/Server/NginxAdapter.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\Core\\Environment\\Server\\NginxAdapter"
+        ],
+        "target_methods": [
+            "NginxAdapter::getServerType",
+            "NginxAdapter::supportsHtaccess",
+            "NginxAdapter::supportsNginxDirectives"
+        ],
+        "target_entrypoints": [
+            "EnvironmentDetector resolution during boot"
+        ],
+        "target_tests": [
+            "testNginxAdapterCapabilities"
+        ]
+    },
+    "APEX-151": {
+        "id": "APEX-151",
+        "target_files": [
+            "src/Core/Environment/Server/LiteSpeedAdapter.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\Core\\Environment\\Server\\LiteSpeedAdapter"
+        ],
+        "target_methods": [
+            "LiteSpeedAdapter::getServerType",
+            "LiteSpeedAdapter::supportsLiteSpeedEngine",
+            "LiteSpeedAdapter::supportsEsi"
+        ],
+        "target_entrypoints": [
+            "EnvironmentDetector resolution during boot"
+        ],
+        "target_tests": [
+            "testLiteSpeedAdapterCapabilities"
+        ]
+    },
+    "APEX-152": {
+        "id": "APEX-152",
+        "target_files": [
+            "src/Core/Environment/Server/OpenLiteSpeedAdapter.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\Core\\Environment\\Server\\OpenLiteSpeedAdapter"
+        ],
+        "target_methods": [
+            "OpenLiteSpeedAdapter::getServerType",
+            "OpenLiteSpeedAdapter::supportsLiteSpeedEngine",
+            "OpenLiteSpeedAdapter::supportsHtaccess"
+        ],
+        "target_entrypoints": [
+            "EnvironmentDetector resolution during boot"
+        ],
+        "target_tests": [
+            "testOpenLiteSpeedAdapterCapabilities"
+        ]
+    },
+    "APEX-153": {
+        "id": "APEX-153",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-154": {
+        "id": "APEX-154",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-155": {
+        "id": "APEX-155",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-156": {
+        "id": "APEX-156",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-157": {
+        "id": "APEX-157",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-158": {
+        "id": "APEX-158",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-159": {
+        "id": "APEX-159",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-160": {
+        "id": "APEX-160",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-161": {
+        "id": "APEX-161",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-162": {
+        "id": "APEX-162",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-163": {
+        "id": "APEX-163",
+        "target_files": [
+            "src/Analytics/Tracker/RankTracker.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\Analytics\\Tracker\\RankTracker"
+        ],
+        "target_methods": [
+            "RankTracker::trackKeyword",
+            "RankTracker::getTrackedKeywords"
+        ],
+        "target_entrypoints": [
+            "REST API / WP-Cron tracking schedule"
+        ],
+        "target_tests": [
+            "testRankTrackerKeywords"
+        ]
+    },
+    "APEX-164": {
+        "id": "APEX-164",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-165": {
+        "id": "APEX-165",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-166": {
+        "id": "APEX-166",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-167": {
+        "id": "APEX-167",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-168": {
+        "id": "APEX-168",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-169": {
+        "id": "APEX-169",
+        "target_files": [
+            "src/API/Controllers/SettingsRestController.php",
+            "src/API/RestApiRouter.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\API\\Controllers\\SettingsRestController"
+        ],
+        "target_methods": [
+            "SettingsRestController::getSettings",
+            "SettingsRestController::updateSettings",
+            "SettingsRestController::registerRoutes"
+        ],
+        "target_entrypoints": [
+            "rest_api_init WordPress hook"
+        ],
+        "target_tests": [
+            "testSettingsControllerGetAndUpdate"
+        ]
+    },
+    "APEX-170": {
+        "id": "APEX-170",
+        "target_files": [
+            "src/API/Controllers/MetaRestController.php",
+            "src/SEO/Admin/MetaSaver.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\API\\Controllers\\MetaRestController"
+        ],
+        "target_methods": [
+            "MetaRestController::getMeta",
+            "MetaRestController::saveMeta",
+            "MetaRestController::registerRoutes"
+        ],
+        "target_entrypoints": [
+            "rest_api_init WordPress hook"
+        ],
+        "target_tests": [
+            "testMetaControllerSaveAndGet"
+        ]
+    },
+    "APEX-171": {
+        "id": "APEX-171",
+        "target_files": [
+            "src/API/Controllers/SchemaRestController.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\API\\Controllers\\SchemaRestController"
+        ],
+        "target_methods": [
+            "SchemaRestController::getSchemas",
+            "SchemaRestController::createSchema",
+            "SchemaRestController::registerRoutes"
+        ],
+        "target_entrypoints": [
+            "rest_api_init WordPress hook"
+        ],
+        "target_tests": [
+            "testSchemaControllerCRUD"
+        ]
+    },
+    "APEX-172": {
+        "id": "APEX-172",
+        "target_files": [
+            "src/API/Controllers/RedirectsRestController.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\API\\Controllers\\RedirectsRestController"
+        ],
+        "target_methods": [
+            "RedirectsRestController::getRedirects",
+            "RedirectsRestController::createRedirect",
+            "RedirectsRestController::registerRoutes"
+        ],
+        "target_entrypoints": [
+            "rest_api_init hook"
+        ],
+        "target_tests": [
+            "testRedirectsControllerCRUD"
+        ]
+    },
+    "APEX-173": {
+        "id": "APEX-173",
+        "target_files": [
+            "src/API/Controllers/NotFoundRestController.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\API\\Controllers\\NotFoundRestController"
+        ],
+        "target_methods": [
+            "NotFoundRestController::get404Logs",
+            "NotFoundRestController::clear404Logs",
+            "NotFoundRestController::registerRoutes"
+        ],
+        "target_entrypoints": [
+            "rest_api_init hook"
+        ],
+        "target_tests": [
+            "testNotFoundController"
+        ]
+    },
+    "APEX-174": {
+        "id": "APEX-174",
+        "target_files": [
+            "src/API/Controllers/LinksRestController.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\API\\Controllers\\LinksRestController"
+        ],
+        "target_methods": [
+            "LinksRestController::getSuggestions",
+            "LinksRestController::registerRoutes"
+        ],
+        "target_entrypoints": [
+            "rest_api_init hook"
+        ],
+        "target_tests": [
+            "testLinksController"
+        ]
+    },
+    "APEX-175": {
+        "id": "APEX-175",
+        "target_files": [
+            "src/API/Controllers/MetaRestController.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\API\\Controllers\\MetaRestController"
+        ],
+        "target_methods": [
+            "MetaRestController::getMeta",
+            "MetaRestController::registerRoutes"
+        ],
+        "target_entrypoints": [
+            "rest_api_init hook"
+        ],
+        "target_tests": [
+            "testMetaControllerSaveAndGet"
+        ]
+    },
+    "APEX-176": {
+        "id": "APEX-176",
+        "target_files": [
+            "src/API/Controllers/CacheRestController.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\API\\Controllers\\CacheRestController"
+        ],
+        "target_methods": [
+            "CacheRestController::purgeCache",
+            "CacheRestController::triggerPreload",
+            "CacheRestController::registerRoutes"
+        ],
+        "target_entrypoints": [
+            "rest_api_init hook"
+        ],
+        "target_tests": [
+            "testCacheControllerPurgeAndPreload"
+        ]
+    },
+    "APEX-177": {
+        "id": "APEX-177",
+        "target_files": [
+            "src/API/Controllers/MediaRestController.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\API\\Controllers\\MediaRestController"
+        ],
+        "target_methods": [
+            "MediaRestController::optimizeSingle",
+            "MediaRestController::bulkOptimize",
+            "MediaRestController::registerRoutes"
+        ],
+        "target_entrypoints": [
+            "rest_api_init hook"
+        ],
+        "target_tests": [
+            "testMediaControllerSingleAndBulk"
+        ]
+    },
+    "APEX-178": {
+        "id": "APEX-178",
+        "target_files": [
+            "src/API/Controllers/MigrationRestController.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\API\\Controllers\\MigrationRestController"
+        ],
+        "target_methods": [
+            "MigrationRestController::executeMigration",
+            "MigrationRestController::registerRoutes"
+        ],
+        "target_entrypoints": [
+            "rest_api_init hook"
+        ],
+        "target_tests": [
+            "testMigrationControllerExecution"
+        ]
+    },
+    "APEX-179": {
+        "id": "APEX-179",
+        "target_files": [
+            "src/API/Controllers/AnalyticsRestController.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\API\\Controllers\\AnalyticsRestController"
+        ],
+        "target_methods": [
+            "AnalyticsRestController::getOverview",
+            "AnalyticsRestController::registerRoutes"
+        ],
+        "target_entrypoints": [
+            "rest_api_init hook"
+        ],
+        "target_tests": [
+            "testAnalyticsController"
+        ]
+    },
+    "APEX-180": {
+        "id": "APEX-180",
+        "target_files": [
+            "src/API/Controllers/AnalyticsRestController.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\API\\Controllers\\AnalyticsRestController"
+        ],
+        "target_methods": [
+            "AnalyticsRestController::getRankTracker",
+            "AnalyticsRestController::registerRoutes"
+        ],
+        "target_entrypoints": [
+            "rest_api_init hook"
+        ],
+        "target_tests": [
+            "testAnalyticsController"
+        ]
+    },
+    "APEX-181": {
+        "id": "APEX-181",
+        "target_files": [
+            "src/CLI/CacheCommand.php",
+            "src/Core/CLI/CliManager.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\CLI\\CacheCommand"
+        ],
+        "target_methods": [
+            "CacheCommand::purge",
+            "CacheCommand::register"
+        ],
+        "target_entrypoints": [
+            "WP_CLI::add_command during cli_init hook"
+        ],
+        "target_tests": [
+            "testCacheCommandPurgeAndWarmup"
+        ]
+    },
+    "APEX-182": {
+        "id": "APEX-182",
+        "target_files": [
+            "src/CLI/CacheCommand.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\CLI\\CacheCommand"
+        ],
+        "target_methods": [
+            "CacheCommand::preload"
+        ],
+        "target_entrypoints": [
+            "cli_init hook"
+        ],
+        "target_tests": [
+            "testCacheCommandPurgeAndWarmup"
+        ]
+    },
+    "APEX-183": {
+        "id": "APEX-183",
+        "target_files": [
+            "src/CLI/IndexCommand.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\CLI\\IndexCommand"
+        ],
+        "target_methods": [
+            "IndexCommand::rebuild",
+            "IndexCommand::status"
+        ],
+        "target_entrypoints": [
+            "cli_init hook"
+        ],
+        "target_tests": [
+            "testIndexCommandRebuildAndStatus"
+        ]
+    },
+    "APEX-184": {
+        "id": "APEX-184",
+        "target_files": [
+            "src/CLI/MediaCommand.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\CLI\\MediaCommand"
+        ],
+        "target_methods": [
+            "MediaCommand::optimize",
+            "MediaCommand::restore"
+        ],
+        "target_entrypoints": [
+            "cli_init hook"
+        ],
+        "target_tests": [
+            "testMediaCommandOptimizeAndRestore"
+        ]
+    },
+    "APEX-185": {
+        "id": "APEX-185",
+        "target_files": [
+            "src/CLI/RedirectCommand.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\CLI\\RedirectCommand"
+        ],
+        "target_methods": [
+            "RedirectCommand::add"
+        ],
+        "target_entrypoints": [
+            "cli_init hook"
+        ],
+        "target_tests": [
+            "testRedirectCommandAddAndList"
+        ]
+    },
+    "APEX-186": {
+        "id": "APEX-186",
+        "target_files": [
+            "src/CLI/RedirectCommand.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\CLI\\RedirectCommand"
+        ],
+        "target_methods": [
+            "RedirectCommand::list"
+        ],
+        "target_entrypoints": [
+            "cli_init hook"
+        ],
+        "target_tests": [
+            "testRedirectCommandAddAndList"
+        ]
+    },
+    "APEX-187": {
+        "id": "APEX-187",
+        "target_files": [
+            "src/CLI/DatabaseCommand.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\CLI\\DatabaseCommand"
+        ],
+        "target_methods": [
+            "DatabaseCommand::clean"
+        ],
+        "target_entrypoints": [
+            "cli_init hook"
+        ],
+        "target_tests": [
+            "testDatabaseCommandClean"
+        ]
+    },
+    "APEX-188": {
+        "id": "APEX-188",
+        "target_files": [
+            "src/CLI/MigrateCommand.php",
+            "src/Core/Database/MigrationRunner.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\CLI\\MigrateCommand"
+        ],
+        "target_methods": [
+            "MigrateCommand::run",
+            "MigrateCommand::rollback"
+        ],
+        "target_entrypoints": [
+            "cli_init hook"
+        ],
+        "target_tests": [
+            "testMigrateCommandRunAndRollback"
+        ]
+    },
+    "APEX-189": {
+        "id": "APEX-189",
+        "target_files": [
+            "src/CLI/SitemapCommand.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\CLI\\SitemapCommand"
+        ],
+        "target_methods": [
+            "SitemapCommand::rebuild"
+        ],
+        "target_entrypoints": [
+            "cli_init hook"
+        ],
+        "target_tests": [
+            "testSitemapCommandRebuild"
+        ]
+    },
+    "APEX-190": {
+        "id": "APEX-190",
+        "target_files": [
+            "src/CLI/DoctorCommand.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\CLI\\DoctorCommand"
+        ],
+        "target_methods": [
+            "DoctorCommand::diagnose"
+        ],
+        "target_entrypoints": [
+            "cli_init hook"
+        ],
+        "target_tests": [
+            "testDoctorCommandDiagnose"
+        ]
+    },
+    "APEX-191": {
+        "id": "APEX-191",
+        "target_files": [
+            "src/Core/Container/Container.php",
+            "src/Core/Container/ContainerInterface.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\Core\\Container\\Container"
+        ],
+        "target_methods": [
+            "Container::get",
+            "Container::has",
+            "Container::singleton",
+            "Container::bind",
+            "Container::alias"
+        ],
+        "target_entrypoints": [
+            "Plugin bootstrap initialization"
+        ],
+        "target_tests": [
+            "testSingletonBinding"
+        ]
+    },
+    "APEX-192": {
+        "id": "APEX-192",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-193": {
+        "id": "APEX-193",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-194": {
+        "id": "APEX-194",
+        "target_files": [
+            "src/Core/Multisite/MultisiteManager.php"
+        ],
+        "target_classes": [
+            "ApexSEO\\Core\\Multisite\\MultisiteManager"
+        ],
+        "target_methods": [
+            "MultisiteManager::isMultisite",
+            "MultisiteManager::runInBlogContext",
+            "MultisiteManager::getCurrentBlogId"
+        ],
+        "target_entrypoints": [
+            "Plugin boot and multi-site maintenance routines"
+        ],
+        "target_tests": [
+            "testRunInBlogContextExecution"
+        ]
+    },
+    "APEX-195": {
+        "id": "APEX-195",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-196": {
+        "id": "APEX-196",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-197": {
+        "id": "APEX-197",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    },
+    "APEX-198": {
+        "id": "APEX-198",
+        "target_files": [],
+        "target_classes": [],
+        "target_methods": [],
+        "target_entrypoints": [],
+        "target_tests": []
+    }
+}
