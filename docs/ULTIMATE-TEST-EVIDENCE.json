@@ -1,0 +1,591 @@
+{
+    "behavioral": [
+        {
+            "class": "ApexSEO\\Tests\\AutoloaderTest",
+            "method": "testAutoloaderIgnoresForeignNamespace",
+            "file": "tests/AutoloaderTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\AutoloaderTest",
+            "method": "testAutoloaderReturnsFalseForNonExistentClass",
+            "file": "tests/AutoloaderTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\ContainerTest",
+            "method": "testSingletonBinding",
+            "file": "tests/ContainerTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\ContainerTest",
+            "method": "testTransientFactoryBinding",
+            "file": "tests/ContainerTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\ContainerTest",
+            "method": "testLazyLoadingResolution",
+            "file": "tests/ContainerTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\ContainerTest",
+            "method": "testAliasResolution",
+            "file": "tests/ContainerTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\ContainerTest",
+            "method": "testAutoWiringDependencies",
+            "file": "tests/ContainerTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\ContainerTest",
+            "method": "testCircularDependencyDetection",
+            "file": "tests/ContainerTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\CapabilityRegistryTest",
+            "method": "testCapabilityRegistrationAndRetrieval",
+            "file": "tests/CapabilityRegistryTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\CapabilityRegistryTest",
+            "method": "testCoreRegisteredCapabilities",
+            "file": "tests/CapabilityRegistryTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\ConfigurationManagerTest",
+            "method": "testDefaultValuesLoaded",
+            "file": "tests/ConfigurationManagerTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\ConfigurationManagerTest",
+            "method": "testDotNotationGetAndSet",
+            "file": "tests/ConfigurationManagerTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\ConfigurationManagerTest",
+            "method": "testModuleStatusToggling",
+            "file": "tests/ConfigurationManagerTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\ConfigurationManagerTest",
+            "method": "testConfigurationPersistence",
+            "file": "tests/ConfigurationManagerTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\EnvironmentDetectorTest",
+            "method": "testPhpAndWordPressVersionDetection",
+            "file": "tests/EnvironmentDetectorTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\EnvironmentDetectorTest",
+            "method": "testExtensionDetection",
+            "file": "tests/EnvironmentDetectorTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\EnvironmentDetectorTest",
+            "method": "testServerAdapterResolution",
+            "file": "tests/EnvironmentDetectorTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\ServerAdapterTest",
+            "method": "testApacheAdapterCapabilities",
+            "file": "tests/ServerAdapterTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\ServerAdapterTest",
+            "method": "testNginxAdapterCapabilities",
+            "file": "tests/ServerAdapterTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\ServerAdapterTest",
+            "method": "testLiteSpeedAdapterCapabilities",
+            "file": "tests/ServerAdapterTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\ServerAdapterTest",
+            "method": "testOpenLiteSpeedAdapterCapabilities",
+            "file": "tests/ServerAdapterTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\ServerAdapterTest",
+            "method": "testGenericServerAdapterCapabilities",
+            "file": "tests/ServerAdapterTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\MultisiteManagerTest",
+            "method": "testSingleSiteDefaults",
+            "file": "tests/MultisiteManagerTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\MultisiteManagerTest",
+            "method": "testRunInBlogContextExecution",
+            "file": "tests/MultisiteManagerTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\BootstrapTest",
+            "method": "testPluginSingletonInstance",
+            "file": "tests/BootstrapTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\BootstrapTest",
+            "method": "testPluginContainerInitialization",
+            "file": "tests/BootstrapTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\BootstrapTest",
+            "method": "testPluginBootSequence",
+            "file": "tests/BootstrapTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\SeoSubsystemTest",
+            "method": "testVariableEngineDefaultTokens",
+            "file": "tests/SeoSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\SeoSubsystemTest",
+            "method": "testTitleAndDescriptionPresenters",
+            "file": "tests/SeoSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\SeoSubsystemTest",
+            "method": "testCanonicalAndRobotsPresenters",
+            "file": "tests/SeoSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\SeoSubsystemTest",
+            "method": "testOpenGraphAndTwitterCardPresenters",
+            "file": "tests/SeoSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\SeoSubsystemTest",
+            "method": "testBreadcrumbGenerator",
+            "file": "tests/SeoSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\SeoSubsystemTest",
+            "method": "testSitemapGenerator",
+            "file": "tests/SeoSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\SeoSubsystemTest",
+            "method": "testRedirectManager",
+            "file": "tests/SeoSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\SchemaSubsystemTest",
+            "method": "testSchemaRegistryDefaultTypes",
+            "file": "tests/SchemaSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\SchemaSubsystemTest",
+            "method": "testArticleSchemaGeneration",
+            "file": "tests/SchemaSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\SchemaSubsystemTest",
+            "method": "testProductSchemaGeneration",
+            "file": "tests/SchemaSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\SchemaSubsystemTest",
+            "method": "testFaqPageSchemaGeneration",
+            "file": "tests/SchemaSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\SchemaSubsystemTest",
+            "method": "testRecipeSchemaGeneration",
+            "file": "tests/SchemaSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\SchemaSubsystemTest",
+            "method": "testJobPostingSchemaGeneration",
+            "file": "tests/SchemaSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\SchemaSubsystemTest",
+            "method": "testCourseSchemaGeneration",
+            "file": "tests/SchemaSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\SchemaSubsystemTest",
+            "method": "testEventSchemaGeneration",
+            "file": "tests/SchemaSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\SchemaSubsystemTest",
+            "method": "testSoftwareApplicationSchemaGeneration",
+            "file": "tests/SchemaSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\SchemaSubsystemTest",
+            "method": "testVideoObjectSchemaGeneration",
+            "file": "tests/SchemaSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\SchemaSubsystemTest",
+            "method": "testSchemaValidator",
+            "file": "tests/SchemaSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\SchemaSubsystemTest",
+            "method": "testSchemaGraphBuilderOutput",
+            "file": "tests/SchemaSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\PerformanceSubsystemTest",
+            "method": "testCssMinification",
+            "file": "tests/PerformanceSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\PerformanceSubsystemTest",
+            "method": "testJsMinification",
+            "file": "tests/PerformanceSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\PerformanceSubsystemTest",
+            "method": "testHtmlMinification",
+            "file": "tests/PerformanceSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\PerformanceSubsystemTest",
+            "method": "testDelayJsEngine",
+            "file": "tests/PerformanceSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\PerformanceSubsystemTest",
+            "method": "testResourceHints",
+            "file": "tests/PerformanceSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\PerformanceSubsystemTest",
+            "method": "testStaticFileWriterAndSmartPurge",
+            "file": "tests/PerformanceSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\MediaSubsystemTest",
+            "method": "testSvgPlaceholderGenerator",
+            "file": "tests/MediaSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\MediaSubsystemTest",
+            "method": "testImageLazyLoader",
+            "file": "tests/MediaSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\MediaSubsystemTest",
+            "method": "testLcpOptimizer",
+            "file": "tests/MediaSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\AiSubsystemTest",
+            "method": "testLlmsTxtGeneration",
+            "file": "tests/AiSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\AiSubsystemTest",
+            "method": "testSearchIntentAnalyzer",
+            "file": "tests/AiSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\AiSubsystemTest",
+            "method": "testMetadataAiGenerator",
+            "file": "tests/AiSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\AnalyticsSubsystemTest",
+            "method": "testFourOhFourLogging",
+            "file": "tests/AnalyticsSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\AnalyticsSubsystemTest",
+            "method": "testRankTrackerKeywords",
+            "file": "tests/AnalyticsSubsystemTest.php",
+            "passed": true
+        }
+    ],
+    "integration": [
+        {
+            "class": "ApexSEO\\Tests\\DatabaseMigrationTest",
+            "method": "testTablePrefixResolution",
+            "file": "tests/DatabaseMigrationTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\DatabaseMigrationTest",
+            "method": "testCustomPrefixOverride",
+            "file": "tests/DatabaseMigrationTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\DatabaseMigrationTest",
+            "method": "testMigrationExecutionCreates8LockedTables",
+            "file": "tests/DatabaseMigrationTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\DatabaseMigrationTest",
+            "method": "testMigrationRollbackDropsTables",
+            "file": "tests/DatabaseMigrationTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\LifecycleTest",
+            "method": "testActivationRunsMigrationsAndSetsOption",
+            "file": "tests/LifecycleTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\LifecycleTest",
+            "method": "testDeactivationCleansTransients",
+            "file": "tests/LifecycleTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\LifecycleTest",
+            "method": "testUninstallPreservesTablesWhenConfigured",
+            "file": "tests/LifecycleTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\LifecycleTest",
+            "method": "testUninstallDropsTablesWhenExplicitlyConfigured",
+            "file": "tests/LifecycleTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\RestSubsystemTest",
+            "method": "testRestRouterInitialization",
+            "file": "tests/RestSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\RestSubsystemTest",
+            "method": "testStatusEndpointResponse",
+            "file": "tests/RestSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\RestSubsystemTest",
+            "method": "testSettingsControllerGetAndUpdate",
+            "file": "tests/RestSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\RestSubsystemTest",
+            "method": "testMetaControllerSaveAndGet",
+            "file": "tests/RestSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\RestSubsystemTest",
+            "method": "testSchemaControllerCRUD",
+            "file": "tests/RestSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\RestSubsystemTest",
+            "method": "testRedirectsControllerCRUD",
+            "file": "tests/RestSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\RestSubsystemTest",
+            "method": "testNotFoundController",
+            "file": "tests/RestSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\RestSubsystemTest",
+            "method": "testLinksController",
+            "file": "tests/RestSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\RestSubsystemTest",
+            "method": "testAnalyticsController",
+            "file": "tests/RestSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\RestSubsystemTest",
+            "method": "testCacheControllerPurgeAndPreload",
+            "file": "tests/RestSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\RestSubsystemTest",
+            "method": "testMediaControllerSingleAndBulk",
+            "file": "tests/RestSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\RestSubsystemTest",
+            "method": "testMigrationControllerExecution",
+            "file": "tests/RestSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\RestSubsystemTest",
+            "method": "testPermissionWrappers",
+            "file": "tests/RestSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\RestSubsystemTest",
+            "method": "testSecurityIdorAndObjectAuthorization",
+            "file": "tests/RestSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\RestSubsystemTest",
+            "method": "testSecuritySqlInjectionResilience",
+            "file": "tests/RestSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\RestSubsystemTest",
+            "method": "testSecurityXssPayloadSanitization",
+            "file": "tests/RestSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\RestSubsystemTest",
+            "method": "testSecurityOversizedBatchAndPaginationBounds",
+            "file": "tests/RestSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\RestSubsystemTest",
+            "method": "testSecurityPathTraversalAndSsrfGuards",
+            "file": "tests/RestSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\CliSubsystemTest",
+            "method": "testCliManagerCommandRegistration",
+            "file": "tests/CliSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\CliSubsystemTest",
+            "method": "testIndexCommandRebuildAndStatus",
+            "file": "tests/CliSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\CliSubsystemTest",
+            "method": "testCacheCommandPurgeAndWarmup",
+            "file": "tests/CliSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\CliSubsystemTest",
+            "method": "testMediaCommandOptimizeAndRestore",
+            "file": "tests/CliSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\CliSubsystemTest",
+            "method": "testRedirectCommandAddAndList",
+            "file": "tests/CliSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\CliSubsystemTest",
+            "method": "testDatabaseCommandClean",
+            "file": "tests/CliSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\CliSubsystemTest",
+            "method": "testMigrateCommandRunAndRollback",
+            "file": "tests/CliSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\CliSubsystemTest",
+            "method": "testSitemapCommandRebuild",
+            "file": "tests/CliSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\CliSubsystemTest",
+            "method": "testDoctorCommandDiagnose",
+            "file": "tests/CliSubsystemTest.php",
+            "passed": true
+        },
+        {
+            "class": "ApexSEO\\Tests\\CliSubsystemTest",
+            "method": "testSchemaCommandValidate",
+            "file": "tests/CliSubsystemTest.php",
+            "passed": true
+        }
+    ],
+    "existence_only": [
+        {
+            "class": "ApexSEO\\Tests\\AutoloaderTest",
+            "method": "testAutoloaderLoadsExistingCoreClass",
+            "file": "tests/AutoloaderTest.php",
+            "passed": true
+        }
+    ],
+    "mock_only": []
+}

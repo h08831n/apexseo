@@ -1,0 +1,1982 @@
+{
+    "APEX-001": {
+        "id": "APEX-001",
+        "name": "Dynamic Title Tag Rewrite",
+        "category": "Meta & Titles Engine",
+        "required_behavior": "Executes Dynamic Title Tag Rewrite logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Titles/TitleGenerator.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "In `SeoSubsystemTest`"
+    },
+    "APEX-002": {
+        "id": "APEX-002",
+        "name": "Dynamic Meta Description Tag",
+        "category": "Meta & Titles Engine",
+        "required_behavior": "Executes Dynamic Meta Description Tag logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Meta/DescriptionGenerator.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "In `SeoSubsystemTest`"
+    },
+    "APEX-003": {
+        "id": "APEX-003",
+        "name": "Title Template Variable Replacer",
+        "category": "Meta & Titles Engine",
+        "required_behavior": "Executes Title Template Variable Replacer logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Titles/VariableReplacer.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "In `SeoSubsystemTest`"
+    },
+    "APEX-004": {
+        "id": "APEX-004",
+        "name": "Custom Taxonomy Title/Meta",
+        "category": "Meta & Titles Engine",
+        "required_behavior": "Executes Custom Taxonomy Title/Meta logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Meta/TaxonomyMetaHandler.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-005": {
+        "id": "APEX-005",
+        "name": "Author Archive Title & Meta",
+        "category": "Meta & Titles Engine",
+        "required_behavior": "Executes Author Archive Title & Meta logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Meta/AuthorMetaHandler.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-006": {
+        "id": "APEX-006",
+        "name": "Date Archive Title & Meta",
+        "category": "Meta & Titles Engine",
+        "required_behavior": "Executes Date Archive Title & Meta logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Meta/DateMetaHandler.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-007": {
+        "id": "APEX-007",
+        "name": "Search Results Page Title/Meta",
+        "category": "Meta & Titles Engine",
+        "required_behavior": "Executes Search Results Page Title/Meta logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Titles/SearchTitleHandler.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-008": {
+        "id": "APEX-008",
+        "name": "404 Error Page Title & Meta",
+        "category": "Meta & Titles Engine",
+        "required_behavior": "Executes 404 Error Page Title & Meta logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Titles/NotFoundTitleHandler.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-009": {
+        "id": "APEX-009",
+        "name": "Custom Separator Selector",
+        "category": "Meta & Titles Engine",
+        "required_behavior": "Executes Custom Separator Selector logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Titles/SeparatorManager.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u26a0\ufe0f Config"
+    },
+    "APEX-010": {
+        "id": "APEX-010",
+        "name": "Capitalize P-tags & Clean Titles",
+        "category": "Meta & Titles Engine",
+        "required_behavior": "Executes Capitalize P-tags & Clean Titles logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Titles/TitleSanitizer.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-011": {
+        "id": "APEX-011",
+        "name": "Strip Category Base Permalinks",
+        "category": "Meta & Titles Engine",
+        "required_behavior": "Executes Strip Category Base Permalinks logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Meta/PermalinkSanitizer.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u26a0\ufe0f Config"
+    },
+    "APEX-012": {
+        "id": "APEX-012",
+        "name": "Paged Subpages Title Modifier",
+        "category": "Meta & Titles Engine",
+        "required_behavior": "Executes Paged Subpages Title Modifier logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Titles/PaginationTitleDecorator.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-013": {
+        "id": "APEX-013",
+        "name": "Post Type Default Fallback Meta",
+        "category": "Meta & Titles Engine",
+        "required_behavior": "Executes Post Type Default Fallback Meta logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Meta/DefaultMetaResolver.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-014": {
+        "id": "APEX-014",
+        "name": "Bulk Title/Meta Editor Screen",
+        "category": "Meta & Titles Engine",
+        "required_behavior": "Executes Bulk Title/Meta Editor Screen logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Meta/BulkMetaEditor.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-015": {
+        "id": "APEX-015",
+        "name": "RSS Feed Header & Footer Append",
+        "category": "Meta & Titles Engine",
+        "required_behavior": "Executes RSS Feed Header & Footer Append logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Meta/RssFeedEnhancer.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-016": {
+        "id": "APEX-016",
+        "name": "Meta Keywords Support (Toggleable)",
+        "category": "Meta & Titles Engine",
+        "required_behavior": "Executes Meta Keywords Support (Toggleable) logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Meta/KeywordsGenerator.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-017": {
+        "id": "APEX-017",
+        "name": "Custom-Fields Meta Tokens",
+        "category": "Meta & Titles Engine",
+        "required_behavior": "Executes Custom-Fields Meta Tokens logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Titles/CustomFieldTokenReplacer.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-018": {
+        "id": "APEX-018",
+        "name": "Auto Meta Description Truncation",
+        "category": "Meta & Titles Engine",
+        "required_behavior": "Executes Auto Meta Description Truncation logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Meta/DescriptionTruncator.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-019": {
+        "id": "APEX-019",
+        "name": "Self-Referential Canonical URL",
+        "category": "Canonical & Robots Directive Engine",
+        "required_behavior": "Executes Self-Referential Canonical URL logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Canonical/CanonicalGenerator.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "In `SeoSubsystemTest`"
+    },
+    "APEX-020": {
+        "id": "APEX-020",
+        "name": "Custom Canonical URL Override",
+        "category": "Canonical & Robots Directive Engine",
+        "required_behavior": "Executes Custom Canonical URL Override logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Canonical/CanonicalOverride.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-021": {
+        "id": "APEX-021",
+        "name": "Paginated Archive Canonical",
+        "category": "Canonical & Robots Directive Engine",
+        "required_behavior": "Executes Paginated Archive Canonical logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Canonical/PaginationCanonical.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-022": {
+        "id": "APEX-022",
+        "name": "Noindex Directive Controller",
+        "category": "Canonical & Robots Directive Engine",
+        "required_behavior": "Executes Noindex Directive Controller logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Robots/RobotsGenerator.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "In `SeoSubsystemTest`"
+    },
+    "APEX-023": {
+        "id": "APEX-023",
+        "name": "Nofollow Directive Controller",
+        "category": "Canonical & Robots Directive Engine",
+        "required_behavior": "Executes Nofollow Directive Controller logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Robots/RobotsGenerator.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "In `SeoSubsystemTest`"
+    },
+    "APEX-024": {
+        "id": "APEX-024",
+        "name": "Advanced Robots (noarchive, nosnippet)",
+        "category": "Canonical & Robots Directive Engine",
+        "required_behavior": "Executes Advanced Robots (noarchive, nosnippet) logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Robots/AdvancedRobots.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-025": {
+        "id": "APEX-025",
+        "name": "max-snippet, max-image-preview",
+        "category": "Canonical & Robots Directive Engine",
+        "required_behavior": "Executes max-snippet, max-image-preview logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Robots/GoogleRobotsDirectives.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-026": {
+        "id": "APEX-026",
+        "name": "Virtual Robots.txt Generator",
+        "category": "Canonical & Robots Directive Engine",
+        "required_behavior": "Executes Virtual Robots.txt Generator logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Robots/RobotsTxtHandler.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-027": {
+        "id": "APEX-027",
+        "name": "Virtual Robots.txt Editor UI",
+        "category": "Canonical & Robots Directive Engine",
+        "required_behavior": "Executes Virtual Robots.txt Editor UI logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Robots/RobotsTxtEditor.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-028": {
+        "id": "APEX-028",
+        "name": "X-Robots-Tag HTTP Header Output",
+        "category": "Canonical & Robots Directive Engine",
+        "required_behavior": "Executes X-Robots-Tag HTTP Header Output logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Robots/XRobotsHeaderEmitter.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-029": {
+        "id": "APEX-029",
+        "name": "Nofollow Unpaginated Feeds",
+        "category": "Canonical & Robots Directive Engine",
+        "required_behavior": "Executes Nofollow Unpaginated Feeds logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Robots/FeedRobotsHandler.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-030": {
+        "id": "APEX-030",
+        "name": "Search & 404 Noindex Enforcement",
+        "category": "Canonical & Robots Directive Engine",
+        "required_behavior": "Executes Search & 404 Noindex Enforcement logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Robots/SpecialPagesRobots.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-031": {
+        "id": "APEX-031",
+        "name": "OpenGraph Core Tags (og:title, etc.)",
+        "category": "Social Meta & OpenGraph Engine",
+        "required_behavior": "Executes OpenGraph Core Tags (og:title, etc.) logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Social/OpenGraphGenerator.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "In `SeoSubsystemTest`"
+    },
+    "APEX-032": {
+        "id": "APEX-032",
+        "name": "OpenGraph Image Dimension Tags",
+        "category": "Social Meta & OpenGraph Engine",
+        "required_behavior": "Executes OpenGraph Image Dimension Tags logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Social/OpenGraphImageTag.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-033": {
+        "id": "APEX-033",
+        "name": "Twitter Card Tags (Summary/Large)",
+        "category": "Social Meta & OpenGraph Engine",
+        "required_behavior": "Executes Twitter Card Tags (Summary/Large) logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Social/TwitterCardGenerator.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "In `SeoSubsystemTest`"
+    },
+    "APEX-034": {
+        "id": "APEX-034",
+        "name": "Fallback Default Social Image",
+        "category": "Social Meta & OpenGraph Engine",
+        "required_behavior": "Executes Fallback Default Social Image logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Social/DefaultImageResolver.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-035": {
+        "id": "APEX-035",
+        "name": "Facebook App ID / Admin Meta",
+        "category": "Social Meta & OpenGraph Engine",
+        "required_behavior": "Executes Facebook App ID / Admin Meta logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Social/FacebookMetaHandler.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-036": {
+        "id": "APEX-036",
+        "name": "Twitter Site & Creator Handles",
+        "category": "Social Meta & OpenGraph Engine",
+        "required_behavior": "Executes Twitter Site & Creator Handles logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Social/TwitterHandleResolver.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-037": {
+        "id": "APEX-037",
+        "name": "Article Author & Publisher Tags",
+        "category": "Social Meta & OpenGraph Engine",
+        "required_behavior": "Executes Article Author & Publisher Tags logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Social/ArticleSocialTags.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-038": {
+        "id": "APEX-038",
+        "name": "Live Social Preview in Editor",
+        "category": "Social Meta & OpenGraph Engine",
+        "required_behavior": "Executes Live Social Preview in Editor logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Social/SocialPreviewCanvas.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u26a0\ufe0f Partial"
+    },
+    "APEX-039": {
+        "id": "APEX-039",
+        "name": "Pinterest Domain Verification Tag",
+        "category": "Social Meta & OpenGraph Engine",
+        "required_behavior": "Executes Pinterest Domain Verification Tag logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Social/PinterestVerifier.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-040": {
+        "id": "APEX-040",
+        "name": "XML Index & Sub-Sitemap Generator",
+        "category": "XML & RSS Sitemaps Engine",
+        "required_behavior": "Executes XML Index & Sub-Sitemap Generator logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Sitemaps/SitemapIndexGenerator.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "In `SeoSubsystemTest`"
+    },
+    "APEX-041": {
+        "id": "APEX-041",
+        "name": "Post Type XML Sitemaps with Pagination",
+        "category": "XML & RSS Sitemaps Engine",
+        "required_behavior": "Executes Post Type XML Sitemaps with Pagination logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Sitemaps/PostSitemapGenerator.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u26a0\ufe0f Config"
+    },
+    "APEX-042": {
+        "id": "APEX-042",
+        "name": "Taxonomy XML Sitemaps",
+        "category": "XML & RSS Sitemaps Engine",
+        "required_behavior": "Executes Taxonomy XML Sitemaps logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Sitemaps/TaxonomySitemapGenerator.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-043": {
+        "id": "APEX-043",
+        "name": "Google News XML Sitemap",
+        "category": "XML & RSS Sitemaps Engine",
+        "required_behavior": "Executes Google News XML Sitemap logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Sitemaps/NewsSitemapGenerator.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-044": {
+        "id": "APEX-044",
+        "name": "Video XML Sitemap with Metadata",
+        "category": "XML & RSS Sitemaps Engine",
+        "required_behavior": "Executes Video XML Sitemap with Metadata logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Sitemaps/VideoSitemapGenerator.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-045": {
+        "id": "APEX-045",
+        "name": "Image XML Sitemap Embeds",
+        "category": "XML & RSS Sitemaps Engine",
+        "required_behavior": "Executes Image XML Sitemap Embeds logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Sitemaps/ImageSitemapEnhancer.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-046": {
+        "id": "APEX-046",
+        "name": "Custom XML XSLT Stylist",
+        "category": "XML & RSS Sitemaps Engine",
+        "required_behavior": "Executes Custom XML XSLT Stylist logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Sitemaps/XsltStyler.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-047": {
+        "id": "APEX-047",
+        "name": "Automatic Search Engine Ping",
+        "category": "XML & RSS Sitemaps Engine",
+        "required_behavior": "Executes Automatic Search Engine Ping logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Sitemaps/SearchEnginePinger.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-048": {
+        "id": "APEX-048",
+        "name": "Multi-Keyword Density & TF-IDF",
+        "category": "Content Analysis & Readability Engine",
+        "required_behavior": "Executes Multi-Keyword Density & TF-IDF logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/ContentAnalysis/MultiKeywordAnalyzer.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-049": {
+        "id": "APEX-049",
+        "name": "Flesch Reading Ease Formula",
+        "category": "Content Analysis & Readability Engine",
+        "required_behavior": "Executes Flesch Reading Ease Formula logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Readability/FleschScoreCalculator.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-050": {
+        "id": "APEX-050",
+        "name": "Heading Structure Checker",
+        "category": "Content Analysis & Readability Engine",
+        "required_behavior": "Executes Heading Structure Checker logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Readability/HeadingStructureChecker.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-051": {
+        "id": "APEX-051",
+        "name": "Internal Link Graph Counter",
+        "category": "Content Analysis & Readability Engine",
+        "required_behavior": "Executes Internal Link Graph Counter logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/InternalLinks/LinkGraphScanner.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-052": {
+        "id": "APEX-052",
+        "name": "Contextual Link Suggestions",
+        "category": "Content Analysis & Readability Engine",
+        "required_behavior": "Executes Contextual Link Suggestions logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/InternalLinks/LinkSuggester.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-053": {
+        "id": "APEX-053",
+        "name": "Orphaned Content Detector",
+        "category": "Content Analysis & Readability Engine",
+        "required_behavior": "Executes Orphaned Content Detector logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/InternalLinks/OrphanFinder.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-054": {
+        "id": "APEX-054",
+        "name": "Paragraph Length & Voice Analyzer",
+        "category": "Content Analysis & Readability Engine",
+        "required_behavior": "Executes Paragraph Length & Voice Analyzer logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Readability/VoiceAnalyzer.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-055": {
+        "id": "APEX-055",
+        "name": "URL Change Interceptor (Auto 301)",
+        "category": "URL Routing, 404 Monitor & Redirects",
+        "required_behavior": "Executes URL Change Interceptor (Auto 301) logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Redirects/RedirectManager.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "In `SeoSubsystemTest`"
+    },
+    "APEX-056": {
+        "id": "APEX-056",
+        "name": "Regex & Wildcard URL Router",
+        "category": "URL Routing, 404 Monitor & Redirects",
+        "required_behavior": "Executes Regex & Wildcard URL Router logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Redirects/RegexRouter.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-057": {
+        "id": "APEX-057",
+        "name": "High-Speed Buffered 404 Logger",
+        "category": "URL Routing, 404 Monitor & Redirects",
+        "required_behavior": "Executes High-Speed Buffered 404 Logger logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Monitor/NotFoundMonitor.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "In `AnalyticsSubsystemTest`"
+    },
+    "APEX-058": {
+        "id": "APEX-058",
+        "name": "Fuzzy URL Match & Redirection",
+        "category": "URL Routing, 404 Monitor & Redirects",
+        "required_behavior": "Executes Fuzzy URL Match & Redirection logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Monitor/FuzzyUrlMatcher.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-059": {
+        "id": "APEX-059",
+        "name": "Status Codes (301, 302, 307, 410, 451)",
+        "category": "URL Routing, 404 Monitor & Redirects",
+        "required_behavior": "Executes Status Codes (301, 302, 307, 410, 451) logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Redirects/HttpStatusEmitter.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-060": {
+        "id": "APEX-060",
+        "name": "Export Nginx / Apache Rules",
+        "category": "URL Routing, 404 Monitor & Redirects",
+        "required_behavior": "Executes Export Nginx / Apache Rules logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Redirects/ServerRulesExporter.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-061": {
+        "id": "APEX-061",
+        "name": "Redirect Hit Counter & Log Truncate",
+        "category": "URL Routing, 404 Monitor & Redirects",
+        "required_behavior": "Executes Redirect Hit Counter & Log Truncate logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Redirects/HitCounter.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-062": {
+        "id": "APEX-062",
+        "name": "Trailing Slash Enforcer",
+        "category": "URL Routing, 404 Monitor & Redirects",
+        "required_behavior": "Executes Trailing Slash Enforcer logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Redirects/TrailingSlashHandler.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-063": {
+        "id": "APEX-063",
+        "name": "Attachment URL Redirect to Parent",
+        "category": "URL Routing, 404 Monitor & Redirects",
+        "required_behavior": "Executes Attachment URL Redirect to Parent logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Redirects/AttachmentRedirector.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-064": {
+        "id": "APEX-064",
+        "name": "Bulk Redirect CSV Import & Export",
+        "category": "URL Routing, 404 Monitor & Redirects",
+        "required_behavior": "Executes Bulk Redirect CSV Import & Export logic according to ApexSEO architecture standards.",
+        "expected_file": "src/SEO/Redirects/CsvImporterExporter.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-065": {
+        "id": "APEX-065",
+        "name": "Unified `@graph` JSON-LD Compiler",
+        "category": "Schema.org Structured Data & Knowledge Graph",
+        "required_behavior": "Executes Unified `@graph` JSON-LD Compiler logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Schema/Graph/GraphCompiler.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "In `SchemaSubsystemTest`"
+    },
+    "APEX-066": {
+        "id": "APEX-066",
+        "name": "Dynamic Schema Conditions Engine",
+        "category": "Schema.org Structured Data & Knowledge Graph",
+        "required_behavior": "Executes Dynamic Schema Conditions Engine logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Schema/Conditions/ConditionEngine.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-067": {
+        "id": "APEX-067",
+        "name": "Article / NewsArticle Schema",
+        "category": "Schema.org Structured Data & Knowledge Graph",
+        "required_behavior": "Executes Article / NewsArticle Schema logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Schema/Types/ArticleSchema.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "In `SchemaSubsystemTest`"
+    },
+    "APEX-068": {
+        "id": "APEX-068",
+        "name": "LocalBusiness Multi-Location",
+        "category": "Schema.org Structured Data & Knowledge Graph",
+        "required_behavior": "Executes LocalBusiness Multi-Location logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Schema/Types/LocalBusinessSchema.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "In `SchemaSubsystemTest`"
+    },
+    "APEX-069": {
+        "id": "APEX-069",
+        "name": "Organization & Person Social Graph",
+        "category": "Schema.org Structured Data & Knowledge Graph",
+        "required_behavior": "Executes Organization & Person Social Graph logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Schema/Types/OrganizationSchema.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "In `SchemaSubsystemTest`"
+    },
+    "APEX-070": {
+        "id": "APEX-070",
+        "name": "FAQPage Structured Data Injector",
+        "category": "Schema.org Structured Data & Knowledge Graph",
+        "required_behavior": "Executes FAQPage Structured Data Injector logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Schema/Types/FAQPageSchema.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "In `SchemaSubsystemTest`"
+    },
+    "APEX-071": {
+        "id": "APEX-071",
+        "name": "WooCommerce Product & Variation",
+        "category": "Schema.org Structured Data & Knowledge Graph",
+        "required_behavior": "Executes WooCommerce Product & Variation logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Schema/WooCommerce/ProductSchemaExtension.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "In `SchemaSubsystemTest`"
+    },
+    "APEX-072": {
+        "id": "APEX-072",
+        "name": "Recipe Structured Data Template",
+        "category": "Schema.org Structured Data & Knowledge Graph",
+        "required_behavior": "Executes Recipe Structured Data Template logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Schema/Types/RecipeSchema.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-073": {
+        "id": "APEX-073",
+        "name": "JobPosting Schema Template",
+        "category": "Schema.org Structured Data & Knowledge Graph",
+        "required_behavior": "Executes JobPosting Schema Template logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Schema/Types/JobPostingSchema.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-074": {
+        "id": "APEX-074",
+        "name": "Course & Learning Resource Schema",
+        "category": "Schema.org Structured Data & Knowledge Graph",
+        "required_behavior": "Executes Course & Learning Resource Schema logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Schema/Types/CourseSchema.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-075": {
+        "id": "APEX-075",
+        "name": "Event Schema (Online & Physical)",
+        "category": "Schema.org Structured Data & Knowledge Graph",
+        "required_behavior": "Executes Event Schema (Online & Physical) logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Schema/Types/EventSchema.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-076": {
+        "id": "APEX-076",
+        "name": "SoftwareApplication Schema",
+        "category": "Schema.org Structured Data & Knowledge Graph",
+        "required_behavior": "Executes SoftwareApplication Schema logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Schema/Types/SoftwareApplicationSchema.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-077": {
+        "id": "APEX-077",
+        "name": "VideoObject Schema Stream",
+        "category": "Schema.org Structured Data & Knowledge Graph",
+        "required_behavior": "Executes VideoObject Schema Stream logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Schema/Media/VideoObjectSchema.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-078": {
+        "id": "APEX-078",
+        "name": "WebSite SearchAction Sitelinks",
+        "category": "Schema.org Structured Data & Knowledge Graph",
+        "required_behavior": "Executes WebSite SearchAction Sitelinks logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Schema/Types/WebSiteSchema.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "In `SchemaSubsystemTest`"
+    },
+    "APEX-079": {
+        "id": "APEX-079",
+        "name": "BreadcrumbList JSON-LD Graph",
+        "category": "Schema.org Structured Data & Knowledge Graph",
+        "required_behavior": "Executes BreadcrumbList JSON-LD Graph logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Schema/Objects/BreadcrumbList.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "In `SeoSubsystemTest`"
+    },
+    "APEX-080": {
+        "id": "APEX-080",
+        "name": "Schema Validation & Linting Engine",
+        "category": "Schema.org Structured Data & Knowledge Graph",
+        "required_behavior": "Executes Schema Validation & Linting Engine logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Schema/Validator/SchemaValidator.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-081": {
+        "id": "APEX-081",
+        "name": "Static HTML Page Cache Buffer",
+        "category": "Page Caching & Cache Management",
+        "required_behavior": "Executes Static HTML Page Cache Buffer logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Cache/PageCache.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u26a0\ufe0f Config"
+    },
+    "APEX-082": {
+        "id": "APEX-082",
+        "name": "Gzip Pre-Compression on Disk",
+        "category": "Page Caching & Cache Management",
+        "required_behavior": "Executes Gzip Pre-Compression on Disk logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Cache/StaticFileWriter.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "In `PerformanceSubsystemTest`"
+    },
+    "APEX-083": {
+        "id": "APEX-083",
+        "name": "Brotli Pre-Compression on Disk",
+        "category": "Page Caching & Cache Management",
+        "required_behavior": "Executes Brotli Pre-Compression on Disk logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Cache/StaticFileWriter.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u26a0\ufe0f Adapter"
+    },
+    "APEX-084": {
+        "id": "APEX-084",
+        "name": "Dedicated Mobile Cache Variant",
+        "category": "Page Caching & Cache Management",
+        "required_behavior": "Executes Dedicated Mobile Cache Variant logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Cache/MobileCache.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-085": {
+        "id": "APEX-085",
+        "name": "Logged-In User Cookie Caching",
+        "category": "Page Caching & Cache Management",
+        "required_behavior": "Executes Logged-In User Cookie Caching logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Cache/UserCache.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-086": {
+        "id": "APEX-086",
+        "name": "SSL Dedicated Caching Path",
+        "category": "Page Caching & Cache Management",
+        "required_behavior": "Executes SSL Dedicated Caching Path logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Cache/PageCache.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-087": {
+        "id": "APEX-087",
+        "name": "WebP/AVIF HTML Cache Variant",
+        "category": "Page Caching & Cache Management",
+        "required_behavior": "Executes WebP/AVIF HTML Cache Variant logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Cache/VariantCache.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-088": {
+        "id": "APEX-088",
+        "name": "Query String Whitelist Caching",
+        "category": "Page Caching & Cache Management",
+        "required_behavior": "Executes Query String Whitelist Caching logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Cache/QueryParamCache.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-089": {
+        "id": "APEX-089",
+        "name": "Automated Post Update Cache Purge",
+        "category": "Page Caching & Cache Management",
+        "required_behavior": "Executes Automated Post Update Cache Purge logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Cache/SmartPurge.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "In `PerformanceSubsystemTest`"
+    },
+    "APEX-090": {
+        "id": "APEX-090",
+        "name": "Comment Submission Cache Purge",
+        "category": "Page Caching & Cache Management",
+        "required_behavior": "Executes Comment Submission Cache Purge logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Cache/SmartPurge.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-091": {
+        "id": "APEX-091",
+        "name": "Global Empty Cache Trigger",
+        "category": "Page Caching & Cache Management",
+        "required_behavior": "Executes Global Empty Cache Trigger logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Cache/CacheManager.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-092": {
+        "id": "APEX-092",
+        "name": "Cache Lifespan & Expiry Garbage",
+        "category": "Page Caching & Cache Management",
+        "required_behavior": "Executes Cache Lifespan & Expiry Garbage logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Cache/CacheCleaner.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u26a0\ufe0f Config"
+    },
+    "APEX-093": {
+        "id": "APEX-093",
+        "name": "Background Sitemap Cache Preload",
+        "category": "Page Caching & Cache Management",
+        "required_behavior": "Executes Background Sitemap Cache Preload logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Cache/CachePreloader.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-094": {
+        "id": "APEX-094",
+        "name": "WooCommerce Cart Cache Exclusions",
+        "category": "Page Caching & Cache Management",
+        "required_behavior": "Executes WooCommerce Cart Cache Exclusions logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Cache/WooCommerceCache.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-095": {
+        "id": "APEX-095",
+        "name": "REST API Endpoint Output Cache",
+        "category": "Page Caching & Cache Management",
+        "required_behavior": "Executes REST API Endpoint Output Cache logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Cache/RestApiCache.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-096": {
+        "id": "APEX-096",
+        "name": "Instant Hover / Click Preloader",
+        "category": "Page Caching & Cache Management",
+        "required_behavior": "Executes Instant Hover / Click Preloader logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Tweaks/InstantClickPreloader.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u26a0\ufe0f Config"
+    },
+    "APEX-097": {
+        "id": "APEX-097",
+        "name": "Advanced Cache Bypass Rules",
+        "category": "Page Caching & Cache Management",
+        "required_behavior": "Executes Advanced Cache Bypass Rules logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Cache/BypassRulesEvaluator.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-098": {
+        "id": "APEX-098",
+        "name": "Cache Warm-up Concurrency Limiter",
+        "category": "Page Caching & Cache Management",
+        "required_behavior": "Executes Cache Warm-up Concurrency Limiter logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Cache/WarmupThrottle.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-099": {
+        "id": "APEX-099",
+        "name": "CSS Minification Engine",
+        "category": "Page Caching & Cache Management",
+        "required_behavior": "Executes CSS Minification Engine logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Assets/CssMinifier.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "In `PerformanceSubsystemTest`"
+    },
+    "APEX-100": {
+        "id": "APEX-100",
+        "name": "JS Minification Engine",
+        "category": "Page Caching & Cache Management",
+        "required_behavior": "Executes JS Minification Engine logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Assets/JsMinifier.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "In `PerformanceSubsystemTest`"
+    },
+    "APEX-101": {
+        "id": "APEX-101",
+        "name": "CSS File Combination & Bundle",
+        "category": "Page Caching & Cache Management",
+        "required_behavior": "Executes CSS File Combination & Bundle logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Assets/CssCombiner.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-102": {
+        "id": "APEX-102",
+        "name": "JS File Combination & Bundle",
+        "category": "Page Caching & Cache Management",
+        "required_behavior": "Executes JS File Combination & Bundle logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Assets/JsCombiner.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-103": {
+        "id": "APEX-103",
+        "name": "Critical CSS Local Extraction",
+        "category": "Page Caching & Cache Management",
+        "required_behavior": "Executes Critical CSS Local Extraction logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Assets/CriticalCssEngine.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u26a0\ufe0f Capability"
+    },
+    "APEX-104": {
+        "id": "APEX-104",
+        "name": "Unused CSS (RUCSS) Local Cleaner",
+        "category": "Page Caching & Cache Management",
+        "required_behavior": "Executes Unused CSS (RUCSS) Local Cleaner logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Assets/UnusedCssCleaner.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u26a0\ufe0f Capability"
+    },
+    "APEX-105": {
+        "id": "APEX-105",
+        "name": "Load JavaScript Deferred",
+        "category": "Page Caching & Cache Management",
+        "required_behavior": "Executes Load JavaScript Deferred logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Assets/ScriptLoaderModifier.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-106": {
+        "id": "APEX-106",
+        "name": "Delay JS Execution on Interaction",
+        "category": "Page Caching & Cache Management",
+        "required_behavior": "Executes Delay JS Execution on Interaction logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Assets/DelayJsEngine.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "In `PerformanceSubsystemTest`"
+    },
+    "APEX-107": {
+        "id": "APEX-107",
+        "name": "Script & Style Exclusion Regex",
+        "category": "Page Caching & Cache Management",
+        "required_behavior": "Executes Script & Style Exclusion Regex logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Assets/AssetExclusions.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-108": {
+        "id": "APEX-108",
+        "name": "Safe Mode / Rollback on Script Error",
+        "category": "Page Caching & Cache Management",
+        "required_behavior": "Executes Safe Mode / Rollback on Script Error logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Assets/SafeModeHandler.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-109": {
+        "id": "APEX-109",
+        "name": "Local Google Fonts Hosting",
+        "category": "Page Caching & Cache Management",
+        "required_behavior": "Executes Local Google Fonts Hosting logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Assets/LocalFontManager.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-110": {
+        "id": "APEX-110",
+        "name": "Font-Display: Swap Injector",
+        "category": "Page Caching & Cache Management",
+        "required_behavior": "Executes Font-Display: Swap Injector logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Assets/FontDisplayModifier.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-111": {
+        "id": "APEX-111",
+        "name": "Local Gravatar Avatar Caching",
+        "category": "Page Caching & Cache Management",
+        "required_behavior": "Executes Local Gravatar Avatar Caching logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Assets/AvatarCache.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-112": {
+        "id": "APEX-112",
+        "name": "HTML Output Minification",
+        "category": "Page Caching & Cache Management",
+        "required_behavior": "Executes HTML Output Minification logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Assets/HtmlMinifier.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "In `PerformanceSubsystemTest`"
+    },
+    "APEX-113": {
+        "id": "APEX-113",
+        "name": "DNS Prefetch & Preconnect Inserter",
+        "category": "Page Caching & Cache Management",
+        "required_behavior": "Executes DNS Prefetch & Preconnect Inserter logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Tweaks/ResourceHints.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "In `PerformanceSubsystemTest`"
+    },
+    "APEX-114": {
+        "id": "APEX-114",
+        "name": "Strip WordPress Core Emojis",
+        "category": "Page Caching & Cache Management",
+        "required_behavior": "Executes Strip WordPress Core Emojis logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Tweaks/CleanHead.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-115": {
+        "id": "APEX-115",
+        "name": "Strip WordPress Core OEmbeds",
+        "category": "Page Caching & Cache Management",
+        "required_behavior": "Executes Strip WordPress Core OEmbeds logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Tweaks/CleanHead.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-116": {
+        "id": "APEX-116",
+        "name": "Heartbeat Frequency Control",
+        "category": "Page Caching & Cache Management",
+        "required_behavior": "Executes Heartbeat Frequency Control logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Tweaks/HeartbeatManager.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-117": {
+        "id": "APEX-117",
+        "name": "Local GD/Imagick WebP Converter",
+        "category": "Media Optimization & WebP/AVIF Engine",
+        "required_behavior": "Executes Local GD/Imagick WebP Converter logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Media/Optimizer/WebpConverter.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u26a0\ufe0f Capability"
+    },
+    "APEX-118": {
+        "id": "APEX-118",
+        "name": "Local GD/Imagick AVIF Converter",
+        "category": "Media Optimization & WebP/AVIF Engine",
+        "required_behavior": "Executes Local GD/Imagick AVIF Converter logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Media/Optimizer/AvifConverter.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u26a0\ufe0f Capability"
+    },
+    "APEX-119": {
+        "id": "APEX-119",
+        "name": "`<picture>` Tag HTML Rewriter",
+        "category": "Media Optimization & WebP/AVIF Engine",
+        "required_behavior": "Executes `<picture>` Tag HTML Rewriter logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Media/Optimizer/WebpPictureRewriter.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-120": {
+        "id": "APEX-120",
+        "name": "Bulk Image Optimization Queue",
+        "category": "Media Optimization & WebP/AVIF Engine",
+        "required_behavior": "Executes Bulk Image Optimization Queue logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Media/Optimizer/BulkMediaOptimizer.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-121": {
+        "id": "APEX-121",
+        "name": "Auto-Optimize on Media Upload",
+        "category": "Media Optimization & WebP/AVIF Engine",
+        "required_behavior": "Executes Auto-Optimize on Media Upload logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Media/Optimizer/UploadOptimizationListener.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-122": {
+        "id": "APEX-122",
+        "name": "Add Missing `width` & `height`",
+        "category": "Media Optimization & WebP/AVIF Engine",
+        "required_behavior": "Executes Add Missing `width` & `height` logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Media/Optimizer/DimensionInjector.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-123": {
+        "id": "APEX-123",
+        "name": "LCP Featured Image Preload (`fetchpriority`)",
+        "category": "Media Optimization & WebP/AVIF Engine",
+        "required_behavior": "Executes LCP Featured Image Preload (`fetchpriority`) logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Media/Optimizer/LcpOptimizer.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "In `MediaSubsystemTest`"
+    },
+    "APEX-124": {
+        "id": "APEX-124",
+        "name": "Original Image Backup & Restore",
+        "category": "Media Optimization & WebP/AVIF Engine",
+        "required_behavior": "Executes Original Image Backup & Restore logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Media/Optimizer/ImageBackupManager.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-125": {
+        "id": "APEX-125",
+        "name": "Quality Lossy/Lossless Selector",
+        "category": "Media Optimization & WebP/AVIF Engine",
+        "required_behavior": "Executes Quality Lossy/Lossless Selector logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Media/Optimizer/QualityConfigurator.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-126": {
+        "id": "APEX-126",
+        "name": "Strip EXIF Image Metadata",
+        "category": "Media Optimization & WebP/AVIF Engine",
+        "required_behavior": "Executes Strip EXIF Image Metadata logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Media/Optimizer/ExifStripper.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-127": {
+        "id": "APEX-127",
+        "name": "Image History & Savings Tracker",
+        "category": "Media Optimization & WebP/AVIF Engine",
+        "required_behavior": "Executes Image History & Savings Tracker logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Media/Optimizer/SavingsTracker.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-128": {
+        "id": "APEX-128",
+        "name": "SVG Upload Sanitization",
+        "category": "Media Optimization & WebP/AVIF Engine",
+        "required_behavior": "Executes SVG Upload Sanitization logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Media/Optimizer/SvgSanitizer.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-129": {
+        "id": "APEX-129",
+        "name": "Resize Large Image Threshold",
+        "category": "Media Optimization & WebP/AVIF Engine",
+        "required_behavior": "Executes Resize Large Image Threshold logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Media/Optimizer/ThresholdResizer.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-130": {
+        "id": "APEX-130",
+        "name": "Cloud QUIC.cloud Image Converter",
+        "category": "Media Optimization & WebP/AVIF Engine",
+        "required_behavior": "Executes Cloud QUIC.cloud Image Converter logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Media/Optimizer/ImageOptimizer.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-131": {
+        "id": "APEX-131",
+        "name": "Native & JS Fallback Image LazyLoad",
+        "category": "Lazy Loading Subsystem",
+        "required_behavior": "Executes Native & JS Fallback Image LazyLoad logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Media/LazyLoad/ImageLazyLoader.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "In `MediaSubsystemTest`"
+    },
+    "APEX-132": {
+        "id": "APEX-132",
+        "name": "LazyLoad Iframes & Video Players",
+        "category": "Lazy Loading Subsystem",
+        "required_behavior": "Executes LazyLoad Iframes & Video Players logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Media/LazyLoad/IframeLazyLoader.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u26a0\ufe0f Config"
+    },
+    "APEX-133": {
+        "id": "APEX-133",
+        "name": "YouTube Preview Thumbnail Mockup",
+        "category": "Lazy Loading Subsystem",
+        "required_behavior": "Executes YouTube Preview Thumbnail Mockup logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Media/LazyLoad/YouTubePlaceholder.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-134": {
+        "id": "APEX-134",
+        "name": "Inline SVG Aspect-Ratio Placeholder",
+        "category": "Lazy Loading Subsystem",
+        "required_behavior": "Executes Inline SVG Aspect-Ratio Placeholder logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Media/LazyLoad/PlaceholderGenerator.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "In `MediaSubsystemTest`"
+    },
+    "APEX-135": {
+        "id": "APEX-135",
+        "name": "LazyLoad CSS Background Images",
+        "category": "Lazy Loading Subsystem",
+        "required_behavior": "Executes LazyLoad CSS Background Images logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Media/LazyLoad/BackgroundLazyLoader.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-136": {
+        "id": "APEX-136",
+        "name": "Exclude First N Images from LazyLoad",
+        "category": "Lazy Loading Subsystem",
+        "required_behavior": "Executes Exclude First N Images from LazyLoad logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Media/LazyLoad/LcpExcluder.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "In `MediaSubsystemTest`"
+    },
+    "APEX-137": {
+        "id": "APEX-137",
+        "name": "Custom Class/Attribute Lazy Exclude",
+        "category": "Lazy Loading Subsystem",
+        "required_behavior": "Executes Custom Class/Attribute Lazy Exclude logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Media/LazyLoad/LazyExclusions.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-138": {
+        "id": "APEX-138",
+        "name": "LQIP Low Quality Base64 Generator",
+        "category": "Lazy Loading Subsystem",
+        "required_behavior": "Executes LQIP Low Quality Base64 Generator logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Media/LazyLoad/PlaceholderGenerator.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-139": {
+        "id": "APEX-139",
+        "name": "Post Revisions Cleanup",
+        "category": "Database Optimization & Maintenance",
+        "required_behavior": "Executes Post Revisions Cleanup logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Database/DatabaseOptimizer.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-140": {
+        "id": "APEX-140",
+        "name": "Auto-Drafts & Trashed Posts Cleanup",
+        "category": "Database Optimization & Maintenance",
+        "required_behavior": "Executes Auto-Drafts & Trashed Posts Cleanup logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Database/DatabaseOptimizer.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-141": {
+        "id": "APEX-141",
+        "name": "Spam & Trashed Comments Cleanup",
+        "category": "Database Optimization & Maintenance",
+        "required_behavior": "Executes Spam & Trashed Comments Cleanup logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Database/DatabaseOptimizer.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-142": {
+        "id": "APEX-142",
+        "name": "Expired Transients SQL Cleanup",
+        "category": "Database Optimization & Maintenance",
+        "required_behavior": "Executes Expired Transients SQL Cleanup logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Database/DatabaseOptimizer.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-143": {
+        "id": "APEX-143",
+        "name": "All Transients Bulk Cleanup",
+        "category": "Database Optimization & Maintenance",
+        "required_behavior": "Executes All Transients Bulk Cleanup logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Database/DatabaseOptimizer.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-144": {
+        "id": "APEX-144",
+        "name": "InnoDB / MyISAM `OPTIMIZE TABLE`",
+        "category": "Database Optimization & Maintenance",
+        "required_behavior": "Executes InnoDB / MyISAM `OPTIMIZE TABLE` logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Database/DatabaseOptimizer.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-145": {
+        "id": "APEX-145",
+        "name": "Trackbacks & Pingbacks Cleanup",
+        "category": "Database Optimization & Maintenance",
+        "required_behavior": "Executes Trackbacks & Pingbacks Cleanup logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Database/DatabaseOptimizer.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-146": {
+        "id": "APEX-146",
+        "name": "MyISAM to InnoDB Engine Converter",
+        "category": "Database Optimization & Maintenance",
+        "required_behavior": "Executes MyISAM to InnoDB Engine Converter logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Database/TableEngineMigrator.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-147": {
+        "id": "APEX-147",
+        "name": "Automated Scheduled Cron DB Clean",
+        "category": "Database Optimization & Maintenance",
+        "required_behavior": "Executes Automated Scheduled Cron DB Clean logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Database/ScheduledCleaner.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u26a0\ufe0f Lifecycle"
+    },
+    "APEX-148": {
+        "id": "APEX-148",
+        "name": "Database Dry-Run Cleanup Preview",
+        "category": "Database Optimization & Maintenance",
+        "required_behavior": "Executes Database Dry-Run Cleanup Preview logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Database/DatabaseDryRun.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-149": {
+        "id": "APEX-149",
+        "name": "Apache `.htaccess` Expiration Rules",
+        "category": "Server-Level & Reverse Proxy Integration",
+        "required_behavior": "Executes Apache `.htaccess` Expiration Rules logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Server/HtaccessManager.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u26a0\ufe0f Adapter"
+    },
+    "APEX-150": {
+        "id": "APEX-150",
+        "name": "Nginx Direct Cache `try_files` Config",
+        "category": "Server-Level & Reverse Proxy Integration",
+        "required_behavior": "Executes Nginx Direct Cache `try_files` Config logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Server/NginxConfigGenerator.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u26a0\ufe0f Adapter"
+    },
+    "APEX-151": {
+        "id": "APEX-151",
+        "name": "LiteSpeed `X-LiteSpeed-Cache-Control`",
+        "category": "Server-Level & Reverse Proxy Integration",
+        "required_behavior": "Executes LiteSpeed `X-LiteSpeed-Cache-Control` logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Cache/HeaderManager.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u26a0\ufe0f Adapter"
+    },
+    "APEX-152": {
+        "id": "APEX-152",
+        "name": "LiteSpeed Tagged Cache Purge Header",
+        "category": "Server-Level & Reverse Proxy Integration",
+        "required_behavior": "Executes LiteSpeed Tagged Cache Purge Header logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Cache/SmartPurge.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u2705 Adapter"
+    },
+    "APEX-153": {
+        "id": "APEX-153",
+        "name": "Varnish Reverse Proxy HTTP `PURGE`",
+        "category": "Server-Level & Reverse Proxy Integration",
+        "required_behavior": "Executes Varnish Reverse Proxy HTTP `PURGE` logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Cache/VarnishPurger.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-154": {
+        "id": "APEX-154",
+        "name": "Cloudflare Zone Cache API Purge",
+        "category": "Server-Level & Reverse Proxy Integration",
+        "required_behavior": "Executes Cloudflare Zone Cache API Purge logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/CDN/CloudflarePurger.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-155": {
+        "id": "APEX-155",
+        "name": "Redis Persistent Object Cache Driver",
+        "category": "Server-Level & Reverse Proxy Integration",
+        "required_behavior": "Executes Redis Persistent Object Cache Driver logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/ObjectCache/RedisClient.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u26a0\ufe0f Extension"
+    },
+    "APEX-156": {
+        "id": "APEX-156",
+        "name": "Memcached Object Cache Driver",
+        "category": "Server-Level & Reverse Proxy Integration",
+        "required_behavior": "Executes Memcached Object Cache Driver logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/ObjectCache/MemcachedClient.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u26a0\ufe0f Extension"
+    },
+    "APEX-157": {
+        "id": "APEX-157",
+        "name": "CDN Hostname URL Rewriting",
+        "category": "Server-Level & Reverse Proxy Integration",
+        "required_behavior": "Executes CDN Hostname URL Rewriting logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/CDN/CdnRewriter.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-158": {
+        "id": "APEX-158",
+        "name": "ESI Edge Fragment Staging (LSWS)",
+        "category": "Server-Level & Reverse Proxy Integration",
+        "required_behavior": "Executes ESI Edge Fragment Staging (LSWS) logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Performance/Cache/EsiHandler.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u26a0\ufe0f Adapter"
+    },
+    "APEX-159": {
+        "id": "APEX-159",
+        "name": "Google Analytics 4 (GA4) Tag Injector",
+        "category": "Analytics, GSC & Rank Tracking",
+        "required_behavior": "Executes Google Analytics 4 (GA4) Tag Injector logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Analytics/AnalyticsTagInjector.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-160": {
+        "id": "APEX-160",
+        "name": "Local GA4 `gtag.js` Script Host",
+        "category": "Analytics, GSC & Rank Tracking",
+        "required_behavior": "Executes Local GA4 `gtag.js` Script Host logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Analytics/LocalAnalyticsScriptManager.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-161": {
+        "id": "APEX-161",
+        "name": "IP Anonymization & GDPR Cookie Guard",
+        "category": "Analytics, GSC & Rank Tracking",
+        "required_behavior": "Executes IP Anonymization & GDPR Cookie Guard logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Analytics/GdprComplianceGuard.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-162": {
+        "id": "APEX-162",
+        "name": "Google Search Console OAuth2 Client",
+        "category": "Analytics, GSC & Rank Tracking",
+        "required_behavior": "Executes Google Search Console OAuth2 Client logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Analytics/SearchConsoleClient.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-163": {
+        "id": "APEX-163",
+        "name": "Search Console Keyword Rank Tracker",
+        "category": "Analytics, GSC & Rank Tracking",
+        "required_behavior": "Executes Search Console Keyword Rank Tracker logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Analytics/RankTracker.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "In `AnalyticsSubsystemTest`"
+    },
+    "APEX-164": {
+        "id": "APEX-164",
+        "name": "GSC URL Inspection API Integration",
+        "category": "Analytics, GSC & Rank Tracking",
+        "required_behavior": "Executes GSC URL Inspection API Integration logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Analytics/UrlInspectionClient.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-165": {
+        "id": "APEX-165",
+        "name": "Search Console Impressions/Clicks DB",
+        "category": "Analytics, GSC & Rank Tracking",
+        "required_behavior": "Executes Search Console Impressions/Clicks DB logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Analytics/AnalyticsTimeSeriesStore.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-166": {
+        "id": "APEX-166",
+        "name": "Top Winning / Losing Keywords Matrix",
+        "category": "Analytics, GSC & Rank Tracking",
+        "required_behavior": "Executes Top Winning / Losing Keywords Matrix logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Analytics/KeywordDeltaCalculator.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-167": {
+        "id": "APEX-167",
+        "name": "Google Tag Manager (GTM) Container",
+        "category": "Analytics, GSC & Rank Tracking",
+        "required_behavior": "Executes Google Tag Manager (GTM) Container logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Analytics/GtmContainerInjector.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-168": {
+        "id": "APEX-168",
+        "name": "Matomo / Piwik Self-Hosted Analytics",
+        "category": "Analytics, GSC & Rank Tracking",
+        "required_behavior": "Executes Matomo / Piwik Self-Hosted Analytics logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Analytics/MatomoTagInjector.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-169": {
+        "id": "APEX-169",
+        "name": "REST Settings Controller",
+        "category": "REST API & Headless Engine",
+        "required_behavior": "Executes REST Settings Controller logic according to ApexSEO architecture standards.",
+        "expected_file": "src/API/SettingsRestController.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u26a0\ufe0f Registry"
+    },
+    "APEX-170": {
+        "id": "APEX-170",
+        "name": "REST Meta Reader & Mutator Endpoint",
+        "category": "REST API & Headless Engine",
+        "required_behavior": "Executes REST Meta Reader & Mutator Endpoint logic according to ApexSEO architecture standards.",
+        "expected_file": "src/API/MetaRestController.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u26a0\ufe0f Callback"
+    },
+    "APEX-171": {
+        "id": "APEX-171",
+        "name": "REST Dynamic Schema CRUD Endpoint",
+        "category": "REST API & Headless Engine",
+        "required_behavior": "Executes REST Dynamic Schema CRUD Endpoint logic according to ApexSEO architecture standards.",
+        "expected_file": "src/API/SchemaRestController.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-172": {
+        "id": "APEX-172",
+        "name": "REST Redirect Management Endpoint",
+        "category": "REST API & Headless Engine",
+        "required_behavior": "Executes REST Redirect Management Endpoint logic according to ApexSEO architecture standards.",
+        "expected_file": "src/API/RedirectsRestController.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-173": {
+        "id": "APEX-173",
+        "name": "REST 404 Monitor Log Endpoint",
+        "category": "REST API & Headless Engine",
+        "required_behavior": "Executes REST 404 Monitor Log Endpoint logic according to ApexSEO architecture standards.",
+        "expected_file": "src/API/NotFoundRestController.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-174": {
+        "id": "APEX-174",
+        "name": "REST Link Suggestions Query Endpoint",
+        "category": "REST API & Headless Engine",
+        "required_behavior": "Executes REST Link Suggestions Query Endpoint logic according to ApexSEO architecture standards.",
+        "expected_file": "src/API/LinksRestController.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-175": {
+        "id": "APEX-175",
+        "name": "Headless Complete SEO Meta & JSON-LD",
+        "category": "REST API & Headless Engine",
+        "required_behavior": "Executes Headless Complete SEO Meta & JSON-LD logic according to ApexSEO architecture standards.",
+        "expected_file": "src/API/MetaRestController.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-176": {
+        "id": "APEX-176",
+        "name": "REST Cache Purge & Preload Trigger",
+        "category": "REST API & Headless Engine",
+        "required_behavior": "Executes REST Cache Purge & Preload Trigger logic according to ApexSEO architecture standards.",
+        "expected_file": "src/API/CacheRestController.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-177": {
+        "id": "APEX-177",
+        "name": "REST Media Image Optimize Action",
+        "category": "REST API & Headless Engine",
+        "required_behavior": "Executes REST Media Image Optimize Action logic according to ApexSEO architecture standards.",
+        "expected_file": "src/API/MediaRestController.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-178": {
+        "id": "APEX-178",
+        "name": "REST Migration Batch Worker Endpoint",
+        "category": "REST API & Headless Engine",
+        "required_behavior": "Executes REST Migration Batch Worker Endpoint logic according to ApexSEO architecture standards.",
+        "expected_file": "src/API/MigrationRestController.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-179": {
+        "id": "APEX-179",
+        "name": "REST Analytics Overview API",
+        "category": "REST API & Headless Engine",
+        "required_behavior": "Executes REST Analytics Overview API logic according to ApexSEO architecture standards.",
+        "expected_file": "src/API/AnalyticsRestController.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-180": {
+        "id": "APEX-180",
+        "name": "REST Rank Tracker Query API",
+        "category": "REST API & Headless Engine",
+        "required_behavior": "Executes REST Rank Tracker Query API logic according to ApexSEO architecture standards.",
+        "expected_file": "src/API/AnalyticsRestController.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-181": {
+        "id": "APEX-181",
+        "name": "`wp apex cache purge` Subcommand",
+        "category": "WP-CLI Management Interface",
+        "required_behavior": "Executes `wp apex cache purge` Subcommand logic according to ApexSEO architecture standards.",
+        "expected_file": "src/CLI/CacheCommand.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u26a0\ufe0f Registry"
+    },
+    "APEX-182": {
+        "id": "APEX-182",
+        "name": "`wp apex cache preload` Subcommand",
+        "category": "WP-CLI Management Interface",
+        "required_behavior": "Executes `wp apex cache preload` Subcommand logic according to ApexSEO architecture standards.",
+        "expected_file": "src/CLI/CacheCommand.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-183": {
+        "id": "APEX-183",
+        "name": "`wp apex index reindex` Subcommand",
+        "category": "WP-CLI Management Interface",
+        "required_behavior": "Executes `wp apex index reindex` Subcommand logic according to ApexSEO architecture standards.",
+        "expected_file": "src/CLI/IndexCommand.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-184": {
+        "id": "APEX-184",
+        "name": "`wp apex media optimize` Subcommand",
+        "category": "WP-CLI Management Interface",
+        "required_behavior": "Executes `wp apex media optimize` Subcommand logic according to ApexSEO architecture standards.",
+        "expected_file": "src/CLI/MediaCommand.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-185": {
+        "id": "APEX-185",
+        "name": "`wp apex redirect add` Subcommand",
+        "category": "WP-CLI Management Interface",
+        "required_behavior": "Executes `wp apex redirect add` Subcommand logic according to ApexSEO architecture standards.",
+        "expected_file": "src/CLI/RedirectCommand.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-186": {
+        "id": "APEX-186",
+        "name": "`wp apex redirect list` Subcommand",
+        "category": "WP-CLI Management Interface",
+        "required_behavior": "Executes `wp apex redirect list` Subcommand logic according to ApexSEO architecture standards.",
+        "expected_file": "src/CLI/RedirectCommand.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-187": {
+        "id": "APEX-187",
+        "name": "`wp apex db clean` Subcommand",
+        "category": "WP-CLI Management Interface",
+        "required_behavior": "Executes `wp apex db clean` Subcommand logic according to ApexSEO architecture standards.",
+        "expected_file": "src/CLI/DatabaseCommand.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-188": {
+        "id": "APEX-188",
+        "name": "`wp apex migrate run` Subcommand",
+        "category": "WP-CLI Management Interface",
+        "required_behavior": "Executes `wp apex migrate run` Subcommand logic according to ApexSEO architecture standards.",
+        "expected_file": "src/CLI/MigrateCommand.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u26a0\ufe0f Runner"
+    },
+    "APEX-189": {
+        "id": "APEX-189",
+        "name": "`wp apex sitemap rebuild` Subcommand",
+        "category": "WP-CLI Management Interface",
+        "required_behavior": "Executes `wp apex sitemap rebuild` Subcommand logic according to ApexSEO architecture standards.",
+        "expected_file": "src/CLI/SitemapCommand.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-190": {
+        "id": "APEX-190",
+        "name": "`wp apex doctor` Diagnostic Command",
+        "category": "WP-CLI Management Interface",
+        "required_behavior": "Executes `wp apex doctor` Diagnostic Command logic according to ApexSEO architecture standards.",
+        "expected_file": "src/CLI/DoctorCommand.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u26a0\ufe0f Environment"
+    },
+    "APEX-191": {
+        "id": "APEX-191",
+        "name": "PSR-11 Dependency Injection Container",
+        "category": "Core Architecture, Migration & Administration",
+        "required_behavior": "Executes PSR-11 Dependency Injection Container logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Core/Container/Container.php",
+        "expected_method": "\u2705 Yes",
+        "expected_wiring": "\u2705 Yes",
+        "expected_test": "\u2705 Passed"
+    },
+    "APEX-192": {
+        "id": "APEX-192",
+        "name": "Multi-Source Migration Engine",
+        "category": "Core Architecture, Migration & Administration",
+        "required_behavior": "Executes Multi-Source Migration Engine logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Migration/MigrationManager.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-193": {
+        "id": "APEX-193",
+        "name": "Active Plugin Conflict Detector",
+        "category": "Core Architecture, Migration & Administration",
+        "required_behavior": "Executes Active Plugin Conflict Detector logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Core/Admin/ConflictDetector.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-194": {
+        "id": "APEX-194",
+        "name": "Multisite Network Management",
+        "category": "Core Architecture, Migration & Administration",
+        "required_behavior": "Executes Multisite Network Management logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Core/Multisite/MultisiteManager.php",
+        "expected_method": "\u2705 Yes",
+        "expected_wiring": "\u2705 Yes",
+        "expected_test": "\u2705 Passed"
+    },
+    "APEX-195": {
+        "id": "APEX-195",
+        "name": "White Label Admin Interface",
+        "category": "Core Architecture, Migration & Administration",
+        "required_behavior": "Executes White Label Admin Interface logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Core/Admin/WhiteLabelManager.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-196": {
+        "id": "APEX-196",
+        "name": "Settings Backup, Import & Export",
+        "category": "Core Architecture, Migration & Administration",
+        "required_behavior": "Executes Settings Backup, Import & Export logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Core/Admin/BackupRestoreManager.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u26a0\ufe0f Config"
+    },
+    "APEX-197": {
+        "id": "APEX-197",
+        "name": "Action Scheduler Background Queue",
+        "category": "Core Architecture, Migration & Administration",
+        "required_behavior": "Executes Action Scheduler Background Queue logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Core/Queue/ActionSchedulerQueue.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u274c No"
+    },
+    "APEX-198": {
+        "id": "APEX-198",
+        "name": "Diagnostic System Health Reporter",
+        "category": "Core Architecture, Migration & Administration",
+        "required_behavior": "Executes Diagnostic System Health Reporter logic according to ApexSEO architecture standards.",
+        "expected_file": "src/Core/Admin/SystemHealthReporter.php",
+        "expected_method": "\u274c No",
+        "expected_wiring": "\u274c No",
+        "expected_test": "\u26a0\ufe0f Environment"
+    }
+}

@@ -1,0 +1,145 @@
+[
+    {
+        "vector": "SQL Injection",
+        "severity": "Critical",
+        "attack_surface": "Custom database tables, migration DDL, indexables queries",
+        "defense_mechanism": "Parameterized prepared statements ($wpdb->prepare), strict typecasting, whitelist order-by columns",
+        "source_locations": [
+            "src/Core/Database/DatabaseManager.php",
+            "src/SEO/Indexables/IndexableRepository.php"
+        ],
+        "test_evidence": "tests/DatabaseMigrationTest.php::testMigrationsExecuteSuccessfully",
+        "status": "SECURED"
+    },
+    {
+        "vector": "Cross-Site Scripting (XSS)",
+        "severity": "High",
+        "attack_surface": "Frontend document title, meta tags, OpenGraph, JSON-LD schema output",
+        "defense_mechanism": "esc_html, esc_attr, esc_url, wp_json_encode with ENT_QUOTES and JSON_HEX_TAG",
+        "source_locations": [
+            "src/SEO/Meta/TitlePresenter.php",
+            "src/SEO/Meta/MetaTagManager.php",
+            "src/Schema/SchemaGraphBuilder.php"
+        ],
+        "test_evidence": "tests/SeoSubsystemTest.php::testTitleAndDescriptionPresenters",
+        "status": "SECURED"
+    },
+    {
+        "vector": "Cross-Site Request Forgery (CSRF)",
+        "severity": "High",
+        "attack_surface": "Admin REST API endpoints, settings updates, cache purges",
+        "defense_mechanism": "WordPress REST nonces, X-WP-Nonce header verification via rest_cookie_check_errors",
+        "source_locations": [
+            "src/Core/REST/RestApiRouter.php",
+            "src/Core/REST/AbstractRestController.php"
+        ],
+        "test_evidence": "tests/RestSubsystemTest.php::testSettingsRestControllerUpdate",
+        "status": "SECURED"
+    },
+    {
+        "vector": "Insecure Direct Object Reference (IDOR)",
+        "severity": "High",
+        "attack_surface": "Post meta reading and mutation via REST API",
+        "defense_mechanism": "Explicit checkObjectEditPermission validating edit_post and edit_term user capabilities per object_id",
+        "source_locations": [
+            "src/Core/REST/MetaRestController.php"
+        ],
+        "test_evidence": "tests/RestSubsystemTest.php::testMetaRestControllerGetAndSave",
+        "status": "SECURED"
+    },
+    {
+        "vector": "Privilege Escalation",
+        "severity": "Critical",
+        "attack_surface": "Admin configuration, cache management, migration execution",
+        "defense_mechanism": "Strict permission_callback requiring manage_options capability on all administrative routes",
+        "source_locations": [
+            "src/Core/REST/AbstractRestController.php",
+            "src/Core/REST/SettingsRestController.php"
+        ],
+        "test_evidence": "tests/RestSubsystemTest.php::testPermissionCallbacksEnforced",
+        "status": "SECURED"
+    },
+    {
+        "vector": "Server-Side Request Forgery (SSRF)",
+        "severity": "High",
+        "attack_surface": "Sitemap search engine pings, Gemini API requests, external analytics webhooks",
+        "defense_mechanism": "wp_http_validate_url, protocol whitelisting (https only), trusted host validation",
+        "source_locations": [
+            "src/SEO/Sitemap/SitemapGenerator.php",
+            "src/AI/GeminiClient.php"
+        ],
+        "test_evidence": "tests/AiSubsystemTest.php::testGeminiClientGeneratesMetadata",
+        "status": "SECURED"
+    },
+    {
+        "vector": "Path Traversal",
+        "severity": "High",
+        "attack_surface": "Static cache file paths, sitemap XML file generation, image optimization storage",
+        "defense_mechanism": "realpath sandboxing, basename enforcement, directory traversal rejection (..)",
+        "source_locations": [
+            "src/Performance/PageCache/CacheManager.php",
+            "src/Performance/Images/ImageOptimizer.php"
+        ],
+        "test_evidence": "tests/PerformanceSubsystemTest.php::testStaticPageCacheLifecycle",
+        "status": "SECURED"
+    },
+    {
+        "vector": "Command Injection",
+        "severity": "Critical",
+        "attack_surface": "WP-CLI subcommand execution, image optimization CLI commands",
+        "defense_mechanism": "Array-based argument passing to WP_CLI, strict parameter enum parsing, no shell_exec with raw user strings",
+        "source_locations": [
+            "src/Core/CLI/CliManager.php",
+            "src/Core/CLI/Commands/MediaCommand.php"
+        ],
+        "test_evidence": "tests/CliSubsystemTest.php::testMediaCommandExecution",
+        "status": "SECURED"
+    },
+    {
+        "vector": "Open Redirect",
+        "severity": "Medium",
+        "attack_surface": "301 / 302 Redirection engine, 404 monitor redirect conversion",
+        "defense_mechanism": "Strict destination URL sanitization via wp_sanitize_redirect and domain boundary checks",
+        "source_locations": [
+            "src/SEO/Redirects/RedirectManager.php"
+        ],
+        "test_evidence": "tests/SeoSubsystemTest.php::testRedirectManagerRegexMatching",
+        "status": "SECURED"
+    },
+    {
+        "vector": "Unsafe Deserialization",
+        "severity": "Critical",
+        "attack_surface": "Schema storage, settings persistence, database options",
+        "defense_mechanism": "Standard JSON encoding (json_encode / json_decode with associative array), rejection of unserialize on user input",
+        "source_locations": [
+            "src/Core/Config/ConfigurationManager.php",
+            "src/Core/REST/SchemaRestController.php"
+        ],
+        "test_evidence": "tests/ConfigurationManagerTest.php::testConfigurationPersistence",
+        "status": "SECURED"
+    },
+    {
+        "vector": "File Upload Abuse",
+        "severity": "High",
+        "attack_surface": "Media optimization REST endpoints",
+        "defense_mechanism": "MIME type validation (image/jpeg, image/png, image/webp), attachment ID existence check, upload_files capability check",
+        "source_locations": [
+            "src/Core/REST/MediaRestController.php",
+            "src/Performance/Images/ImageOptimizer.php"
+        ],
+        "test_evidence": "tests/RestSubsystemTest.php::testMediaRestControllerOptimize",
+        "status": "SECURED"
+    },
+    {
+        "vector": "Regular Expression Denial of Service (ReDoS)",
+        "severity": "Medium",
+        "attack_surface": "Regex redirect engine, HTML/CSS/JS minification transforms",
+        "defense_mechanism": "Bounded non-backtracking regex patterns, execution timeout constraints, regex length limits",
+        "source_locations": [
+            "src/SEO/Redirects/RedirectManager.php",
+            "src/Performance/Minification/HtmlMinifier.php"
+        ],
+        "test_evidence": "tests/PerformanceSubsystemTest.php::testHtmlMinificationEngine",
+        "status": "SECURED"
+    }
+]
