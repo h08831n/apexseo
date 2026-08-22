@@ -1,0 +1,1294 @@
+{
+    "total_production_classes_inspected": 118,
+    "orphan_count": 0,
+    "orphans": [],
+    "all_classes_audit": [
+        {
+            "class": "ApexSEO\\Schema\\Types\\CourseSchema",
+            "short_name": "CourseSchema",
+            "type": "class",
+            "file": "src/Schema/Types/CourseSchema.php",
+            "reachability_reasons": [
+                "Registered in SchemaRegistry",
+                "Instantiated/invoked by 3 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Schema\\Types\\RecipeSchema",
+            "short_name": "RecipeSchema",
+            "type": "class",
+            "file": "src/Schema/Types/RecipeSchema.php",
+            "reachability_reasons": [
+                "Registered in SchemaRegistry",
+                "Instantiated/invoked by 3 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Schema\\Types\\LocalBusinessSchema",
+            "short_name": "LocalBusinessSchema",
+            "type": "class",
+            "file": "src/Schema/Types/LocalBusinessSchema.php",
+            "reachability_reasons": [
+                "Registered in SchemaRegistry",
+                "Instantiated/invoked by 4 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Schema\\Types\\JobPostingSchema",
+            "short_name": "JobPostingSchema",
+            "type": "class",
+            "file": "src/Schema/Types/JobPostingSchema.php",
+            "reachability_reasons": [
+                "Registered in SchemaRegistry",
+                "Instantiated/invoked by 3 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Schema\\Types\\AbstractSchemaType",
+            "short_name": "AbstractSchemaType",
+            "type": "class",
+            "file": "src/Schema/Types/AbstractSchemaType.php",
+            "reachability_reasons": [
+                "Registered in SchemaRegistry",
+                "Instantiated/invoked by 14 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Schema\\Types\\ArticleSchema",
+            "short_name": "ArticleSchema",
+            "type": "class",
+            "file": "src/Schema/Types/ArticleSchema.php",
+            "reachability_reasons": [
+                "Registered in SchemaRegistry",
+                "Instantiated/invoked by 5 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Schema\\Types\\ProductSchema",
+            "short_name": "ProductSchema",
+            "type": "class",
+            "file": "src/Schema/Types/ProductSchema.php",
+            "reachability_reasons": [
+                "Registered in SchemaRegistry",
+                "Instantiated/invoked by 3 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Schema\\Types\\SoftwareApplicationSchema",
+            "short_name": "SoftwareApplicationSchema",
+            "type": "class",
+            "file": "src/Schema/Types/SoftwareApplicationSchema.php",
+            "reachability_reasons": [
+                "Registered in SchemaRegistry",
+                "Instantiated/invoked by 3 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Schema\\Types\\WebSiteSchema",
+            "short_name": "WebSiteSchema",
+            "type": "class",
+            "file": "src/Schema/Types/WebSiteSchema.php",
+            "reachability_reasons": [
+                "Registered in SchemaRegistry",
+                "Instantiated/invoked by 3 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Schema\\Types\\SchemaTypeInterface",
+            "short_name": "SchemaTypeInterface",
+            "type": "interface",
+            "file": "src/Schema/Types/SchemaTypeInterface.php",
+            "reachability_reasons": [
+                "Registered in SchemaRegistry",
+                "Core interface contract",
+                "Instantiated/invoked by 8 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Schema\\Types\\OrganizationSchema",
+            "short_name": "OrganizationSchema",
+            "type": "class",
+            "file": "src/Schema/Types/OrganizationSchema.php",
+            "reachability_reasons": [
+                "Registered in SchemaRegistry",
+                "Instantiated/invoked by 3 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Schema\\Types\\FAQPageSchema",
+            "short_name": "FAQPageSchema",
+            "type": "class",
+            "file": "src/Schema/Types/FAQPageSchema.php",
+            "reachability_reasons": [
+                "Registered in SchemaRegistry",
+                "Instantiated/invoked by 3 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Schema\\Types\\EventSchema",
+            "short_name": "EventSchema",
+            "type": "class",
+            "file": "src/Schema/Types/EventSchema.php",
+            "reachability_reasons": [
+                "Registered in SchemaRegistry",
+                "Instantiated/invoked by 3 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Schema\\SchemaRegistry",
+            "short_name": "SchemaRegistry",
+            "type": "class",
+            "file": "src/Schema/SchemaRegistry.php",
+            "reachability_reasons": [
+                "Registered in RestApiRouter or Controller suite",
+                "Registered in SchemaRegistry",
+                "Instantiated/invoked by 15 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Schema\\Validator\\SchemaValidator",
+            "short_name": "SchemaValidator",
+            "type": "class",
+            "file": "src/Schema/Validator/SchemaValidator.php",
+            "reachability_reasons": [
+                "Registered in RestApiRouter or Controller suite",
+                "Instantiated/invoked by 13 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Schema\\SchemaGraphBuilder",
+            "short_name": "SchemaGraphBuilder",
+            "type": "class",
+            "file": "src/Schema/SchemaGraphBuilder.php",
+            "reachability_reasons": [
+                "Instantiated/invoked by 4 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Schema\\SchemaModule",
+            "short_name": "SchemaModule",
+            "type": "class",
+            "file": "src/Schema/SchemaModule.php",
+            "reachability_reasons": [
+                "Wired in Plugin::registerDefaultServices() or Plugin::boot()",
+                "Instantiated/invoked by 3 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Schema\\Media\\VideoObjectSchema",
+            "short_name": "VideoObjectSchema",
+            "type": "class",
+            "file": "src/Schema/Media/VideoObjectSchema.php",
+            "reachability_reasons": [
+                "Registered in SchemaRegistry",
+                "Instantiated/invoked by 3 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\CLI\\DoctorCommand",
+            "short_name": "DoctorCommand",
+            "type": "class",
+            "file": "src/CLI/DoctorCommand.php",
+            "reachability_reasons": [
+                "Registered in CliManager subcommands",
+                "Instantiated/invoked by 4 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\CLI\\MigrateCommand",
+            "short_name": "MigrateCommand",
+            "type": "class",
+            "file": "src/CLI/MigrateCommand.php",
+            "reachability_reasons": [
+                "Registered in CliManager subcommands",
+                "Instantiated/invoked by 3 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\CLI\\SitemapCommand",
+            "short_name": "SitemapCommand",
+            "type": "class",
+            "file": "src/CLI/SitemapCommand.php",
+            "reachability_reasons": [
+                "Registered in CliManager subcommands",
+                "Instantiated/invoked by 3 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\CLI\\RedirectCommand",
+            "short_name": "RedirectCommand",
+            "type": "class",
+            "file": "src/CLI/RedirectCommand.php",
+            "reachability_reasons": [
+                "Registered in CliManager subcommands",
+                "Instantiated/invoked by 3 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\CLI\\SchemaCommand",
+            "short_name": "SchemaCommand",
+            "type": "class",
+            "file": "src/CLI/SchemaCommand.php",
+            "reachability_reasons": [
+                "Registered in CliManager subcommands",
+                "Instantiated/invoked by 3 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\CLI\\AbstractCliCommand",
+            "short_name": "AbstractCliCommand",
+            "type": "class",
+            "file": "src/CLI/AbstractCliCommand.php",
+            "reachability_reasons": [
+                "Instantiated/invoked by 10 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\CLI\\IndexCommand",
+            "short_name": "IndexCommand",
+            "type": "class",
+            "file": "src/CLI/IndexCommand.php",
+            "reachability_reasons": [
+                "Registered in CliManager subcommands",
+                "Instantiated/invoked by 3 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\CLI\\CacheCommand",
+            "short_name": "CacheCommand",
+            "type": "class",
+            "file": "src/CLI/CacheCommand.php",
+            "reachability_reasons": [
+                "Registered in CliManager subcommands",
+                "Instantiated/invoked by 3 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\CLI\\MediaCommand",
+            "short_name": "MediaCommand",
+            "type": "class",
+            "file": "src/CLI/MediaCommand.php",
+            "reachability_reasons": [
+                "Registered in CliManager subcommands",
+                "Instantiated/invoked by 3 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\CLI\\DatabaseCommand",
+            "short_name": "DatabaseCommand",
+            "type": "class",
+            "file": "src/CLI/DatabaseCommand.php",
+            "reachability_reasons": [
+                "Registered in CliManager subcommands",
+                "Instantiated/invoked by 3 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\API\\Controllers\\MigrationRestController",
+            "short_name": "MigrationRestController",
+            "type": "class",
+            "file": "src/API/Controllers/MigrationRestController.php",
+            "reachability_reasons": [
+                "Registered in RestApiRouter or Controller suite",
+                "Instantiated/invoked by 3 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\API\\Controllers\\MetaRestController",
+            "short_name": "MetaRestController",
+            "type": "class",
+            "file": "src/API/Controllers/MetaRestController.php",
+            "reachability_reasons": [
+                "Registered in RestApiRouter or Controller suite",
+                "Instantiated/invoked by 3 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\API\\Controllers\\CacheRestController",
+            "short_name": "CacheRestController",
+            "type": "class",
+            "file": "src/API/Controllers/CacheRestController.php",
+            "reachability_reasons": [
+                "Registered in RestApiRouter or Controller suite",
+                "Instantiated/invoked by 3 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\API\\Controllers\\AbstractRestController",
+            "short_name": "AbstractRestController",
+            "type": "class",
+            "file": "src/API/Controllers/AbstractRestController.php",
+            "reachability_reasons": [
+                "Registered in RestApiRouter or Controller suite",
+                "Instantiated/invoked by 15 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\API\\Controllers\\SettingsRestController",
+            "short_name": "SettingsRestController",
+            "type": "class",
+            "file": "src/API/Controllers/SettingsRestController.php",
+            "reachability_reasons": [
+                "Registered in RestApiRouter or Controller suite",
+                "Instantiated/invoked by 3 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\API\\Controllers\\LinksRestController",
+            "short_name": "LinksRestController",
+            "type": "class",
+            "file": "src/API/Controllers/LinksRestController.php",
+            "reachability_reasons": [
+                "Registered in RestApiRouter or Controller suite",
+                "Instantiated/invoked by 3 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\API\\Controllers\\RedirectsRestController",
+            "short_name": "RedirectsRestController",
+            "type": "class",
+            "file": "src/API/Controllers/RedirectsRestController.php",
+            "reachability_reasons": [
+                "Registered in RestApiRouter or Controller suite",
+                "Instantiated/invoked by 3 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\API\\Controllers\\NotFoundRestController",
+            "short_name": "NotFoundRestController",
+            "type": "class",
+            "file": "src/API/Controllers/NotFoundRestController.php",
+            "reachability_reasons": [
+                "Registered in RestApiRouter or Controller suite",
+                "Instantiated/invoked by 3 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\API\\Controllers\\AnalyticsRestController",
+            "short_name": "AnalyticsRestController",
+            "type": "class",
+            "file": "src/API/Controllers/AnalyticsRestController.php",
+            "reachability_reasons": [
+                "Registered in RestApiRouter or Controller suite",
+                "Instantiated/invoked by 3 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\API\\Controllers\\MediaRestController",
+            "short_name": "MediaRestController",
+            "type": "class",
+            "file": "src/API/Controllers/MediaRestController.php",
+            "reachability_reasons": [
+                "Registered in RestApiRouter or Controller suite",
+                "Instantiated/invoked by 3 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\API\\Controllers\\SchemaRestController",
+            "short_name": "SchemaRestController",
+            "type": "class",
+            "file": "src/API/Controllers/SchemaRestController.php",
+            "reachability_reasons": [
+                "Registered in RestApiRouter or Controller suite",
+                "Instantiated/invoked by 3 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\API\\RestApiRouter",
+            "short_name": "RestApiRouter",
+            "type": "class",
+            "file": "src/API/RestApiRouter.php",
+            "reachability_reasons": [
+                "Registered in RestApiRouter or Controller suite"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Performance\\PerformanceModule",
+            "short_name": "PerformanceModule",
+            "type": "class",
+            "file": "src/Performance/PerformanceModule.php",
+            "reachability_reasons": [
+                "Wired in Plugin::registerDefaultServices() or Plugin::boot()",
+                "Instantiated/invoked by 3 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Performance\\Tweaks\\ResourceHints",
+            "short_name": "ResourceHints",
+            "type": "class",
+            "file": "src/Performance/Tweaks/ResourceHints.php",
+            "reachability_reasons": [
+                "Instantiated/invoked by 5 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Performance\\Assets\\JsMinifier",
+            "short_name": "JsMinifier",
+            "type": "class",
+            "file": "src/Performance/Assets/JsMinifier.php",
+            "reachability_reasons": [
+                "Instantiated/invoked by 4 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Performance\\Assets\\HtmlMinifier",
+            "short_name": "HtmlMinifier",
+            "type": "class",
+            "file": "src/Performance/Assets/HtmlMinifier.php",
+            "reachability_reasons": [
+                "Instantiated/invoked by 4 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Performance\\Assets\\CssMinifier",
+            "short_name": "CssMinifier",
+            "type": "class",
+            "file": "src/Performance/Assets/CssMinifier.php",
+            "reachability_reasons": [
+                "Instantiated/invoked by 4 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Performance\\Assets\\DelayJsEngine",
+            "short_name": "DelayJsEngine",
+            "type": "class",
+            "file": "src/Performance/Assets/DelayJsEngine.php",
+            "reachability_reasons": [
+                "Instantiated/invoked by 4 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Performance\\Cache\\SmartPurge",
+            "short_name": "SmartPurge",
+            "type": "class",
+            "file": "src/Performance/Cache/SmartPurge.php",
+            "reachability_reasons": [
+                "Instantiated/invoked by 6 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Performance\\Cache\\StaticFileWriter",
+            "short_name": "StaticFileWriter",
+            "type": "class",
+            "file": "src/Performance/Cache/StaticFileWriter.php",
+            "reachability_reasons": [
+                "Instantiated/invoked by 7 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Core\\Modules\\ModuleRegistry",
+            "short_name": "ModuleRegistry",
+            "type": "class",
+            "file": "src/Core/Modules/ModuleRegistry.php",
+            "reachability_reasons": [
+                "Wired in Plugin::registerDefaultServices() or Plugin::boot()",
+                "Registered in ModuleRegistry default modules",
+                "Instantiated/invoked by 5 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Core\\Environment\\EnvironmentDetector",
+            "short_name": "EnvironmentDetector",
+            "type": "class",
+            "file": "src/Core/Environment/EnvironmentDetector.php",
+            "reachability_reasons": [
+                "Wired in Plugin::registerDefaultServices() or Plugin::boot()",
+                "Resolved in EnvironmentDetector / ServerAdapter hierarchy",
+                "Instantiated/invoked by 43 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Core\\Environment\\Server\\LiteSpeedAdapter",
+            "short_name": "LiteSpeedAdapter",
+            "type": "class",
+            "file": "src/Core/Environment/Server/LiteSpeedAdapter.php",
+            "reachability_reasons": [
+                "Resolved in EnvironmentDetector / ServerAdapter hierarchy",
+                "Instantiated/invoked by 6 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Core\\Environment\\Server\\NginxAdapter",
+            "short_name": "NginxAdapter",
+            "type": "class",
+            "file": "src/Core/Environment/Server/NginxAdapter.php",
+            "reachability_reasons": [
+                "Resolved in EnvironmentDetector / ServerAdapter hierarchy",
+                "Instantiated/invoked by 3 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Core\\Environment\\Server\\ServerAdapterInterface",
+            "short_name": "ServerAdapterInterface",
+            "type": "interface",
+            "file": "src/Core/Environment/Server/ServerAdapterInterface.php",
+            "reachability_reasons": [
+                "Wired in Plugin::registerDefaultServices() or Plugin::boot()",
+                "Resolved in EnvironmentDetector / ServerAdapter hierarchy",
+                "Core interface contract",
+                "Instantiated/invoked by 18 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Core\\Environment\\Server\\ApacheAdapter",
+            "short_name": "ApacheAdapter",
+            "type": "class",
+            "file": "src/Core/Environment/Server/ApacheAdapter.php",
+            "reachability_reasons": [
+                "Resolved in EnvironmentDetector / ServerAdapter hierarchy",
+                "Instantiated/invoked by 3 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Core\\Environment\\Server\\OpenLiteSpeedAdapter",
+            "short_name": "OpenLiteSpeedAdapter",
+            "type": "class",
+            "file": "src/Core/Environment/Server/OpenLiteSpeedAdapter.php",
+            "reachability_reasons": [
+                "Resolved in EnvironmentDetector / ServerAdapter hierarchy",
+                "Instantiated/invoked by 3 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Core\\Environment\\Server\\GenericServerAdapter",
+            "short_name": "GenericServerAdapter",
+            "type": "class",
+            "file": "src/Core/Environment/Server/GenericServerAdapter.php",
+            "reachability_reasons": [
+                "Resolved in EnvironmentDetector / ServerAdapter hierarchy",
+                "Instantiated/invoked by 5 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Core\\Environment\\CapabilityRegistry",
+            "short_name": "CapabilityRegistry",
+            "type": "class",
+            "file": "src/Core/Environment/CapabilityRegistry.php",
+            "reachability_reasons": [
+                "Wired in Plugin::registerDefaultServices() or Plugin::boot()",
+                "Instantiated/invoked by 4 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Core\\Configuration\\ConfigurationManager",
+            "short_name": "ConfigurationManager",
+            "type": "class",
+            "file": "src/Core/Configuration/ConfigurationManager.php",
+            "reachability_reasons": [
+                "Wired in Plugin::registerDefaultServices() or Plugin::boot()",
+                "Registered in ModuleRegistry default modules",
+                "Registered in RestApiRouter or Controller suite",
+                "Instantiated/invoked by 30 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Core\\Container\\ContainerInterface",
+            "short_name": "ContainerInterface",
+            "type": "interface",
+            "file": "src/Core/Container/ContainerInterface.php",
+            "reachability_reasons": [
+                "Wired in Plugin::registerDefaultServices() or Plugin::boot()",
+                "Registered in ModuleRegistry default modules",
+                "Core interface contract",
+                "Instantiated/invoked by 70 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Core\\Container\\Container",
+            "short_name": "Container",
+            "type": "class",
+            "file": "src/Core/Container/Container.php",
+            "reachability_reasons": [
+                "Wired in Plugin::registerDefaultServices() or Plugin::boot()",
+                "Registered in ModuleRegistry default modules",
+                "Instantiated/invoked by 114 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Core\\Database\\MigrationInterface",
+            "short_name": "MigrationInterface",
+            "type": "interface",
+            "file": "src/Core/Database/MigrationInterface.php",
+            "reachability_reasons": [
+                "Core interface contract",
+                "Instantiated/invoked by 7 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Core\\Database\\Migrations\\Migration_1_0_0_CreateLockedTables",
+            "short_name": "Migration_1_0_0_CreateLockedTables",
+            "type": "class",
+            "file": "src/Core/Database/Migrations/Migration_1_0_0_CreateLockedTables.php",
+            "reachability_reasons": [
+                "Instantiated/invoked by 3 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Core\\Database\\DatabaseManager",
+            "short_name": "DatabaseManager",
+            "type": "class",
+            "file": "src/Core/Database/DatabaseManager.php",
+            "reachability_reasons": [
+                "Wired in Plugin::registerDefaultServices() or Plugin::boot()",
+                "Registered in RestApiRouter or Controller suite",
+                "Instantiated/invoked by 85 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Core\\Database\\MigrationRunner",
+            "short_name": "MigrationRunner",
+            "type": "class",
+            "file": "src/Core/Database/MigrationRunner.php",
+            "reachability_reasons": [
+                "Wired in Plugin::registerDefaultServices() or Plugin::boot()",
+                "Instantiated/invoked by 10 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Core\\Database\\SchemaVersion",
+            "short_name": "SchemaVersion",
+            "type": "class",
+            "file": "src/Core/Database/SchemaVersion.php",
+            "reachability_reasons": [
+                "Instantiated/invoked by 8 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Core\\CLI\\CliManager",
+            "short_name": "CliManager",
+            "type": "class",
+            "file": "src/Core/CLI/CliManager.php",
+            "reachability_reasons": [
+                "Wired in Plugin::registerDefaultServices() or Plugin::boot()",
+                "Registered in CliManager subcommands",
+                "Instantiated/invoked by 5 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Core\\Security\\SecurityManager",
+            "short_name": "SecurityManager",
+            "type": "class",
+            "file": "src/Core/Security/SecurityManager.php",
+            "reachability_reasons": [
+                "Wired in Plugin::registerDefaultServices() or Plugin::boot()",
+                "Registered in RestApiRouter or Controller suite",
+                "Instantiated/invoked by 47 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Core\\Security\\SecurityUtils",
+            "short_name": "SecurityUtils",
+            "type": "class",
+            "file": "src/Core/Security/SecurityUtils.php",
+            "reachability_reasons": [
+                "Instantiated/invoked by 2 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Core\\Exceptions\\ConfigurationException",
+            "short_name": "ConfigurationException",
+            "type": "class",
+            "file": "src/Core/Exceptions/ConfigurationException.php",
+            "reachability_reasons": [
+                "Domain exception type referenced during runtime error handling",
+                "Instantiated/invoked by 3 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Core\\Exceptions\\SecurityException",
+            "short_name": "SecurityException",
+            "type": "class",
+            "file": "src/Core/Exceptions/SecurityException.php",
+            "reachability_reasons": [
+                "Domain exception type referenced during runtime error handling",
+                "Instantiated/invoked by 2 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Core\\Exceptions\\ApexException",
+            "short_name": "ApexException",
+            "type": "class",
+            "file": "src/Core/Exceptions/ApexException.php",
+            "reachability_reasons": [
+                "Domain exception type referenced during runtime error handling",
+                "Instantiated/invoked by 8 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Core\\Exceptions\\NotFoundException",
+            "short_name": "NotFoundException",
+            "type": "class",
+            "file": "src/Core/Exceptions/NotFoundException.php",
+            "reachability_reasons": [
+                "Domain exception type referenced during runtime error handling",
+                "Instantiated/invoked by 7 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Core\\Exceptions\\ContainerException",
+            "short_name": "ContainerException",
+            "type": "class",
+            "file": "src/Core/Exceptions/ContainerException.php",
+            "reachability_reasons": [
+                "Domain exception type referenced during runtime error handling",
+                "Instantiated/invoked by 13 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Core\\Exceptions\\DatabaseException",
+            "short_name": "DatabaseException",
+            "type": "class",
+            "file": "src/Core/Exceptions/DatabaseException.php",
+            "reachability_reasons": [
+                "Domain exception type referenced during runtime error handling",
+                "Instantiated/invoked by 5 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Core\\Hooks\\HookManager",
+            "short_name": "HookManager",
+            "type": "class",
+            "file": "src/Core/Hooks/HookManager.php",
+            "reachability_reasons": [
+                "Wired in Plugin::registerDefaultServices() or Plugin::boot()",
+                "Instantiated/invoked by 4 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Core\\Bootstrap\\Plugin",
+            "short_name": "Plugin",
+            "type": "class",
+            "file": "src/Core/Bootstrap/Plugin.php",
+            "reachability_reasons": [
+                "Wired in Plugin::registerDefaultServices() or Plugin::boot()",
+                "Instantiated/invoked by 13 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Core\\Contracts\\ModuleInterface",
+            "short_name": "ModuleInterface",
+            "type": "interface",
+            "file": "src/Core/Contracts/ModuleInterface.php",
+            "reachability_reasons": [
+                "Registered in ModuleRegistry default modules",
+                "Core interface contract",
+                "Instantiated/invoked by 21 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Core\\Contracts\\HookableInterface",
+            "short_name": "HookableInterface",
+            "type": "interface",
+            "file": "src/Core/Contracts/HookableInterface.php",
+            "reachability_reasons": [
+                "Registered in CliManager subcommands",
+                "Registered in RestApiRouter or Controller suite",
+                "Core interface contract",
+                "Instantiated/invoked by 10 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Core\\Contracts\\BootableInterface",
+            "short_name": "BootableInterface",
+            "type": "interface",
+            "file": "src/Core/Contracts/BootableInterface.php",
+            "reachability_reasons": [
+                "Core interface contract"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Core\\Contracts\\for",
+            "short_name": "for",
+            "type": "interface",
+            "file": "src/Core/Contracts/ServiceContractInterface.php",
+            "reachability_reasons": [
+                "Wired in Plugin::registerDefaultServices() or Plugin::boot()",
+                "Registered in ModuleRegistry default modules",
+                "Registered in CliManager subcommands",
+                "Registered in RestApiRouter or Controller suite",
+                "Registered in SchemaRegistry",
+                "Resolved in EnvironmentDetector / ServerAdapter hierarchy",
+                "Core interface contract",
+                "Instantiated/invoked by 379 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Core\\Logging\\LoggerInterface",
+            "short_name": "LoggerInterface",
+            "type": "interface",
+            "file": "src/Core/Logging/LoggerInterface.php",
+            "reachability_reasons": [
+                "Wired in Plugin::registerDefaultServices() or Plugin::boot()",
+                "Registered in ModuleRegistry default modules",
+                "Core interface contract",
+                "Instantiated/invoked by 18 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Core\\Logging\\Logger",
+            "short_name": "Logger",
+            "type": "class",
+            "file": "src/Core/Logging/Logger.php",
+            "reachability_reasons": [
+                "Wired in Plugin::registerDefaultServices() or Plugin::boot()",
+                "Registered in ModuleRegistry default modules",
+                "Instantiated/invoked by 26 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Core\\REST\\RestManager",
+            "short_name": "RestManager",
+            "type": "class",
+            "file": "src/Core/REST/RestManager.php",
+            "reachability_reasons": [
+                "Wired in Plugin::registerDefaultServices() or Plugin::boot()",
+                "Instantiated/invoked by 5 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Core\\Multisite\\MultisiteManager",
+            "short_name": "MultisiteManager",
+            "type": "class",
+            "file": "src/Core/Multisite/MultisiteManager.php",
+            "reachability_reasons": [
+                "Wired in Plugin::registerDefaultServices() or Plugin::boot()",
+                "Instantiated/invoked by 7 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Core\\Lifecycle\\LifecycleManager",
+            "short_name": "LifecycleManager",
+            "type": "class",
+            "file": "src/Core/Lifecycle/LifecycleManager.php",
+            "reachability_reasons": [
+                "Wired in Plugin::registerDefaultServices() or Plugin::boot()",
+                "Instantiated/invoked by 3 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\SEO\\Admin\\MetaSaver",
+            "short_name": "MetaSaver",
+            "type": "class",
+            "file": "src/SEO/Admin/MetaSaver.php",
+            "reachability_reasons": [
+                "Instantiated/invoked by 14 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\SEO\\Models\\Indexable",
+            "short_name": "Indexable",
+            "type": "class",
+            "file": "src/SEO/Models/Indexable.php",
+            "reachability_reasons": [
+                "Registered in RestApiRouter or Controller suite",
+                "Domain entity / DTO model",
+                "Instantiated/invoked by 115 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\SEO\\Models\\SeoContext",
+            "short_name": "SeoContext",
+            "type": "class",
+            "file": "src/SEO/Models/SeoContext.php",
+            "reachability_reasons": [
+                "Domain entity / DTO model",
+                "Instantiated/invoked by 53 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\SEO\\Meta\\RobotsPresenter",
+            "short_name": "RobotsPresenter",
+            "type": "class",
+            "file": "src/SEO/Meta/RobotsPresenter.php",
+            "reachability_reasons": [
+                "Instantiated/invoked by 7 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\SEO\\Meta\\TitlePresenter",
+            "short_name": "TitlePresenter",
+            "type": "class",
+            "file": "src/SEO/Meta/TitlePresenter.php",
+            "reachability_reasons": [
+                "Instantiated/invoked by 9 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\SEO\\Meta\\CanonicalPresenter",
+            "short_name": "CanonicalPresenter",
+            "type": "class",
+            "file": "src/SEO/Meta/CanonicalPresenter.php",
+            "reachability_reasons": [
+                "Instantiated/invoked by 7 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\SEO\\Meta\\MetaTagManager",
+            "short_name": "MetaTagManager",
+            "type": "class",
+            "file": "src/SEO/Meta/MetaTagManager.php",
+            "reachability_reasons": [
+                "Instantiated/invoked by 6 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\SEO\\Meta\\DescriptionPresenter",
+            "short_name": "DescriptionPresenter",
+            "type": "class",
+            "file": "src/SEO/Meta/DescriptionPresenter.php",
+            "reachability_reasons": [
+                "Instantiated/invoked by 7 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\SEO\\Repository\\IndexableRepository",
+            "short_name": "IndexableRepository",
+            "type": "class",
+            "file": "src/SEO/Repository/IndexableRepository.php",
+            "reachability_reasons": [
+                "Registered in RestApiRouter or Controller suite",
+                "Instantiated/invoked by 25 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\SEO\\Redirects\\RedirectManager",
+            "short_name": "RedirectManager",
+            "type": "class",
+            "file": "src/SEO/Redirects/RedirectManager.php",
+            "reachability_reasons": [
+                "Instantiated/invoked by 6 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\SEO\\Social\\OpenGraphPresenter",
+            "short_name": "OpenGraphPresenter",
+            "type": "class",
+            "file": "src/SEO/Social/OpenGraphPresenter.php",
+            "reachability_reasons": [
+                "Instantiated/invoked by 8 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\SEO\\Social\\TwitterCardPresenter",
+            "short_name": "TwitterCardPresenter",
+            "type": "class",
+            "file": "src/SEO/Social/TwitterCardPresenter.php",
+            "reachability_reasons": [
+                "Instantiated/invoked by 8 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\SEO\\Breadcrumbs\\BreadcrumbGenerator",
+            "short_name": "BreadcrumbGenerator",
+            "type": "class",
+            "file": "src/SEO/Breadcrumbs/BreadcrumbGenerator.php",
+            "reachability_reasons": [
+                "Instantiated/invoked by 4 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\SEO\\Sitemap\\SitemapGenerator",
+            "short_name": "SitemapGenerator",
+            "type": "class",
+            "file": "src/SEO/Sitemap/SitemapGenerator.php",
+            "reachability_reasons": [
+                "Instantiated/invoked by 4 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\SEO\\Builder\\IndexableBuilder",
+            "short_name": "IndexableBuilder",
+            "type": "class",
+            "file": "src/SEO/Builder/IndexableBuilder.php",
+            "reachability_reasons": [
+                "Registered in RestApiRouter or Controller suite",
+                "Instantiated/invoked by 18 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\SEO\\Integrations\\WooCommerceIntegration",
+            "short_name": "WooCommerceIntegration",
+            "type": "class",
+            "file": "src/SEO/Integrations/WooCommerceIntegration.php",
+            "reachability_reasons": [
+                "Instantiated/invoked by 4 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\SEO\\Templates\\TemplateManager",
+            "short_name": "TemplateManager",
+            "type": "class",
+            "file": "src/SEO/Templates/TemplateManager.php",
+            "reachability_reasons": [
+                "Instantiated/invoked by 24 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\SEO\\Context\\ContextDetector",
+            "short_name": "ContextDetector",
+            "type": "class",
+            "file": "src/SEO/Context/ContextDetector.php",
+            "reachability_reasons": [
+                "Instantiated/invoked by 10 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\SEO\\SeoModule",
+            "short_name": "SeoModule",
+            "type": "class",
+            "file": "src/SEO/SeoModule.php",
+            "reachability_reasons": [
+                "Wired in Plugin::registerDefaultServices() or Plugin::boot()",
+                "Instantiated/invoked by 3 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\SEO\\Variables\\VariableEngine",
+            "short_name": "VariableEngine",
+            "type": "class",
+            "file": "src/SEO/Variables/VariableEngine.php",
+            "reachability_reasons": [
+                "Instantiated/invoked by 35 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Autoloader",
+            "short_name": "Autoloader",
+            "type": "class",
+            "file": "src/Autoloader.php",
+            "reachability_reasons": [
+                "Instantiated/invoked by 2 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Media\\Optimizer\\LcpOptimizer",
+            "short_name": "LcpOptimizer",
+            "type": "class",
+            "file": "src/Media/Optimizer/LcpOptimizer.php",
+            "reachability_reasons": [
+                "Instantiated/invoked by 4 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Media\\Optimizer\\ImageOptimizer",
+            "short_name": "ImageOptimizer",
+            "type": "class",
+            "file": "src/Media/Optimizer/ImageOptimizer.php",
+            "reachability_reasons": [
+                "Registered in RestApiRouter or Controller suite",
+                "Instantiated/invoked by 20 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Media\\LazyLoad\\PlaceholderGenerator",
+            "short_name": "PlaceholderGenerator",
+            "type": "class",
+            "file": "src/Media/LazyLoad/PlaceholderGenerator.php",
+            "reachability_reasons": [
+                "Instantiated/invoked by 8 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Media\\LazyLoad\\ImageLazyLoader",
+            "short_name": "ImageLazyLoader",
+            "type": "class",
+            "file": "src/Media/LazyLoad/ImageLazyLoader.php",
+            "reachability_reasons": [
+                "Instantiated/invoked by 5 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Media\\MediaModule",
+            "short_name": "MediaModule",
+            "type": "class",
+            "file": "src/Media/MediaModule.php",
+            "reachability_reasons": [
+                "Wired in Plugin::registerDefaultServices() or Plugin::boot()",
+                "Instantiated/invoked by 3 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\AI\\AiModule",
+            "short_name": "AiModule",
+            "type": "class",
+            "file": "src/AI/AiModule.php",
+            "reachability_reasons": [
+                "Wired in Plugin::registerDefaultServices() or Plugin::boot()",
+                "Instantiated/invoked by 3 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\AI\\SearchIntent\\SearchIntentAnalyzer",
+            "short_name": "SearchIntentAnalyzer",
+            "type": "class",
+            "file": "src/AI/SearchIntent/SearchIntentAnalyzer.php",
+            "reachability_reasons": [
+                "Instantiated/invoked by 4 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\AI\\Generators\\MetadataAiGenerator",
+            "short_name": "MetadataAiGenerator",
+            "type": "class",
+            "file": "src/AI/Generators/MetadataAiGenerator.php",
+            "reachability_reasons": [
+                "Instantiated/invoked by 4 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\AI\\LlmsTxt\\LlmsTxtGenerator",
+            "short_name": "LlmsTxtGenerator",
+            "type": "class",
+            "file": "src/AI/LlmsTxt/LlmsTxtGenerator.php",
+            "reachability_reasons": [
+                "Instantiated/invoked by 5 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Analytics\\AnalyticsModule",
+            "short_name": "AnalyticsModule",
+            "type": "class",
+            "file": "src/Analytics/AnalyticsModule.php",
+            "reachability_reasons": [
+                "Wired in Plugin::registerDefaultServices() or Plugin::boot()",
+                "Instantiated/invoked by 3 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Analytics\\Monitor\\FourOhFourMonitor",
+            "short_name": "FourOhFourMonitor",
+            "type": "class",
+            "file": "src/Analytics/Monitor/FourOhFourMonitor.php",
+            "reachability_reasons": [
+                "Instantiated/invoked by 5 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        },
+        {
+            "class": "ApexSEO\\Analytics\\Tracker\\RankTracker",
+            "short_name": "RankTracker",
+            "type": "class",
+            "file": "src/Analytics/Tracker/RankTracker.php",
+            "reachability_reasons": [
+                "Instantiated/invoked by 6 domain call-sites across src/"
+            ],
+            "is_orphan": false
+        }
+    ]
+}
