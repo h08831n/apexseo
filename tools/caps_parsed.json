@@ -1,0 +1,1388 @@
+{
+    "APEX-001": {
+        "id": "APEX-001",
+        "name": "Dynamic Title Tag Rewrite",
+        "target_file": "src\/SEO\/Titles\/TitleGenerator.php",
+        "category": "Meta & Titles Engine",
+        "status_note": "Phantom class `ApexSEO\\SEO\\Meta\\TitlePresenter` tested in mock; class missing from `\/src\/`."
+    },
+    "APEX-002": {
+        "id": "APEX-002",
+        "name": "Dynamic Meta Description Tag",
+        "target_file": "src\/SEO\/Meta\/DescriptionGenerator.php",
+        "category": "Meta & Titles Engine",
+        "status_note": "Phantom class `ApexSEO\\SEO\\Meta\\DescriptionPresenter` tested in mock; class missing from `\/src\/`."
+    },
+    "APEX-003": {
+        "id": "APEX-003",
+        "name": "Title Template Variable Replacer",
+        "target_file": "src\/SEO\/Titles\/VariableReplacer.php",
+        "category": "Meta & Titles Engine",
+        "status_note": "Phantom class `ApexSEO\\SEO\\Variables\\VariableEngine` tested; class missing from `\/src\/`."
+    },
+    "APEX-004": {
+        "id": "APEX-004",
+        "name": "Custom Taxonomy Title\/Meta",
+        "target_file": "src\/SEO\/Meta\/TaxonomyMetaHandler.php",
+        "category": "Meta & Titles Engine",
+        "status_note": "DDL column `apex_indexables.object_type='term'` exists, handler missing."
+    },
+    "APEX-005": {
+        "id": "APEX-005",
+        "name": "Author Archive Title & Meta",
+        "target_file": "src\/SEO\/Meta\/AuthorMetaHandler.php",
+        "category": "Meta & Titles Engine",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-006": {
+        "id": "APEX-006",
+        "name": "Date Archive Title & Meta",
+        "target_file": "src\/SEO\/Meta\/DateMetaHandler.php",
+        "category": "Meta & Titles Engine",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-007": {
+        "id": "APEX-007",
+        "name": "Search Results Page Title\/Meta",
+        "target_file": "src\/SEO\/Titles\/SearchTitleHandler.php",
+        "category": "Meta & Titles Engine",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-008": {
+        "id": "APEX-008",
+        "name": "404 Error Page Title & Meta",
+        "target_file": "src\/SEO\/Titles\/NotFoundTitleHandler.php",
+        "category": "Meta & Titles Engine",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-009": {
+        "id": "APEX-009",
+        "name": "Custom Separator Selector",
+        "target_file": "src\/SEO\/Titles\/SeparatorManager.php",
+        "category": "Meta & Titles Engine",
+        "status_note": "Stored in `ConfigurationManager::defaults['seo']['title_separator'] = '-'`. Domain handler missing."
+    },
+    "APEX-010": {
+        "id": "APEX-010",
+        "name": "Capitalize P-tags & Clean Titles",
+        "target_file": "src\/SEO\/Titles\/TitleSanitizer.php",
+        "category": "Meta & Titles Engine",
+        "status_note": "Sanitization utility in `SecurityUtils` handles general strings, not custom title capitalization."
+    },
+    "APEX-011": {
+        "id": "APEX-011",
+        "name": "Strip Category Base Permalinks",
+        "target_file": "src\/SEO\/Meta\/PermalinkSanitizer.php",
+        "category": "Meta & Titles Engine",
+        "status_note": "Config flag `seo.strip_category_base` defined in `ConfigurationManager`. Rewrite rule generator missing."
+    },
+    "APEX-012": {
+        "id": "APEX-012",
+        "name": "Paged Subpages Title Modifier",
+        "target_file": "src\/SEO\/Titles\/PaginationTitleDecorator.php",
+        "category": "Meta & Titles Engine",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-013": {
+        "id": "APEX-013",
+        "name": "Post Type Default Fallback Meta",
+        "target_file": "src\/SEO\/Meta\/DefaultMetaResolver.php",
+        "category": "Meta & Titles Engine",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-014": {
+        "id": "APEX-014",
+        "name": "Bulk Title\/Meta Editor Screen",
+        "target_file": "src\/SEO\/Meta\/BulkMetaEditor.php",
+        "category": "Meta & Titles Engine",
+        "status_note": "Frontend React UI scaffolded in `SerpPreviewTab.tsx`, backend batch worker missing."
+    },
+    "APEX-015": {
+        "id": "APEX-015",
+        "name": "RSS Feed Header & Footer Append",
+        "target_file": "src\/SEO\/Meta\/RssFeedEnhancer.php",
+        "category": "Meta & Titles Engine",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-016": {
+        "id": "APEX-016",
+        "name": "Meta Keywords Support (Toggleable)",
+        "target_file": "src\/SEO\/Meta\/KeywordsGenerator.php",
+        "category": "Meta & Titles Engine",
+        "status_note": "DDL column `secondary_keywords` exists, renderer missing."
+    },
+    "APEX-017": {
+        "id": "APEX-017",
+        "name": "Custom-Fields Meta Tokens",
+        "target_file": "src\/SEO\/Titles\/CustomFieldTokenReplacer.php",
+        "category": "Meta & Titles Engine",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-018": {
+        "id": "APEX-018",
+        "name": "Auto Meta Description Truncation",
+        "target_file": "src\/SEO\/Meta\/DescriptionTruncator.php",
+        "category": "Meta & Titles Engine",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-019": {
+        "id": "APEX-019",
+        "name": "Self-Referential Canonical URL",
+        "target_file": "src\/SEO\/Canonical\/CanonicalGenerator.php",
+        "category": "Canonical & Robots Directive Engine",
+        "status_note": "Phantom class `ApexSEO\\SEO\\Meta\\CanonicalPresenter` tested; class missing from `\/src\/`."
+    },
+    "APEX-020": {
+        "id": "APEX-020",
+        "name": "Custom Canonical URL Override",
+        "target_file": "src\/SEO\/Canonical\/CanonicalOverride.php",
+        "category": "Canonical & Robots Directive Engine",
+        "status_note": "DDL column `canonical_url` exists; override logic missing."
+    },
+    "APEX-021": {
+        "id": "APEX-021",
+        "name": "Paginated Archive Canonical",
+        "target_file": "src\/SEO\/Canonical\/PaginationCanonical.php",
+        "category": "Canonical & Robots Directive Engine",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-022": {
+        "id": "APEX-022",
+        "name": "Noindex Directive Controller",
+        "target_file": "src\/SEO\/Robots\/RobotsGenerator.php",
+        "category": "Canonical & Robots Directive Engine",
+        "status_note": "Phantom class `ApexSEO\\SEO\\Meta\\RobotsPresenter` tested; class missing from `\/src\/`."
+    },
+    "APEX-023": {
+        "id": "APEX-023",
+        "name": "Nofollow Directive Controller",
+        "target_file": "src\/SEO\/Robots\/RobotsGenerator.php",
+        "category": "Canonical & Robots Directive Engine",
+        "status_note": "Tested in `SeoSubsystemTest`; class missing from `\/src\/`."
+    },
+    "APEX-024": {
+        "id": "APEX-024",
+        "name": "Advanced Robots (noarchive, nosnippet)",
+        "target_file": "src\/SEO\/Robots\/AdvancedRobots.php",
+        "category": "Canonical & Robots Directive Engine",
+        "status_note": "DDL columns `is_robots_noarchive`, `is_robots_nosnippet` exist."
+    },
+    "APEX-025": {
+        "id": "APEX-025",
+        "name": "max-snippet, max-image-preview",
+        "target_file": "src\/SEO\/Robots\/GoogleRobotsDirectives.php",
+        "category": "Canonical & Robots Directive Engine",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-026": {
+        "id": "APEX-026",
+        "name": "Virtual Robots.txt Generator",
+        "target_file": "src\/SEO\/Robots\/RobotsTxtHandler.php",
+        "category": "Canonical & Robots Directive Engine",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-027": {
+        "id": "APEX-027",
+        "name": "Virtual Robots.txt Editor UI",
+        "target_file": "src\/SEO\/Robots\/RobotsTxtEditor.php",
+        "category": "Canonical & Robots Directive Engine",
+        "status_note": "React UI present; PHP persistence endpoint missing."
+    },
+    "APEX-028": {
+        "id": "APEX-028",
+        "name": "X-Robots-Tag HTTP Header Output",
+        "target_file": "src\/SEO\/Robots\/XRobotsHeaderEmitter.php",
+        "category": "Canonical & Robots Directive Engine",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-029": {
+        "id": "APEX-029",
+        "name": "Nofollow Unpaginated Feeds",
+        "target_file": "src\/SEO\/Robots\/FeedRobotsHandler.php",
+        "category": "Canonical & Robots Directive Engine",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-030": {
+        "id": "APEX-030",
+        "name": "Search & 404 Noindex Enforcement",
+        "target_file": "src\/SEO\/Robots\/SpecialPagesRobots.php",
+        "category": "Canonical & Robots Directive Engine",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-031": {
+        "id": "APEX-031",
+        "name": "OpenGraph Core Tags (og:title, etc.)",
+        "target_file": "src\/SEO\/Social\/OpenGraphGenerator.php",
+        "category": "Social Meta & OpenGraph Engine",
+        "status_note": "Phantom class `ApexSEO\\SEO\\Social\\OpenGraphPresenter` tested; class missing from `\/src\/`."
+    },
+    "APEX-032": {
+        "id": "APEX-032",
+        "name": "OpenGraph Image Dimension Tags",
+        "target_file": "src\/SEO\/Social\/OpenGraphImageTag.php",
+        "category": "Social Meta & OpenGraph Engine",
+        "status_note": "DDL supports `og_image_id`, dimension injector missing."
+    },
+    "APEX-033": {
+        "id": "APEX-033",
+        "name": "Twitter Card Tags (Summary\/Large)",
+        "target_file": "src\/SEO\/Social\/TwitterCardGenerator.php",
+        "category": "Social Meta & OpenGraph Engine",
+        "status_note": "Phantom class `ApexSEO\\SEO\\Social\\TwitterCardPresenter` tested; class missing from `\/src\/`."
+    },
+    "APEX-034": {
+        "id": "APEX-034",
+        "name": "Fallback Default Social Image",
+        "target_file": "src\/SEO\/Social\/DefaultImageResolver.php",
+        "category": "Social Meta & OpenGraph Engine",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-035": {
+        "id": "APEX-035",
+        "name": "Facebook App ID \/ Admin Meta",
+        "target_file": "src\/SEO\/Social\/FacebookMetaHandler.php",
+        "category": "Social Meta & OpenGraph Engine",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-036": {
+        "id": "APEX-036",
+        "name": "Twitter Site & Creator Handles",
+        "target_file": "src\/SEO\/Social\/TwitterHandleResolver.php",
+        "category": "Social Meta & OpenGraph Engine",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-037": {
+        "id": "APEX-037",
+        "name": "Article Author & Publisher Tags",
+        "target_file": "src\/SEO\/Social\/ArticleSocialTags.php",
+        "category": "Social Meta & OpenGraph Engine",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-038": {
+        "id": "APEX-038",
+        "name": "Live Social Preview in Editor",
+        "target_file": "src\/SEO\/Social\/SocialPreviewCanvas.php",
+        "category": "Social Meta & OpenGraph Engine",
+        "status_note": "Rendered in React `SerpPreviewTab.tsx`, backend sync handler missing."
+    },
+    "APEX-039": {
+        "id": "APEX-039",
+        "name": "Pinterest Domain Verification Tag",
+        "target_file": "src\/SEO\/Social\/PinterestVerifier.php",
+        "category": "Social Meta & OpenGraph Engine",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-040": {
+        "id": "APEX-040",
+        "name": "XML Index & Sub-Sitemap Generator",
+        "target_file": "src\/SEO\/Sitemaps\/SitemapIndexGenerator.php",
+        "category": "XML & RSS Sitemaps Engine",
+        "status_note": "Phantom class `ApexSEO\\SEO\\Sitemap\\SitemapGenerator` tested; class missing from `\/src\/`."
+    },
+    "APEX-041": {
+        "id": "APEX-041",
+        "name": "Post Type XML Sitemaps with Pagination",
+        "target_file": "src\/SEO\/Sitemaps\/PostSitemapGenerator.php",
+        "category": "XML & RSS Sitemaps Engine",
+        "status_note": "Config key `sitemap_entries_per_page=1000` defined in `ConfigurationManager`. Generator missing."
+    },
+    "APEX-042": {
+        "id": "APEX-042",
+        "name": "Taxonomy XML Sitemaps",
+        "target_file": "src\/SEO\/Sitemaps\/TaxonomySitemapGenerator.php",
+        "category": "XML & RSS Sitemaps Engine",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-043": {
+        "id": "APEX-043",
+        "name": "Google News XML Sitemap",
+        "target_file": "src\/SEO\/Sitemaps\/NewsSitemapGenerator.php",
+        "category": "XML & RSS Sitemaps Engine",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-044": {
+        "id": "APEX-044",
+        "name": "Video XML Sitemap with Metadata",
+        "target_file": "src\/SEO\/Sitemaps\/VideoSitemapGenerator.php",
+        "category": "XML & RSS Sitemaps Engine",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-045": {
+        "id": "APEX-045",
+        "name": "Image XML Sitemap Embeds",
+        "target_file": "src\/SEO\/Sitemaps\/ImageSitemapEnhancer.php",
+        "category": "XML & RSS Sitemaps Engine",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-046": {
+        "id": "APEX-046",
+        "name": "Custom XML XSLT Stylist",
+        "target_file": "src\/SEO\/Sitemaps\/XsltStyler.php",
+        "category": "XML & RSS Sitemaps Engine",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-047": {
+        "id": "APEX-047",
+        "name": "Automatic Search Engine Ping",
+        "target_file": "src\/SEO\/Sitemaps\/SearchEnginePinger.php",
+        "category": "XML & RSS Sitemaps Engine",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-048": {
+        "id": "APEX-048",
+        "name": "Multi-Keyword Density & TF-IDF",
+        "target_file": "src\/SEO\/ContentAnalysis\/MultiKeywordAnalyzer.php",
+        "category": "Content Analysis & Readability Engine",
+        "status_note": "DDL column `primary_focus_keyword` exists."
+    },
+    "APEX-049": {
+        "id": "APEX-049",
+        "name": "Flesch Reading Ease Formula",
+        "target_file": "src\/SEO\/Readability\/FleschScoreCalculator.php",
+        "category": "Content Analysis & Readability Engine",
+        "status_note": "DDL column `readability_score` exists."
+    },
+    "APEX-050": {
+        "id": "APEX-050",
+        "name": "Heading Structure Checker",
+        "target_file": "src\/SEO\/Readability\/HeadingStructureChecker.php",
+        "category": "Content Analysis & Readability Engine",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-051": {
+        "id": "APEX-051",
+        "name": "Internal Link Graph Counter",
+        "target_file": "src\/SEO\/InternalLinks\/LinkGraphScanner.php",
+        "category": "Content Analysis & Readability Engine",
+        "status_note": "Table `apex_links` DDL created; parser class missing from `\/src\/`."
+    },
+    "APEX-052": {
+        "id": "APEX-052",
+        "name": "Contextual Link Suggestions",
+        "target_file": "src\/SEO\/InternalLinks\/LinkSuggester.php",
+        "category": "Content Analysis & Readability Engine",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-053": {
+        "id": "APEX-053",
+        "name": "Orphaned Content Detector",
+        "target_file": "src\/SEO\/InternalLinks\/OrphanFinder.php",
+        "category": "Content Analysis & Readability Engine",
+        "status_note": "Index `idx_inbound_links` exists in DDL."
+    },
+    "APEX-054": {
+        "id": "APEX-054",
+        "name": "Paragraph Length & Voice Analyzer",
+        "target_file": "src\/SEO\/Readability\/VoiceAnalyzer.php",
+        "category": "Content Analysis & Readability Engine",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-055": {
+        "id": "APEX-055",
+        "name": "URL Change Interceptor (Auto 301)",
+        "target_file": "src\/SEO\/Redirects\/RedirectManager.php",
+        "category": "URL Routing, 404 Monitor & Redirects",
+        "status_note": "Phantom class `ApexSEO\\SEO\\Redirects\\RedirectManager` tested in mock; class missing from `\/src\/`. Table `apex_redirects` created."
+    },
+    "APEX-056": {
+        "id": "APEX-056",
+        "name": "Regex & Wildcard URL Router",
+        "target_file": "src\/SEO\/Redirects\/RegexRouter.php",
+        "category": "URL Routing, 404 Monitor & Redirects",
+        "status_note": "Column `apex_redirects.is_regex` exists in DDL."
+    },
+    "APEX-057": {
+        "id": "APEX-057",
+        "name": "High-Speed Buffered 404 Logger",
+        "target_file": "src\/SEO\/Monitor\/NotFoundMonitor.php",
+        "category": "URL Routing, 404 Monitor & Redirects",
+        "status_note": "Phantom class `FourOhFourMonitor` tested in mock; class missing from `\/src\/`. Table `apex_404_logs` created."
+    },
+    "APEX-058": {
+        "id": "APEX-058",
+        "name": "Fuzzy URL Match & Redirection",
+        "target_file": "src\/SEO\/Monitor\/FuzzyUrlMatcher.php",
+        "category": "URL Routing, 404 Monitor & Redirects",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-059": {
+        "id": "APEX-059",
+        "name": "Status Codes (301, 302, 307, 410, 451)",
+        "target_file": "src\/SEO\/Redirects\/HttpStatusEmitter.php",
+        "category": "URL Routing, 404 Monitor & Redirects",
+        "status_note": "Column `apex_redirects.status_code` exists in DDL."
+    },
+    "APEX-060": {
+        "id": "APEX-060",
+        "name": "Export Nginx \/ Apache Rules",
+        "target_file": "src\/SEO\/Redirects\/ServerRulesExporter.php",
+        "category": "URL Routing, 404 Monitor & Redirects",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-061": {
+        "id": "APEX-061",
+        "name": "Redirect Hit Counter & Log Truncate",
+        "target_file": "src\/SEO\/Redirects\/HitCounter.php",
+        "category": "URL Routing, 404 Monitor & Redirects",
+        "status_note": "Column `apex_redirects.hits_count` exists in DDL."
+    },
+    "APEX-062": {
+        "id": "APEX-062",
+        "name": "Trailing Slash Enforcer",
+        "target_file": "src\/SEO\/Redirects\/TrailingSlashHandler.php",
+        "category": "URL Routing, 404 Monitor & Redirects",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-063": {
+        "id": "APEX-063",
+        "name": "Attachment URL Redirect to Parent",
+        "target_file": "src\/SEO\/Redirects\/AttachmentRedirector.php",
+        "category": "URL Routing, 404 Monitor & Redirects",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-064": {
+        "id": "APEX-064",
+        "name": "Bulk Redirect CSV Import & Export",
+        "target_file": "src\/SEO\/Redirects\/CsvImporterExporter.php",
+        "category": "URL Routing, 404 Monitor & Redirects",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-065": {
+        "id": "APEX-065",
+        "name": "Unified `@graph` JSON-LD Compiler",
+        "target_file": "src\/Schema\/Graph\/GraphCompiler.php",
+        "category": "Schema.org Structured Data & Knowledge Graph",
+        "status_note": "Phantom class `ApexSEO\\Schema\\SchemaGraphBuilder` tested in mock; class missing from `\/src\/`. Table `apex_schema` created."
+    },
+    "APEX-066": {
+        "id": "APEX-066",
+        "name": "Dynamic Schema Conditions Engine",
+        "target_file": "src\/Schema\/Conditions\/ConditionEngine.php",
+        "category": "Schema.org Structured Data & Knowledge Graph",
+        "status_note": "Column `apex_schema.conditions` exists in DDL."
+    },
+    "APEX-067": {
+        "id": "APEX-067",
+        "name": "Article \/ NewsArticle Schema",
+        "target_file": "src\/Schema\/Types\/ArticleSchema.php",
+        "category": "Schema.org Structured Data & Knowledge Graph",
+        "status_note": "Phantom class `ApexSEO\\Schema\\Types\\ArticleSchema` tested in mock; class missing from `\/src\/`."
+    },
+    "APEX-068": {
+        "id": "APEX-068",
+        "name": "LocalBusiness Multi-Location",
+        "target_file": "src\/Schema\/Types\/LocalBusinessSchema.php",
+        "category": "Schema.org Structured Data & Knowledge Graph",
+        "status_note": "Phantom class `LocalBusinessSchema` tested in mock; class missing from `\/src\/`."
+    },
+    "APEX-069": {
+        "id": "APEX-069",
+        "name": "Organization & Person Social Graph",
+        "target_file": "src\/Schema\/Types\/OrganizationSchema.php",
+        "category": "Schema.org Structured Data & Knowledge Graph",
+        "status_note": "Phantom class `OrganizationSchema` tested in mock; class missing from `\/src\/`."
+    },
+    "APEX-070": {
+        "id": "APEX-070",
+        "name": "FAQPage Structured Data Injector",
+        "target_file": "src\/Schema\/Types\/FAQPageSchema.php",
+        "category": "Schema.org Structured Data & Knowledge Graph",
+        "status_note": "Phantom class `FAQPageSchema` tested in mock; class missing from `\/src\/`."
+    },
+    "APEX-071": {
+        "id": "APEX-071",
+        "name": "WooCommerce Product & Variation",
+        "target_file": "src\/Schema\/WooCommerce\/ProductSchemaExtension.php",
+        "category": "Schema.org Structured Data & Knowledge Graph",
+        "status_note": "Phantom class `ProductSchema` tested in mock; class missing from `\/src\/`."
+    },
+    "APEX-072": {
+        "id": "APEX-072",
+        "name": "Recipe Structured Data Template",
+        "target_file": "src\/Schema\/Types\/RecipeSchema.php",
+        "category": "Schema.org Structured Data & Knowledge Graph",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-073": {
+        "id": "APEX-073",
+        "name": "JobPosting Schema Template",
+        "target_file": "src\/Schema\/Types\/JobPostingSchema.php",
+        "category": "Schema.org Structured Data & Knowledge Graph",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-074": {
+        "id": "APEX-074",
+        "name": "Course & Learning Resource Schema",
+        "target_file": "src\/Schema\/Types\/CourseSchema.php",
+        "category": "Schema.org Structured Data & Knowledge Graph",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-075": {
+        "id": "APEX-075",
+        "name": "Event Schema (Online & Physical)",
+        "target_file": "src\/Schema\/Types\/EventSchema.php",
+        "category": "Schema.org Structured Data & Knowledge Graph",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-076": {
+        "id": "APEX-076",
+        "name": "SoftwareApplication Schema",
+        "target_file": "src\/Schema\/Types\/SoftwareApplicationSchema.php",
+        "category": "Schema.org Structured Data & Knowledge Graph",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-077": {
+        "id": "APEX-077",
+        "name": "VideoObject Schema Stream",
+        "target_file": "src\/Schema\/Media\/VideoObjectSchema.php",
+        "category": "Schema.org Structured Data & Knowledge Graph",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-078": {
+        "id": "APEX-078",
+        "name": "WebSite SearchAction Sitelinks",
+        "target_file": "src\/Schema\/Types\/WebSiteSchema.php",
+        "category": "Schema.org Structured Data & Knowledge Graph",
+        "status_note": "Phantom class `WebSiteSchema` tested in mock; class missing from `\/src\/`."
+    },
+    "APEX-079": {
+        "id": "APEX-079",
+        "name": "BreadcrumbList JSON-LD Graph",
+        "target_file": "src\/Schema\/Objects\/BreadcrumbList.php",
+        "category": "Schema.org Structured Data & Knowledge Graph",
+        "status_note": "Phantom class `BreadcrumbGenerator` tested in mock; class missing from `\/src\/`."
+    },
+    "APEX-080": {
+        "id": "APEX-080",
+        "name": "Schema Validation & Linting Engine",
+        "target_file": "src\/Schema\/Validator\/SchemaValidator.php",
+        "category": "Schema.org Structured Data & Knowledge Graph",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-081": {
+        "id": "APEX-081",
+        "name": "Static HTML Page Cache Buffer",
+        "target_file": "src\/Performance\/Cache\/PageCache.php",
+        "category": "Page Caching & Cache Management",
+        "status_note": "Config `perf.page_cache_enabled` defined in `ConfigurationManager`. Output buffer class missing."
+    },
+    "APEX-082": {
+        "id": "APEX-082",
+        "name": "Gzip Pre-Compression on Disk",
+        "target_file": "src\/Performance\/Cache\/StaticFileWriter.php",
+        "category": "Page Caching & Cache Management",
+        "status_note": "Phantom class `StaticFileWriter` tested in mock; class missing from `\/src\/`."
+    },
+    "APEX-083": {
+        "id": "APEX-083",
+        "name": "Brotli Pre-Compression on Disk",
+        "target_file": "src\/Performance\/Cache\/StaticFileWriter.php",
+        "category": "Page Caching & Cache Management",
+        "status_note": "Server adapter capability `supportsDirectBrotliServing()` implemented in `LiteSpeedAdapter`. File writer missing."
+    },
+    "APEX-084": {
+        "id": "APEX-084",
+        "name": "Dedicated Mobile Cache Variant",
+        "target_file": "src\/Performance\/Cache\/MobileCache.php",
+        "category": "Page Caching & Cache Management",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-085": {
+        "id": "APEX-085",
+        "name": "Logged-In User Cookie Caching",
+        "target_file": "src\/Performance\/Cache\/UserCache.php",
+        "category": "Page Caching & Cache Management",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-086": {
+        "id": "APEX-086",
+        "name": "SSL Dedicated Caching Path",
+        "target_file": "src\/Performance\/Cache\/PageCache.php",
+        "category": "Page Caching & Cache Management",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-087": {
+        "id": "APEX-087",
+        "name": "WebP\/AVIF HTML Cache Variant",
+        "target_file": "src\/Performance\/Cache\/VariantCache.php",
+        "category": "Page Caching & Cache Management",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-088": {
+        "id": "APEX-088",
+        "name": "Query String Whitelist Caching",
+        "target_file": "src\/Performance\/Cache\/QueryParamCache.php",
+        "category": "Page Caching & Cache Management",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-089": {
+        "id": "APEX-089",
+        "name": "Automated Post Update Cache Purge",
+        "target_file": "src\/Performance\/Cache\/SmartPurge.php",
+        "category": "Page Caching & Cache Management",
+        "status_note": "Phantom class `SmartPurge` tested in mock; class missing from `\/src\/`."
+    },
+    "APEX-090": {
+        "id": "APEX-090",
+        "name": "Comment Submission Cache Purge",
+        "target_file": "src\/Performance\/Cache\/SmartPurge.php",
+        "category": "Page Caching & Cache Management",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-091": {
+        "id": "APEX-091",
+        "name": "Global Empty Cache Trigger",
+        "target_file": "src\/Performance\/Cache\/CacheManager.php",
+        "category": "Page Caching & Cache Management",
+        "status_note": "PHP cache directory cleaner missing."
+    },
+    "APEX-092": {
+        "id": "APEX-092",
+        "name": "Cache Lifespan & Expiry Garbage",
+        "target_file": "src\/Performance\/Cache\/CacheCleaner.php",
+        "category": "Page Caching & Cache Management",
+        "status_note": "Config `perf.cache_lifespan_hours=24` defined. Cron cleanup class missing."
+    },
+    "APEX-093": {
+        "id": "APEX-093",
+        "name": "Background Sitemap Cache Preload",
+        "target_file": "src\/Performance\/Cache\/CachePreloader.php",
+        "category": "Page Caching & Cache Management",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-094": {
+        "id": "APEX-094",
+        "name": "WooCommerce Cart Cache Exclusions",
+        "target_file": "src\/Performance\/Cache\/WooCommerceCache.php",
+        "category": "Page Caching & Cache Management",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-095": {
+        "id": "APEX-095",
+        "name": "REST API Endpoint Output Cache",
+        "target_file": "src\/Performance\/Cache\/RestApiCache.php",
+        "category": "Page Caching & Cache Management",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-096": {
+        "id": "APEX-096",
+        "name": "Instant Hover \/ Click Preloader",
+        "target_file": "src\/Performance\/Tweaks\/InstantClickPreloader.php",
+        "category": "Page Caching & Cache Management",
+        "status_note": "Config `perf.instant_click=true` defined. Client script injector missing."
+    },
+    "APEX-097": {
+        "id": "APEX-097",
+        "name": "Advanced Cache Bypass Rules",
+        "target_file": "src\/Performance\/Cache\/BypassRulesEvaluator.php",
+        "category": "Page Caching & Cache Management",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-098": {
+        "id": "APEX-098",
+        "name": "Cache Warm-up Concurrency Limiter",
+        "target_file": "src\/Performance\/Cache\/WarmupThrottle.php",
+        "category": "Page Caching & Cache Management",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-099": {
+        "id": "APEX-099",
+        "name": "CSS Minification Engine",
+        "target_file": "src\/Performance\/Assets\/CssMinifier.php",
+        "category": "Page Caching & Cache Management",
+        "status_note": "Phantom class `CssMinifier` tested in mock; class missing from `\/src\/`."
+    },
+    "APEX-100": {
+        "id": "APEX-100",
+        "name": "JS Minification Engine",
+        "target_file": "src\/Performance\/Assets\/JsMinifier.php",
+        "category": "Page Caching & Cache Management",
+        "status_note": "Phantom class `JsMinifier` tested in mock; class missing from `\/src\/`."
+    },
+    "APEX-101": {
+        "id": "APEX-101",
+        "name": "CSS File Combination & Bundle",
+        "target_file": "src\/Performance\/Assets\/CssCombiner.php",
+        "category": "Page Caching & Cache Management",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-102": {
+        "id": "APEX-102",
+        "name": "JS File Combination & Bundle",
+        "target_file": "src\/Performance\/Assets\/JsCombiner.php",
+        "category": "Page Caching & Cache Management",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-103": {
+        "id": "APEX-103",
+        "name": "Critical CSS Local Extraction",
+        "target_file": "src\/Performance\/Assets\/CriticalCssEngine.php",
+        "category": "Page Caching & Cache Management",
+        "status_note": "Registered in `CapabilityRegistry` as `asset.local_critical_css_ast`, extractor missing."
+    },
+    "APEX-104": {
+        "id": "APEX-104",
+        "name": "Unused CSS (RUCSS) Local Cleaner",
+        "target_file": "src\/Performance\/Assets\/UnusedCssCleaner.php",
+        "category": "Page Caching & Cache Management",
+        "status_note": "Registered in `CapabilityRegistry` as `asset.local_rucss_ast`, cleaner missing."
+    },
+    "APEX-105": {
+        "id": "APEX-105",
+        "name": "Load JavaScript Deferred",
+        "target_file": "src\/Performance\/Assets\/ScriptLoaderModifier.php",
+        "category": "Page Caching & Cache Management",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-106": {
+        "id": "APEX-106",
+        "name": "Delay JS Execution on Interaction",
+        "target_file": "src\/Performance\/Assets\/DelayJsEngine.php",
+        "category": "Page Caching & Cache Management",
+        "status_note": "Phantom class `DelayJsEngine` tested in mock; class missing from `\/src\/`."
+    },
+    "APEX-107": {
+        "id": "APEX-107",
+        "name": "Script & Style Exclusion Regex",
+        "target_file": "src\/Performance\/Assets\/AssetExclusions.php",
+        "category": "Page Caching & Cache Management",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-108": {
+        "id": "APEX-108",
+        "name": "Safe Mode \/ Rollback on Script Error",
+        "target_file": "src\/Performance\/Assets\/SafeModeHandler.php",
+        "category": "Page Caching & Cache Management",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-109": {
+        "id": "APEX-109",
+        "name": "Local Google Fonts Hosting",
+        "target_file": "src\/Performance\/Assets\/LocalFontManager.php",
+        "category": "Page Caching & Cache Management",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-110": {
+        "id": "APEX-110",
+        "name": "Font-Display: Swap Injector",
+        "target_file": "src\/Performance\/Assets\/FontDisplayModifier.php",
+        "category": "Page Caching & Cache Management",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-111": {
+        "id": "APEX-111",
+        "name": "Local Gravatar Avatar Caching",
+        "target_file": "src\/Performance\/Assets\/AvatarCache.php",
+        "category": "Page Caching & Cache Management",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-112": {
+        "id": "APEX-112",
+        "name": "HTML Output Minification",
+        "target_file": "src\/Performance\/Assets\/HtmlMinifier.php",
+        "category": "Page Caching & Cache Management",
+        "status_note": "Phantom class `HtmlMinifier` tested in mock; class missing from `\/src\/`."
+    },
+    "APEX-113": {
+        "id": "APEX-113",
+        "name": "DNS Prefetch & Preconnect Inserter",
+        "target_file": "src\/Performance\/Tweaks\/ResourceHints.php",
+        "category": "Page Caching & Cache Management",
+        "status_note": "Phantom class `ResourceHints` tested in mock; class missing from `\/src\/`."
+    },
+    "APEX-114": {
+        "id": "APEX-114",
+        "name": "Strip WordPress Core Emojis",
+        "target_file": "src\/Performance\/Tweaks\/CleanHead.php",
+        "category": "Page Caching & Cache Management",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-115": {
+        "id": "APEX-115",
+        "name": "Strip WordPress Core OEmbeds",
+        "target_file": "src\/Performance\/Tweaks\/CleanHead.php",
+        "category": "Page Caching & Cache Management",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-116": {
+        "id": "APEX-116",
+        "name": "Heartbeat Frequency Control",
+        "target_file": "src\/Performance\/Tweaks\/HeartbeatManager.php",
+        "category": "Page Caching & Cache Management",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-117": {
+        "id": "APEX-117",
+        "name": "Local GD\/Imagick WebP Converter",
+        "target_file": "src\/Media\/Optimizer\/WebpConverter.php",
+        "category": "Media Optimization & WebP\/AVIF Engine",
+        "status_note": "Capability detected in `CapabilityRegistry` (`media.webp_generation`), converter class missing."
+    },
+    "APEX-118": {
+        "id": "APEX-118",
+        "name": "Local GD\/Imagick AVIF Converter",
+        "target_file": "src\/Media\/Optimizer\/AvifConverter.php",
+        "category": "Media Optimization & WebP\/AVIF Engine",
+        "status_note": "Capability detected via `EnvironmentDetector::getBinaryStatus('avifenc')`. Converter class missing."
+    },
+    "APEX-119": {
+        "id": "APEX-119",
+        "name": "`<picture>` Tag HTML Rewriter",
+        "target_file": "src\/Media\/Optimizer\/WebpPictureRewriter.php",
+        "category": "Media Optimization & WebP\/AVIF Engine",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-120": {
+        "id": "APEX-120",
+        "name": "Bulk Image Optimization Queue",
+        "target_file": "src\/Media\/Optimizer\/BulkMediaOptimizer.php",
+        "category": "Media Optimization & WebP\/AVIF Engine",
+        "status_note": "Table `apex_image_history` created in DDL. Batch optimizer missing."
+    },
+    "APEX-121": {
+        "id": "APEX-121",
+        "name": "Auto-Optimize on Media Upload",
+        "target_file": "src\/Media\/Optimizer\/UploadOptimizationListener.php",
+        "category": "Media Optimization & WebP\/AVIF Engine",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-122": {
+        "id": "APEX-122",
+        "name": "Add Missing `width` & `height`",
+        "target_file": "src\/Media\/Optimizer\/DimensionInjector.php",
+        "category": "Media Optimization & WebP\/AVIF Engine",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-123": {
+        "id": "APEX-123",
+        "name": "LCP Featured Image Preload (`fetchpriority`)",
+        "target_file": "src\/Media\/Optimizer\/LcpOptimizer.php",
+        "category": "Media Optimization & WebP\/AVIF Engine",
+        "status_note": "Phantom class `LcpOptimizer` tested in mock; class missing from `\/src\/`."
+    },
+    "APEX-124": {
+        "id": "APEX-124",
+        "name": "Original Image Backup & Restore",
+        "target_file": "src\/Media\/Optimizer\/ImageBackupManager.php",
+        "category": "Media Optimization & WebP\/AVIF Engine",
+        "status_note": "DDL column `original_size` exists."
+    },
+    "APEX-125": {
+        "id": "APEX-125",
+        "name": "Quality Lossy\/Lossless Selector",
+        "target_file": "src\/Media\/Optimizer\/QualityConfigurator.php",
+        "category": "Media Optimization & WebP\/AVIF Engine",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-126": {
+        "id": "APEX-126",
+        "name": "Strip EXIF Image Metadata",
+        "target_file": "src\/Media\/Optimizer\/ExifStripper.php",
+        "category": "Media Optimization & WebP\/AVIF Engine",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-127": {
+        "id": "APEX-127",
+        "name": "Image History & Savings Tracker",
+        "target_file": "src\/Media\/Optimizer\/SavingsTracker.php",
+        "category": "Media Optimization & WebP\/AVIF Engine",
+        "status_note": "Table `apex_image_history` created with `savings_bytes`, tracker class missing."
+    },
+    "APEX-128": {
+        "id": "APEX-128",
+        "name": "SVG Upload Sanitization",
+        "target_file": "src\/Media\/Optimizer\/SvgSanitizer.php",
+        "category": "Media Optimization & WebP\/AVIF Engine",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-129": {
+        "id": "APEX-129",
+        "name": "Resize Large Image Threshold",
+        "target_file": "src\/Media\/Optimizer\/ThresholdResizer.php",
+        "category": "Media Optimization & WebP\/AVIF Engine",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-130": {
+        "id": "APEX-130",
+        "name": "Cloud QUIC.cloud Image Converter",
+        "target_file": "src\/Media\/Optimizer\/ImageOptimizer.php",
+        "category": "Media Optimization & WebP\/AVIF Engine",
+        "status_note": "Proprietary cloud API not supported without external service dependency."
+    },
+    "APEX-131": {
+        "id": "APEX-131",
+        "name": "Native & JS Fallback Image LazyLoad",
+        "target_file": "src\/Media\/LazyLoad\/ImageLazyLoader.php",
+        "category": "Lazy Loading Subsystem",
+        "status_note": "Phantom class `ImageLazyLoader` tested in mock; class missing from `\/src\/`. Config defined."
+    },
+    "APEX-132": {
+        "id": "APEX-132",
+        "name": "LazyLoad Iframes & Video Players",
+        "target_file": "src\/Media\/LazyLoad\/IframeLazyLoader.php",
+        "category": "Lazy Loading Subsystem",
+        "status_note": "Config `perf.lazyload_iframes=true` defined in `ConfigurationManager`. DOM rewriter missing."
+    },
+    "APEX-133": {
+        "id": "APEX-133",
+        "name": "YouTube Preview Thumbnail Mockup",
+        "target_file": "src\/Media\/LazyLoad\/YouTubePlaceholder.php",
+        "category": "Lazy Loading Subsystem",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-134": {
+        "id": "APEX-134",
+        "name": "Inline SVG Aspect-Ratio Placeholder",
+        "target_file": "src\/Media\/LazyLoad\/PlaceholderGenerator.php",
+        "category": "Lazy Loading Subsystem",
+        "status_note": "Phantom class `PlaceholderGenerator` tested in mock; class missing from `\/src\/`."
+    },
+    "APEX-135": {
+        "id": "APEX-135",
+        "name": "LazyLoad CSS Background Images",
+        "target_file": "src\/Media\/LazyLoad\/BackgroundLazyLoader.php",
+        "category": "Lazy Loading Subsystem",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-136": {
+        "id": "APEX-136",
+        "name": "Exclude First N Images from LazyLoad",
+        "target_file": "src\/Media\/LazyLoad\/LcpExcluder.php",
+        "category": "Lazy Loading Subsystem",
+        "status_note": "Tested in `ImageLazyLoader` mock parameter; class missing from `\/src\/`."
+    },
+    "APEX-137": {
+        "id": "APEX-137",
+        "name": "Custom Class\/Attribute Lazy Exclude",
+        "target_file": "src\/Media\/LazyLoad\/LazyExclusions.php",
+        "category": "Lazy Loading Subsystem",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-138": {
+        "id": "APEX-138",
+        "name": "LQIP Low Quality Base64 Generator",
+        "target_file": "src\/Media\/LazyLoad\/PlaceholderGenerator.php",
+        "category": "Lazy Loading Subsystem",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-139": {
+        "id": "APEX-139",
+        "name": "Post Revisions Cleanup",
+        "target_file": "src\/Performance\/Database\/DatabaseOptimizer.php",
+        "category": "Database Optimization & Maintenance",
+        "status_note": "Optimizer class missing."
+    },
+    "APEX-140": {
+        "id": "APEX-140",
+        "name": "Auto-Drafts & Trashed Posts Cleanup",
+        "target_file": "src\/Performance\/Database\/DatabaseOptimizer.php",
+        "category": "Database Optimization & Maintenance",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-141": {
+        "id": "APEX-141",
+        "name": "Spam & Trashed Comments Cleanup",
+        "target_file": "src\/Performance\/Database\/DatabaseOptimizer.php",
+        "category": "Database Optimization & Maintenance",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-142": {
+        "id": "APEX-142",
+        "name": "Expired Transients SQL Cleanup",
+        "target_file": "src\/Performance\/Database\/DatabaseOptimizer.php",
+        "category": "Database Optimization & Maintenance",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-143": {
+        "id": "APEX-143",
+        "name": "All Transients Bulk Cleanup",
+        "target_file": "src\/Performance\/Database\/DatabaseOptimizer.php",
+        "category": "Database Optimization & Maintenance",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-144": {
+        "id": "APEX-144",
+        "name": "InnoDB \/ MyISAM `OPTIMIZE TABLE`",
+        "target_file": "src\/Performance\/Database\/DatabaseOptimizer.php",
+        "category": "Database Optimization & Maintenance",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-145": {
+        "id": "APEX-145",
+        "name": "Trackbacks & Pingbacks Cleanup",
+        "target_file": "src\/Performance\/Database\/DatabaseOptimizer.php",
+        "category": "Database Optimization & Maintenance",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-146": {
+        "id": "APEX-146",
+        "name": "MyISAM to InnoDB Engine Converter",
+        "target_file": "src\/Performance\/Database\/TableEngineMigrator.php",
+        "category": "Database Optimization & Maintenance",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-147": {
+        "id": "APEX-147",
+        "name": "Automated Scheduled Cron DB Clean",
+        "target_file": "src\/Performance\/Database\/ScheduledCleaner.php",
+        "category": "Database Optimization & Maintenance",
+        "status_note": "Cron hook cleanup configured in `LifecycleManager::deactivate()`. Worker class missing."
+    },
+    "APEX-148": {
+        "id": "APEX-148",
+        "name": "Database Dry-Run Cleanup Preview",
+        "target_file": "src\/Performance\/Database\/DatabaseDryRun.php",
+        "category": "Database Optimization & Maintenance",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-149": {
+        "id": "APEX-149",
+        "name": "Apache `.htaccess` Expiration Rules",
+        "target_file": "src\/Performance\/Server\/HtaccessManager.php",
+        "category": "Server-Level & Reverse Proxy Integration",
+        "status_note": "`ApacheAdapter::supportsHtaccess()` implemented. Directive generator missing."
+    },
+    "APEX-150": {
+        "id": "APEX-150",
+        "name": "Nginx Direct Cache `try_files` Config",
+        "target_file": "src\/Performance\/Server\/NginxConfigGenerator.php",
+        "category": "Server-Level & Reverse Proxy Integration",
+        "status_note": "`NginxAdapter::supportsNginxDirectives()` implemented. Config generator missing."
+    },
+    "APEX-151": {
+        "id": "APEX-151",
+        "name": "LiteSpeed `X-LiteSpeed-Cache-Control`",
+        "target_file": "src\/Performance\/Cache\/HeaderManager.php",
+        "category": "Server-Level & Reverse Proxy Integration",
+        "status_note": "`LiteSpeedAdapter::supportsLiteSpeedEngine()` implemented. Header emitter missing."
+    },
+    "APEX-152": {
+        "id": "APEX-152",
+        "name": "LiteSpeed Tagged Cache Purge Header",
+        "target_file": "src\/Performance\/Cache\/SmartPurge.php",
+        "category": "Server-Level & Reverse Proxy Integration",
+        "status_note": "Executable in `LiteSpeedAdapter::flushServerCache($tags)` emitting `X-LiteSpeed-Purge` headers; domain smart purge hook missing."
+    },
+    "APEX-153": {
+        "id": "APEX-153",
+        "name": "Varnish Reverse Proxy HTTP `PURGE`",
+        "target_file": "src\/Performance\/Cache\/VarnishPurger.php",
+        "category": "Server-Level & Reverse Proxy Integration",
+        "status_note": "Requires Varnish server cache daemon."
+    },
+    "APEX-154": {
+        "id": "APEX-154",
+        "name": "Cloudflare Zone Cache API Purge",
+        "target_file": "src\/Performance\/CDN\/CloudflarePurger.php",
+        "category": "Server-Level & Reverse Proxy Integration",
+        "status_note": "External Cloudflare API token required."
+    },
+    "APEX-155": {
+        "id": "APEX-155",
+        "name": "Redis Persistent Object Cache Driver",
+        "target_file": "src\/Performance\/ObjectCache\/RedisClient.php",
+        "category": "Server-Level & Reverse Proxy Integration",
+        "status_note": "Requires Redis daemon and PHP extension."
+    },
+    "APEX-156": {
+        "id": "APEX-156",
+        "name": "Memcached Object Cache Driver",
+        "target_file": "src\/Performance\/ObjectCache\/MemcachedClient.php",
+        "category": "Server-Level & Reverse Proxy Integration",
+        "status_note": "Requires Memcached daemon and PHP extension."
+    },
+    "APEX-157": {
+        "id": "APEX-157",
+        "name": "CDN Hostname URL Rewriting",
+        "target_file": "src\/Performance\/CDN\/CdnRewriter.php",
+        "category": "Server-Level & Reverse Proxy Integration",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-158": {
+        "id": "APEX-158",
+        "name": "ESI Edge Fragment Staging (LSWS)",
+        "target_file": "src\/Performance\/Cache\/EsiHandler.php",
+        "category": "Server-Level & Reverse Proxy Integration",
+        "status_note": "Requires LiteSpeed Enterprise ESI module."
+    },
+    "APEX-159": {
+        "id": "APEX-159",
+        "name": "Google Analytics 4 (GA4) Tag Injector",
+        "target_file": "src\/Analytics\/AnalyticsTagInjector.php",
+        "category": "Analytics, GSC & Rank Tracking",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-160": {
+        "id": "APEX-160",
+        "name": "Local GA4 `gtag.js` Script Host",
+        "target_file": "src\/Analytics\/LocalAnalyticsScriptManager.php",
+        "category": "Analytics, GSC & Rank Tracking",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-161": {
+        "id": "APEX-161",
+        "name": "IP Anonymization & GDPR Cookie Guard",
+        "target_file": "src\/Analytics\/GdprComplianceGuard.php",
+        "category": "Analytics, GSC & Rank Tracking",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-162": {
+        "id": "APEX-162",
+        "name": "Google Search Console OAuth2 Client",
+        "target_file": "src\/Analytics\/SearchConsoleClient.php",
+        "category": "Analytics, GSC & Rank Tracking",
+        "status_note": "External GSC OAuth client required."
+    },
+    "APEX-163": {
+        "id": "APEX-163",
+        "name": "Search Console Keyword Rank Tracker",
+        "target_file": "src\/Analytics\/RankTracker.php",
+        "category": "Analytics, GSC & Rank Tracking",
+        "status_note": "Phantom class `RankTracker` tested in mock; class missing from `\/src\/`. Table `apex_rank_tracking` created."
+    },
+    "APEX-164": {
+        "id": "APEX-164",
+        "name": "GSC URL Inspection API Integration",
+        "target_file": "src\/Analytics\/UrlInspectionClient.php",
+        "category": "Analytics, GSC & Rank Tracking",
+        "status_note": "External API client required."
+    },
+    "APEX-165": {
+        "id": "APEX-165",
+        "name": "Search Console Impressions\/Clicks DB",
+        "target_file": "src\/Analytics\/AnalyticsTimeSeriesStore.php",
+        "category": "Analytics, GSC & Rank Tracking",
+        "status_note": "Table `apex_analytics` created in DDL. Repository layer missing."
+    },
+    "APEX-166": {
+        "id": "APEX-166",
+        "name": "Top Winning \/ Losing Keywords Matrix",
+        "target_file": "src\/Analytics\/KeywordDeltaCalculator.php",
+        "category": "Analytics, GSC & Rank Tracking",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-167": {
+        "id": "APEX-167",
+        "name": "Google Tag Manager (GTM) Container",
+        "target_file": "src\/Analytics\/GtmContainerInjector.php",
+        "category": "Analytics, GSC & Rank Tracking",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-168": {
+        "id": "APEX-168",
+        "name": "Matomo \/ Piwik Self-Hosted Analytics",
+        "target_file": "src\/Analytics\/MatomoTagInjector.php",
+        "category": "Analytics, GSC & Rank Tracking",
+        "status_note": "Domain handler missing."
+    },
+    "APEX-169": {
+        "id": "APEX-169",
+        "name": "REST Settings Controller",
+        "target_file": "src\/API\/SettingsRestController.php",
+        "category": "REST API & Headless Engine",
+        "status_note": "`RestManager` route registry exists; endpoint controller missing."
+    },
+    "APEX-170": {
+        "id": "APEX-170",
+        "name": "REST Meta Reader & Mutator Endpoint",
+        "target_file": "src\/API\/MetaRestController.php",
+        "category": "REST API & Headless Engine",
+        "status_note": "Permission callback `SecurityManager::restEditorPermissionCallback()` implemented; controller missing."
+    },
+    "APEX-171": {
+        "id": "APEX-171",
+        "name": "REST Dynamic Schema CRUD Endpoint",
+        "target_file": "src\/API\/SchemaRestController.php",
+        "category": "REST API & Headless Engine",
+        "status_note": "Table `apex_schema` created; REST CRUD controller missing."
+    },
+    "APEX-172": {
+        "id": "APEX-172",
+        "name": "REST Redirect Management Endpoint",
+        "target_file": "src\/API\/RedirectsRestController.php",
+        "category": "REST API & Headless Engine",
+        "status_note": "Table `apex_redirects` created; REST controller missing."
+    },
+    "APEX-173": {
+        "id": "APEX-173",
+        "name": "REST 404 Monitor Log Endpoint",
+        "target_file": "src\/API\/NotFoundRestController.php",
+        "category": "REST API & Headless Engine",
+        "status_note": "Table `apex_404_logs` created; REST controller missing."
+    },
+    "APEX-174": {
+        "id": "APEX-174",
+        "name": "REST Link Suggestions Query Endpoint",
+        "target_file": "src\/API\/LinksRestController.php",
+        "category": "REST API & Headless Engine",
+        "status_note": "Table `apex_links` created; REST controller missing."
+    },
+    "APEX-175": {
+        "id": "APEX-175",
+        "name": "Headless Complete SEO Meta & JSON-LD",
+        "target_file": "src\/API\/MetaRestController.php",
+        "category": "REST API & Headless Engine",
+        "status_note": "Headless REST route contract defined; controller missing."
+    },
+    "APEX-176": {
+        "id": "APEX-176",
+        "name": "REST Cache Purge & Preload Trigger",
+        "target_file": "src\/API\/CacheRestController.php",
+        "category": "REST API & Headless Engine",
+        "status_note": "Trigger route contract defined; controller missing."
+    },
+    "APEX-177": {
+        "id": "APEX-177",
+        "name": "REST Media Image Optimize Action",
+        "target_file": "src\/API\/MediaRestController.php",
+        "category": "REST API & Headless Engine",
+        "status_note": "Media REST route contract defined; controller missing."
+    },
+    "APEX-178": {
+        "id": "APEX-178",
+        "name": "REST Migration Batch Worker Endpoint",
+        "target_file": "src\/API\/MigrationRestController.php",
+        "category": "REST API & Headless Engine",
+        "status_note": "Migration batch worker route defined; controller missing."
+    },
+    "APEX-179": {
+        "id": "APEX-179",
+        "name": "REST Analytics Overview API",
+        "target_file": "src\/API\/AnalyticsRestController.php",
+        "category": "REST API & Headless Engine",
+        "status_note": "Analytics overview route defined; controller missing."
+    },
+    "APEX-180": {
+        "id": "APEX-180",
+        "name": "REST Rank Tracker Query API",
+        "target_file": "src\/API\/AnalyticsRestController.php",
+        "category": "REST API & Headless Engine",
+        "status_note": "Rank query route defined; controller missing."
+    },
+    "APEX-181": {
+        "id": "APEX-181",
+        "name": "`wp apex cache purge` Subcommand",
+        "target_file": "src\/CLI\/CacheCommand.php",
+        "category": "WP-CLI Management Interface",
+        "status_note": "`CliManager` subcommand registry exists; command class missing."
+    },
+    "APEX-182": {
+        "id": "APEX-182",
+        "name": "`wp apex cache preload` Subcommand",
+        "target_file": "src\/CLI\/CacheCommand.php",
+        "category": "WP-CLI Management Interface",
+        "status_note": "Subcommand registry entry defined; command class missing."
+    },
+    "APEX-183": {
+        "id": "APEX-183",
+        "name": "`wp apex index reindex` Subcommand",
+        "target_file": "src\/CLI\/IndexCommand.php",
+        "category": "WP-CLI Management Interface",
+        "status_note": "Subcommand registry entry defined; command class missing."
+    },
+    "APEX-184": {
+        "id": "APEX-184",
+        "name": "`wp apex media optimize` Subcommand",
+        "target_file": "src\/CLI\/MediaCommand.php",
+        "category": "WP-CLI Management Interface",
+        "status_note": "Subcommand registry entry defined; command class missing."
+    },
+    "APEX-185": {
+        "id": "APEX-185",
+        "name": "`wp apex redirect add` Subcommand",
+        "target_file": "src\/CLI\/RedirectCommand.php",
+        "category": "WP-CLI Management Interface",
+        "status_note": "Subcommand registry entry defined; command class missing."
+    },
+    "APEX-186": {
+        "id": "APEX-186",
+        "name": "`wp apex redirect list` Subcommand",
+        "target_file": "src\/CLI\/RedirectCommand.php",
+        "category": "WP-CLI Management Interface",
+        "status_note": "Subcommand registry entry defined; command class missing."
+    },
+    "APEX-187": {
+        "id": "APEX-187",
+        "name": "`wp apex db clean` Subcommand",
+        "target_file": "src\/CLI\/DatabaseCommand.php",
+        "category": "WP-CLI Management Interface",
+        "status_note": "Subcommand registry entry defined; command class missing."
+    },
+    "APEX-188": {
+        "id": "APEX-188",
+        "name": "`wp apex migrate run` Subcommand",
+        "target_file": "src\/CLI\/MigrateCommand.php",
+        "category": "WP-CLI Management Interface",
+        "status_note": "`MigrationRunner::migrate()` executable in PHP; WP-CLI command glue missing."
+    },
+    "APEX-189": {
+        "id": "APEX-189",
+        "name": "`wp apex sitemap rebuild` Subcommand",
+        "target_file": "src\/CLI\/SitemapCommand.php",
+        "category": "WP-CLI Management Interface",
+        "status_note": "Subcommand registry entry defined; command class missing."
+    },
+    "APEX-190": {
+        "id": "APEX-190",
+        "name": "`wp apex doctor` Diagnostic Command",
+        "target_file": "src\/CLI\/DoctorCommand.php",
+        "category": "WP-CLI Management Interface",
+        "status_note": "Diagnostic engine ready in Core; CLI command class missing."
+    },
+    "APEX-191": {
+        "id": "APEX-191",
+        "name": "PSR-11 Dependency Injection Container",
+        "target_file": "src\/Core\/Container\/Container.php",
+        "category": "Core Architecture, Migration & Administration",
+        "status_note": "Full PSR-11 Container with singleton, lazy factory, alias, and circular dependency detection tested in `ContainerTest`."
+    },
+    "APEX-192": {
+        "id": "APEX-192",
+        "name": "Multi-Source Migration Engine",
+        "target_file": "src\/Migration\/MigrationManager.php",
+        "category": "Core Architecture, Migration & Administration",
+        "status_note": "Schema locked in DDL; importer classes missing from `\/src\/`."
+    },
+    "APEX-193": {
+        "id": "APEX-193",
+        "name": "Active Plugin Conflict Detector",
+        "target_file": "src\/Core\/Admin\/ConflictDetector.php",
+        "category": "Core Architecture, Migration & Administration",
+        "status_note": "Conflict detector class missing."
+    },
+    "APEX-194": {
+        "id": "APEX-194",
+        "name": "Multisite Network Management",
+        "target_file": "src\/Core\/Multisite\/MultisiteManager.php",
+        "category": "Core Architecture, Migration & Administration",
+        "status_note": "`MultisiteManager` with blog switching stack, safe context execution, and network site listing tested in `MultisiteManagerTest`."
+    },
+    "APEX-195": {
+        "id": "APEX-195",
+        "name": "White Label Admin Interface",
+        "target_file": "src\/Core\/Admin\/WhiteLabelManager.php",
+        "category": "Core Architecture, Migration & Administration",
+        "status_note": "White label manager missing."
+    },
+    "APEX-196": {
+        "id": "APEX-196",
+        "name": "Settings Backup, Import & Export",
+        "target_file": "src\/Core\/Admin\/BackupRestoreManager.php",
+        "category": "Core Architecture, Migration & Administration",
+        "status_note": "`ConfigurationManager::loadSettings()` and `save()` implemented. Import\/Export JSON parser missing."
+    },
+    "APEX-197": {
+        "id": "APEX-197",
+        "name": "Action Scheduler Background Queue",
+        "target_file": "src\/Core\/Queue\/ActionSchedulerQueue.php",
+        "category": "Core Architecture, Migration & Administration",
+        "status_note": "Background queue worker missing."
+    },
+    "APEX-198": {
+        "id": "APEX-198",
+        "name": "Diagnostic System Health Reporter",
+        "target_file": "src\/Core\/Admin\/SystemHealthReporter.php",
+        "category": "Core Architecture, Migration & Administration",
+        "status_note": "`EnvironmentDetector` and `CapabilityRegistry` provide full diagnostic introspection; admin UI reporter missing."
+    }
+}
