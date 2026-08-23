@@ -5,20 +5,94 @@ namespace ApexSEO\SEO\Analysis;
  * APEX-050: Heading Structure Hierarchy Checker.
  *
  * Parses HTML content to validate H1-H6 heading hierarchy, detect missing/duplicate H1s,
- * identify skipped heading levels (e.g. H1 -> H3), and catch empty headings.
+ * identify skipped heading levels (e.g. H1 -> H3, H2 -> H4), and catch empty or whitespace-only headings.
  */
 class HeadingAnalyzer {
     /**
-     * Parse and inspect heading elements in HTML content.
+     * Parse and extract heading elements from HTML content.
+     *
+     * Uses DOMDocument when available with fallback to regular expressions.
      *
      * @param string $html
-     * @return array Array of heading objects: [tag, level, text, is_empty, position]
+     * @return array Array of heading objects: [tag, level, text, is_empty, position, offset]
      */
     public function extractHeadings($html) {
-        if (empty($html)) {
+        if (empty($html) || !is_string($html)) {
             return [];
         }
 
+        // Try DOMDocument if available
+        if (class_exists('\DOMDocument')) {
+            $domHeadings = $this->extractWithDom($html);
+            if ($domHeadings !== null) {
+                return $domHeadings;
+            }
+        }
+
+        // Regex fallback
+        return $this->extractWithRegex($html);
+    }
+
+    /**
+     * Extract headings using PHP DOMDocument.
+     *
+     * @param string $html
+     * @return array|null Array of heading descriptors or null if DOM parsing failed
+     */
+    protected function extractWithDom($html) {
+        $prevErrors = libxml_use_internal_errors(true);
+        $doc = new \DOMDocument('1.0', 'UTF-8');
+
+        // Wrap with UTF-8 metadata to prevent character mangling
+        $encodedHtml = '<?xml encoding="UTF-8"><div>' . $html . '</div>';
+        $loaded = @$doc->loadHTML($encodedHtml, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+
+        if (!$loaded) {
+            libxml_clear_errors();
+            libxml_use_internal_errors($prevErrors);
+            return null;
+        }
+
+        $xpath = new \DOMXPath($doc);
+        $nodes = $xpath->query('//h1 | //h2 | //h3 | //h4 | //h5 | //h6');
+
+        if (!$nodes || $nodes->length === 0) {
+            libxml_clear_errors();
+            libxml_use_internal_errors($prevErrors);
+            return [];
+        }
+
+        $headings = [];
+        $position = 0;
+
+        foreach ($nodes as $node) {
+            $tag = strtolower($node->nodeName);
+            $level = (int) substr($tag, 1);
+            $rawText = $node->textContent;
+            $cleanText = $this->cleanHeadingText($rawText);
+
+            $headings[] = [
+                'tag'       => $tag,
+                'level'     => $level,
+                'text'      => $cleanText,
+                'is_empty'  => ($cleanText === ''),
+                'position'  => $position++,
+                'offset'    => 0,
+            ];
+        }
+
+        libxml_clear_errors();
+        libxml_use_internal_errors($prevErrors);
+        return $headings;
+    }
+
+    /**
+     * Extract headings using regular expressions fallback.
+     *
+     * @param string $html
+     * @return array
+     */
+    protected function extractWithRegex($html) {
         $headings = [];
         $pattern = '/<(h[1-6])([^>]*)>(.*?)<\/\1>/is';
 
@@ -28,7 +102,7 @@ class HeadingAnalyzer {
                 $tag = strtolower($match[1][0]);
                 $level = (int) substr($tag, 1);
                 $rawContent = $match[3][0];
-                $cleanText = trim(strip_tags(html_entity_decode($rawContent, ENT_QUOTES | ENT_HTML5, 'UTF-8')));
+                $cleanText = $this->cleanHeadingText($rawContent);
                 $offset = $match[0][1];
 
                 $headings[] = [
@@ -43,6 +117,20 @@ class HeadingAnalyzer {
         }
 
         return $headings;
+    }
+
+    /**
+     * Clean and normalize heading text, handling non-breaking spaces and unicode whitespace.
+     *
+     * @param string $raw
+     * @return string
+     */
+    protected function cleanHeadingText($raw) {
+        $clean = strip_tags($raw);
+        $clean = html_entity_decode($clean, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+        // Replace non-breaking spaces, ZWNJ, and whitespace
+        $clean = preg_replace('/[\x{00A0}\x{200C}\x{200B}\x{FEFF}\s]+/u', ' ', $clean);
+        return trim($clean);
     }
 
     /**

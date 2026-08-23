@@ -6,7 +6,7 @@ namespace ApexSEO\SEO\Analysis;
  *
  * Identifies passive voice constructions in English sentences using auxiliary verbs
  * and regular/irregular past participles, with intelligent false-positive filtering
- * (e.g., predicate adjectives, stative conditions) and readability threshold ratings.
+ * (e.g., predicate adjectives, stative conditions) and configurable threshold ratings.
  */
 class PassiveVoiceAnalyzer {
     /**
@@ -48,7 +48,9 @@ class PassiveVoiceAnalyzer {
         'tired', 'interested', 'married', 'worried', 'excited', 'bored',
         'confused', 'frightened', 'scared', 'surprised', 'located', 'situated',
         'dressed', 'pleased', 'satisfied', 'closed', 'crowded', 'related',
-        'opposed', 'supposed', 'accustomed', 'qualified', 'dedicated'
+        'opposed', 'supposed', 'accustomed', 'qualified', 'dedicated',
+        'delighted', 'exhausted', 'finished', 'prepared', 'disappointed',
+        'complicated', 'advanced', 'detailed', 'limited', 'experienced'
     ];
 
     /**
@@ -59,29 +61,60 @@ class PassiveVoiceAnalyzer {
     protected $readability;
 
     /**
-     * Constructor.
+     * Maximum acceptable passive voice sentence ratio (percentage).
+     *
+     * @var float
      */
-    public function __construct(ReadabilityScorer $readability = null) {
+    protected $maxPassiveRatio = 10.0;
+
+    /**
+     * Constructor.
+     *
+     * @param ReadabilityScorer|null $readability
+     * @param float $maxPassiveRatio
+     */
+    public function __construct(ReadabilityScorer $readability = null, $maxPassiveRatio = 10.0) {
         $this->readability = $readability ?: new ReadabilityScorer();
+        $this->maxPassiveRatio = max(1.0, (float) $maxPassiveRatio);
+    }
+
+    /**
+     * Set max acceptable passive sentence percentage.
+     *
+     * @param float $ratio
+     * @return self
+     */
+    public function setMaxPassiveRatio($ratio) {
+        $this->maxPassiveRatio = max(1.0, (float) $ratio);
+        return $this;
+    }
+
+    /**
+     * Get max acceptable passive ratio.
+     *
+     * @return float
+     */
+    public function getMaxPassiveRatio() {
+        return $this->maxPassiveRatio;
     }
 
     /**
      * Check if a single sentence contains a passive voice construction.
      *
      * @param string $sentence
-     * @return array [is_passive, matches, text]
+     * @return array [is_passive, matches, text, details]
      */
     public function isPassiveSentence($sentence) {
         $clean = trim(strip_tags($sentence));
         if ($clean === '') {
-            return ['is_passive' => false, 'matches' => [], 'text' => $sentence];
+            return ['is_passive' => false, 'matches' => [], 'text' => $sentence, 'details' => []];
         }
 
-        // Auxiliary "to be" forms: is, am, are, was, were, be, being, been, 's, 're, 've been
+        // Auxiliary "to be" / "to get" forms
         $auxRegex = '\b(is|am|are|was|were|be|being|been|get|gets|got|gotten|\'s|\'re)\b';
 
         // Optional adverbs in-between (e.g., "was quickly written", "is often considered")
-        $advRegex = '(?:\s+\b\w+ly\b|\s+\boften\b|\s+\balways\b|\s+\balso\b|\s+\balready\b|\s+\bever\b)?';
+        $advRegex = '(?:\s+\b\w+ly\b|\s+\boften\b|\s+\balways\b|\s+\balso\b|\s+\balready\b|\s+\bever\b|\s+\bnever\b|\s+\bjust\b)?';
 
         // Verb target (regular -ed or known irregular participle)
         $irregularList = implode('|', self::$irregularParticiples);
@@ -91,15 +124,30 @@ class PassiveVoiceAnalyzer {
 
         if (preg_match_all($pattern, $clean, $matches, PREG_SET_ORDER)) {
             $detectedPassives = [];
+            $details = [];
+
             foreach ($matches as $match) {
+                $matchedString = $match[0];
+                $aux = strtolower(trim($match[1]));
                 $verb = strtolower(trim(end($match)));
 
-                // Filter out known stative adjectives
-                if (in_array($verb, self::$stativeAdjectives)) {
+                // Filter out known stative adjectives / predicate adjectives
+                if (in_array($verb, self::$stativeAdjectives, true)) {
                     continue;
                 }
 
-                $detectedPassives[] = $match[0];
+                // Confidence scoring: higher if explicit "by [agent]" exists in sentence
+                $hasByAgent = (bool) preg_match('/\bby\s+(?:the|a|an|our|their|his|her|its|[a-zA-Z]+)\b/i', $clean);
+                $confidence = $hasByAgent ? 0.95 : 0.88;
+
+                $detectedPassives[] = $matchedString;
+                $details[] = [
+                    'matched_text' => $matchedString,
+                    'auxiliary'    => $aux,
+                    'participle'   => $verb,
+                    'confidence'   => $confidence,
+                    'reason'       => sprintf("Auxiliary verb '%s' followed by past participle '%s'.", $aux, $verb),
+                ];
             }
 
             if (!empty($detectedPassives)) {
@@ -107,11 +155,12 @@ class PassiveVoiceAnalyzer {
                     'is_passive' => true,
                     'matches'    => $detectedPassives,
                     'text'       => $clean,
+                    'details'    => $details,
                 ];
             }
         }
 
-        return ['is_passive' => false, 'matches' => [], 'text' => $clean];
+        return ['is_passive' => false, 'matches' => [], 'text' => $clean, 'details' => []];
     }
 
     /**
@@ -129,10 +178,12 @@ class PassiveVoiceAnalyzer {
                 'total_sentences'   => 0,
                 'passive_sentences' => 0,
                 'passive_ratio'     => 0.0,
+                'threshold'         => $this->maxPassiveRatio,
                 'is_acceptable'     => true,
                 'passive_details'   => [],
                 'diagnostic'        => ['status' => 'good', 'message' => 'No content to analyze.'],
                 'language'          => 'en',
+                'methodology'       => 'heuristic_pattern_matching',
             ];
         }
 
@@ -142,6 +193,7 @@ class PassiveVoiceAnalyzer {
                 'total_sentences'   => $totalSentences,
                 'passive_sentences' => 0,
                 'passive_ratio'     => 0.0,
+                'threshold'         => $this->maxPassiveRatio,
                 'is_acceptable'     => true,
                 'passive_details'   => [],
                 'diagnostic'        => [
@@ -149,6 +201,7 @@ class PassiveVoiceAnalyzer {
                     'message' => 'Passive voice rules are optimized for English content.',
                 ],
                 'language'          => $language,
+                'methodology'       => 'heuristic_pattern_matching',
             ];
         }
 
@@ -160,41 +213,34 @@ class PassiveVoiceAnalyzer {
             if ($result['is_passive']) {
                 $passiveCount++;
                 $passiveDetails[] = [
-                    'index'   => $index + 1,
-                    'text'    => $result['text'],
-                    'matches' => $result['matches'],
+                    'sentence_index' => $index + 1,
+                    'sentence'       => $sentence,
+                    'matches'        => $result['matches'],
+                    'details'        => $result['details'],
                 ];
             }
         }
 
         $passiveRatio = round(($passiveCount / $totalSentences) * 100, 1);
-        $isAcceptable = ($passiveRatio <= 10.0);
+        $isAcceptable = ($passiveRatio <= $this->maxPassiveRatio);
 
-        if ($passiveRatio <= 10.0) {
-            $diagnostic = [
-                'status'  => 'good',
-                'message' => sprintf('Passive voice is %.1f%%, which is within the recommended limit (<= 10%%).', $passiveRatio),
-            ];
-        } elseif ($passiveRatio <= 15.0) {
-            $diagnostic = [
-                'status'  => 'warning',
-                'message' => sprintf('Passive voice is %.1f%%. Try to use more active voice (recommended <= 10%%).', $passiveRatio),
-            ];
-        } else {
-            $diagnostic = [
-                'status'  => 'error',
-                'message' => sprintf('Passive voice is %.1f%%, which is too high. Active voice improves clarity and reader engagement.', $passiveRatio),
-            ];
-        }
+        $diagnostic = [
+            'status'  => $isAcceptable ? 'good' : 'error',
+            'message' => $isAcceptable
+                ? sprintf('Passive voice is %.1f%% of sentences (below the %.1f%% recommended limit).', $passiveRatio, $this->maxPassiveRatio)
+                : sprintf('Passive voice was detected in %.1f%% of sentences (recommended: %.1f%% or less). Consider rewriting some passive sentences in active voice.', $passiveRatio, $this->maxPassiveRatio),
+        ];
 
         return [
             'total_sentences'   => $totalSentences,
             'passive_sentences' => $passiveCount,
             'passive_ratio'     => $passiveRatio,
+            'threshold'         => $this->maxPassiveRatio,
             'is_acceptable'     => $isAcceptable,
             'passive_details'   => $passiveDetails,
             'diagnostic'        => $diagnostic,
             'language'          => $language,
+            'methodology'       => 'heuristic_pattern_matching',
         ];
     }
 }

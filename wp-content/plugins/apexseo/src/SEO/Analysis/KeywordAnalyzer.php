@@ -66,15 +66,57 @@ class KeywordAnalyzer {
     protected $corpusDocFreqs = [];
 
     /**
+     * Configurable keyword stuffing over-optimization threshold (in percent).
+     *
+     * @var float
+     */
+    protected $overOptimizationThreshold = 3.5;
+
+    /**
      * Set external corpus statistics for true IDF calculation.
      *
-     * @param int $totalDocs
+     * Clamps totalDocs to >= 0 and each docFrequency to 0 <= df <= totalDocs.
+     *
+     * @param int $totalDocs Total number of documents in corpus (N)
      * @param array $docFrequencies Map of [term => doc_frequency]
      * @return self
      */
     public function setCorpusStatistics($totalDocs, array $docFrequencies = []) {
         $this->corpusDocCount = max(0, (int) $totalDocs);
-        $this->corpusDocFreqs = $docFrequencies;
+        $this->corpusDocFreqs = [];
+
+        foreach ($docFrequencies as $term => $df) {
+            $normalizedTerm = $this->normalizeText($term);
+            if ($normalizedTerm !== '') {
+                $rawDf = max(0, (int) $df);
+                // Clamp df to corpusDocCount if corpusDocCount > 0
+                if ($this->corpusDocCount > 0 && $rawDf > $this->corpusDocCount) {
+                    $rawDf = $this->corpusDocCount;
+                }
+                $this->corpusDocFreqs[$normalizedTerm] = $rawDf;
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get the configured over-optimization density threshold.
+     *
+     * @return float
+     */
+    public function getOverOptimizationThreshold() {
+        return $this->overOptimizationThreshold;
+    }
+
+    /**
+     * Set the over-optimization density threshold (percentage).
+     *
+     * @param float $threshold
+     * @return self
+     */
+    public function setOverOptimizationThreshold($threshold) {
+        $this->overOptimizationThreshold = max(0.5, (float) $threshold);
         return $this;
     }
 
@@ -115,6 +157,9 @@ class KeywordAnalyzer {
         // 5. Lowercase UTF-8 string
         $text = mb_strtolower($text, 'UTF-8');
 
+        // 6. Normalize multiple consecutive whitespace characters to a single space
+        $text = preg_replace('/\s+/u', ' ', $text);
+
         return trim($text);
     }
 
@@ -153,6 +198,8 @@ class KeywordAnalyzer {
     /**
      * Count exact occurrences of a term/phrase in content (Unicode & word-boundary aware).
      *
+     * Uses a boundary matching approach that avoids variable-length lookbehinds in PCRE2.
+     *
      * @param string $term
      * @param string $content
      * @return int
@@ -165,13 +212,49 @@ class KeywordAnalyzer {
             return 0;
         }
 
-        // Quote term for regex safely
-        $pattern = preg_quote($normalizedTerm, '/');
-        // Word boundary matching with Unicode awareness
-        $regex = '/(?<=^|[^\p{L}\p{N}])' . $pattern . '(?=$|[^\p{L}\p{N}])/u';
+        // Token-level exact sequence matching for multi-word or single-word phrases
+        $termTokens = $this->tokenize($normalizedTerm, false);
+        $termLen = count($termTokens);
 
-        $count = preg_match_all($regex, $normalizedContent, $matches);
-        return $count !== false ? $count : 0;
+        if ($termLen === 0) {
+            return 0;
+        }
+
+        // For single-word matching, we can do direct token comparison
+        $contentTokens = $this->tokenize($normalizedContent, false);
+        $contentLen = count($contentTokens);
+
+        if ($contentLen < $termLen) {
+            return 0;
+        }
+
+        if ($termLen === 1) {
+            $targetToken = $termTokens[0];
+            $count = 0;
+            foreach ($contentTokens as $tok) {
+                if ($tok === $targetToken) {
+                    $count++;
+                }
+            }
+            return $count;
+        }
+
+        // For multi-word phrases, scan sliding window of tokens
+        $count = 0;
+        for ($i = 0; $i <= $contentLen - $termLen; $i++) {
+            $match = true;
+            for ($j = 0; $j < $termLen; $j++) {
+                if ($contentTokens[$i + $j] !== $termTokens[$j]) {
+                    $match = false;
+                    break;
+                }
+            }
+            if ($match) {
+                $count++;
+            }
+        }
+
+        return $count;
     }
 
     /**
@@ -181,7 +264,7 @@ class KeywordAnalyzer {
      *
      * @param string $keyword
      * @param string $content
-     * @return array Analysis metrics [count, word_count, total_words, density, is_over_optimized]
+     * @return array Analysis metrics [count, word_count, total_words, density, is_over_optimized, threshold]
      */
     public function analyzeKeywordDensity($keyword, $content) {
         $allTokens = $this->tokenize($content, false);
@@ -194,6 +277,7 @@ class KeywordAnalyzer {
                 'term_word_count'   => 0,
                 'total_words'       => $totalWords,
                 'density'           => 0.0,
+                'threshold'         => $this->overOptimizationThreshold,
                 'is_over_optimized' => false,
                 'warning'           => $totalWords === 0 ? 'Content is empty.' : 'Keyword is empty.'
             ];
@@ -208,15 +292,15 @@ class KeywordAnalyzer {
             ? round(($occurrences * $termWordCount / $totalWords) * 100, 2)
             : 0.0;
 
-        $isOverOptimized = $density > 3.5;
+        $isOverOptimized = $density > $this->overOptimizationThreshold;
         $warning = null;
 
         if ($occurrences === 0) {
             $warning = sprintf('Keyword "%s" was not found in the content.', $keyword);
         } elseif ($density < 0.5) {
-            $warning = sprintf('Keyword density (%.2f%%) is relatively low. Recommended is between 0.8%% and 2.5%%.', $density);
+            $warning = sprintf('Keyword density (%.2f%%) is relatively low. Recommended range is between 0.8%% and 2.5%%.', $density);
         } elseif ($isOverOptimized) {
-            $warning = sprintf('Keyword density (%.2f%%) exceeds safe threshold (3.5%%), which may be flagged as keyword stuffing.', $density);
+            $warning = sprintf('Keyword density (%.2f%%) exceeds configured threshold (%.1f%%), which may be flagged as keyword stuffing.', $density, $this->overOptimizationThreshold);
         }
 
         return [
@@ -225,6 +309,7 @@ class KeywordAnalyzer {
             'term_word_count'   => $termWordCount,
             'total_words'       => $totalWords,
             'density'           => $density,
+            'threshold'         => $this->overOptimizationThreshold,
             'is_over_optimized' => $isOverOptimized,
             'warning'           => $warning
         ];
@@ -259,22 +344,35 @@ class KeywordAnalyzer {
     /**
      * Compute Inverse Document Frequency (IDF).
      *
-     * Standard formula: log( (1 + N) / (1 + df) ) + 1
-     * Fallback single document formula: log(1 + 1) = ~0.693
+     * Standard formula with smoothing: log( (1 + N) / (1 + df) ) + 1.0
      *
      * @param string $term
-     * @return float
+     * @return array [idf, idf_source, corpus_docs, doc_frequency]
      */
     public function calculateInverseDocumentFrequency($term) {
         $normalizedTerm = $this->normalizeText($term);
 
         if ($this->corpusDocCount > 0) {
-            $df = isset($this->corpusDocFreqs[$normalizedTerm]) ? (int) $this->corpusDocFreqs[$normalizedTerm] : 0;
-            return log((1 + $this->corpusDocCount) / (1 + $df)) + 1.0;
+            $rawDf = isset($this->corpusDocFreqs[$normalizedTerm]) ? (int) $this->corpusDocFreqs[$normalizedTerm] : 0;
+            // Clamp df to N to prevent mathematical anomalies
+            $df = max(0, min($rawDf, $this->corpusDocCount));
+            $idf = log((1 + $this->corpusDocCount) / (1 + $df)) + 1.0;
+
+            return [
+                'idf'           => round($idf, 4),
+                'idf_source'    => 'corpus',
+                'corpus_docs'   => $this->corpusDocCount,
+                'doc_frequency' => $df,
+            ];
         }
 
-        // Fallback default IDF when no external corpus is set
-        return 1.0;
+        // Explicit fallback when no external corpus is set
+        return [
+            'idf'           => 1.0,
+            'idf_source'    => 'fallback',
+            'corpus_docs'   => 0,
+            'doc_frequency' => 0,
+        ];
     }
 
     /**
@@ -298,15 +396,19 @@ class KeywordAnalyzer {
 
         foreach ($frequencies as $term => $count) {
             $tf = $count / $totalTokens;
-            $idf = $this->calculateInverseDocumentFrequency($term);
+            $idfInfo = $this->calculateInverseDocumentFrequency($term);
+            $idf = $idfInfo['idf'];
             $tfidf = round($tf * $idf, 5);
 
             $results[] = [
-                'term'      => $term,
-                'count'     => $count,
-                'tf'        => round($tf, 4),
-                'idf'       => round($idf, 4),
-                'tfidf'     => $tfidf,
+                'term'          => $term,
+                'count'         => $count,
+                'tf'            => round($tf, 4),
+                'idf'           => $idf,
+                'idf_source'    => $idfInfo['idf_source'],
+                'corpus_docs'   => $idfInfo['corpus_docs'],
+                'doc_frequency' => $idfInfo['doc_frequency'],
+                'tfidf'         => $tfidf,
             ];
         }
 
@@ -346,12 +448,15 @@ class KeywordAnalyzer {
         }
 
         $topTerms = $this->extractTopTfIdfTerms($content, 10);
+        $idfSource = ($this->corpusDocCount > 0) ? 'corpus' : 'fallback';
 
         return [
-            'total_words'         => $totalWords,
-            'primary_keyword'     => $primaryAnalysis,
-            'secondary_keywords'   => $secondaryAnalysis,
-            'top_tfidf_terms'     => $topTerms,
+            'total_words'           => $totalWords,
+            'primary_keyword'       => $primaryAnalysis,
+            'secondary_keywords'     => $secondaryAnalysis,
+            'top_tfidf_terms'       => $topTerms,
+            'idf_source'            => $idfSource,
+            'corpus_size'           => $this->corpusDocCount,
             'has_over_optimization' => ($primaryAnalysis && $primaryAnalysis['is_over_optimized']),
         ];
     }

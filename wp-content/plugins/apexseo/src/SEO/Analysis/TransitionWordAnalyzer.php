@@ -93,22 +93,58 @@ class TransitionWordAnalyzer {
     protected $keywordAnalyzer;
 
     /**
-     * Constructor.
+     * Recommended transition sentence percentage threshold.
+     *
+     * @var float
      */
-    public function __construct(ReadabilityScorer $readability = null, KeywordAnalyzer $keywordAnalyzer = null) {
+    protected $recommendedThreshold = 30.0;
+
+    /**
+     * Constructor.
+     *
+     * @param ReadabilityScorer|null $readability
+     * @param KeywordAnalyzer|null $keywordAnalyzer
+     * @param float $recommendedThreshold
+     */
+    public function __construct(ReadabilityScorer $readability = null, KeywordAnalyzer $keywordAnalyzer = null, $recommendedThreshold = 30.0) {
         $this->readability = $readability ?: new ReadabilityScorer();
         $this->keywordAnalyzer = $keywordAnalyzer ?: new KeywordAnalyzer();
+        $this->recommendedThreshold = max(5.0, (float) $recommendedThreshold);
     }
 
     /**
-     * Find transitions in a single sentence.
+     * Set recommended threshold percentage.
+     *
+     * @param float $threshold
+     * @return self
+     */
+    public function setRecommendedThreshold($threshold) {
+        $this->recommendedThreshold = max(5.0, (float) $threshold);
+        return $this;
+    }
+
+    /**
+     * Get recommended threshold percentage.
+     *
+     * @return float
+     */
+    public function getRecommendedThreshold() {
+        return $this->recommendedThreshold;
+    }
+
+    /**
+     * Find transitions in a single sentence without substring false-positives.
      *
      * @param string $sentence
      * @param string $language 'en' or 'fa'
      * @return array [has_transition, found_transitions, categories]
      */
     public function findTransitionsInSentence($sentence, $language = 'en') {
-        $normalizedSentence = ' ' . $this->keywordAnalyzer->normalizeText($sentence) . ' ';
+        $normalizedSentence = $this->keywordAnalyzer->normalizeText($sentence);
+        if ($normalizedSentence === '') {
+            return ['has_transition' => false, 'found_transitions' => [], 'categories' => []];
+        }
+
         $categoriesList = ($language === 'fa') ? self::$persianTransitions : self::$englishTransitions;
 
         $found = [];
@@ -121,11 +157,11 @@ class TransitionWordAnalyzer {
                     continue;
                 }
 
-                // Regex with word boundaries
-                $pattern = '/(?<=^|[^\p{L}\p{N}])' . preg_quote($normalizedPhrase, '/') . '(?=$|[^\p{L}\p{N}])/u';
-                if (preg_match($pattern, $normalizedSentence)) {
+                // Check occurrences using token-level matching to prevent substring false-positives (e.g., 'but' in 'button')
+                $occurrences = $this->keywordAnalyzer->countTermOccurrences($normalizedPhrase, $normalizedSentence);
+                if ($occurrences > 0) {
                     $found[] = $phrase;
-                    if (!in_array($category, $categories)) {
+                    if (!in_array($category, $categories, true)) {
                         $categories[] = $category;
                     }
                 }
@@ -134,7 +170,7 @@ class TransitionWordAnalyzer {
 
         return [
             'has_transition'    => !empty($found),
-            'found_transitions' => array_unique($found),
+            'found_transitions' => array_values(array_unique($found)),
             'categories'        => $categories,
         ];
     }
@@ -154,6 +190,7 @@ class TransitionWordAnalyzer {
                 'total_sentences'              => 0,
                 'sentences_with_transitions'   => 0,
                 'transition_percentage'        => 0.0,
+                'threshold'                    => $this->recommendedThreshold,
                 'is_acceptable'                => false,
                 'category_breakdown'           => [],
                 'all_found_transitions'        => [],
@@ -164,7 +201,6 @@ class TransitionWordAnalyzer {
 
         $language = $this->readability->detectLanguage($content);
         $sentencesWithTransitions = 0;
-        $allFound = [];
         $categoryCounts = [
             'addition'         => 0,
             'contrast'         => 0,
@@ -173,51 +209,54 @@ class TransitionWordAnalyzer {
             'emphasis_example' => 0,
             'conclusion'       => 0,
         ];
+        $allTransitionsFound = [];
+        $sentenceDetails = [];
 
-        foreach ($sentences as $sentence) {
-            $res = $this->findTransitionsInSentence($sentence, $language);
-            if ($res['has_transition']) {
+        foreach ($sentences as $index => $sentence) {
+            $analysis = $this->findTransitionsInSentence($sentence, $language);
+
+            if ($analysis['has_transition']) {
                 $sentencesWithTransitions++;
-                foreach ($res['found_transitions'] as $tr) {
-                    $allFound[] = $tr;
-                }
-                foreach ($res['categories'] as $cat) {
+                foreach ($analysis['categories'] as $cat) {
                     if (isset($categoryCounts[$cat])) {
                         $categoryCounts[$cat]++;
                     }
                 }
+                foreach ($analysis['found_transitions'] as $tr) {
+                    $allTransitionsFound[] = $tr;
+                }
             }
+
+            $sentenceDetails[] = [
+                'sentence_index'    => $index + 1,
+                'sentence'          => $sentence,
+                'has_transition'    => $analysis['has_transition'],
+                'found_transitions' => $analysis['found_transitions'],
+                'categories'        => $analysis['categories'],
+            ];
         }
 
         $percentage = round(($sentencesWithTransitions / $totalSentences) * 100, 1);
-        $isAcceptable = ($percentage >= 30.0);
+        $isAcceptable = ($percentage >= $this->recommendedThreshold);
 
-        if ($percentage >= 30.0) {
-            $diagnostic = [
-                'status'  => 'good',
-                'message' => sprintf('Great transition word coverage: %.1f%% of sentences contain transition words (recommended >= 30%%).', $percentage),
-            ];
-        } elseif ($percentage >= 20.0) {
-            $diagnostic = [
-                'status'  => 'warning',
-                'message' => sprintf('Transition word coverage is %.1f%%. Adding more transition words (recommended >= 30%%) will improve content flow.', $percentage),
-            ];
-        } else {
-            $diagnostic = [
-                'status'  => 'error',
-                'message' => sprintf('Only %.1f%% of sentences contain transition words. Use more connectives to guide readers through your ideas.', $percentage),
-            ];
-        }
+        $diagnostic = [
+            'status'  => $isAcceptable ? 'good' : 'warning',
+            'message' => $isAcceptable
+                ? sprintf('Great: %.1f%% of sentences contain transition words (recommended: %.1f%% or higher).', $percentage, $this->recommendedThreshold)
+                : sprintf('Only %.1f%% of sentences contain transition words. Recommended minimum is %.1f%% for smooth reading flow.', $percentage, $this->recommendedThreshold),
+        ];
 
         return [
-            'total_sentences'            => $totalSentences,
-            'sentences_with_transitions' => $sentencesWithTransitions,
-            'transition_percentage'      => $percentage,
-            'is_acceptable'              => $isAcceptable,
-            'category_breakdown'         => $categoryCounts,
-            'all_found_transitions'      => array_values(array_unique($allFound)),
-            'diagnostic'                 => $diagnostic,
-            'language'                   => $language,
+            'total_sentences'              => $totalSentences,
+            'sentences_with_transitions'   => $sentencesWithTransitions,
+            'transition_percentage'        => $percentage,
+            'threshold'                    => $this->recommendedThreshold,
+            'is_acceptable'                => $isAcceptable,
+            'category_breakdown'           => $categoryCounts,
+            'all_found_transitions'        => array_values(array_unique($allTransitionsFound)),
+            'sentence_details'             => $sentenceDetails,
+            'diagnostic'                   => $diagnostic,
+            'language'                     => $language,
         ];
     }
 }

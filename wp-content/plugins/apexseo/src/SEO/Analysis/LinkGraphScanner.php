@@ -8,8 +8,8 @@ use ApexSEO\Core\Database\DatabaseManager;
  *
  * Scans HTML content for links, classifies internal vs external destinations,
  * evaluates rel attributes (nofollow, sponsored, ugc), extracts anchor texts,
- * persists the link graph in `wp_apex_links`, and maintains inbound link counts
- * and orphan page detection.
+ * resolves target post IDs, persists the link graph in `wp_apex_links`, and
+ * maintains inbound link counts and orphan page detection.
  */
 class LinkGraphScanner {
     /**
@@ -25,6 +25,13 @@ class LinkGraphScanner {
      * @var string
      */
     protected $siteUrl;
+
+    /**
+     * Additional internal hostnames (e.g., CDN, subdomains).
+     *
+     * @var array
+     */
+    protected $allowedInternalHosts = [];
 
     /**
      * Constructor.
@@ -49,14 +56,38 @@ class LinkGraphScanner {
     }
 
     /**
-     * Normalize URL (strip fragment, trim, lowercase host).
+     * Get current site URL.
+     *
+     * @return string
+     */
+    public function getSiteUrl() {
+        return $this->siteUrl;
+    }
+
+    /**
+     * Set additional allowed internal hostnames.
+     *
+     * @param array $hosts
+     * @return self
+     */
+    public function setAllowedInternalHosts(array $hosts) {
+        $this->allowedInternalHosts = array_map('strtolower', $hosts);
+        return $this;
+    }
+
+    /**
+     * Normalize URL (strip fragment, trim, handle relative and protocol-relative links).
      *
      * @param string $rawUrl
-     * @return string|null Normalized URL or null if invalid
+     * @return string|null Normalized absolute URL or null if invalid/non-HTTP
      */
     public function normalizeUrl($rawUrl) {
+        if ($rawUrl === null) {
+            return null;
+        }
+
         $rawUrl = trim($rawUrl);
-        if ($rawUrl === '' || $rawUrl === '#' || strpos($rawUrl, 'javascript:') === 0 || strpos($rawUrl, 'mailto:') === 0 || strpos($rawUrl, 'tel:') === 0) {
+        if ($rawUrl === '' || $rawUrl === '#' || strpos($rawUrl, 'javascript:') === 0 || strpos($rawUrl, 'mailto:') === 0 || strpos($rawUrl, 'tel:') === 0 || strpos($rawUrl, 'data:') === 0) {
             return null;
         }
 
@@ -71,18 +102,29 @@ class LinkGraphScanner {
             return null;
         }
 
-        // Convert relative URLs to absolute using site URL
-        if (strpos($rawUrl, '/') === 0) {
-            $rawUrl = $this->siteUrl . $rawUrl;
-        } elseif (!preg_match('~^https?://~i', $rawUrl)) {
-            $rawUrl = $this->siteUrl . '/' . ltrim($rawUrl, '/');
+        // Handle protocol-relative URLs (//example.com/path)
+        if (strpos($rawUrl, '//') === 0) {
+            $scheme = parse_url($this->siteUrl, PHP_URL_SCHEME) ?: 'https';
+            $rawUrl = $scheme . ':' . $rawUrl;
+            return rtrim($rawUrl, '/');
         }
 
-        return $rawUrl;
+        // Handle root-relative URLs (/path)
+        if (strpos($rawUrl, '/') === 0) {
+            return rtrim($this->siteUrl . $rawUrl, '/');
+        }
+
+        // Handle full absolute URLs (http:// or https://)
+        if (preg_match('~^https?://~i', $rawUrl)) {
+            return rtrim($rawUrl, '/');
+        }
+
+        // Handle relative path (relative to site root)
+        return rtrim($this->siteUrl . '/' . ltrim($rawUrl, '/'), '/');
     }
 
     /**
-     * Check if a given URL is internal to the current site.
+     * Check if a given normalized URL is internal to the current site.
      *
      * @param string $url
      * @return bool
@@ -95,20 +137,152 @@ class LinkGraphScanner {
             return true; // Relative is internal
         }
 
-        return strtolower($siteHost) === strtolower($urlHost);
+        $siteHost = strtolower($siteHost);
+        $urlHost = strtolower($urlHost);
+
+        if ($siteHost === $urlHost) {
+            return true;
+        }
+
+        return in_array($urlHost, $this->allowedInternalHosts, true);
+    }
+
+    /**
+     * Resolve target post ID from a target URL if possible.
+     *
+     * @param string $url
+     * @return int|null
+     */
+    public function resolveTargetPostId($url) {
+        if (empty($url)) {
+            return null;
+        }
+
+        // 1. If WordPress url_to_postid exists
+        if (function_exists('url_to_postid')) {
+            $id = url_to_postid($url);
+            if ($id > 0) {
+                return (int) $id;
+            }
+        }
+
+        // 2. Query indexables table by permalink_hash or permalink if DB is available
+        if ($this->db) {
+            $wpdb = $this->db->getWpdb();
+            $prefix = $this->db->getPrefix();
+            $tableName = "{$prefix}apex_indexables";
+
+            $urlHash = md5($url);
+            $sql = "SELECT `object_id` FROM `{$tableName}` WHERE `permalink_hash` = %s AND `object_type` = 'post' LIMIT 1";
+            $prepared = $wpdb->prepare($sql, $urlHash);
+            $foundId = $wpdb->get_var($prepared);
+
+            if ($foundId && (int) $foundId > 0) {
+                return (int) $foundId;
+            }
+        }
+
+        return null;
     }
 
     /**
      * Scan HTML content and extract all link occurrences with metadata.
      *
+     * Uses DOMDocument when available with regex fallback.
+     *
      * @param string $html
      * @return array Array of extracted link descriptors
      */
     public function scanHtml($html) {
-        if (empty($html)) {
+        if (empty($html) || !is_string($html)) {
             return [];
         }
 
+        if (class_exists('\DOMDocument')) {
+            $domLinks = $this->scanWithDom($html);
+            if ($domLinks !== null) {
+                return $domLinks;
+            }
+        }
+
+        return $this->scanWithRegex($html);
+    }
+
+    /**
+     * Scan links with DOMDocument.
+     *
+     * @param string $html
+     * @return array|null
+     */
+    protected function scanWithDom($html) {
+        $prevErrors = libxml_use_internal_errors(true);
+        $doc = new \DOMDocument('1.0', 'UTF-8');
+
+        $encodedHtml = '<?xml encoding="UTF-8"><div>' . $html . '</div>';
+        $loaded = @$doc->loadHTML($encodedHtml, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+
+        if (!$loaded) {
+            libxml_clear_errors();
+            libxml_use_internal_errors($prevErrors);
+            return null;
+        }
+
+        $xpath = new \DOMXPath($doc);
+        $nodes = $xpath->query('//a[@href]');
+
+        if (!$nodes || $nodes->length === 0) {
+            libxml_clear_errors();
+            libxml_use_internal_errors($prevErrors);
+            return [];
+        }
+
+        $links = [];
+        foreach ($nodes as $node) {
+            $rawHref = $node->getAttribute('href');
+            $normalizedUrl = $this->normalizeUrl($rawHref);
+
+            if ($normalizedUrl === null) {
+                continue;
+            }
+
+            $rawAnchor = $node->textContent;
+            $anchorText = trim(preg_replace('/\s+/u', ' ', html_entity_decode($rawAnchor, ENT_QUOTES | ENT_HTML5, 'UTF-8')));
+            $isInternal = $this->isInternalUrl($normalizedUrl);
+
+            // Parse rel attribute
+            $relAttr = strtolower($node->getAttribute('rel'));
+            $relValues = preg_split('/\s+/', $relAttr);
+
+            $isNofollow = in_array('nofollow', $relValues, true);
+            $isUgc = in_array('ugc', $relValues, true);
+            $isSponsored = in_array('sponsored', $relValues, true);
+
+            $targetPostId = $isInternal ? $this->resolveTargetPostId($normalizedUrl) : null;
+
+            $links[] = [
+                'url'            => $normalizedUrl,
+                'url_hash'       => md5($normalizedUrl),
+                'anchor_text'    => $anchorText,
+                'link_type'      => $isInternal ? 'internal' : 'external',
+                'is_nofollow'    => $isNofollow,
+                'is_ugc'         => $isUgc,
+                'is_sponsored'   => $isSponsored,
+                'target_post_id' => $targetPostId,
+            ];
+        }
+
+        libxml_clear_errors();
+        libxml_use_internal_errors($prevErrors);
+        return $links;
+    }
+
+    /**
+     * Scan links with Regex fallback.
+     *
+     * @param string $html
+     * @return array
+     */
+    protected function scanWithRegex($html) {
         $links = [];
         $pattern = '/<a\s+(?:[^>]*?\s+)?href=(["\'])(.*?)\1([^>]*)>(.*?)<\/a>/is';
 
@@ -124,6 +298,7 @@ class LinkGraphScanner {
                 }
 
                 $anchorText = trim(strip_tags(html_entity_decode($rawAnchor, ENT_QUOTES | ENT_HTML5, 'UTF-8')));
+                $anchorText = preg_replace('/\s+/u', ' ', $anchorText);
                 $isInternal = $this->isInternalUrl($normalizedUrl);
 
                 // Check rel attributes
@@ -133,19 +308,22 @@ class LinkGraphScanner {
 
                 if (preg_match('/rel=(["\'])(.*?)\1/i', $attributes, $relMatch)) {
                     $relValues = preg_split('/\s+/', strtolower($relMatch[2]));
-                    $isNofollow = in_array('nofollow', $relValues);
-                    $isUgc = in_array('ugc', $relValues);
-                    $isSponsored = in_array('sponsored', $relValues);
+                    $isNofollow = in_array('nofollow', $relValues, true);
+                    $isUgc = in_array('ugc', $relValues, true);
+                    $isSponsored = in_array('sponsored', $relValues, true);
                 }
 
+                $targetPostId = $isInternal ? $this->resolveTargetPostId($normalizedUrl) : null;
+
                 $links[] = [
-                    'url'           => $normalizedUrl,
-                    'url_hash'      => md5($normalizedUrl),
-                    'anchor_text'   => $anchorText,
-                    'link_type'     => $isInternal ? 'internal' : 'external',
-                    'is_nofollow'   => $isNofollow,
-                    'is_ugc'        => $isUgc,
-                    'is_sponsored'  => $isSponsored,
+                    'url'            => $normalizedUrl,
+                    'url_hash'       => md5($normalizedUrl),
+                    'anchor_text'    => $anchorText,
+                    'link_type'      => $isInternal ? 'internal' : 'external',
+                    'is_nofollow'    => $isNofollow,
+                    'is_ugc'         => $isUgc,
+                    'is_sponsored'   => $isSponsored,
+                    'target_post_id' => $targetPostId,
                 ];
             }
         }
@@ -177,7 +355,7 @@ class LinkGraphScanner {
         foreach ($links as $link) {
             $inserted = $wpdb->insert($tableName, [
                 'post_id'        => (int) $postId,
-                'target_post_id' => null, // Optional resolved post ID
+                'target_post_id' => $link['target_post_id'] ? (int) $link['target_post_id'] : null,
                 'url'            => $link['url'],
                 'url_hash'       => $link['url_hash'],
                 'anchor_text'    => $link['anchor_text'],
@@ -251,11 +429,13 @@ class LinkGraphScanner {
             return 0;
         }
 
+        $normalized = $this->normalizeUrl($targetUrl) ?: $targetUrl;
+        $urlHash = md5($normalized);
+
         $wpdb = $this->db->getWpdb();
         $prefix = $this->db->getPrefix();
         $tableName = "{$prefix}apex_links";
 
-        $urlHash = md5($this->normalizeUrl($targetUrl) ?? $targetUrl);
         $sql = "SELECT COUNT(*) FROM `{$tableName}` WHERE `url_hash` = %s AND `link_type` = 'internal'";
         $prepared = $wpdb->prepare($sql, $urlHash);
 

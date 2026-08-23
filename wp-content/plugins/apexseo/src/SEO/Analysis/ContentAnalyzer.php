@@ -2,12 +2,11 @@
 namespace ApexSEO\SEO\Analysis;
 
 use ApexSEO\SEO\Repository\IndexableRepository;
-use ApexSEO\Core\Database\DatabaseManager;
 
 /**
  * Phase 4 Master Subsystem Coordinator: Content Intelligence & On-Page Analysis Engine.
  *
- * Integrates APEX-048 through APEX-054 to perform unified multi-keyword density,
+ * Coordinates APEX-048 through APEX-054 to perform unified multi-keyword density,
  * TF-IDF extraction, Flesch readability scoring, heading hierarchy checking,
  * internal link graph scanning, passive voice detection, and text structure analysis.
  */
@@ -51,6 +50,20 @@ class ContentAnalyzer {
      * @var IndexableRepository|null
      */
     protected $indexableRepository;
+
+    /**
+     * Schema version for analysis reports.
+     *
+     * @var string
+     */
+    const SCHEMA_VERSION = '1.0.0';
+
+    /**
+     * Engine version.
+     *
+     * @var string
+     */
+    const ANALYZER_VERSION = '1.0.0';
 
     /**
      * Constructor.
@@ -153,28 +166,37 @@ class ContentAnalyzer {
         }
 
         $score = 100;
+        $isFleschSupported = !empty($readability['is_flesch_supported']);
 
-        // Flesch Reading Ease contribution (40% weight)
-        if (!empty($readability['is_flesch_supported'])) {
+        if ($isFleschSupported) {
+            // Flesch Reading Ease contribution (40% weight)
             $flesch = $readability['flesch_reading_ease'] ?? 60.0;
             if ($flesch < 50.0) {
                 $score -= (int) round((50.0 - $flesch) * 0.6);
             }
+        } else {
+            // Non-English / Persian structural baseline
+            $asl = $readability['avg_words_per_sentence'] ?? 15.0;
+            if ($asl > 25.0) {
+                $score -= (int) min(25, round(($asl - 25.0) * 1.5));
+            }
         }
 
         // Passive Voice contribution (20% weight)
-        if (!empty($passiveVoice['is_acceptable']) === false) {
+        if (empty($passiveVoice['is_acceptable'])) {
             $ratio = $passiveVoice['passive_ratio'] ?? 0.0;
-            if ($ratio > 10.0) {
-                $score -= (int) min(20, round(($ratio - 10.0) * 1.5));
+            $threshold = $passiveVoice['threshold'] ?? 10.0;
+            if ($ratio > $threshold) {
+                $score -= (int) min(20, round(($ratio - $threshold) * 1.5));
             }
         }
 
         // Transition Words contribution (20% weight)
-        if (!empty($transitionWords['is_acceptable']) === false) {
+        if (empty($transitionWords['is_acceptable'])) {
             $transPercentage = $transitionWords['transition_percentage'] ?? 0.0;
-            if ($transPercentage < 30.0) {
-                $score -= (int) min(20, round((30.0 - $transPercentage) * 0.7));
+            $threshold = $transitionWords['threshold'] ?? 30.0;
+            if ($transPercentage < $threshold) {
+                $score -= (int) min(20, round(($threshold - $transPercentage) * 0.7));
             }
         }
 
@@ -183,6 +205,7 @@ class ContentAnalyzer {
             $score -= (int) min(10, count($textStructure['oversized_paragraphs']) * 5);
         }
         $sentenceRatio = $textStructure['oversized_sentences_ratio'] ?? 0.0;
+        $maxSentenceRatio = $textStructure['max_words_per_sentence_limit'] ?? 25.0;
         if ($sentenceRatio > 25.0) {
             $score -= (int) min(10, round(($sentenceRatio - 25.0) * 0.5));
         }
@@ -229,7 +252,7 @@ class ContentAnalyzer {
             $score -= (int) round((100 - $headingScore) * 0.25);
         }
 
-        // Links presence (at least 1 internal link)
+        // Links presence (at least 1 internal link recommended)
         if (($linkAnalysis['internal_links'] ?? 0) === 0) {
             $score -= 10;
         }
@@ -279,6 +302,9 @@ class ContentAnalyzer {
         $seoScore = $this->calculateSeoScore($keywords, $headings, $links, $readability['words_count'] ?? 0);
 
         return [
+            'schema_version'      => self::SCHEMA_VERSION,
+            'analyzer_version'    => self::ANALYZER_VERSION,
+            'score_disclaimer'    => 'Scores are heuristic on-page content optimization indicators, not proprietary search engine ranking algorithms.',
             'seo_score'           => $seoScore,
             'readability_score'   => $readabilityScore,
             'keywords'            => $keywords,
