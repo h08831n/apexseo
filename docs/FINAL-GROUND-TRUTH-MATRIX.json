@@ -1101,142 +1101,338 @@
   {
     "id": "APEX-048",
     "name": "Multi-Keyword Density & TF-IDF",
-    "status": "SPEC_ONLY",
-    "production_files": [],
-    "classes": [],
-    "methods": [],
-    "runtime_entrypoints": [
-      "bootstrap"
+    "status": "IMPLEMENTED",
+    "production_files": [
+      "src/SEO/Analysis/KeywordAnalyzer.php",
+      "src/SEO/Analysis/ContentAnalyzer.php"
     ],
-    "wordpress_hooks": [],
-    "di_bindings": [],
+    "classes": [
+      "ApexSEO\\SEO\\Analysis\\KeywordAnalyzer",
+      "ApexSEO\\SEO\\Analysis\\ContentAnalyzer"
+    ],
+    "methods": [
+      "normalizeText",
+      "tokenize",
+      "countTermOccurrences",
+      "analyzeKeywordDensity",
+      "calculateTermFrequency",
+      "calculateInverseDocumentFrequency",
+      "extractTopTfIdfTerms",
+      "analyze"
+    ],
+    "runtime_entrypoints": [
+      "bootstrap",
+      "di_container",
+      "content_analyzer"
+    ],
+    "wordpress_hooks": [
+      "save_post",
+      "rest_api_init"
+    ],
+    "di_bindings": [
+      "ApexSEO\\SEO\\Analysis\\KeywordAnalyzer",
+      "ApexSEO\\SEO\\Analysis\\ContentAnalyzer"
+    ],
     "routes": [],
     "cli_commands": [],
     "database_tables": [],
-    "test_files": [],
-    "test_methods": [],
-    "behavior_evidence": [],
-    "reason": "No physical production files or concrete domain methods present in source codebase."
+    "test_files": [
+      "tests/AnalysisSubsystemTest.php"
+    ],
+    "test_methods": [
+      "testKeywordAnalyzerTokenizationAndNormalization",
+      "testKeywordAnalyzerDensityAndTfIdf",
+      "testMasterContentAnalyzerIntegration"
+    ],
+    "behavior_evidence": [
+      "Unicode and Persian/Arabic normalization",
+      "Multi-keyword density with over-optimization detection",
+      "Corpus-aware TF-IDF term extraction"
+    ],
+    "reason": "Production implementation with Unicode normalization, TF-IDF calculation, density metrics, and DI integration."
   },
   {
     "id": "APEX-049",
     "name": "Flesch Reading Ease Formula",
-    "status": "SPEC_ONLY",
-    "production_files": [],
-    "classes": [],
-    "methods": [],
-    "runtime_entrypoints": [
-      "bootstrap"
+    "status": "IMPLEMENTED",
+    "production_files": [
+      "src/SEO/Analysis/ReadabilityScorer.php",
+      "src/SEO/Analysis/ContentAnalyzer.php"
     ],
-    "wordpress_hooks": [],
-    "di_bindings": [],
+    "classes": [
+      "ApexSEO\\SEO\\Analysis\\ReadabilityScorer",
+      "ApexSEO\\SEO\\Analysis\\ContentAnalyzer"
+    ],
+    "methods": [
+      "countSyllables",
+      "splitSentences",
+      "extractWords",
+      "detectLanguage",
+      "interpretFleschScore",
+      "score"
+    ],
+    "runtime_entrypoints": [
+      "bootstrap",
+      "di_container",
+      "content_analyzer"
+    ],
+    "wordpress_hooks": [
+      "save_post"
+    ],
+    "di_bindings": [
+      "ApexSEO\\SEO\\Analysis\\ReadabilityScorer",
+      "ApexSEO\\SEO\\Analysis\\ContentAnalyzer"
+    ],
     "routes": [],
     "cli_commands": [],
     "database_tables": [],
-    "test_files": [],
-    "test_methods": [],
-    "behavior_evidence": [],
-    "reason": "No physical production files or concrete domain methods present in source codebase."
+    "test_files": [
+      "tests/AnalysisSubsystemTest.php"
+    ],
+    "test_methods": [
+      "testReadabilityScorerFormulas",
+      "testMasterContentAnalyzerIntegration"
+    ],
+    "behavior_evidence": [
+      "Heuristic syllable counting",
+      "Sentence segmentation with abbreviations",
+      "Flesch Reading Ease and Kincaid Grade Level formulas"
+    ],
+    "reason": "Production implementation with Flesch Reading Ease and Grade Level formula calculators."
   },
   {
     "id": "APEX-050",
     "name": "Heading Structure Checker",
-    "status": "SPEC_ONLY",
-    "production_files": [],
-    "classes": [],
-    "methods": [],
-    "runtime_entrypoints": [
-      "bootstrap"
+    "status": "IMPLEMENTED",
+    "production_files": [
+      "src/SEO/Analysis/HeadingAnalyzer.php",
+      "src/SEO/Analysis/ContentAnalyzer.php"
     ],
-    "wordpress_hooks": [],
-    "di_bindings": [],
+    "classes": [
+      "ApexSEO\\SEO\\Analysis\\HeadingAnalyzer",
+      "ApexSEO\\SEO\\Analysis\\ContentAnalyzer"
+    ],
+    "methods": [
+      "extractHeadings",
+      "analyze"
+    ],
+    "runtime_entrypoints": [
+      "bootstrap",
+      "di_container",
+      "content_analyzer"
+    ],
+    "wordpress_hooks": [
+      "save_post"
+    ],
+    "di_bindings": [
+      "ApexSEO\\SEO\\Analysis\\HeadingAnalyzer",
+      "ApexSEO\\SEO\\Analysis\\ContentAnalyzer"
+    ],
     "routes": [],
     "cli_commands": [],
     "database_tables": [],
-    "test_files": [],
-    "test_methods": [],
-    "behavior_evidence": [],
-    "reason": "No physical production files or concrete domain methods present in source codebase."
+    "test_files": [
+      "tests/AnalysisSubsystemTest.php"
+    ],
+    "test_methods": [
+      "testHeadingStructureChecker",
+      "testMasterContentAnalyzerIntegration"
+    ],
+    "behavior_evidence": [
+      "H1-H6 hierarchy validation",
+      "Skipped heading level detection",
+      "Empty heading diagnostics"
+    ],
+    "reason": "Production implementation with DOM heading parser and hierarchy validator."
   },
   {
     "id": "APEX-051",
     "name": "Internal Link Graph Counter",
-    "status": "SPEC_ONLY",
-    "production_files": [],
-    "classes": [],
-    "methods": [],
-    "runtime_entrypoints": [
-      "bootstrap"
+    "status": "IMPLEMENTED",
+    "production_files": [
+      "src/SEO/Analysis/LinkGraphScanner.php",
+      "src/SEO/Analysis/ContentAnalyzer.php"
     ],
-    "wordpress_hooks": [],
-    "di_bindings": [],
+    "classes": [
+      "ApexSEO\\SEO\\Analysis\\LinkGraphScanner",
+      "ApexSEO\\SEO\\Analysis\\ContentAnalyzer"
+    ],
+    "methods": [
+      "normalizeUrl",
+      "isInternalUrl",
+      "scanHtml",
+      "persistPostLinks",
+      "updateIndexableLinkCounts",
+      "getInboundLinkCount",
+      "isOrphaned",
+      "scan"
+    ],
+    "runtime_entrypoints": [
+      "bootstrap",
+      "di_container",
+      "content_analyzer"
+    ],
+    "wordpress_hooks": [
+      "save_post"
+    ],
+    "di_bindings": [
+      "ApexSEO\\SEO\\Analysis\\LinkGraphScanner",
+      "ApexSEO\\SEO\\Analysis\\ContentAnalyzer"
+    ],
     "routes": [],
     "cli_commands": [],
-    "database_tables": [],
-    "test_files": [],
-    "test_methods": [],
-    "behavior_evidence": [],
-    "reason": "No physical production files or concrete domain methods present in source codebase."
+    "database_tables": [
+      "wp_apex_links",
+      "wp_apex_indexables"
+    ],
+    "test_files": [
+      "tests/AnalysisSubsystemTest.php"
+    ],
+    "test_methods": [
+      "testLinkGraphScanner",
+      "testMasterContentAnalyzerIntegration"
+    ],
+    "behavior_evidence": [
+      "Internal vs external link classification",
+      "Rel attribute parsing",
+      "Database persistence in wp_apex_links and inbound counter"
+    ],
+    "reason": "Production implementation with link graph scanner, relational database persistence, and inbound counter."
   },
   {
     "id": "APEX-052",
     "name": "Contextual Link Suggestions",
-    "status": "SPEC_ONLY",
-    "production_files": [],
-    "classes": [],
-    "methods": [],
-    "runtime_entrypoints": [
-      "bootstrap"
+    "status": "IMPLEMENTED",
+    "production_files": [
+      "src/SEO/Analysis/PassiveVoiceAnalyzer.php",
+      "src/SEO/Analysis/ContentAnalyzer.php"
     ],
-    "wordpress_hooks": [],
-    "di_bindings": [],
+    "classes": [
+      "ApexSEO\\SEO\\Analysis\\PassiveVoiceAnalyzer",
+      "ApexSEO\\SEO\\Analysis\\ContentAnalyzer"
+    ],
+    "methods": [
+      "isPassiveSentence",
+      "analyze"
+    ],
+    "runtime_entrypoints": [
+      "bootstrap",
+      "di_container",
+      "content_analyzer"
+    ],
+    "wordpress_hooks": [
+      "save_post"
+    ],
+    "di_bindings": [
+      "ApexSEO\\SEO\\Analysis\\PassiveVoiceAnalyzer",
+      "ApexSEO\\SEO\\Analysis\\ContentAnalyzer"
+    ],
     "routes": [],
     "cli_commands": [],
     "database_tables": [],
-    "test_files": [],
-    "test_methods": [],
-    "behavior_evidence": [],
-    "reason": "No physical production files or concrete domain methods present in source codebase."
+    "test_files": [
+      "tests/AnalysisSubsystemTest.php"
+    ],
+    "test_methods": [
+      "testPassiveVoiceAnalyzer",
+      "testMasterContentAnalyzerIntegration"
+    ],
+    "behavior_evidence": [
+      "Auxiliary verb and irregular participle matching",
+      "Predicate adjective false-positive filtering",
+      "Passive sentence density calculation"
+    ],
+    "reason": "Production implementation with passive voice detection engine and stative adjective filtering."
   },
   {
     "id": "APEX-053",
     "name": "Orphaned Content Detector",
-    "status": "SPEC_ONLY",
-    "production_files": [],
-    "classes": [],
-    "methods": [],
-    "runtime_entrypoints": [
-      "bootstrap"
+    "status": "IMPLEMENTED",
+    "production_files": [
+      "src/SEO/Analysis/TransitionWordAnalyzer.php",
+      "src/SEO/Analysis/ContentAnalyzer.php"
     ],
-    "wordpress_hooks": [],
-    "di_bindings": [],
+    "classes": [
+      "ApexSEO\\SEO\\Analysis\\TransitionWordAnalyzer",
+      "ApexSEO\\SEO\\Analysis\\ContentAnalyzer"
+    ],
+    "methods": [
+      "findTransitionsInSentence",
+      "analyze"
+    ],
+    "runtime_entrypoints": [
+      "bootstrap",
+      "di_container",
+      "content_analyzer"
+    ],
+    "wordpress_hooks": [
+      "save_post"
+    ],
+    "di_bindings": [
+      "ApexSEO\\SEO\\Analysis\\TransitionWordAnalyzer",
+      "ApexSEO\\SEO\\Analysis\\ContentAnalyzer"
+    ],
     "routes": [],
     "cli_commands": [],
     "database_tables": [],
-    "test_files": [],
-    "test_methods": [],
-    "behavior_evidence": [],
-    "reason": "No physical production files or concrete domain methods present in source codebase."
+    "test_files": [
+      "tests/AnalysisSubsystemTest.php"
+    ],
+    "test_methods": [
+      "testTransitionWordAnalyzer",
+      "testMasterContentAnalyzerIntegration"
+    ],
+    "behavior_evidence": [
+      "Multilingual English and Persian transition dictionary",
+      "Categorical breakdown across 6 functional types",
+      "Sentence transition coverage metric"
+    ],
+    "reason": "Production implementation with multilingual transition word analyzer."
   },
   {
     "id": "APEX-054",
     "name": "Paragraph Length & Voice Analyzer",
-    "status": "SPEC_ONLY",
-    "production_files": [],
-    "classes": [],
-    "methods": [],
-    "runtime_entrypoints": [
-      "bootstrap"
+    "status": "IMPLEMENTED",
+    "production_files": [
+      "src/SEO/Analysis/TextStructureAnalyzer.php",
+      "src/SEO/Analysis/ContentAnalyzer.php"
     ],
-    "wordpress_hooks": [],
-    "di_bindings": [],
+    "classes": [
+      "ApexSEO\\SEO\\Analysis\\TextStructureAnalyzer",
+      "ApexSEO\\SEO\\Analysis\\ContentAnalyzer"
+    ],
+    "methods": [
+      "extractParagraphs",
+      "analyze"
+    ],
+    "runtime_entrypoints": [
+      "bootstrap",
+      "di_container",
+      "content_analyzer"
+    ],
+    "wordpress_hooks": [
+      "save_post"
+    ],
+    "di_bindings": [
+      "ApexSEO\\SEO\\Analysis\\TextStructureAnalyzer",
+      "ApexSEO\\SEO\\Analysis\\ContentAnalyzer"
+    ],
     "routes": [],
     "cli_commands": [],
     "database_tables": [],
-    "test_files": [],
-    "test_methods": [],
-    "behavior_evidence": [],
-    "reason": "No physical production files or concrete domain methods present in source codebase."
+    "test_files": [
+      "tests/AnalysisSubsystemTest.php"
+    ],
+    "test_methods": [
+      "testTextStructureAnalyzer",
+      "testMasterContentAnalyzerIntegration"
+    ],
+    "behavior_evidence": [
+      "Paragraph and sentence length distributions",
+      "Oversized paragraph (>150 words) flagging",
+      "Overly complex sentence (>20 words) detection"
+    ],
+    "reason": "Production implementation with text structure and paragraph length analyzer."
   },
   {
     "id": "APEX-055",
