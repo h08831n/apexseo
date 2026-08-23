@@ -20,6 +20,7 @@ require_once __DIR__ . '/LifecycleTest.php';
 
 // Subsystems test cases
 require_once __DIR__ . '/SeoSubsystemTest.php';
+require_once __DIR__ . '/AnalysisSubsystemTest.php';
 require_once __DIR__ . '/SchemaSubsystemTest.php';
 require_once __DIR__ . '/PerformanceSubsystemTest.php';
 require_once __DIR__ . '/MediaSubsystemTest.php';
@@ -40,6 +41,7 @@ $testClasses = [
     ApexSEO\Tests\BootstrapTest::class,
     ApexSEO\Tests\LifecycleTest::class,
     ApexSEO\Tests\SeoSubsystemTest::class,
+    ApexSEO\Tests\AnalysisSubsystemTest::class,
     ApexSEO\Tests\SchemaSubsystemTest::class,
     ApexSEO\Tests\PerformanceSubsystemTest::class,
     ApexSEO\Tests\MediaSubsystemTest::class,

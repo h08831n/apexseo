@@ -23,6 +23,14 @@ use ApexSEO\SEO\Sitemap\SitemapGenerator;
 use ApexSEO\SEO\Redirects\RedirectManager;
 use ApexSEO\SEO\Integrations\WooCommerceIntegration;
 use ApexSEO\SEO\Admin\MetaSaver;
+use ApexSEO\SEO\Analysis\KeywordAnalyzer;
+use ApexSEO\SEO\Analysis\ReadabilityScorer;
+use ApexSEO\SEO\Analysis\HeadingAnalyzer;
+use ApexSEO\SEO\Analysis\LinkGraphScanner;
+use ApexSEO\SEO\Analysis\PassiveVoiceAnalyzer;
+use ApexSEO\SEO\Analysis\TransitionWordAnalyzer;
+use ApexSEO\SEO\Analysis\TextStructureAnalyzer;
+use ApexSEO\SEO\Analysis\ContentAnalyzer;
 
 /**
  * SEO Core Subsystem Module.
@@ -161,6 +169,52 @@ class SeoModule implements ModuleInterface, HookableInterface {
             return new MetaSaver(
                 $c->get(IndexableRepository::class),
                 $c->get(IndexableBuilder::class)
+            );
+        });
+
+        // Content Intelligence & On-Page Analysis Subsystem (APEX-048 to APEX-054)
+        $container->singleton(KeywordAnalyzer::class, function() {
+            return new KeywordAnalyzer();
+        });
+
+        $container->singleton(ReadabilityScorer::class, function() {
+            return new ReadabilityScorer();
+        });
+
+        $container->singleton(HeadingAnalyzer::class, function() {
+            return new HeadingAnalyzer();
+        });
+
+        $container->singleton(LinkGraphScanner::class, function(ContainerInterface $c) {
+            $db = $c->has(DatabaseManager::class) ? $c->get(DatabaseManager::class) : null;
+            return new LinkGraphScanner($db);
+        });
+
+        $container->singleton(PassiveVoiceAnalyzer::class, function(ContainerInterface $c) {
+            return new PassiveVoiceAnalyzer($c->get(ReadabilityScorer::class));
+        });
+
+        $container->singleton(TransitionWordAnalyzer::class, function(ContainerInterface $c) {
+            return new TransitionWordAnalyzer(
+                $c->get(ReadabilityScorer::class),
+                $c->get(KeywordAnalyzer::class)
+            );
+        });
+
+        $container->singleton(TextStructureAnalyzer::class, function(ContainerInterface $c) {
+            return new TextStructureAnalyzer($c->get(ReadabilityScorer::class));
+        });
+
+        $container->singleton(ContentAnalyzer::class, function(ContainerInterface $c) {
+            return new ContentAnalyzer(
+                $c->get(KeywordAnalyzer::class),
+                $c->get(ReadabilityScorer::class),
+                $c->get(HeadingAnalyzer::class),
+                $c->get(LinkGraphScanner::class),
+                $c->get(PassiveVoiceAnalyzer::class),
+                $c->get(TransitionWordAnalyzer::class),
+                $c->get(TextStructureAnalyzer::class),
+                $c->has(IndexableRepository::class) ? $c->get(IndexableRepository::class) : null
             );
         });
     }
