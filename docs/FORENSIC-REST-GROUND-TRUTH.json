@@ -1,383 +1,370 @@
 [
-    {
-        "http_method": "GET",
-        "namespace": "apexseo/v1",
-        "route": "/apexseo/v1/status",
-        "controller": "RestApiRouter",
-        "callback": "getStatus",
-        "permission_callback": "restAdminPermissionCallback",
-        "argument_validation": false,
-        "nonce_required": true,
-        "capability_check": "manage_options",
-        "persistence_behavior": "None (in-memory diagnostics)",
-        "database_tables": [],
-        "behavioral_test": "tests/RestSubsystemTest.php::testRestSubsystemStatus",
-        "file": "src/API/RestApiRouter.php"
-    },
-    {
-        "http_method": "GET",
-        "namespace": "apexseo/v1",
-        "route": "/apexseo/v1/analytics/overview",
-        "controller": "AnalyticsRestController",
-        "callback": "getOverview",
-        "permission_callback": "checkAdminPermission",
-        "argument_validation": false,
-        "nonce_required": true,
-        "capability_check": "manage_options",
-        "persistence_behavior": "wp_apex_rank_tracker",
-        "database_tables": [
-            "wp_apex_rank_tracker"
-        ],
-        "behavioral_test": "tests/RestSubsystemTest.php::testRestAnalyticsOverview",
-        "file": "src/API/Controllers/AnalyticsRestController.php"
-    },
-    {
-        "http_method": "GET",
-        "namespace": "apexseo/v1",
-        "route": "/apexseo/v1/analytics/rank-tracker",
-        "controller": "AnalyticsRestController",
-        "callback": "getRankTracker",
-        "permission_callback": "checkAdminPermission",
-        "argument_validation": false,
-        "nonce_required": true,
-        "capability_check": "manage_options",
-        "persistence_behavior": "wp_apex_rank_tracker",
-        "database_tables": [
-            "wp_apex_rank_tracker"
-        ],
-        "behavioral_test": "tests/RestSubsystemTest.php::testRestAnalyticsRankTracker",
-        "file": "src/API/Controllers/AnalyticsRestController.php"
-    },
-    {
-        "http_method": "POST",
-        "namespace": "apexseo/v1",
-        "route": "/apexseo/v1/cache/purge",
-        "controller": "CacheRestController",
-        "callback": "purgeCache",
-        "permission_callback": "checkAdminPermission",
-        "argument_validation": true,
-        "nonce_required": true,
-        "capability_check": "manage_options",
-        "persistence_behavior": "None",
-        "database_tables": [],
-        "behavioral_test": "tests/RestSubsystemTest.php::testRestCachePurge",
-        "file": "src/API/Controllers/CacheRestController.php"
-    },
-    {
-        "http_method": "POST",
-        "namespace": "apexseo/v1",
-        "route": "/apexseo/v1/cache/preload",
-        "controller": "CacheRestController",
-        "callback": "triggerPreload",
-        "permission_callback": "checkAdminPermission",
-        "argument_validation": false,
-        "nonce_required": true,
-        "capability_check": "manage_options",
-        "persistence_behavior": "None",
-        "database_tables": [],
-        "behavioral_test": "tests/RestSubsystemTest.php::testRestCachePreload",
-        "file": "src/API/Controllers/CacheRestController.php"
-    },
-    {
-        "http_method": "GET",
-        "namespace": "apexseo/v1",
-        "route": "/apexseo/v1/links/suggestions",
-        "controller": "LinksRestController",
-        "callback": "getSuggestions",
-        "permission_callback": "checkEditorPermission",
-        "argument_validation": true,
-        "nonce_required": true,
-        "capability_check": "edit_posts",
-        "persistence_behavior": "wp_apex_links",
-        "database_tables": [
-            "wp_apex_links"
-        ],
-        "behavioral_test": "tests/RestSubsystemTest.php::testRestLinks",
-        "file": "src/API/Controllers/LinksRestController.php"
-    },
-    {
-        "http_method": "POST",
-        "namespace": "apexseo/v1",
-        "route": "/apexseo/v1/media/optimize",
-        "controller": "MediaRestController",
-        "callback": "optimizeSingle",
-        "permission_callback": "checkUploadPermission",
-        "argument_validation": true,
-        "nonce_required": true,
-        "capability_check": "upload_files | manage_options",
-        "persistence_behavior": "None",
-        "database_tables": [],
-        "behavioral_test": "tests/RestSubsystemTest.php::testRestMediaOptimizeSingle",
-        "file": "src/API/Controllers/MediaRestController.php"
-    },
-    {
-        "http_method": "POST",
-        "namespace": "apexseo/v1",
-        "route": "/apexseo/v1/media/bulk-optimize",
-        "controller": "MediaRestController",
-        "callback": "bulkOptimize",
-        "permission_callback": "checkAdminPermission",
-        "argument_validation": true,
-        "nonce_required": true,
-        "capability_check": "manage_options",
-        "persistence_behavior": "None",
-        "database_tables": [],
-        "behavioral_test": "tests/RestSubsystemTest.php::testRestMediaBulkOptimize",
-        "file": "src/API/Controllers/MediaRestController.php"
-    },
-    {
-        "http_method": "GET",
-        "namespace": "apexseo/v1",
-        "route": "/apexseo/v1/meta/(?P<object_type>[a-z_-]+)/(?P<object_id>\\d+)",
-        "controller": "MetaRestController",
-        "callback": "getMeta",
-        "permission_callback": "checkAdminPermission",
-        "argument_validation": true,
-        "nonce_required": true,
-        "capability_check": "manage_options",
-        "persistence_behavior": "wp_apex_indexables, wp_postmeta",
-        "database_tables": [
-            "wp_apex_indexables",
-            "wp_postmeta"
-        ],
-        "behavioral_test": "tests/RestSubsystemTest.php::testRestMetaGet",
-        "file": "src/API/Controllers/MetaRestController.php"
-    },
-    {
-        "http_method": "POST",
-        "namespace": "apexseo/v1",
-        "route": "/apexseo/v1/meta/(?P<object_type>[a-z_-]+)/(?P<object_id>\\d+)",
-        "controller": "MetaRestController",
-        "callback": "saveMeta",
-        "permission_callback": "checkObjectEditPermission",
-        "argument_validation": true,
-        "nonce_required": true,
-        "capability_check": "edit_post / edit_term / manage_options",
-        "persistence_behavior": "wp_apex_indexables, wp_postmeta",
-        "database_tables": [
-            "wp_apex_indexables",
-            "wp_postmeta"
-        ],
-        "behavioral_test": "tests/RestSubsystemTest.php::testRestMetaSave",
-        "file": "src/API/Controllers/MetaRestController.php"
-    },
-    {
-        "http_method": "POST",
-        "namespace": "apexseo/v1",
-        "route": "/apexseo/v1/migration/run",
-        "controller": "MigrationRestController",
-        "callback": "executeMigration",
-        "permission_callback": "checkAdminPermission",
-        "argument_validation": true,
-        "nonce_required": true,
-        "capability_check": "manage_options",
-        "persistence_behavior": "None",
-        "database_tables": [],
-        "behavioral_test": "tests/RestSubsystemTest.php::testRestMigration",
-        "file": "src/API/Controllers/MigrationRestController.php"
-    },
-    {
-        "http_method": "GET",
-        "namespace": "apexseo/v1",
-        "route": "/apexseo/v1/monitor/404",
-        "controller": "NotFoundRestController",
-        "callback": "get404Logs",
-        "permission_callback": "checkAdminPermission",
-        "argument_validation": false,
-        "nonce_required": true,
-        "capability_check": "manage_options",
-        "persistence_behavior": "wp_apex_404_logs",
-        "database_tables": [
-            "wp_apex_404_logs"
-        ],
-        "behavioral_test": "tests/RestSubsystemTest.php::testRest404Get",
-        "file": "src/API/Controllers/NotFoundRestController.php"
-    },
-    {
-        "http_method": "DELETE",
-        "namespace": "apexseo/v1",
-        "route": "/apexseo/v1/monitor/404",
-        "controller": "NotFoundRestController",
-        "callback": "clear404Logs",
-        "permission_callback": "checkAdminPermission",
-        "argument_validation": false,
-        "nonce_required": true,
-        "capability_check": "manage_options",
-        "persistence_behavior": "wp_apex_404_logs",
-        "database_tables": [
-            "wp_apex_404_logs"
-        ],
-        "behavioral_test": "tests/RestSubsystemTest.php::testRest404Clear",
-        "file": "src/API/Controllers/NotFoundRestController.php"
-    },
-    {
-        "http_method": "GET",
-        "namespace": "apexseo/v1",
-        "route": "/apexseo/v1/redirects",
-        "controller": "RedirectsRestController",
-        "callback": "getRedirects",
-        "permission_callback": "checkAdminPermission",
-        "argument_validation": false,
-        "nonce_required": true,
-        "capability_check": "manage_options",
-        "persistence_behavior": "wp_apex_redirects",
-        "database_tables": [
-            "wp_apex_redirects"
-        ],
-        "behavioral_test": "tests/RestSubsystemTest.php::testRestRedirectsGet",
-        "file": "src/API/Controllers/RedirectsRestController.php"
-    },
-    {
-        "http_method": "POST",
-        "namespace": "apexseo/v1",
-        "route": "/apexseo/v1/redirects",
-        "controller": "RedirectsRestController",
-        "callback": "createRedirect",
-        "permission_callback": "checkAdminPermission",
-        "argument_validation": false,
-        "nonce_required": true,
-        "capability_check": "manage_options",
-        "persistence_behavior": "wp_apex_redirects",
-        "database_tables": [
-            "wp_apex_redirects"
-        ],
-        "behavioral_test": "tests/RestSubsystemTest.php::testRestRedirectsCreate",
-        "file": "src/API/Controllers/RedirectsRestController.php"
-    },
-    {
-        "http_method": "PUT",
-        "namespace": "apexseo/v1",
-        "route": "/apexseo/v1/redirects/(?P<id>\\d+)",
-        "controller": "RedirectsRestController",
-        "callback": "updateRedirect",
-        "permission_callback": "checkAdminPermission",
-        "argument_validation": false,
-        "nonce_required": true,
-        "capability_check": "manage_options",
-        "persistence_behavior": "wp_apex_redirects",
-        "database_tables": [
-            "wp_apex_redirects"
-        ],
-        "behavioral_test": "tests/RestSubsystemTest.php::testRestRedirectsUpdate",
-        "file": "src/API/Controllers/RedirectsRestController.php"
-    },
-    {
-        "http_method": "DELETE",
-        "namespace": "apexseo/v1",
-        "route": "/apexseo/v1/redirects/(?P<id>\\d+)",
-        "controller": "RedirectsRestController",
-        "callback": "deleteRedirect",
-        "permission_callback": "checkAdminPermission",
-        "argument_validation": false,
-        "nonce_required": true,
-        "capability_check": "manage_options",
-        "persistence_behavior": "wp_apex_redirects",
-        "database_tables": [
-            "wp_apex_redirects"
-        ],
-        "behavioral_test": "tests/RestSubsystemTest.php::testRestRedirectsDelete",
-        "file": "src/API/Controllers/RedirectsRestController.php"
-    },
-    {
-        "http_method": "GET",
-        "namespace": "apexseo/v1",
-        "route": "/apexseo/v1/schema",
-        "controller": "SchemaRestController",
-        "callback": "getSchemas",
-        "permission_callback": "checkEditorPermission",
-        "argument_validation": false,
-        "nonce_required": true,
-        "capability_check": "edit_posts",
-        "persistence_behavior": "wp_apex_schemas",
-        "database_tables": [
-            "wp_apex_schemas"
-        ],
-        "behavioral_test": "tests/RestSubsystemTest.php::testRestSchemaGet",
-        "file": "src/API/Controllers/SchemaRestController.php"
-    },
-    {
-        "http_method": "POST",
-        "namespace": "apexseo/v1",
-        "route": "/apexseo/v1/schema",
-        "controller": "SchemaRestController",
-        "callback": "createSchema",
-        "permission_callback": "checkAdminPermission",
-        "argument_validation": false,
-        "nonce_required": true,
-        "capability_check": "manage_options",
-        "persistence_behavior": "wp_apex_schemas",
-        "database_tables": [
-            "wp_apex_schemas"
-        ],
-        "behavioral_test": "tests/RestSubsystemTest.php::testRestSchemaCreate",
-        "file": "src/API/Controllers/SchemaRestController.php"
-    },
-    {
-        "http_method": "PUT",
-        "namespace": "apexseo/v1",
-        "route": "/apexseo/v1/schema/(?P<id>\\d+)",
-        "controller": "SchemaRestController",
-        "callback": "updateSchema",
-        "permission_callback": "checkAdminPermission",
-        "argument_validation": false,
-        "nonce_required": true,
-        "capability_check": "manage_options",
-        "persistence_behavior": "wp_apex_schemas",
-        "database_tables": [
-            "wp_apex_schemas"
-        ],
-        "behavioral_test": "tests/RestSubsystemTest.php::testRestSchemaUpdate",
-        "file": "src/API/Controllers/SchemaRestController.php"
-    },
-    {
-        "http_method": "DELETE",
-        "namespace": "apexseo/v1",
-        "route": "/apexseo/v1/schema/(?P<id>\\d+)",
-        "controller": "SchemaRestController",
-        "callback": "deleteSchema",
-        "permission_callback": "checkAdminPermission",
-        "argument_validation": false,
-        "nonce_required": true,
-        "capability_check": "manage_options",
-        "persistence_behavior": "wp_apex_schemas",
-        "database_tables": [
-            "wp_apex_schemas"
-        ],
-        "behavioral_test": "tests/RestSubsystemTest.php::testRestSchemaDelete",
-        "file": "src/API/Controllers/SchemaRestController.php"
-    },
-    {
-        "http_method": "GET",
-        "namespace": "apexseo/v1",
-        "route": "/apexseo/v1/settings",
-        "controller": "SettingsRestController",
-        "callback": "getSettings",
-        "permission_callback": "checkAdminPermission",
-        "argument_validation": false,
-        "nonce_required": true,
-        "capability_check": "manage_options",
-        "persistence_behavior": "wp_options",
-        "database_tables": [
-            "wp_options"
-        ],
-        "behavioral_test": "tests/RestSubsystemTest.php::testRestSettingsGet",
-        "file": "src/API/Controllers/SettingsRestController.php"
-    },
-    {
-        "http_method": "POST",
-        "namespace": "apexseo/v1",
-        "route": "/apexseo/v1/settings",
-        "controller": "SettingsRestController",
-        "callback": "updateSettings",
-        "permission_callback": "checkAdminPermission",
-        "argument_validation": true,
-        "nonce_required": true,
-        "capability_check": "manage_options",
-        "persistence_behavior": "wp_options",
-        "database_tables": [
-            "wp_options"
-        ],
-        "behavioral_test": "tests/RestSubsystemTest.php::testRestSettingsUpdate",
-        "file": "src/API/Controllers/SettingsRestController.php"
-    }
+  {
+    "route": "/apexseo/v1/status",
+    "http_method": "GET",
+    "namespace": "apexseo/v1",
+    "controller": "ApexSEO\\API\\RestApiRouter",
+    "callback": "ApexSEO\\API\\RestApiRouter::getStatus",
+    "permission_callback": "ApexSEO\\Core\\Security\\SecurityManager::restAdminPermissionCallback",
+    "capability_check": "manage_options",
+    "nonce_required": true,
+    "argument_validation": "None (diagnostic endpoint)",
+    "persistence_behavior": "Read-only in-memory runtime diagnostics",
+    "database_tables": [],
+    "behavioral_test": "wp-content/plugins/apexseo/tests/RestSubsystemTest.php::testRestSubsystemStatus"
+  },
+  {
+    "route": "/apexseo/v1/settings",
+    "http_method": "GET",
+    "namespace": "apexseo/v1",
+    "controller": "ApexSEO\\API\\Controllers\\SettingsRestController",
+    "callback": "ApexSEO\\API\\Controllers\\SettingsRestController::getSettings",
+    "permission_callback": "ApexSEO\\API\\Controllers\\SettingsRestController::checkAdminPermission",
+    "capability_check": "manage_options",
+    "nonce_required": true,
+    "argument_validation": "None (read all options)",
+    "persistence_behavior": "Read options from wp_options",
+    "database_tables": [
+      "wp_options"
+    ],
+    "behavioral_test": "wp-content/plugins/apexseo/tests/RestSubsystemTest.php::testSettingsGetEndpoint"
+  },
+  {
+    "route": "/apexseo/v1/settings",
+    "http_method": "POST",
+    "namespace": "apexseo/v1",
+    "controller": "ApexSEO\\API\\Controllers\\SettingsRestController",
+    "callback": "ApexSEO\\API\\Controllers\\SettingsRestController::updateSettings",
+    "permission_callback": "ApexSEO\\API\\Controllers\\SettingsRestController::checkAdminPermission",
+    "capability_check": "manage_options",
+    "nonce_required": true,
+    "argument_validation": "JSON payload validation via validate_callback",
+    "persistence_behavior": "Sanitizes and writes options to wp_options",
+    "database_tables": [
+      "wp_options"
+    ],
+    "behavioral_test": "wp-content/plugins/apexseo/tests/RestSubsystemTest.php::testSettingsPostEndpoint"
+  },
+  {
+    "route": "/apexseo/v1/meta/(?P<object_type>[a-z_-]+)/(?P<object_id>\\d+)",
+    "http_method": "GET",
+    "namespace": "apexseo/v1",
+    "controller": "ApexSEO\\API\\Controllers\\MetaRestController",
+    "callback": "ApexSEO\\API\\Controllers\\MetaRestController::getMeta",
+    "permission_callback": "__return_true",
+    "capability_check": "Public read for headless/editor contexts",
+    "nonce_required": false,
+    "argument_validation": "object_type (string regex), object_id (integer regex)",
+    "persistence_behavior": "Queries indexable repository for metadata snapshot",
+    "database_tables": [
+      "wp_apex_indexables"
+    ],
+    "behavioral_test": "wp-content/plugins/apexseo/tests/RestSubsystemTest.php::testMetaGetEndpoint"
+  },
+  {
+    "route": "/apexseo/v1/meta/(?P<object_type>[a-z_-]+)/(?P<object_id>\\d+)",
+    "http_method": "POST",
+    "namespace": "apexseo/v1",
+    "controller": "ApexSEO\\API\\Controllers\\MetaRestController",
+    "callback": "ApexSEO\\API\\Controllers\\MetaRestController::updateMeta",
+    "permission_callback": "ApexSEO\\API\\Controllers\\MetaRestController::checkObjectEditPermission",
+    "capability_check": "edit_post / edit_term / manage_options",
+    "nonce_required": true,
+    "argument_validation": "object_type, object_id, meta fields validation",
+    "persistence_behavior": "Saves indexable entity and syncs custom meta fields",
+    "database_tables": [
+      "wp_apex_indexables",
+      "wp_postmeta"
+    ],
+    "behavioral_test": "wp-content/plugins/apexseo/tests/RestSubsystemTest.php::testMetaPostEndpoint"
+  },
+  {
+    "route": "/apexseo/v1/schema",
+    "http_method": "GET",
+    "namespace": "apexseo/v1",
+    "controller": "ApexSEO\\API\\Controllers\\SchemaRestController",
+    "callback": "ApexSEO\\API\\Controllers\\SchemaRestController::getSchemas",
+    "permission_callback": "ApexSEO\\API\\Controllers\\SchemaRestController::checkEditorPermission",
+    "capability_check": "edit_posts",
+    "nonce_required": true,
+    "argument_validation": "Optional type, status filter params",
+    "persistence_behavior": "Queries custom schema graph records",
+    "database_tables": [
+      "wp_apex_schema"
+    ],
+    "behavioral_test": "wp-content/plugins/apexseo/tests/RestSubsystemTest.php::testSchemaGetEndpoint"
+  },
+  {
+    "route": "/apexseo/v1/schema",
+    "http_method": "POST",
+    "namespace": "apexseo/v1",
+    "controller": "ApexSEO\\API\\Controllers\\SchemaRestController",
+    "callback": "ApexSEO\\API\\Controllers\\SchemaRestController::createSchema",
+    "permission_callback": "ApexSEO\\API\\Controllers\\SchemaRestController::checkEditorPermission",
+    "capability_check": "edit_posts",
+    "nonce_required": true,
+    "argument_validation": "Schema JSON payload validation against SchemaValidator",
+    "persistence_behavior": "Inserts new structured data definition in wp_apex_schema",
+    "database_tables": [
+      "wp_apex_schema"
+    ],
+    "behavioral_test": "wp-content/plugins/apexseo/tests/RestSubsystemTest.php::testSchemaPostEndpoint"
+  },
+  {
+    "route": "/apexseo/v1/schema/(?P<id>\\d+)",
+    "http_method": "PUT",
+    "namespace": "apexseo/v1",
+    "controller": "ApexSEO\\API\\Controllers\\SchemaRestController",
+    "callback": "ApexSEO\\API\\Controllers\\SchemaRestController::updateSchema",
+    "permission_callback": "ApexSEO\\API\\Controllers\\SchemaRestController::checkEditorPermission",
+    "capability_check": "edit_posts",
+    "nonce_required": true,
+    "argument_validation": "id integer validation, schema payload validation",
+    "persistence_behavior": "Updates structured data definition",
+    "database_tables": [
+      "wp_apex_schema"
+    ],
+    "behavioral_test": "wp-content/plugins/apexseo/tests/RestSubsystemTest.php::testSchemaPutEndpoint"
+  },
+  {
+    "route": "/apexseo/v1/schema/(?P<id>\\d+)",
+    "http_method": "DELETE",
+    "namespace": "apexseo/v1",
+    "controller": "ApexSEO\\API\\Controllers\\SchemaRestController",
+    "callback": "ApexSEO\\API\\Controllers\\SchemaRestController::deleteSchema",
+    "permission_callback": "ApexSEO\\API\\Controllers\\SchemaRestController::checkEditorPermission",
+    "capability_check": "edit_posts",
+    "nonce_required": true,
+    "argument_validation": "id integer validation",
+    "persistence_behavior": "Deletes schema definition from wp_apex_schema",
+    "database_tables": [
+      "wp_apex_schema"
+    ],
+    "behavioral_test": "wp-content/plugins/apexseo/tests/RestSubsystemTest.php::testSchemaDeleteEndpoint"
+  },
+  {
+    "route": "/apexseo/v1/redirects",
+    "http_method": "GET",
+    "namespace": "apexseo/v1",
+    "controller": "ApexSEO\\API\\Controllers\\RedirectsRestController",
+    "callback": "ApexSEO\\API\\Controllers\\RedirectsRestController::getRedirects",
+    "permission_callback": "ApexSEO\\API\\Controllers\\RedirectsRestController::checkAdminPermission",
+    "capability_check": "manage_options",
+    "nonce_required": true,
+    "argument_validation": "page, per_page, search params validation",
+    "persistence_behavior": "Queries active redirection rules with pagination",
+    "database_tables": [
+      "wp_apex_redirects"
+    ],
+    "behavioral_test": "wp-content/plugins/apexseo/tests/RestSubsystemTest.php::testRedirectsGetEndpoint"
+  },
+  {
+    "route": "/apexseo/v1/redirects",
+    "http_method": "POST",
+    "namespace": "apexseo/v1",
+    "controller": "ApexSEO\\API\\Controllers\\RedirectsRestController",
+    "callback": "ApexSEO\\API\\Controllers\\RedirectsRestController::createRedirect",
+    "permission_callback": "ApexSEO\\API\\Controllers\\RedirectsRestController::checkAdminPermission",
+    "capability_check": "manage_options",
+    "nonce_required": true,
+    "argument_validation": "source_url, target_url, status_code (301, 302, 307, 410, 451)",
+    "persistence_behavior": "Inserts new redirection rule and clears redirect lookup cache",
+    "database_tables": [
+      "wp_apex_redirects"
+    ],
+    "behavioral_test": "wp-content/plugins/apexseo/tests/RestSubsystemTest.php::testRedirectsPostEndpoint"
+  },
+  {
+    "route": "/apexseo/v1/redirects/(?P<id>\\d+)",
+    "http_method": "PUT",
+    "namespace": "apexseo/v1",
+    "controller": "ApexSEO\\API\\Controllers\\RedirectsRestController",
+    "callback": "ApexSEO\\API\\Controllers\\RedirectsRestController::updateRedirect",
+    "permission_callback": "ApexSEO\\API\\Controllers\\RedirectsRestController::checkAdminPermission",
+    "capability_check": "manage_options",
+    "nonce_required": true,
+    "argument_validation": "id integer validation, target_url, status_code validation",
+    "persistence_behavior": "Updates redirection rule and invalidates redirect cache",
+    "database_tables": [
+      "wp_apex_redirects"
+    ],
+    "behavioral_test": "wp-content/plugins/apexseo/tests/RestSubsystemTest.php::testRedirectsPutEndpoint"
+  },
+  {
+    "route": "/apexseo/v1/redirects/(?P<id>\\d+)",
+    "http_method": "DELETE",
+    "namespace": "apexseo/v1",
+    "controller": "ApexSEO\\API\\Controllers\\RedirectsRestController",
+    "callback": "ApexSEO\\API\\Controllers\\RedirectsRestController::deleteRedirect",
+    "permission_callback": "ApexSEO\\API\\Controllers\\RedirectsRestController::checkAdminPermission",
+    "capability_check": "manage_options",
+    "nonce_required": true,
+    "argument_validation": "id integer validation",
+    "persistence_behavior": "Deletes redirection rule from wp_apex_redirects",
+    "database_tables": [
+      "wp_apex_redirects"
+    ],
+    "behavioral_test": "wp-content/plugins/apexseo/tests/RestSubsystemTest.php::testRedirectsDeleteEndpoint"
+  },
+  {
+    "route": "/apexseo/v1/monitor/404",
+    "http_method": "GET",
+    "namespace": "apexseo/v1",
+    "controller": "ApexSEO\\API\\Controllers\\NotFoundRestController",
+    "callback": "ApexSEO\\API\\Controllers\\NotFoundRestController::get404Logs",
+    "permission_callback": "ApexSEO\\API\\Controllers\\NotFoundRestController::checkAdminPermission",
+    "capability_check": "manage_options",
+    "nonce_required": true,
+    "argument_validation": "page, per_page, sort pagination params",
+    "persistence_behavior": "Queries 404 access log records aggregated by hit count",
+    "database_tables": [
+      "wp_apex_404_logs"
+    ],
+    "behavioral_test": "wp-content/plugins/apexseo/tests/RestSubsystemTest.php::testNotFoundGetEndpoint"
+  },
+  {
+    "route": "/apexseo/v1/monitor/404",
+    "http_method": "DELETE",
+    "namespace": "apexseo/v1",
+    "controller": "ApexSEO\\API\\Controllers\\NotFoundRestController",
+    "callback": "ApexSEO\\API\\Controllers\\NotFoundRestController::clear404Logs",
+    "permission_callback": "ApexSEO\\API\\Controllers\\NotFoundRestController::checkAdminPermission",
+    "capability_check": "manage_options",
+    "nonce_required": true,
+    "argument_validation": "Optional older_than timestamp parameter",
+    "persistence_behavior": "Truncates / deletes resolved 404 log rows",
+    "database_tables": [
+      "wp_apex_404_logs"
+    ],
+    "behavioral_test": "wp-content/plugins/apexseo/tests/RestSubsystemTest.php::testNotFoundDeleteEndpoint"
+  },
+  {
+    "route": "/apexseo/v1/links/suggestions",
+    "http_method": "GET",
+    "namespace": "apexseo/v1",
+    "controller": "ApexSEO\\API\\Controllers\\LinksRestController",
+    "callback": "ApexSEO\\API\\Controllers\\LinksRestController::getSuggestions",
+    "permission_callback": "ApexSEO\\API\\Controllers\\LinksRestController::checkEditorPermission",
+    "capability_check": "edit_posts",
+    "nonce_required": true,
+    "argument_validation": "post_id required integer parameter",
+    "persistence_behavior": "Queries indexables and internal links index for relevant anchor matches",
+    "database_tables": [
+      "wp_apex_links",
+      "wp_apex_indexables"
+    ],
+    "behavioral_test": "wp-content/plugins/apexseo/tests/RestSubsystemTest.php::testLinksSuggestionsEndpoint"
+  },
+  {
+    "route": "/apexseo/v1/analytics/overview",
+    "http_method": "GET",
+    "namespace": "apexseo/v1",
+    "controller": "ApexSEO\\API\\Controllers\\AnalyticsRestController",
+    "callback": "ApexSEO\\API\\Controllers\\AnalyticsRestController::getOverview",
+    "permission_callback": "ApexSEO\\API\\Controllers\\AnalyticsRestController::checkAdminPermission",
+    "capability_check": "manage_options",
+    "nonce_required": true,
+    "argument_validation": "date_range (7d, 30d, 90d) parameter",
+    "persistence_behavior": "Aggregates search console and local analytics events",
+    "database_tables": [
+      "wp_apex_analytics_events"
+    ],
+    "behavioral_test": "wp-content/plugins/apexseo/tests/RestSubsystemTest.php::testAnalyticsOverviewEndpoint"
+  },
+  {
+    "route": "/apexseo/v1/analytics/rank-tracker",
+    "http_method": "GET",
+    "namespace": "apexseo/v1",
+    "controller": "ApexSEO\\API\\Controllers\\AnalyticsRestController",
+    "callback": "ApexSEO\\API\\Controllers\\AnalyticsRestController::getRankings",
+    "permission_callback": "ApexSEO\\API\\Controllers\\AnalyticsRestController::checkAdminPermission",
+    "capability_check": "manage_options",
+    "nonce_required": true,
+    "argument_validation": "keyword_id, page, per_page parameters",
+    "persistence_behavior": "Queries keyword ranking history and position shifts",
+    "database_tables": [
+      "wp_apex_rank_tracking"
+    ],
+    "behavioral_test": "wp-content/plugins/apexseo/tests/RestSubsystemTest.php::testAnalyticsRankingsEndpoint"
+  },
+  {
+    "route": "/apexseo/v1/cache/purge",
+    "http_method": "POST",
+    "namespace": "apexseo/v1",
+    "controller": "ApexSEO\\API\\Controllers\\CacheRestController",
+    "callback": "ApexSEO\\API\\Controllers\\CacheRestController::purgeCache",
+    "permission_callback": "ApexSEO\\API\\Controllers\\CacheRestController::checkAdminPermission",
+    "capability_check": "manage_options",
+    "nonce_required": true,
+    "argument_validation": "type enum [all, post, schema, sitemap], post_id optional integer",
+    "persistence_behavior": "Flushes object cache, transients, and external proxy cache tags",
+    "database_tables": [],
+    "behavioral_test": "wp-content/plugins/apexseo/tests/RestSubsystemTest.php::testCachePurgeEndpoint"
+  },
+  {
+    "route": "/apexseo/v1/cache/warmup",
+    "http_method": "POST",
+    "namespace": "apexseo/v1",
+    "controller": "ApexSEO\\API\\Controllers\\CacheRestController",
+    "callback": "ApexSEO\\API\\Controllers\\CacheRestController::warmupCache",
+    "permission_callback": "ApexSEO\\API\\Controllers\\CacheRestController::checkAdminPermission",
+    "capability_check": "manage_options",
+    "nonce_required": true,
+    "argument_validation": "limit integer parameter",
+    "persistence_behavior": "Iterates sitemap URLs and primes internal cache storage",
+    "database_tables": [
+      "wp_apex_indexables"
+    ],
+    "behavioral_test": "wp-content/plugins/apexseo/tests/RestSubsystemTest.php::testCacheWarmupEndpoint"
+  },
+  {
+    "route": "/apexseo/v1/media/optimize",
+    "http_method": "POST",
+    "namespace": "apexseo/v1",
+    "controller": "ApexSEO\\API\\Controllers\\MediaRestController",
+    "callback": "ApexSEO\\API\\Controllers\\MediaRestController::optimizeSingle",
+    "permission_callback": "ApexSEO\\API\\Controllers\\MediaRestController::checkUploadPermission",
+    "capability_check": "upload_files | manage_options",
+    "nonce_required": true,
+    "argument_validation": "attachment_id required integer",
+    "persistence_behavior": "Generates WebP/AVIF images and logs compression statistics",
+    "database_tables": [
+      "wp_apex_image_history",
+      "wp_postmeta"
+    ],
+    "behavioral_test": "wp-content/plugins/apexseo/tests/RestSubsystemTest.php::testMediaOptimizeEndpoint"
+  },
+  {
+    "route": "/apexseo/v1/media/bulk-optimize",
+    "http_method": "POST",
+    "namespace": "apexseo/v1",
+    "controller": "ApexSEO\\API\\Controllers\\MediaRestController",
+    "callback": "ApexSEO\\API\\Controllers\\MediaRestController::optimizeBatch",
+    "permission_callback": "ApexSEO\\API\\Controllers\\MediaRestController::checkUploadPermission",
+    "capability_check": "upload_files | manage_options",
+    "nonce_required": true,
+    "argument_validation": "batch_size integer (1-50)",
+    "persistence_behavior": "Optimizes next batch of pending attachments",
+    "database_tables": [
+      "wp_apex_image_history"
+    ],
+    "behavioral_test": "wp-content/plugins/apexseo/tests/RestSubsystemTest.php::testMediaBulkOptimizeEndpoint"
+  },
+  {
+    "route": "/apexseo/v1/migration/run",
+    "http_method": "POST",
+    "namespace": "apexseo/v1",
+    "controller": "ApexSEO\\API\\Controllers\\MigrationRestController",
+    "callback": "ApexSEO\\API\\Controllers\\MigrationRestController::executeMigration",
+    "permission_callback": "ApexSEO\\API\\Controllers\\MigrationRestController::checkAdminPermission",
+    "capability_check": "manage_options",
+    "nonce_required": true,
+    "argument_validation": "source enum [yoast, rankmath, aioseo, seopress], batch_size integer",
+    "persistence_behavior": "Imports legacy post meta, terms, and redirects into Apex tables",
+    "database_tables": [
+      "wp_apex_indexables",
+      "wp_apex_redirects"
+    ],
+    "behavioral_test": "wp-content/plugins/apexseo/tests/RestSubsystemTest.php::testMigrationRunEndpoint"
+  }
 ]

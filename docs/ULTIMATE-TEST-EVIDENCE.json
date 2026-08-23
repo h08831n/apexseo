@@ -1,227 +1,400 @@
 {
-    "summary": {
-        "total_tests": 97,
-        "behavioral": 74,
-        "integration": 22,
+    "generated_at": "2026-08-22T20:59:33Z",
+    "total_executed": 97,
+    "classifications": {
+        "behavioral": 67,
+        "integration": 29,
         "existence_only": 1,
         "mock_only": 0
     },
-    "classification": {
-        "behavioral": [
-            "ApexSEO\\Tests\\AiSubsystemTest::testLlmsTxtGeneration",
-            "ApexSEO\\Tests\\AiSubsystemTest::testSearchIntentAnalyzer",
-            "ApexSEO\\Tests\\AiSubsystemTest::testMetadataAiGenerator",
-            "ApexSEO\\Tests\\AnalyticsSubsystemTest::testFourOhFourLogging",
-            "ApexSEO\\Tests\\AnalyticsSubsystemTest::testRankTrackerKeywords",
-            "ApexSEO\\Tests\\AutoloaderTest::testAutoloaderIgnoresForeignNamespace",
-            "ApexSEO\\Tests\\AutoloaderTest::testAutoloaderReturnsFalseForNonExistentClass",
-            "ApexSEO\\Tests\\BootstrapTest::testPluginSingletonInstance",
-            "ApexSEO\\Tests\\BootstrapTest::testPluginContainerInitialization",
-            "ApexSEO\\Tests\\BootstrapTest::testPluginBootSequence",
-            "ApexSEO\\Tests\\CapabilityRegistryTest::testCapabilityRegistrationAndRetrieval",
-            "ApexSEO\\Tests\\CapabilityRegistryTest::testCoreRegisteredCapabilities",
-            "ApexSEO\\Tests\\CliSubsystemTest::testCliManagerCommandRegistration",
-            "ApexSEO\\Tests\\CliSubsystemTest::testIndexCommandRebuildAndStatus",
-            "ApexSEO\\Tests\\CliSubsystemTest::testCacheCommandPurgeAndWarmup",
-            "ApexSEO\\Tests\\CliSubsystemTest::testMediaCommandOptimizeAndRestore",
-            "ApexSEO\\Tests\\CliSubsystemTest::testRedirectCommandAddAndList",
-            "ApexSEO\\Tests\\CliSubsystemTest::testDatabaseCommandClean",
-            "ApexSEO\\Tests\\CliSubsystemTest::testMigrateCommandRunAndRollback",
-            "ApexSEO\\Tests\\CliSubsystemTest::testSitemapCommandRebuild",
-            "ApexSEO\\Tests\\CliSubsystemTest::testDoctorCommandDiagnose",
-            "ApexSEO\\Tests\\CliSubsystemTest::testSchemaCommandValidate",
-            "ApexSEO\\Tests\\ConfigurationManagerTest::testDefaultValuesLoaded",
-            "ApexSEO\\Tests\\ConfigurationManagerTest::testDotNotationGetAndSet",
-            "ApexSEO\\Tests\\ConfigurationManagerTest::testModuleStatusToggling",
-            "ApexSEO\\Tests\\ConfigurationManagerTest::testConfigurationPersistence",
-            "ApexSEO\\Tests\\ContainerTest::testSingletonBinding",
-            "ApexSEO\\Tests\\ContainerTest::testTransientFactoryBinding",
-            "ApexSEO\\Tests\\ContainerTest::testLazyLoadingResolution",
-            "ApexSEO\\Tests\\ContainerTest::testAliasResolution",
-            "ApexSEO\\Tests\\ContainerTest::testAutoWiringDependencies",
-            "ApexSEO\\Tests\\ContainerTest::testCircularDependencyDetection",
-            "ApexSEO\\Tests\\EnvironmentDetectorTest::testPhpAndWordPressVersionDetection",
-            "ApexSEO\\Tests\\EnvironmentDetectorTest::testExtensionDetection",
-            "ApexSEO\\Tests\\EnvironmentDetectorTest::testServerAdapterResolution",
-            "ApexSEO\\Tests\\LifecycleTest::testActivationRunsMigrationsAndSetsOption",
-            "ApexSEO\\Tests\\LifecycleTest::testDeactivationCleansTransients",
-            "ApexSEO\\Tests\\LifecycleTest::testUninstallPreservesTablesWhenConfigured",
-            "ApexSEO\\Tests\\LifecycleTest::testUninstallDropsTablesWhenExplicitlyConfigured",
-            "ApexSEO\\Tests\\MediaSubsystemTest::testSvgPlaceholderGenerator",
-            "ApexSEO\\Tests\\MediaSubsystemTest::testImageLazyLoader",
-            "ApexSEO\\Tests\\MediaSubsystemTest::testLcpOptimizer",
-            "ApexSEO\\Tests\\MultisiteManagerTest::testSingleSiteDefaults",
-            "ApexSEO\\Tests\\MultisiteManagerTest::testRunInBlogContextExecution",
-            "ApexSEO\\Tests\\PerformanceSubsystemTest::testCssMinification",
-            "ApexSEO\\Tests\\PerformanceSubsystemTest::testJsMinification",
-            "ApexSEO\\Tests\\PerformanceSubsystemTest::testHtmlMinification",
-            "ApexSEO\\Tests\\PerformanceSubsystemTest::testDelayJsEngine",
-            "ApexSEO\\Tests\\PerformanceSubsystemTest::testResourceHints",
-            "ApexSEO\\Tests\\PerformanceSubsystemTest::testStaticFileWriterAndSmartPurge",
-            "ApexSEO\\Tests\\SchemaSubsystemTest::testSchemaRegistryDefaultTypes",
-            "ApexSEO\\Tests\\SchemaSubsystemTest::testArticleSchemaGeneration",
-            "ApexSEO\\Tests\\SchemaSubsystemTest::testProductSchemaGeneration",
-            "ApexSEO\\Tests\\SchemaSubsystemTest::testFaqPageSchemaGeneration",
-            "ApexSEO\\Tests\\SchemaSubsystemTest::testRecipeSchemaGeneration",
-            "ApexSEO\\Tests\\SchemaSubsystemTest::testJobPostingSchemaGeneration",
-            "ApexSEO\\Tests\\SchemaSubsystemTest::testCourseSchemaGeneration",
-            "ApexSEO\\Tests\\SchemaSubsystemTest::testEventSchemaGeneration",
-            "ApexSEO\\Tests\\SchemaSubsystemTest::testSoftwareApplicationSchemaGeneration",
-            "ApexSEO\\Tests\\SchemaSubsystemTest::testVideoObjectSchemaGeneration",
-            "ApexSEO\\Tests\\SchemaSubsystemTest::testSchemaValidator",
-            "ApexSEO\\Tests\\SchemaSubsystemTest::testSchemaGraphBuilderOutput",
-            "ApexSEO\\Tests\\SeoSubsystemTest::testVariableEngineDefaultTokens",
-            "ApexSEO\\Tests\\SeoSubsystemTest::testTitleAndDescriptionPresenters",
-            "ApexSEO\\Tests\\SeoSubsystemTest::testCanonicalAndRobotsPresenters",
-            "ApexSEO\\Tests\\SeoSubsystemTest::testOpenGraphAndTwitterCardPresenters",
-            "ApexSEO\\Tests\\SeoSubsystemTest::testBreadcrumbGenerator",
-            "ApexSEO\\Tests\\SeoSubsystemTest::testSitemapGenerator",
-            "ApexSEO\\Tests\\SeoSubsystemTest::testRedirectManager",
-            "ApexSEO\\Tests\\ServerAdapterTest::testApacheAdapterCapabilities",
-            "ApexSEO\\Tests\\ServerAdapterTest::testNginxAdapterCapabilities",
-            "ApexSEO\\Tests\\ServerAdapterTest::testLiteSpeedAdapterCapabilities",
-            "ApexSEO\\Tests\\ServerAdapterTest::testOpenLiteSpeedAdapterCapabilities",
-            "ApexSEO\\Tests\\ServerAdapterTest::testGenericServerAdapterCapabilities"
-        ],
-        "integration": [
-            "ApexSEO\\Tests\\DatabaseMigrationTest::testTablePrefixResolution",
-            "ApexSEO\\Tests\\DatabaseMigrationTest::testCustomPrefixOverride",
-            "ApexSEO\\Tests\\DatabaseMigrationTest::testMigrationExecutionCreates8LockedTables",
-            "ApexSEO\\Tests\\DatabaseMigrationTest::testMigrationRollbackDropsTables",
-            "ApexSEO\\Tests\\RestSubsystemTest::testRestRouterInitialization",
-            "ApexSEO\\Tests\\RestSubsystemTest::testStatusEndpointResponse",
-            "ApexSEO\\Tests\\RestSubsystemTest::testSettingsControllerGetAndUpdate",
-            "ApexSEO\\Tests\\RestSubsystemTest::testMetaControllerSaveAndGet",
-            "ApexSEO\\Tests\\RestSubsystemTest::testSchemaControllerCRUD",
-            "ApexSEO\\Tests\\RestSubsystemTest::testRedirectsControllerCRUD",
-            "ApexSEO\\Tests\\RestSubsystemTest::testNotFoundController",
-            "ApexSEO\\Tests\\RestSubsystemTest::testLinksController",
-            "ApexSEO\\Tests\\RestSubsystemTest::testAnalyticsController",
-            "ApexSEO\\Tests\\RestSubsystemTest::testCacheControllerPurgeAndPreload",
-            "ApexSEO\\Tests\\RestSubsystemTest::testMediaControllerSingleAndBulk",
-            "ApexSEO\\Tests\\RestSubsystemTest::testMigrationControllerExecution",
-            "ApexSEO\\Tests\\RestSubsystemTest::testPermissionWrappers",
-            "ApexSEO\\Tests\\RestSubsystemTest::testSecurityIdorAndObjectAuthorization",
-            "ApexSEO\\Tests\\RestSubsystemTest::testSecuritySqlInjectionResilience",
-            "ApexSEO\\Tests\\RestSubsystemTest::testSecurityXssPayloadSanitization",
-            "ApexSEO\\Tests\\RestSubsystemTest::testSecurityOversizedBatchAndPaginationBounds",
-            "ApexSEO\\Tests\\RestSubsystemTest::testSecurityPathTraversalAndSsrfGuards"
-        ],
-        "existence_only": [
-            "ApexSEO\\Tests\\AutoloaderTest::testAutoloaderLoadsExistingCoreClass"
-        ],
-        "mock_only": []
-    },
-    "existence_only_audit": [
-        {
-            "file": "tests/AutoloaderTest.php",
-            "class": "ApexSEO\\Tests\\AutoloaderTest",
-            "method": "testAutoloaderLoadsExistingCoreClass",
-            "reason": "Only asserts class_exists / method_exists without validating behavior",
-            "dependent_capabilities": []
+    "tests": {
+        "ApexSEO\\Tests\\AiSubsystemTest::testLlmsTxtGeneration": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\AiSubsystemTest::testSearchIntentAnalyzer": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\AiSubsystemTest::testMetadataAiGenerator": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\AnalyticsSubsystemTest::testFourOhFourLogging": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\AnalyticsSubsystemTest::testRankTrackerKeywords": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\AutoloaderTest::testAutoloaderLoadsExistingCoreClass": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\AutoloaderTest::testAutoloaderIgnoresForeignNamespace": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\AutoloaderTest::testAutoloaderReturnsFalseForNonExistentClass": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\BootstrapTest::testPluginSingletonInstance": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\BootstrapTest::testPluginContainerInitialization": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\BootstrapTest::testPluginBootSequence": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\CapabilityRegistryTest::testCapabilityRegistrationAndRetrieval": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\CapabilityRegistryTest::testCoreRegisteredCapabilities": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\CliSubsystemTest::testCliManagerCommandRegistration": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\CliSubsystemTest::testIndexCommandRebuildAndStatus": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\CliSubsystemTest::testCacheCommandPurgeAndWarmup": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\CliSubsystemTest::testMediaCommandOptimizeAndRestore": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\CliSubsystemTest::testRedirectCommandAddAndList": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\CliSubsystemTest::testDatabaseCommandClean": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\CliSubsystemTest::testMigrateCommandRunAndRollback": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\CliSubsystemTest::testSitemapCommandRebuild": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\CliSubsystemTest::testDoctorCommandDiagnose": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\CliSubsystemTest::testSchemaCommandValidate": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\ConfigurationManagerTest::testDefaultValuesLoaded": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\ConfigurationManagerTest::testDotNotationGetAndSet": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\ConfigurationManagerTest::testModuleStatusToggling": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\ConfigurationManagerTest::testConfigurationPersistence": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\ContainerTest::testSingletonBinding": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\ContainerTest::testTransientFactoryBinding": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\ContainerTest::testLazyLoadingResolution": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\ContainerTest::testAliasResolution": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\ContainerTest::testAutoWiringDependencies": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\ContainerTest::testCircularDependencyDetection": {
+            "passed": false,
+            "error": "Circular dependency detected while resolving [ApexSEO\\Tests\\CircularA]."
+        },
+        "ApexSEO\\Tests\\DatabaseMigrationTest::testTablePrefixResolution": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\DatabaseMigrationTest::testCustomPrefixOverride": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\DatabaseMigrationTest::testMigrationExecutionCreates8LockedTables": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\DatabaseMigrationTest::testMigrationRollbackDropsTables": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\EnvironmentDetectorTest::testPhpAndWordPressVersionDetection": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\EnvironmentDetectorTest::testExtensionDetection": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\EnvironmentDetectorTest::testServerAdapterResolution": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\LifecycleTest::testActivationRunsMigrationsAndSetsOption": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\LifecycleTest::testDeactivationCleansTransients": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\LifecycleTest::testUninstallPreservesTablesWhenConfigured": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\LifecycleTest::testUninstallDropsTablesWhenExplicitlyConfigured": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\MediaSubsystemTest::testSvgPlaceholderGenerator": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\MediaSubsystemTest::testImageLazyLoader": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\MediaSubsystemTest::testLcpOptimizer": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\MultisiteManagerTest::testSingleSiteDefaults": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\MultisiteManagerTest::testRunInBlogContextExecution": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\PerformanceSubsystemTest::testCssMinification": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\PerformanceSubsystemTest::testJsMinification": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\PerformanceSubsystemTest::testHtmlMinification": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\PerformanceSubsystemTest::testDelayJsEngine": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\PerformanceSubsystemTest::testResourceHints": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\PerformanceSubsystemTest::testStaticFileWriterAndSmartPurge": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\RestSubsystemTest::testRestRouterInitialization": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\RestSubsystemTest::testStatusEndpointResponse": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\RestSubsystemTest::testSettingsControllerGetAndUpdate": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\RestSubsystemTest::testMetaControllerSaveAndGet": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\RestSubsystemTest::testSchemaControllerCRUD": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\RestSubsystemTest::testRedirectsControllerCRUD": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\RestSubsystemTest::testNotFoundController": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\RestSubsystemTest::testLinksController": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\RestSubsystemTest::testAnalyticsController": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\RestSubsystemTest::testCacheControllerPurgeAndPreload": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\RestSubsystemTest::testMediaControllerSingleAndBulk": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\RestSubsystemTest::testMigrationControllerExecution": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\RestSubsystemTest::testPermissionWrappers": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\RestSubsystemTest::testSecurityIdorAndObjectAuthorization": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\RestSubsystemTest::testSecuritySqlInjectionResilience": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\RestSubsystemTest::testSecurityXssPayloadSanitization": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\RestSubsystemTest::testSecurityOversizedBatchAndPaginationBounds": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\RestSubsystemTest::testSecurityPathTraversalAndSsrfGuards": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\SchemaSubsystemTest::testSchemaRegistryDefaultTypes": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\SchemaSubsystemTest::testArticleSchemaGeneration": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\SchemaSubsystemTest::testProductSchemaGeneration": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\SchemaSubsystemTest::testFaqPageSchemaGeneration": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\SchemaSubsystemTest::testRecipeSchemaGeneration": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\SchemaSubsystemTest::testJobPostingSchemaGeneration": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\SchemaSubsystemTest::testCourseSchemaGeneration": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\SchemaSubsystemTest::testEventSchemaGeneration": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\SchemaSubsystemTest::testSoftwareApplicationSchemaGeneration": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\SchemaSubsystemTest::testVideoObjectSchemaGeneration": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\SchemaSubsystemTest::testSchemaValidator": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\SchemaSubsystemTest::testSchemaGraphBuilderOutput": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\SeoSubsystemTest::testVariableEngineDefaultTokens": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\SeoSubsystemTest::testTitleAndDescriptionPresenters": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\SeoSubsystemTest::testCanonicalAndRobotsPresenters": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\SeoSubsystemTest::testOpenGraphAndTwitterCardPresenters": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\SeoSubsystemTest::testBreadcrumbGenerator": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\SeoSubsystemTest::testSitemapGenerator": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\SeoSubsystemTest::testRedirectManager": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\ServerAdapterTest::testApacheAdapterCapabilities": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\ServerAdapterTest::testNginxAdapterCapabilities": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\ServerAdapterTest::testLiteSpeedAdapterCapabilities": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\ServerAdapterTest::testOpenLiteSpeedAdapterCapabilities": {
+            "passed": true,
+            "error": null
+        },
+        "ApexSEO\\Tests\\ServerAdapterTest::testGenericServerAdapterCapabilities": {
+            "passed": true,
+            "error": null
         }
-    ],
-    "execution_results": {
-        "passed": [
-            "ApexSEO\\Tests\\AiSubsystemTest::testLlmsTxtGeneration",
-            "ApexSEO\\Tests\\AiSubsystemTest::testSearchIntentAnalyzer",
-            "ApexSEO\\Tests\\AiSubsystemTest::testMetadataAiGenerator",
-            "ApexSEO\\Tests\\AnalyticsSubsystemTest::testFourOhFourLogging",
-            "ApexSEO\\Tests\\AnalyticsSubsystemTest::testRankTrackerKeywords",
-            "ApexSEO\\Tests\\AutoloaderTest::testAutoloaderLoadsExistingCoreClass",
-            "ApexSEO\\Tests\\AutoloaderTest::testAutoloaderIgnoresForeignNamespace",
-            "ApexSEO\\Tests\\AutoloaderTest::testAutoloaderReturnsFalseForNonExistentClass",
-            "ApexSEO\\Tests\\BootstrapTest::testPluginSingletonInstance",
-            "ApexSEO\\Tests\\BootstrapTest::testPluginContainerInitialization",
-            "ApexSEO\\Tests\\BootstrapTest::testPluginBootSequence",
-            "ApexSEO\\Tests\\CapabilityRegistryTest::testCapabilityRegistrationAndRetrieval",
-            "ApexSEO\\Tests\\CapabilityRegistryTest::testCoreRegisteredCapabilities",
-            "ApexSEO\\Tests\\CliSubsystemTest::testCliManagerCommandRegistration",
-            "ApexSEO\\Tests\\CliSubsystemTest::testIndexCommandRebuildAndStatus",
-            "ApexSEO\\Tests\\CliSubsystemTest::testCacheCommandPurgeAndWarmup",
-            "ApexSEO\\Tests\\CliSubsystemTest::testMediaCommandOptimizeAndRestore",
-            "ApexSEO\\Tests\\CliSubsystemTest::testRedirectCommandAddAndList",
-            "ApexSEO\\Tests\\CliSubsystemTest::testDatabaseCommandClean",
-            "ApexSEO\\Tests\\CliSubsystemTest::testMigrateCommandRunAndRollback",
-            "ApexSEO\\Tests\\CliSubsystemTest::testSitemapCommandRebuild",
-            "ApexSEO\\Tests\\CliSubsystemTest::testDoctorCommandDiagnose",
-            "ApexSEO\\Tests\\CliSubsystemTest::testSchemaCommandValidate",
-            "ApexSEO\\Tests\\ConfigurationManagerTest::testDefaultValuesLoaded",
-            "ApexSEO\\Tests\\ConfigurationManagerTest::testDotNotationGetAndSet",
-            "ApexSEO\\Tests\\ConfigurationManagerTest::testModuleStatusToggling",
-            "ApexSEO\\Tests\\ConfigurationManagerTest::testConfigurationPersistence",
-            "ApexSEO\\Tests\\ContainerTest::testSingletonBinding",
-            "ApexSEO\\Tests\\ContainerTest::testTransientFactoryBinding",
-            "ApexSEO\\Tests\\ContainerTest::testLazyLoadingResolution",
-            "ApexSEO\\Tests\\ContainerTest::testAliasResolution",
-            "ApexSEO\\Tests\\ContainerTest::testAutoWiringDependencies",
-            "ApexSEO\\Tests\\ContainerTest::testCircularDependencyDetection",
-            "ApexSEO\\Tests\\DatabaseMigrationTest::testTablePrefixResolution",
-            "ApexSEO\\Tests\\DatabaseMigrationTest::testCustomPrefixOverride",
-            "ApexSEO\\Tests\\DatabaseMigrationTest::testMigrationExecutionCreates8LockedTables",
-            "ApexSEO\\Tests\\DatabaseMigrationTest::testMigrationRollbackDropsTables",
-            "ApexSEO\\Tests\\EnvironmentDetectorTest::testPhpAndWordPressVersionDetection",
-            "ApexSEO\\Tests\\EnvironmentDetectorTest::testExtensionDetection",
-            "ApexSEO\\Tests\\EnvironmentDetectorTest::testServerAdapterResolution",
-            "ApexSEO\\Tests\\LifecycleTest::testActivationRunsMigrationsAndSetsOption",
-            "ApexSEO\\Tests\\LifecycleTest::testDeactivationCleansTransients",
-            "ApexSEO\\Tests\\LifecycleTest::testUninstallPreservesTablesWhenConfigured",
-            "ApexSEO\\Tests\\LifecycleTest::testUninstallDropsTablesWhenExplicitlyConfigured",
-            "ApexSEO\\Tests\\MediaSubsystemTest::testSvgPlaceholderGenerator",
-            "ApexSEO\\Tests\\MediaSubsystemTest::testImageLazyLoader",
-            "ApexSEO\\Tests\\MediaSubsystemTest::testLcpOptimizer",
-            "ApexSEO\\Tests\\MultisiteManagerTest::testSingleSiteDefaults",
-            "ApexSEO\\Tests\\MultisiteManagerTest::testRunInBlogContextExecution",
-            "ApexSEO\\Tests\\PerformanceSubsystemTest::testCssMinification",
-            "ApexSEO\\Tests\\PerformanceSubsystemTest::testJsMinification",
-            "ApexSEO\\Tests\\PerformanceSubsystemTest::testHtmlMinification",
-            "ApexSEO\\Tests\\PerformanceSubsystemTest::testDelayJsEngine",
-            "ApexSEO\\Tests\\PerformanceSubsystemTest::testResourceHints",
-            "ApexSEO\\Tests\\PerformanceSubsystemTest::testStaticFileWriterAndSmartPurge",
-            "ApexSEO\\Tests\\RestSubsystemTest::testRestRouterInitialization",
-            "ApexSEO\\Tests\\RestSubsystemTest::testStatusEndpointResponse",
-            "ApexSEO\\Tests\\RestSubsystemTest::testSettingsControllerGetAndUpdate",
-            "ApexSEO\\Tests\\RestSubsystemTest::testMetaControllerSaveAndGet",
-            "ApexSEO\\Tests\\RestSubsystemTest::testSchemaControllerCRUD",
-            "ApexSEO\\Tests\\RestSubsystemTest::testRedirectsControllerCRUD",
-            "ApexSEO\\Tests\\RestSubsystemTest::testNotFoundController",
-            "ApexSEO\\Tests\\RestSubsystemTest::testLinksController",
-            "ApexSEO\\Tests\\RestSubsystemTest::testAnalyticsController",
-            "ApexSEO\\Tests\\RestSubsystemTest::testCacheControllerPurgeAndPreload",
-            "ApexSEO\\Tests\\RestSubsystemTest::testMediaControllerSingleAndBulk",
-            "ApexSEO\\Tests\\RestSubsystemTest::testMigrationControllerExecution",
-            "ApexSEO\\Tests\\RestSubsystemTest::testPermissionWrappers",
-            "ApexSEO\\Tests\\RestSubsystemTest::testSecurityIdorAndObjectAuthorization",
-            "ApexSEO\\Tests\\RestSubsystemTest::testSecuritySqlInjectionResilience",
-            "ApexSEO\\Tests\\RestSubsystemTest::testSecurityXssPayloadSanitization",
-            "ApexSEO\\Tests\\RestSubsystemTest::testSecurityOversizedBatchAndPaginationBounds",
-            "ApexSEO\\Tests\\RestSubsystemTest::testSecurityPathTraversalAndSsrfGuards",
-            "ApexSEO\\Tests\\SchemaSubsystemTest::testSchemaRegistryDefaultTypes",
-            "ApexSEO\\Tests\\SchemaSubsystemTest::testArticleSchemaGeneration",
-            "ApexSEO\\Tests\\SchemaSubsystemTest::testProductSchemaGeneration",
-            "ApexSEO\\Tests\\SchemaSubsystemTest::testFaqPageSchemaGeneration",
-            "ApexSEO\\Tests\\SchemaSubsystemTest::testRecipeSchemaGeneration",
-            "ApexSEO\\Tests\\SchemaSubsystemTest::testJobPostingSchemaGeneration",
-            "ApexSEO\\Tests\\SchemaSubsystemTest::testCourseSchemaGeneration",
-            "ApexSEO\\Tests\\SchemaSubsystemTest::testEventSchemaGeneration",
-            "ApexSEO\\Tests\\SchemaSubsystemTest::testSoftwareApplicationSchemaGeneration",
-            "ApexSEO\\Tests\\SchemaSubsystemTest::testVideoObjectSchemaGeneration",
-            "ApexSEO\\Tests\\SchemaSubsystemTest::testSchemaValidator",
-            "ApexSEO\\Tests\\SchemaSubsystemTest::testSchemaGraphBuilderOutput",
-            "ApexSEO\\Tests\\SeoSubsystemTest::testVariableEngineDefaultTokens",
-            "ApexSEO\\Tests\\SeoSubsystemTest::testTitleAndDescriptionPresenters",
-            "ApexSEO\\Tests\\SeoSubsystemTest::testCanonicalAndRobotsPresenters",
-            "ApexSEO\\Tests\\SeoSubsystemTest::testOpenGraphAndTwitterCardPresenters",
-            "ApexSEO\\Tests\\SeoSubsystemTest::testBreadcrumbGenerator",
-            "ApexSEO\\Tests\\SeoSubsystemTest::testSitemapGenerator",
-            "ApexSEO\\Tests\\SeoSubsystemTest::testRedirectManager",
-            "ApexSEO\\Tests\\ServerAdapterTest::testApacheAdapterCapabilities",
-            "ApexSEO\\Tests\\ServerAdapterTest::testNginxAdapterCapabilities",
-            "ApexSEO\\Tests\\ServerAdapterTest::testLiteSpeedAdapterCapabilities",
-            "ApexSEO\\Tests\\ServerAdapterTest::testOpenLiteSpeedAdapterCapabilities",
-            "ApexSEO\\Tests\\ServerAdapterTest::testGenericServerAdapterCapabilities"
-        ],
-        "failed": [],
-        "skipped": []
     }
 }

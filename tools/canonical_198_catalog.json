@@ -4,11 +4,28 @@
         "name": "Dynamic Title Tag Rewrite",
         "category": "Meta & Titles Engine",
         "required_behavior": "Executes Dynamic Title Tag Rewrite logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Meta & Titles Engine"
+        "required_production_symbols": {
+            "files": [
+                "src/SEO/Meta/TitlePresenter.php",
+                "src/SEO/Meta/MetaTagManager.php"
+            ],
+            "classes": [
+                "ApexSEO\\SEO\\Meta\\TitlePresenter",
+                "ApexSEO\\SEO\\Meta\\MetaTagManager"
+            ],
+            "methods": [
+                "TitlePresenter::render",
+                "TitlePresenter::renderHtmlTag",
+                "MetaTagManager::renderHead"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "WordPress wp_head action hook or pre_get_document_title filter"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testTitleAndDescriptionPresenters"
+            ]
         }
     },
     "APEX-002": {
@@ -16,11 +33,28 @@
         "name": "Dynamic Meta Description Tag",
         "category": "Meta & Titles Engine",
         "required_behavior": "Executes Dynamic Meta Description Tag logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Meta & Titles Engine"
+        "required_production_symbols": {
+            "files": [
+                "src/SEO/Meta/DescriptionPresenter.php",
+                "src/SEO/Meta/MetaTagManager.php"
+            ],
+            "classes": [
+                "ApexSEO\\SEO\\Meta\\DescriptionPresenter",
+                "ApexSEO\\SEO\\Meta\\MetaTagManager"
+            ],
+            "methods": [
+                "DescriptionPresenter::render",
+                "DescriptionPresenter::renderHtmlTag",
+                "DescriptionPresenter::cleanDescription"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "WordPress wp_head action hook"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testTitleAndDescriptionPresenters"
+            ]
         }
     },
     "APEX-003": {
@@ -28,11 +62,26 @@
         "name": "Title Template Variable Replacer",
         "category": "Meta & Titles Engine",
         "required_behavior": "Executes Title Template Variable Replacer logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Meta & Titles Engine"
+        "required_production_symbols": {
+            "files": [
+                "src/SEO/Variables/VariableEngine.php"
+            ],
+            "classes": [
+                "ApexSEO\\SEO\\Variables\\VariableEngine"
+            ],
+            "methods": [
+                "VariableEngine::registerCoreVariables",
+                "VariableEngine::registerVariable",
+                "VariableEngine::replace"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "MetaTagManager / TitlePresenter / DescriptionPresenter invocation"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testVariableEngineDefaultTokens"
+            ]
         }
     },
     "APEX-004": {
@@ -40,11 +89,16 @@
         "name": "Custom Taxonomy Title/Meta",
         "category": "Meta & Titles Engine",
         "required_behavior": "Executes Custom Taxonomy Title/Meta logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Meta & Titles Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-005": {
@@ -52,11 +106,16 @@
         "name": "Author Archive Title & Meta",
         "category": "Meta & Titles Engine",
         "required_behavior": "Executes Author Archive Title & Meta logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Meta & Titles Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-006": {
@@ -64,11 +123,16 @@
         "name": "Date Archive Title & Meta",
         "category": "Meta & Titles Engine",
         "required_behavior": "Executes Date Archive Title & Meta logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Meta & Titles Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-007": {
@@ -76,11 +140,16 @@
         "name": "Search Results Page Title/Meta",
         "category": "Meta & Titles Engine",
         "required_behavior": "Executes Search Results Page Title/Meta logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Meta & Titles Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-008": {
@@ -88,11 +157,16 @@
         "name": "404 Error Page Title & Meta",
         "category": "Meta & Titles Engine",
         "required_behavior": "Executes 404 Error Page Title & Meta logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Meta & Titles Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-009": {
@@ -100,11 +174,29 @@
         "name": "Custom Separator Selector",
         "category": "Meta & Titles Engine",
         "required_behavior": "Executes Custom Separator Selector logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Meta & Titles Engine"
+        "required_production_symbols": {
+            "files": [
+                "src/SEO/Templates/TemplateManager.php",
+                "src/SEO/Variables/VariableEngine.php",
+                "src/Core/Configuration/ConfigurationManager.php"
+            ],
+            "classes": [
+                "ApexSEO\\SEO\\Templates\\TemplateManager",
+                "ApexSEO\\SEO\\Variables\\VariableEngine"
+            ],
+            "methods": [
+                "TemplateManager::getTitleSeparator",
+                "VariableEngine::replace",
+                "VariableEngine::cleanDanglingSeparators"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "Plugin bootstrap and template evaluation"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testVariableEngineDefaultTokens"
+            ]
         }
     },
     "APEX-010": {
@@ -112,11 +204,16 @@
         "name": "Capitalize P-tags & Clean Titles",
         "category": "Meta & Titles Engine",
         "required_behavior": "Executes Capitalize P-tags & Clean Titles logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Meta & Titles Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-011": {
@@ -124,11 +221,16 @@
         "name": "Strip Category Base Permalinks",
         "category": "Meta & Titles Engine",
         "required_behavior": "Executes Strip Category Base Permalinks logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Meta & Titles Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-012": {
@@ -136,11 +238,16 @@
         "name": "Paged Subpages Title Modifier",
         "category": "Meta & Titles Engine",
         "required_behavior": "Executes Paged Subpages Title Modifier logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Meta & Titles Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-013": {
@@ -148,11 +255,16 @@
         "name": "Post Type Default Fallback Meta",
         "category": "Meta & Titles Engine",
         "required_behavior": "Executes Post Type Default Fallback Meta logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Meta & Titles Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-014": {
@@ -160,11 +272,16 @@
         "name": "Bulk Title/Meta Editor Screen",
         "category": "Meta & Titles Engine",
         "required_behavior": "Executes Bulk Title/Meta Editor Screen logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Meta & Titles Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-015": {
@@ -172,11 +289,16 @@
         "name": "RSS Feed Header & Footer Append",
         "category": "Meta & Titles Engine",
         "required_behavior": "Executes RSS Feed Header & Footer Append logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Meta & Titles Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-016": {
@@ -184,11 +306,16 @@
         "name": "Meta Keywords Support (Toggleable)",
         "category": "Meta & Titles Engine",
         "required_behavior": "Executes Meta Keywords Support (Toggleable) logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Meta & Titles Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-017": {
@@ -196,11 +323,16 @@
         "name": "Custom-Fields Meta Tokens",
         "category": "Meta & Titles Engine",
         "required_behavior": "Executes Custom-Fields Meta Tokens logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Meta & Titles Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-018": {
@@ -208,11 +340,16 @@
         "name": "Auto Meta Description Truncation",
         "category": "Meta & Titles Engine",
         "required_behavior": "Executes Auto Meta Description Truncation logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Meta & Titles Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-019": {
@@ -220,11 +357,28 @@
         "name": "Self-Referential Canonical URL",
         "category": "Canonical & Robots Directive Engine",
         "required_behavior": "Executes Self-Referential Canonical URL logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Canonical & Robots Directive Engine"
+        "required_production_symbols": {
+            "files": [
+                "src/SEO/Meta/CanonicalPresenter.php",
+                "src/SEO/Meta/MetaTagManager.php"
+            ],
+            "classes": [
+                "ApexSEO\\SEO\\Meta\\CanonicalPresenter",
+                "ApexSEO\\SEO\\Meta\\MetaTagManager"
+            ],
+            "methods": [
+                "CanonicalPresenter::render",
+                "CanonicalPresenter::cleanUrl",
+                "CanonicalPresenter::renderHtmlTag"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "WordPress wp_head action hook"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testCanonicalAndRobotsPresenters"
+            ]
         }
     },
     "APEX-020": {
@@ -232,11 +386,16 @@
         "name": "Custom Canonical URL Override",
         "category": "Canonical & Robots Directive Engine",
         "required_behavior": "Executes Custom Canonical URL Override logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Canonical & Robots Directive Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-021": {
@@ -244,11 +403,16 @@
         "name": "Paginated Archive Canonical",
         "category": "Canonical & Robots Directive Engine",
         "required_behavior": "Executes Paginated Archive Canonical logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Canonical & Robots Directive Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-022": {
@@ -256,11 +420,28 @@
         "name": "Noindex Directive Controller",
         "category": "Canonical & Robots Directive Engine",
         "required_behavior": "Executes Noindex Directive Controller logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Canonical & Robots Directive Engine"
+        "required_production_symbols": {
+            "files": [
+                "src/SEO/Meta/RobotsPresenter.php",
+                "src/SEO/Meta/MetaTagManager.php"
+            ],
+            "classes": [
+                "ApexSEO\\SEO\\Meta\\RobotsPresenter",
+                "ApexSEO\\SEO\\Meta\\MetaTagManager"
+            ],
+            "methods": [
+                "RobotsPresenter::getDirectives",
+                "RobotsPresenter::render",
+                "RobotsPresenter::renderHtmlTag"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "WordPress wp_head action hook"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testCanonicalAndRobotsPresenters"
+            ]
         }
     },
     "APEX-023": {
@@ -268,11 +449,25 @@
         "name": "Nofollow Directive Controller",
         "category": "Canonical & Robots Directive Engine",
         "required_behavior": "Executes Nofollow Directive Controller logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Canonical & Robots Directive Engine"
+        "required_production_symbols": {
+            "files": [
+                "src/SEO/Meta/RobotsPresenter.php"
+            ],
+            "classes": [
+                "ApexSEO\\SEO\\Meta\\RobotsPresenter"
+            ],
+            "methods": [
+                "RobotsPresenter::getDirectives",
+                "RobotsPresenter::render"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "WordPress wp_head action hook"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testCanonicalAndRobotsPresenters"
+            ]
         }
     },
     "APEX-024": {
@@ -280,11 +475,16 @@
         "name": "Advanced Robots (noarchive, nosnippet)",
         "category": "Canonical & Robots Directive Engine",
         "required_behavior": "Executes Advanced Robots (noarchive, nosnippet) logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Canonical & Robots Directive Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-025": {
@@ -292,11 +492,16 @@
         "name": "max-snippet, max-image-preview",
         "category": "Canonical & Robots Directive Engine",
         "required_behavior": "Executes max-snippet, max-image-preview logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Canonical & Robots Directive Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-026": {
@@ -304,11 +509,16 @@
         "name": "Virtual Robots.txt Generator",
         "category": "Canonical & Robots Directive Engine",
         "required_behavior": "Executes Virtual Robots.txt Generator logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Canonical & Robots Directive Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-027": {
@@ -316,11 +526,16 @@
         "name": "Virtual Robots.txt Editor UI",
         "category": "Canonical & Robots Directive Engine",
         "required_behavior": "Executes Virtual Robots.txt Editor UI logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Canonical & Robots Directive Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-028": {
@@ -328,11 +543,16 @@
         "name": "X-Robots-Tag HTTP Header Output",
         "category": "Canonical & Robots Directive Engine",
         "required_behavior": "Executes X-Robots-Tag HTTP Header Output logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Canonical & Robots Directive Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-029": {
@@ -340,11 +560,16 @@
         "name": "Nofollow Unpaginated Feeds",
         "category": "Canonical & Robots Directive Engine",
         "required_behavior": "Executes Nofollow Unpaginated Feeds logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Canonical & Robots Directive Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-030": {
@@ -352,11 +577,16 @@
         "name": "Search & 404 Noindex Enforcement",
         "category": "Canonical & Robots Directive Engine",
         "required_behavior": "Executes Search & 404 Noindex Enforcement logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Canonical & Robots Directive Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-031": {
@@ -364,11 +594,25 @@
         "name": "OpenGraph Core Tags (og:title, etc.)",
         "category": "Social Meta & OpenGraph Engine",
         "required_behavior": "Executes OpenGraph Core Tags (og:title, etc.) logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Social Meta & OpenGraph Engine"
+        "required_production_symbols": {
+            "files": [
+                "src/SEO/Social/OpenGraphPresenter.php"
+            ],
+            "classes": [
+                "ApexSEO\\SEO\\Social\\OpenGraphPresenter"
+            ],
+            "methods": [
+                "OpenGraphPresenter::buildTags",
+                "OpenGraphPresenter::render"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "WordPress wp_head action hook"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testOpenGraphAndTwitterCardPresenters"
+            ]
         }
     },
     "APEX-032": {
@@ -376,11 +620,16 @@
         "name": "OpenGraph Image Dimension Tags",
         "category": "Social Meta & OpenGraph Engine",
         "required_behavior": "Executes OpenGraph Image Dimension Tags logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Social Meta & OpenGraph Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-033": {
@@ -388,11 +637,25 @@
         "name": "Twitter Card Tags (Summary/Large)",
         "category": "Social Meta & OpenGraph Engine",
         "required_behavior": "Executes Twitter Card Tags (Summary/Large) logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Social Meta & OpenGraph Engine"
+        "required_production_symbols": {
+            "files": [
+                "src/SEO/Social/TwitterCardPresenter.php"
+            ],
+            "classes": [
+                "ApexSEO\\SEO\\Social\\TwitterCardPresenter"
+            ],
+            "methods": [
+                "TwitterCardPresenter::buildTags",
+                "TwitterCardPresenter::render"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "WordPress wp_head action hook"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testOpenGraphAndTwitterCardPresenters"
+            ]
         }
     },
     "APEX-034": {
@@ -400,11 +663,16 @@
         "name": "Fallback Default Social Image",
         "category": "Social Meta & OpenGraph Engine",
         "required_behavior": "Executes Fallback Default Social Image logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Social Meta & OpenGraph Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-035": {
@@ -412,11 +680,16 @@
         "name": "Facebook App ID / Admin Meta",
         "category": "Social Meta & OpenGraph Engine",
         "required_behavior": "Executes Facebook App ID / Admin Meta logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Social Meta & OpenGraph Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-036": {
@@ -424,11 +697,16 @@
         "name": "Twitter Site & Creator Handles",
         "category": "Social Meta & OpenGraph Engine",
         "required_behavior": "Executes Twitter Site & Creator Handles logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Social Meta & OpenGraph Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-037": {
@@ -436,11 +714,16 @@
         "name": "Article Author & Publisher Tags",
         "category": "Social Meta & OpenGraph Engine",
         "required_behavior": "Executes Article Author & Publisher Tags logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Social Meta & OpenGraph Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-038": {
@@ -448,11 +731,16 @@
         "name": "Live Social Preview in Editor",
         "category": "Social Meta & OpenGraph Engine",
         "required_behavior": "Executes Live Social Preview in Editor logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Social Meta & OpenGraph Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-039": {
@@ -460,11 +748,16 @@
         "name": "Pinterest Domain Verification Tag",
         "category": "Social Meta & OpenGraph Engine",
         "required_behavior": "Executes Pinterest Domain Verification Tag logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Social Meta & OpenGraph Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-040": {
@@ -472,11 +765,25 @@
         "name": "XML Index & Sub-Sitemap Generator",
         "category": "XML & RSS Sitemaps Engine",
         "required_behavior": "Executes XML Index & Sub-Sitemap Generator logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "XML & RSS Sitemaps Engine"
+        "required_production_symbols": {
+            "files": [
+                "src/SEO/Sitemap/SitemapGenerator.php"
+            ],
+            "classes": [
+                "ApexSEO\\SEO\\Sitemap\\SitemapGenerator"
+            ],
+            "methods": [
+                "SitemapGenerator::renderIndexSitemap",
+                "SitemapGenerator::renderUrlSitemap"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "HTTP request to /sitemap_index.xml or /sitemap.xml rewrite endpoint"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testSitemapGenerator"
+            ]
         }
     },
     "APEX-041": {
@@ -484,11 +791,24 @@
         "name": "Post Type XML Sitemaps with Pagination",
         "category": "XML & RSS Sitemaps Engine",
         "required_behavior": "Executes Post Type XML Sitemaps with Pagination logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "XML & RSS Sitemaps Engine"
+        "required_production_symbols": {
+            "files": [
+                "src/SEO/Sitemap/SitemapGenerator.php"
+            ],
+            "classes": [
+                "ApexSEO\\SEO\\Sitemap\\SitemapGenerator"
+            ],
+            "methods": [
+                "SitemapGenerator::renderUrlSitemap"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "HTTP request to /post-sitemap.xml or /post-sitemap1.xml"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testSitemapGenerator"
+            ]
         }
     },
     "APEX-042": {
@@ -496,11 +816,16 @@
         "name": "Taxonomy XML Sitemaps",
         "category": "XML & RSS Sitemaps Engine",
         "required_behavior": "Executes Taxonomy XML Sitemaps logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "XML & RSS Sitemaps Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-043": {
@@ -508,11 +833,16 @@
         "name": "Google News XML Sitemap",
         "category": "XML & RSS Sitemaps Engine",
         "required_behavior": "Executes Google News XML Sitemap logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "XML & RSS Sitemaps Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-044": {
@@ -520,11 +850,16 @@
         "name": "Video XML Sitemap with Metadata",
         "category": "XML & RSS Sitemaps Engine",
         "required_behavior": "Executes Video XML Sitemap with Metadata logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "XML & RSS Sitemaps Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-045": {
@@ -532,11 +867,16 @@
         "name": "Image XML Sitemap Embeds",
         "category": "XML & RSS Sitemaps Engine",
         "required_behavior": "Executes Image XML Sitemap Embeds logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "XML & RSS Sitemaps Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-046": {
@@ -544,11 +884,16 @@
         "name": "Custom XML XSLT Stylist",
         "category": "XML & RSS Sitemaps Engine",
         "required_behavior": "Executes Custom XML XSLT Stylist logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "XML & RSS Sitemaps Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-047": {
@@ -556,11 +901,16 @@
         "name": "Automatic Search Engine Ping",
         "category": "XML & RSS Sitemaps Engine",
         "required_behavior": "Executes Automatic Search Engine Ping logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "XML & RSS Sitemaps Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-048": {
@@ -568,11 +918,16 @@
         "name": "Multi-Keyword Density & TF-IDF",
         "category": "Content Analysis & Readability Engine",
         "required_behavior": "Executes Multi-Keyword Density & TF-IDF logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Content Analysis & Readability Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-049": {
@@ -580,11 +935,16 @@
         "name": "Flesch Reading Ease Formula",
         "category": "Content Analysis & Readability Engine",
         "required_behavior": "Executes Flesch Reading Ease Formula logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Content Analysis & Readability Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-050": {
@@ -592,11 +952,16 @@
         "name": "Heading Structure Checker",
         "category": "Content Analysis & Readability Engine",
         "required_behavior": "Executes Heading Structure Checker logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Content Analysis & Readability Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-051": {
@@ -604,11 +969,16 @@
         "name": "Internal Link Graph Counter",
         "category": "Content Analysis & Readability Engine",
         "required_behavior": "Executes Internal Link Graph Counter logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Content Analysis & Readability Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-052": {
@@ -616,11 +986,16 @@
         "name": "Contextual Link Suggestions",
         "category": "Content Analysis & Readability Engine",
         "required_behavior": "Executes Contextual Link Suggestions logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Content Analysis & Readability Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-053": {
@@ -628,11 +1003,16 @@
         "name": "Orphaned Content Detector",
         "category": "Content Analysis & Readability Engine",
         "required_behavior": "Executes Orphaned Content Detector logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Content Analysis & Readability Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-054": {
@@ -640,11 +1020,16 @@
         "name": "Paragraph Length & Voice Analyzer",
         "category": "Content Analysis & Readability Engine",
         "required_behavior": "Executes Paragraph Length & Voice Analyzer logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Content Analysis & Readability Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-055": {
@@ -652,11 +1037,26 @@
         "name": "URL Change Interceptor (Auto 301)",
         "category": "URL Routing, 404 Monitor & Redirects",
         "required_behavior": "Executes URL Change Interceptor (Auto 301) logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "URL Routing, 404 Monitor & Redirects"
+        "required_production_symbols": {
+            "files": [
+                "src/SEO/Redirects/RedirectManager.php"
+            ],
+            "classes": [
+                "ApexSEO\\SEO\\Redirects\\RedirectManager"
+            ],
+            "methods": [
+                "RedirectManager::addRedirect",
+                "RedirectManager::matchRedirect",
+                "RedirectManager::interceptAndRedirect"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "template_redirect WordPress action hook"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testRedirectManager"
+            ]
         }
     },
     "APEX-056": {
@@ -664,11 +1064,25 @@
         "name": "Regex & Wildcard URL Router",
         "category": "URL Routing, 404 Monitor & Redirects",
         "required_behavior": "Executes Regex & Wildcard URL Router logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "URL Routing, 404 Monitor & Redirects"
+        "required_production_symbols": {
+            "files": [
+                "src/SEO/Redirects/RedirectManager.php"
+            ],
+            "classes": [
+                "ApexSEO\\SEO\\Redirects\\RedirectManager"
+            ],
+            "methods": [
+                "RedirectManager::addRedirect",
+                "RedirectManager::matchRedirect"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "template_redirect hook"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testRedirectManager"
+            ]
         }
     },
     "APEX-057": {
@@ -676,11 +1090,28 @@
         "name": "High-Speed Buffered 404 Logger",
         "category": "URL Routing, 404 Monitor & Redirects",
         "required_behavior": "Executes High-Speed Buffered 404 Logger logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "URL Routing, 404 Monitor & Redirects"
+        "required_production_symbols": {
+            "files": [
+                "src/SEO/Redirects/RedirectManager.php",
+                "src/Core/Security/SecurityUtils.php"
+            ],
+            "classes": [
+                "ApexSEO\\SEO\\Redirects\\RedirectManager",
+                "ApexSEO\\Core\\Security\\SecurityUtils"
+            ],
+            "methods": [
+                "RedirectManager::matchRedirect",
+                "SecurityUtils::isValidRegex",
+                "SecurityUtils::safePregMatch"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "template_redirect hook"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testRedirectsControllerCRUD"
+            ]
         }
     },
     "APEX-058": {
@@ -688,11 +1119,16 @@
         "name": "Fuzzy URL Match & Redirection",
         "category": "URL Routing, 404 Monitor & Redirects",
         "required_behavior": "Executes Fuzzy URL Match & Redirection logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "URL Routing, 404 Monitor & Redirects"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-059": {
@@ -700,11 +1136,16 @@
         "name": "Status Codes (301, 302, 307, 410, 451)",
         "category": "URL Routing, 404 Monitor & Redirects",
         "required_behavior": "Executes Status Codes (301, 302, 307, 410, 451) logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "URL Routing, 404 Monitor & Redirects"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-060": {
@@ -712,11 +1153,16 @@
         "name": "Export Nginx / Apache Rules",
         "category": "URL Routing, 404 Monitor & Redirects",
         "required_behavior": "Executes Export Nginx / Apache Rules logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "URL Routing, 404 Monitor & Redirects"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-061": {
@@ -724,11 +1170,25 @@
         "name": "Redirect Hit Counter & Log Truncate",
         "category": "URL Routing, 404 Monitor & Redirects",
         "required_behavior": "Executes Redirect Hit Counter & Log Truncate logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "URL Routing, 404 Monitor & Redirects"
+        "required_production_symbols": {
+            "files": [
+                "src/Analytics/Monitor/FourOhFourMonitor.php"
+            ],
+            "classes": [
+                "ApexSEO\\Analytics\\Monitor\\FourOhFourMonitor"
+            ],
+            "methods": [
+                "FourOhFourMonitor::record404",
+                "FourOhFourMonitor::getRecent404s"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "template_redirect action hook when is_404() is true"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testFourOhFourLogging"
+            ]
         }
     },
     "APEX-062": {
@@ -736,11 +1196,27 @@
         "name": "Trailing Slash Enforcer",
         "category": "URL Routing, 404 Monitor & Redirects",
         "required_behavior": "Executes Trailing Slash Enforcer logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "URL Routing, 404 Monitor & Redirects"
+        "required_production_symbols": {
+            "files": [
+                "src/API/Controllers/NotFoundRestController.php",
+                "src/SEO/Redirects/RedirectManager.php",
+                "src/Analytics/Monitor/FourOhFourMonitor.php"
+            ],
+            "classes": [
+                "ApexSEO\\API\\Controllers\\NotFoundRestController"
+            ],
+            "methods": [
+                "NotFoundRestController::get404Logs",
+                "NotFoundRestController::clear404Logs"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "REST API request to /wp-json/apexseo/v1/404s"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testNotFoundController"
+            ]
         }
     },
     "APEX-063": {
@@ -748,11 +1224,16 @@
         "name": "Attachment URL Redirect to Parent",
         "category": "URL Routing, 404 Monitor & Redirects",
         "required_behavior": "Executes Attachment URL Redirect to Parent logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "URL Routing, 404 Monitor & Redirects"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-064": {
@@ -760,11 +1241,16 @@
         "name": "Bulk Redirect CSV Import & Export",
         "category": "URL Routing, 404 Monitor & Redirects",
         "required_behavior": "Executes Bulk Redirect CSV Import & Export logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "URL Routing, 404 Monitor & Redirects"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-065": {
@@ -772,11 +1258,27 @@
         "name": "Unified `@graph` JSON-LD Compiler",
         "category": "Schema.org Structured Data & Knowledge Graph",
         "required_behavior": "Executes Unified `@graph` JSON-LD Compiler logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Schema.org Structured Data & Knowledge Graph"
+        "required_production_symbols": {
+            "files": [
+                "src/Schema/SchemaGraphBuilder.php",
+                "src/Schema/SchemaRegistry.php"
+            ],
+            "classes": [
+                "ApexSEO\\Schema\\SchemaGraphBuilder",
+                "ApexSEO\\Schema\\SchemaRegistry"
+            ],
+            "methods": [
+                "SchemaGraphBuilder::buildGraph",
+                "SchemaGraphBuilder::renderScript"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "WordPress wp_head action hook"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testSchemaGraphBuilderOutput"
+            ]
         }
     },
     "APEX-066": {
@@ -784,11 +1286,26 @@
         "name": "Dynamic Schema Conditions Engine",
         "category": "Schema.org Structured Data & Knowledge Graph",
         "required_behavior": "Executes Dynamic Schema Conditions Engine logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Schema.org Structured Data & Knowledge Graph"
+        "required_production_symbols": {
+            "files": [
+                "src/Schema/SchemaRegistry.php",
+                "src/Schema/Types/SchemaTypeInterface.php"
+            ],
+            "classes": [
+                "ApexSEO\\Schema\\SchemaRegistry"
+            ],
+            "methods": [
+                "SchemaRegistry::getAllTypes",
+                "SchemaRegistry::getType"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "SchemaModule boot and SchemaGraphBuilder execution"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testSchemaRegistryDefaultTypes"
+            ]
         }
     },
     "APEX-067": {
@@ -796,11 +1313,25 @@
         "name": "Article / NewsArticle Schema",
         "category": "Schema.org Structured Data & Knowledge Graph",
         "required_behavior": "Executes Article / NewsArticle Schema logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Schema.org Structured Data & Knowledge Graph"
+        "required_production_symbols": {
+            "files": [
+                "src/Schema/Types/ArticleSchema.php"
+            ],
+            "classes": [
+                "ApexSEO\\Schema\\Types\\ArticleSchema"
+            ],
+            "methods": [
+                "ArticleSchema::isApplicable",
+                "ArticleSchema::generate"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "SchemaGraphBuilder::buildGraph"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testArticleSchemaGeneration"
+            ]
         }
     },
     "APEX-068": {
@@ -808,11 +1339,25 @@
         "name": "LocalBusiness Multi-Location",
         "category": "Schema.org Structured Data & Knowledge Graph",
         "required_behavior": "Executes LocalBusiness Multi-Location logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Schema.org Structured Data & Knowledge Graph"
+        "required_production_symbols": {
+            "files": [
+                "src/Schema/Types/OrganizationSchema.php"
+            ],
+            "classes": [
+                "ApexSEO\\Schema\\Types\\OrganizationSchema"
+            ],
+            "methods": [
+                "OrganizationSchema::generate",
+                "OrganizationSchema::isApplicable"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "SchemaGraphBuilder on homepage or publisher reference"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testSchemaRegistryDefaultTypes"
+            ]
         }
     },
     "APEX-069": {
@@ -820,11 +1365,25 @@
         "name": "Organization & Person Social Graph",
         "category": "Schema.org Structured Data & Knowledge Graph",
         "required_behavior": "Executes Organization & Person Social Graph logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Schema.org Structured Data & Knowledge Graph"
+        "required_production_symbols": {
+            "files": [
+                "src/Schema/Types/LocalBusinessSchema.php"
+            ],
+            "classes": [
+                "ApexSEO\\Schema\\Types\\LocalBusinessSchema"
+            ],
+            "methods": [
+                "LocalBusinessSchema::generate",
+                "LocalBusinessSchema::isApplicable"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "SchemaGraphBuilder for local business pages"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testSchemaRegistryDefaultTypes"
+            ]
         }
     },
     "APEX-070": {
@@ -832,11 +1391,25 @@
         "name": "FAQPage Structured Data Injector",
         "category": "Schema.org Structured Data & Knowledge Graph",
         "required_behavior": "Executes FAQPage Structured Data Injector logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Schema.org Structured Data & Knowledge Graph"
+        "required_production_symbols": {
+            "files": [
+                "src/Schema/Types/ProductSchema.php"
+            ],
+            "classes": [
+                "ApexSEO\\Schema\\Types\\ProductSchema"
+            ],
+            "methods": [
+                "ProductSchema::generate",
+                "ProductSchema::isApplicable"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "SchemaGraphBuilder on WooCommerce single product pages"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testProductSchemaGeneration"
+            ]
         }
     },
     "APEX-071": {
@@ -844,11 +1417,25 @@
         "name": "WooCommerce Product & Variation",
         "category": "Schema.org Structured Data & Knowledge Graph",
         "required_behavior": "Executes WooCommerce Product & Variation logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Schema.org Structured Data & Knowledge Graph"
+        "required_production_symbols": {
+            "files": [
+                "src/Schema/Types/FAQPageSchema.php"
+            ],
+            "classes": [
+                "ApexSEO\\Schema\\Types\\FAQPageSchema"
+            ],
+            "methods": [
+                "FAQPageSchema::generate",
+                "FAQPageSchema::isApplicable"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "SchemaGraphBuilder on FAQ pages or posts with FAQ block"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testFaqPageSchemaGeneration"
+            ]
         }
     },
     "APEX-072": {
@@ -856,11 +1443,25 @@
         "name": "Recipe Structured Data Template",
         "category": "Schema.org Structured Data & Knowledge Graph",
         "required_behavior": "Executes Recipe Structured Data Template logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Schema.org Structured Data & Knowledge Graph"
+        "required_production_symbols": {
+            "files": [
+                "src/Schema/Types/RecipeSchema.php"
+            ],
+            "classes": [
+                "ApexSEO\\Schema\\Types\\RecipeSchema"
+            ],
+            "methods": [
+                "RecipeSchema::generate",
+                "RecipeSchema::isApplicable"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "SchemaGraphBuilder on recipe posts"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testRecipeSchemaGeneration"
+            ]
         }
     },
     "APEX-073": {
@@ -868,11 +1469,25 @@
         "name": "JobPosting Schema Template",
         "category": "Schema.org Structured Data & Knowledge Graph",
         "required_behavior": "Executes JobPosting Schema Template logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Schema.org Structured Data & Knowledge Graph"
+        "required_production_symbols": {
+            "files": [
+                "src/Schema/Types/JobPostingSchema.php"
+            ],
+            "classes": [
+                "ApexSEO\\Schema\\Types\\JobPostingSchema"
+            ],
+            "methods": [
+                "JobPostingSchema::generate",
+                "JobPostingSchema::isApplicable"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "SchemaGraphBuilder on job listing pages"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testJobPostingSchemaGeneration"
+            ]
         }
     },
     "APEX-074": {
@@ -880,11 +1495,25 @@
         "name": "Course & Learning Resource Schema",
         "category": "Schema.org Structured Data & Knowledge Graph",
         "required_behavior": "Executes Course & Learning Resource Schema logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Schema.org Structured Data & Knowledge Graph"
+        "required_production_symbols": {
+            "files": [
+                "src/Schema/Types/CourseSchema.php"
+            ],
+            "classes": [
+                "ApexSEO\\Schema\\Types\\CourseSchema"
+            ],
+            "methods": [
+                "CourseSchema::generate",
+                "CourseSchema::isApplicable"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "SchemaGraphBuilder on course pages"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testCourseSchemaGeneration"
+            ]
         }
     },
     "APEX-075": {
@@ -892,11 +1521,25 @@
         "name": "Event Schema (Online & Physical)",
         "category": "Schema.org Structured Data & Knowledge Graph",
         "required_behavior": "Executes Event Schema (Online & Physical) logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Schema.org Structured Data & Knowledge Graph"
+        "required_production_symbols": {
+            "files": [
+                "src/Schema/Types/EventSchema.php"
+            ],
+            "classes": [
+                "ApexSEO\\Schema\\Types\\EventSchema"
+            ],
+            "methods": [
+                "EventSchema::generate",
+                "EventSchema::isApplicable"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "SchemaGraphBuilder on event pages"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testEventSchemaGeneration"
+            ]
         }
     },
     "APEX-076": {
@@ -904,11 +1547,25 @@
         "name": "SoftwareApplication Schema",
         "category": "Schema.org Structured Data & Knowledge Graph",
         "required_behavior": "Executes SoftwareApplication Schema logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Schema.org Structured Data & Knowledge Graph"
+        "required_production_symbols": {
+            "files": [
+                "src/Schema/Types/SoftwareApplicationSchema.php"
+            ],
+            "classes": [
+                "ApexSEO\\Schema\\Types\\SoftwareApplicationSchema"
+            ],
+            "methods": [
+                "SoftwareApplicationSchema::generate",
+                "SoftwareApplicationSchema::isApplicable"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "SchemaGraphBuilder on app pages"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testSoftwareApplicationSchemaGeneration"
+            ]
         }
     },
     "APEX-077": {
@@ -916,11 +1573,25 @@
         "name": "VideoObject Schema Stream",
         "category": "Schema.org Structured Data & Knowledge Graph",
         "required_behavior": "Executes VideoObject Schema Stream logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Schema.org Structured Data & Knowledge Graph"
+        "required_production_symbols": {
+            "files": [
+                "src/Schema/Media/VideoObjectSchema.php"
+            ],
+            "classes": [
+                "ApexSEO\\Schema\\Media\\VideoObjectSchema"
+            ],
+            "methods": [
+                "VideoObjectSchema::generate",
+                "VideoObjectSchema::isApplicable"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "SchemaGraphBuilder on pages containing embedded videos"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testVideoObjectSchemaGeneration"
+            ]
         }
     },
     "APEX-078": {
@@ -928,11 +1599,25 @@
         "name": "WebSite SearchAction Sitelinks",
         "category": "Schema.org Structured Data & Knowledge Graph",
         "required_behavior": "Executes WebSite SearchAction Sitelinks logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Schema.org Structured Data & Knowledge Graph"
+        "required_production_symbols": {
+            "files": [
+                "src/Schema/Types/WebSiteSchema.php"
+            ],
+            "classes": [
+                "ApexSEO\\Schema\\Types\\WebSiteSchema"
+            ],
+            "methods": [
+                "WebSiteSchema::generate",
+                "WebSiteSchema::isApplicable"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "SchemaGraphBuilder on all pages"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testSchemaRegistryDefaultTypes"
+            ]
         }
     },
     "APEX-079": {
@@ -940,11 +1625,24 @@
         "name": "BreadcrumbList JSON-LD Graph",
         "category": "Schema.org Structured Data & Knowledge Graph",
         "required_behavior": "Executes BreadcrumbList JSON-LD Graph logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Schema.org Structured Data & Knowledge Graph"
+        "required_production_symbols": {
+            "files": [
+                "src/Schema/Validator/SchemaValidator.php"
+            ],
+            "classes": [
+                "ApexSEO\\Schema\\Validator\\SchemaValidator"
+            ],
+            "methods": [
+                "SchemaValidator::validate"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "Schema creation REST endpoint and schema preview"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testSchemaValidator"
+            ]
         }
     },
     "APEX-080": {
@@ -952,11 +1650,26 @@
         "name": "Schema Validation & Linting Engine",
         "category": "Schema.org Structured Data & Knowledge Graph",
         "required_behavior": "Executes Schema Validation & Linting Engine logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Schema.org Structured Data & Knowledge Graph"
+        "required_production_symbols": {
+            "files": [
+                "src/SEO/Breadcrumbs/BreadcrumbGenerator.php"
+            ],
+            "classes": [
+                "ApexSEO\\SEO\\Breadcrumbs\\BreadcrumbGenerator"
+            ],
+            "methods": [
+                "BreadcrumbGenerator::getBreadcrumbItems",
+                "BreadcrumbGenerator::renderHtml",
+                "BreadcrumbGenerator::generateSchema"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "Theme template tag or breadcrumb shortcode / schema graph builder"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testBreadcrumbGenerator"
+            ]
         }
     },
     "APEX-081": {
@@ -964,11 +1677,16 @@
         "name": "Static HTML Page Cache Buffer",
         "category": "Page Caching & Cache Management",
         "required_behavior": "Executes Static HTML Page Cache Buffer logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Page Caching & Cache Management"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-082": {
@@ -976,11 +1694,16 @@
         "name": "Gzip Pre-Compression on Disk",
         "category": "Page Caching & Cache Management",
         "required_behavior": "Executes Gzip Pre-Compression on Disk logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Page Caching & Cache Management"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-083": {
@@ -988,11 +1711,16 @@
         "name": "Brotli Pre-Compression on Disk",
         "category": "Page Caching & Cache Management",
         "required_behavior": "Executes Brotli Pre-Compression on Disk logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Page Caching & Cache Management"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-084": {
@@ -1000,11 +1728,16 @@
         "name": "Dedicated Mobile Cache Variant",
         "category": "Page Caching & Cache Management",
         "required_behavior": "Executes Dedicated Mobile Cache Variant logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Page Caching & Cache Management"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-085": {
@@ -1012,11 +1745,16 @@
         "name": "Logged-In User Cookie Caching",
         "category": "Page Caching & Cache Management",
         "required_behavior": "Executes Logged-In User Cookie Caching logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Page Caching & Cache Management"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-086": {
@@ -1024,11 +1762,16 @@
         "name": "SSL Dedicated Caching Path",
         "category": "Page Caching & Cache Management",
         "required_behavior": "Executes SSL Dedicated Caching Path logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Page Caching & Cache Management"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-087": {
@@ -1036,11 +1779,16 @@
         "name": "WebP/AVIF HTML Cache Variant",
         "category": "Page Caching & Cache Management",
         "required_behavior": "Executes WebP/AVIF HTML Cache Variant logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Page Caching & Cache Management"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-088": {
@@ -1048,11 +1796,16 @@
         "name": "Query String Whitelist Caching",
         "category": "Page Caching & Cache Management",
         "required_behavior": "Executes Query String Whitelist Caching logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Page Caching & Cache Management"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-089": {
@@ -1060,11 +1813,16 @@
         "name": "Automated Post Update Cache Purge",
         "category": "Page Caching & Cache Management",
         "required_behavior": "Executes Automated Post Update Cache Purge logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Page Caching & Cache Management"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-090": {
@@ -1072,11 +1830,27 @@
         "name": "Comment Submission Cache Purge",
         "category": "Page Caching & Cache Management",
         "required_behavior": "Executes Comment Submission Cache Purge logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Page Caching & Cache Management"
+        "required_production_symbols": {
+            "files": [
+                "src/Performance/Cache/SmartPurge.php",
+                "src/Performance/Cache/StaticFileWriter.php"
+            ],
+            "classes": [
+                "ApexSEO\\Performance\\Cache\\SmartPurge",
+                "ApexSEO\\Performance\\Cache\\StaticFileWriter"
+            ],
+            "methods": [
+                "SmartPurge::purge",
+                "StaticFileWriter::deleteCache"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "shutdown / template_redirect output buffering hook"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testStaticFileWriterAndSmartPurge"
+            ]
         }
     },
     "APEX-091": {
@@ -1084,11 +1858,27 @@
         "name": "Global Empty Cache Trigger",
         "category": "Page Caching & Cache Management",
         "required_behavior": "Executes Global Empty Cache Trigger logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Page Caching & Cache Management"
+        "required_production_symbols": {
+            "files": [
+                "src/Performance/Cache/SmartPurge.php",
+                "src/Performance/Cache/StaticFileWriter.php"
+            ],
+            "classes": [
+                "ApexSEO\\Performance\\Cache\\SmartPurge",
+                "ApexSEO\\Performance\\Cache\\StaticFileWriter"
+            ],
+            "methods": [
+                "SmartPurge::purgeAll",
+                "StaticFileWriter::purgeAll"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "save_post, edit_terms, comment_post WordPress hooks"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testStaticFileWriterAndSmartPurge"
+            ]
         }
     },
     "APEX-092": {
@@ -1096,11 +1886,16 @@
         "name": "Cache Lifespan & Expiry Garbage",
         "category": "Page Caching & Cache Management",
         "required_behavior": "Executes Cache Lifespan & Expiry Garbage logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Page Caching & Cache Management"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-093": {
@@ -1108,11 +1903,16 @@
         "name": "Background Sitemap Cache Preload",
         "category": "Page Caching & Cache Management",
         "required_behavior": "Executes Background Sitemap Cache Preload logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Page Caching & Cache Management"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-094": {
@@ -1120,11 +1920,16 @@
         "name": "WooCommerce Cart Cache Exclusions",
         "category": "Page Caching & Cache Management",
         "required_behavior": "Executes WooCommerce Cart Cache Exclusions logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Page Caching & Cache Management"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-095": {
@@ -1132,11 +1937,24 @@
         "name": "REST API Endpoint Output Cache",
         "category": "Page Caching & Cache Management",
         "required_behavior": "Executes REST API Endpoint Output Cache logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Page Caching & Cache Management"
+        "required_production_symbols": {
+            "files": [
+                "src/Performance/Assets/CssMinifier.php"
+            ],
+            "classes": [
+                "ApexSEO\\Performance\\Assets\\CssMinifier"
+            ],
+            "methods": [
+                "CssMinifier::minify"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "Asset pipeline during page rendering or asset build"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testCssMinification"
+            ]
         }
     },
     "APEX-096": {
@@ -1144,11 +1962,24 @@
         "name": "Instant Hover / Click Preloader",
         "category": "Page Caching & Cache Management",
         "required_behavior": "Executes Instant Hover / Click Preloader logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Page Caching & Cache Management"
+        "required_production_symbols": {
+            "files": [
+                "src/Performance/Assets/JsMinifier.php"
+            ],
+            "classes": [
+                "ApexSEO\\Performance\\Assets\\JsMinifier"
+            ],
+            "methods": [
+                "JsMinifier::minify"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "Asset pipeline during page rendering"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testJsMinification"
+            ]
         }
     },
     "APEX-097": {
@@ -1156,11 +1987,24 @@
         "name": "Advanced Cache Bypass Rules",
         "category": "Page Caching & Cache Management",
         "required_behavior": "Executes Advanced Cache Bypass Rules logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Page Caching & Cache Management"
+        "required_production_symbols": {
+            "files": [
+                "src/Performance/Assets/HtmlMinifier.php"
+            ],
+            "classes": [
+                "ApexSEO\\Performance\\Assets\\HtmlMinifier"
+            ],
+            "methods": [
+                "HtmlMinifier::minify"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "Output buffering filter before sending response"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testHtmlMinification"
+            ]
         }
     },
     "APEX-098": {
@@ -1168,11 +2012,24 @@
         "name": "Cache Warm-up Concurrency Limiter",
         "category": "Page Caching & Cache Management",
         "required_behavior": "Executes Cache Warm-up Concurrency Limiter logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Page Caching & Cache Management"
+        "required_production_symbols": {
+            "files": [
+                "src/Performance/Assets/DelayJsEngine.php"
+            ],
+            "classes": [
+                "ApexSEO\\Performance\\Assets\\DelayJsEngine"
+            ],
+            "methods": [
+                "DelayJsEngine::processHtml"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "Output buffer processing filter"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testDelayJsEngine"
+            ]
         }
     },
     "APEX-099": {
@@ -1180,11 +2037,24 @@
         "name": "CSS Minification Engine",
         "category": "Page Caching & Cache Management",
         "required_behavior": "Executes CSS Minification Engine logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Page Caching & Cache Management"
+        "required_production_symbols": {
+            "files": [
+                "src/Performance/Assets/CssMinifier.php"
+            ],
+            "classes": [
+                "ApexSEO\\Performance\\Assets\\CssMinifier"
+            ],
+            "methods": [
+                "CssMinifier::minify"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "WordPress wp_head action hook"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testResourceHints"
+            ]
         }
     },
     "APEX-100": {
@@ -1192,11 +2062,16 @@
         "name": "JS Minification Engine",
         "category": "Page Caching & Cache Management",
         "required_behavior": "Executes JS Minification Engine logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Page Caching & Cache Management"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-101": {
@@ -1204,11 +2079,16 @@
         "name": "CSS File Combination & Bundle",
         "category": "Page Caching & Cache Management",
         "required_behavior": "Executes CSS File Combination & Bundle logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Page Caching & Cache Management"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-102": {
@@ -1216,11 +2096,16 @@
         "name": "JS File Combination & Bundle",
         "category": "Page Caching & Cache Management",
         "required_behavior": "Executes JS File Combination & Bundle logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Page Caching & Cache Management"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-103": {
@@ -1228,11 +2113,16 @@
         "name": "Critical CSS Local Extraction",
         "category": "Page Caching & Cache Management",
         "required_behavior": "Executes Critical CSS Local Extraction logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Page Caching & Cache Management"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-104": {
@@ -1240,11 +2130,16 @@
         "name": "Unused CSS (RUCSS) Local Cleaner",
         "category": "Page Caching & Cache Management",
         "required_behavior": "Executes Unused CSS (RUCSS) Local Cleaner logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Page Caching & Cache Management"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-105": {
@@ -1252,11 +2147,16 @@
         "name": "Load JavaScript Deferred",
         "category": "Page Caching & Cache Management",
         "required_behavior": "Executes Load JavaScript Deferred logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Page Caching & Cache Management"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-106": {
@@ -1264,11 +2164,16 @@
         "name": "Delay JS Execution on Interaction",
         "category": "Page Caching & Cache Management",
         "required_behavior": "Executes Delay JS Execution on Interaction logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Page Caching & Cache Management"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-107": {
@@ -1276,11 +2181,16 @@
         "name": "Script & Style Exclusion Regex",
         "category": "Page Caching & Cache Management",
         "required_behavior": "Executes Script & Style Exclusion Regex logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Page Caching & Cache Management"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-108": {
@@ -1288,11 +2198,16 @@
         "name": "Safe Mode / Rollback on Script Error",
         "category": "Page Caching & Cache Management",
         "required_behavior": "Executes Safe Mode / Rollback on Script Error logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Page Caching & Cache Management"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-109": {
@@ -1300,11 +2215,16 @@
         "name": "Local Google Fonts Hosting",
         "category": "Page Caching & Cache Management",
         "required_behavior": "Executes Local Google Fonts Hosting logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Page Caching & Cache Management"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-110": {
@@ -1312,11 +2232,25 @@
         "name": "Font-Display: Swap Injector",
         "category": "Page Caching & Cache Management",
         "required_behavior": "Executes Font-Display: Swap Injector logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Page Caching & Cache Management"
+        "required_production_symbols": {
+            "files": [
+                "src/AI/LlmsTxt/LlmsTxtGenerator.php"
+            ],
+            "classes": [
+                "ApexSEO\\AI\\LlmsTxt\\LlmsTxtGenerator"
+            ],
+            "methods": [
+                "LlmsTxtGenerator::generateLlmsTxt",
+                "LlmsTxtGenerator::generateLlmsFullTxt"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "WordPress template_redirect hook on /llms.txt URI"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testLlmsTxtGeneration"
+            ]
         }
     },
     "APEX-111": {
@@ -1324,11 +2258,16 @@
         "name": "Local Gravatar Avatar Caching",
         "category": "Page Caching & Cache Management",
         "required_behavior": "Executes Local Gravatar Avatar Caching logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Page Caching & Cache Management"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-112": {
@@ -1336,11 +2275,25 @@
         "name": "HTML Output Minification",
         "category": "Page Caching & Cache Management",
         "required_behavior": "Executes HTML Output Minification logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Page Caching & Cache Management"
+        "required_production_symbols": {
+            "files": [
+                "src/AI/SearchIntent/SearchIntentAnalyzer.php"
+            ],
+            "classes": [
+                "ApexSEO\\AI\\SearchIntent\\SearchIntentAnalyzer"
+            ],
+            "methods": [
+                "SearchIntentAnalyzer::analyze",
+                "SearchIntentAnalyzer::getIntentSuggestions"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "REST API / Admin content editor analysis trigger"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testSearchIntentAnalyzer"
+            ]
         }
     },
     "APEX-113": {
@@ -1348,11 +2301,25 @@
         "name": "DNS Prefetch & Preconnect Inserter",
         "category": "Page Caching & Cache Management",
         "required_behavior": "Executes DNS Prefetch & Preconnect Inserter logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Page Caching & Cache Management"
+        "required_production_symbols": {
+            "files": [
+                "src/AI/Generators/MetadataAiGenerator.php"
+            ],
+            "classes": [
+                "ApexSEO\\AI\\Generators\\MetadataAiGenerator"
+            ],
+            "methods": [
+                "MetadataAiGenerator::generateTitleCandidates",
+                "MetadataAiGenerator::generateDescriptionCandidates"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "REST API / Admin AI assist button"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testMetadataAiGenerator"
+            ]
         }
     },
     "APEX-114": {
@@ -1360,11 +2327,16 @@
         "name": "Strip WordPress Core Emojis",
         "category": "Page Caching & Cache Management",
         "required_behavior": "Executes Strip WordPress Core Emojis logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Page Caching & Cache Management"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-115": {
@@ -1372,11 +2344,16 @@
         "name": "Strip WordPress Core OEmbeds",
         "category": "Page Caching & Cache Management",
         "required_behavior": "Executes Strip WordPress Core OEmbeds logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Page Caching & Cache Management"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-116": {
@@ -1384,11 +2361,16 @@
         "name": "Heartbeat Frequency Control",
         "category": "Page Caching & Cache Management",
         "required_behavior": "Executes Heartbeat Frequency Control logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Page Caching & Cache Management"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-117": {
@@ -1396,11 +2378,16 @@
         "name": "Local GD/Imagick WebP Converter",
         "category": "Media Optimization & WebP/AVIF Engine",
         "required_behavior": "Executes Local GD/Imagick WebP Converter logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Media Optimization & WebP/AVIF Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-118": {
@@ -1408,11 +2395,16 @@
         "name": "Local GD/Imagick AVIF Converter",
         "category": "Media Optimization & WebP/AVIF Engine",
         "required_behavior": "Executes Local GD/Imagick AVIF Converter logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Media Optimization & WebP/AVIF Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-119": {
@@ -1420,11 +2412,16 @@
         "name": "`<picture>` Tag HTML Rewriter",
         "category": "Media Optimization & WebP/AVIF Engine",
         "required_behavior": "Executes `<picture>` Tag HTML Rewriter logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Media Optimization & WebP/AVIF Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-120": {
@@ -1432,11 +2429,27 @@
         "name": "Bulk Image Optimization Queue",
         "category": "Media Optimization & WebP/AVIF Engine",
         "required_behavior": "Executes Bulk Image Optimization Queue logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Media Optimization & WebP/AVIF Engine"
+        "required_production_symbols": {
+            "files": [
+                "src/Media/Optimizer/ImageOptimizer.php"
+            ],
+            "classes": [
+                "ApexSEO\\Media\\Optimizer\\ImageOptimizer"
+            ],
+            "methods": [
+                "ImageOptimizer::supportsWebP",
+                "ImageOptimizer::supportsAvif",
+                "ImageOptimizer::convertToWebP",
+                "ImageOptimizer::optimizeAttachment"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "wp_generate_attachment_metadata hook or CLI / REST optimization trigger"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testMediaCommandOptimizeAndRestore"
+            ]
         }
     },
     "APEX-121": {
@@ -1444,11 +2457,16 @@
         "name": "Auto-Optimize on Media Upload",
         "category": "Media Optimization & WebP/AVIF Engine",
         "required_behavior": "Executes Auto-Optimize on Media Upload logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Media Optimization & WebP/AVIF Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-122": {
@@ -1456,11 +2474,16 @@
         "name": "Add Missing `width` & `height`",
         "category": "Media Optimization & WebP/AVIF Engine",
         "required_behavior": "Executes Add Missing `width` & `height` logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Media Optimization & WebP/AVIF Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-123": {
@@ -1468,11 +2491,16 @@
         "name": "LCP Featured Image Preload (`fetchpriority`)",
         "category": "Media Optimization & WebP/AVIF Engine",
         "required_behavior": "Executes LCP Featured Image Preload (`fetchpriority`) logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Media Optimization & WebP/AVIF Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-124": {
@@ -1480,11 +2508,16 @@
         "name": "Original Image Backup & Restore",
         "category": "Media Optimization & WebP/AVIF Engine",
         "required_behavior": "Executes Original Image Backup & Restore logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Media Optimization & WebP/AVIF Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-125": {
@@ -1492,11 +2525,24 @@
         "name": "Quality Lossy/Lossless Selector",
         "category": "Media Optimization & WebP/AVIF Engine",
         "required_behavior": "Executes Quality Lossy/Lossless Selector logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Media Optimization & WebP/AVIF Engine"
+        "required_production_symbols": {
+            "files": [
+                "src/Media/Optimizer/LcpOptimizer.php"
+            ],
+            "classes": [
+                "ApexSEO\\Media\\Optimizer\\LcpOptimizer"
+            ],
+            "methods": [
+                "LcpOptimizer::optimizeLcpImages"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "the_content filter or output buffer filter"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testLcpOptimizer"
+            ]
         }
     },
     "APEX-126": {
@@ -1504,11 +2550,16 @@
         "name": "Strip EXIF Image Metadata",
         "category": "Media Optimization & WebP/AVIF Engine",
         "required_behavior": "Executes Strip EXIF Image Metadata logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Media Optimization & WebP/AVIF Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-127": {
@@ -1516,11 +2567,16 @@
         "name": "Image History & Savings Tracker",
         "category": "Media Optimization & WebP/AVIF Engine",
         "required_behavior": "Executes Image History & Savings Tracker logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Media Optimization & WebP/AVIF Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-128": {
@@ -1528,11 +2584,16 @@
         "name": "SVG Upload Sanitization",
         "category": "Media Optimization & WebP/AVIF Engine",
         "required_behavior": "Executes SVG Upload Sanitization logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Media Optimization & WebP/AVIF Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-129": {
@@ -1540,11 +2601,16 @@
         "name": "Resize Large Image Threshold",
         "category": "Media Optimization & WebP/AVIF Engine",
         "required_behavior": "Executes Resize Large Image Threshold logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Media Optimization & WebP/AVIF Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-130": {
@@ -1552,11 +2618,16 @@
         "name": "Cloud QUIC.cloud Image Converter",
         "category": "Media Optimization & WebP/AVIF Engine",
         "required_behavior": "Executes Cloud QUIC.cloud Image Converter logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Media Optimization & WebP/AVIF Engine"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-131": {
@@ -1564,11 +2635,24 @@
         "name": "Native & JS Fallback Image LazyLoad",
         "category": "Lazy Loading Subsystem",
         "required_behavior": "Executes Native & JS Fallback Image LazyLoad logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Lazy Loading Subsystem"
+        "required_production_symbols": {
+            "files": [
+                "src/Media/LazyLoad/ImageLazyLoader.php"
+            ],
+            "classes": [
+                "ApexSEO\\Media\\LazyLoad\\ImageLazyLoader"
+            ],
+            "methods": [
+                "ImageLazyLoader::processHtml"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "the_content filter or output buffer hook"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testImageLazyLoader"
+            ]
         }
     },
     "APEX-132": {
@@ -1576,11 +2660,16 @@
         "name": "LazyLoad Iframes & Video Players",
         "category": "Lazy Loading Subsystem",
         "required_behavior": "Executes LazyLoad Iframes & Video Players logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Lazy Loading Subsystem"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-133": {
@@ -1588,11 +2677,16 @@
         "name": "YouTube Preview Thumbnail Mockup",
         "category": "Lazy Loading Subsystem",
         "required_behavior": "Executes YouTube Preview Thumbnail Mockup logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Lazy Loading Subsystem"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-134": {
@@ -1600,11 +2694,24 @@
         "name": "Inline SVG Aspect-Ratio Placeholder",
         "category": "Lazy Loading Subsystem",
         "required_behavior": "Executes Inline SVG Aspect-Ratio Placeholder logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Lazy Loading Subsystem"
+        "required_production_symbols": {
+            "files": [
+                "src/Media/LazyLoad/PlaceholderGenerator.php"
+            ],
+            "classes": [
+                "ApexSEO\\Media\\LazyLoad\\PlaceholderGenerator"
+            ],
+            "methods": [
+                "PlaceholderGenerator::generateSvgPlaceholder"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "ImageLazyLoader when placeholder option is active"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testSvgPlaceholderGenerator"
+            ]
         }
     },
     "APEX-135": {
@@ -1612,11 +2719,16 @@
         "name": "LazyLoad CSS Background Images",
         "category": "Lazy Loading Subsystem",
         "required_behavior": "Executes LazyLoad CSS Background Images logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Lazy Loading Subsystem"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-136": {
@@ -1624,11 +2736,16 @@
         "name": "Exclude First N Images from LazyLoad",
         "category": "Lazy Loading Subsystem",
         "required_behavior": "Executes Exclude First N Images from LazyLoad logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Lazy Loading Subsystem"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-137": {
@@ -1636,11 +2753,16 @@
         "name": "Custom Class/Attribute Lazy Exclude",
         "category": "Lazy Loading Subsystem",
         "required_behavior": "Executes Custom Class/Attribute Lazy Exclude logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Lazy Loading Subsystem"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-138": {
@@ -1648,11 +2770,16 @@
         "name": "LQIP Low Quality Base64 Generator",
         "category": "Lazy Loading Subsystem",
         "required_behavior": "Executes LQIP Low Quality Base64 Generator logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Lazy Loading Subsystem"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-139": {
@@ -1660,11 +2787,16 @@
         "name": "Post Revisions Cleanup",
         "category": "Database Optimization & Maintenance",
         "required_behavior": "Executes Post Revisions Cleanup logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Database Optimization & Maintenance"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-140": {
@@ -1672,11 +2804,16 @@
         "name": "Auto-Drafts & Trashed Posts Cleanup",
         "category": "Database Optimization & Maintenance",
         "required_behavior": "Executes Auto-Drafts & Trashed Posts Cleanup logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Database Optimization & Maintenance"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-141": {
@@ -1684,11 +2821,16 @@
         "name": "Spam & Trashed Comments Cleanup",
         "category": "Database Optimization & Maintenance",
         "required_behavior": "Executes Spam & Trashed Comments Cleanup logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Database Optimization & Maintenance"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-142": {
@@ -1696,11 +2838,16 @@
         "name": "Expired Transients SQL Cleanup",
         "category": "Database Optimization & Maintenance",
         "required_behavior": "Executes Expired Transients SQL Cleanup logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Database Optimization & Maintenance"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-143": {
@@ -1708,11 +2855,16 @@
         "name": "All Transients Bulk Cleanup",
         "category": "Database Optimization & Maintenance",
         "required_behavior": "Executes All Transients Bulk Cleanup logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Database Optimization & Maintenance"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-144": {
@@ -1720,11 +2872,16 @@
         "name": "InnoDB / MyISAM `OPTIMIZE TABLE`",
         "category": "Database Optimization & Maintenance",
         "required_behavior": "Executes InnoDB / MyISAM `OPTIMIZE TABLE` logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Database Optimization & Maintenance"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-145": {
@@ -1732,11 +2889,16 @@
         "name": "Trackbacks & Pingbacks Cleanup",
         "category": "Database Optimization & Maintenance",
         "required_behavior": "Executes Trackbacks & Pingbacks Cleanup logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Database Optimization & Maintenance"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-146": {
@@ -1744,11 +2906,16 @@
         "name": "MyISAM to InnoDB Engine Converter",
         "category": "Database Optimization & Maintenance",
         "required_behavior": "Executes MyISAM to InnoDB Engine Converter logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Database Optimization & Maintenance"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-147": {
@@ -1756,11 +2923,16 @@
         "name": "Automated Scheduled Cron DB Clean",
         "category": "Database Optimization & Maintenance",
         "required_behavior": "Executes Automated Scheduled Cron DB Clean logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Database Optimization & Maintenance"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-148": {
@@ -1768,11 +2940,16 @@
         "name": "Database Dry-Run Cleanup Preview",
         "category": "Database Optimization & Maintenance",
         "required_behavior": "Executes Database Dry-Run Cleanup Preview logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Database Optimization & Maintenance"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-149": {
@@ -1780,11 +2957,26 @@
         "name": "Apache `.htaccess` Expiration Rules",
         "category": "Server-Level & Reverse Proxy Integration",
         "required_behavior": "Executes Apache `.htaccess` Expiration Rules logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Server-Level & Reverse Proxy Integration"
+        "required_production_symbols": {
+            "files": [
+                "src/Core/Environment/Server/ApacheAdapter.php"
+            ],
+            "classes": [
+                "ApexSEO\\Core\\Environment\\Server\\ApacheAdapter"
+            ],
+            "methods": [
+                "ApacheAdapter::getServerType",
+                "ApacheAdapter::supportsHtaccess",
+                "ApacheAdapter::supportsNginxDirectives"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "EnvironmentDetector resolution during boot"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testApacheAdapterCapabilities"
+            ]
         }
     },
     "APEX-150": {
@@ -1792,11 +2984,26 @@
         "name": "Nginx Direct Cache `try_files` Config",
         "category": "Server-Level & Reverse Proxy Integration",
         "required_behavior": "Executes Nginx Direct Cache `try_files` Config logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Server-Level & Reverse Proxy Integration"
+        "required_production_symbols": {
+            "files": [
+                "src/Core/Environment/Server/NginxAdapter.php"
+            ],
+            "classes": [
+                "ApexSEO\\Core\\Environment\\Server\\NginxAdapter"
+            ],
+            "methods": [
+                "NginxAdapter::getServerType",
+                "NginxAdapter::supportsHtaccess",
+                "NginxAdapter::supportsNginxDirectives"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "EnvironmentDetector resolution during boot"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testNginxAdapterCapabilities"
+            ]
         }
     },
     "APEX-151": {
@@ -1804,11 +3011,26 @@
         "name": "LiteSpeed `X-LiteSpeed-Cache-Control`",
         "category": "Server-Level & Reverse Proxy Integration",
         "required_behavior": "Executes LiteSpeed `X-LiteSpeed-Cache-Control` logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Server-Level & Reverse Proxy Integration"
+        "required_production_symbols": {
+            "files": [
+                "src/Core/Environment/Server/LiteSpeedAdapter.php"
+            ],
+            "classes": [
+                "ApexSEO\\Core\\Environment\\Server\\LiteSpeedAdapter"
+            ],
+            "methods": [
+                "LiteSpeedAdapter::getServerType",
+                "LiteSpeedAdapter::supportsLiteSpeedEngine",
+                "LiteSpeedAdapter::supportsEsi"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "EnvironmentDetector resolution during boot"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testLiteSpeedAdapterCapabilities"
+            ]
         }
     },
     "APEX-152": {
@@ -1816,11 +3038,26 @@
         "name": "LiteSpeed Tagged Cache Purge Header",
         "category": "Server-Level & Reverse Proxy Integration",
         "required_behavior": "Executes LiteSpeed Tagged Cache Purge Header logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Server-Level & Reverse Proxy Integration"
+        "required_production_symbols": {
+            "files": [
+                "src/Core/Environment/Server/OpenLiteSpeedAdapter.php"
+            ],
+            "classes": [
+                "ApexSEO\\Core\\Environment\\Server\\OpenLiteSpeedAdapter"
+            ],
+            "methods": [
+                "OpenLiteSpeedAdapter::getServerType",
+                "OpenLiteSpeedAdapter::supportsLiteSpeedEngine",
+                "OpenLiteSpeedAdapter::supportsHtaccess"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "EnvironmentDetector resolution during boot"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testOpenLiteSpeedAdapterCapabilities"
+            ]
         }
     },
     "APEX-153": {
@@ -1828,11 +3065,16 @@
         "name": "Varnish Reverse Proxy HTTP `PURGE`",
         "category": "Server-Level & Reverse Proxy Integration",
         "required_behavior": "Executes Varnish Reverse Proxy HTTP `PURGE` logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Server-Level & Reverse Proxy Integration"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-154": {
@@ -1840,11 +3082,16 @@
         "name": "Cloudflare Zone Cache API Purge",
         "category": "Server-Level & Reverse Proxy Integration",
         "required_behavior": "Executes Cloudflare Zone Cache API Purge logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Server-Level & Reverse Proxy Integration"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-155": {
@@ -1852,11 +3099,16 @@
         "name": "Redis Persistent Object Cache Driver",
         "category": "Server-Level & Reverse Proxy Integration",
         "required_behavior": "Executes Redis Persistent Object Cache Driver logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Server-Level & Reverse Proxy Integration"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-156": {
@@ -1864,11 +3116,16 @@
         "name": "Memcached Object Cache Driver",
         "category": "Server-Level & Reverse Proxy Integration",
         "required_behavior": "Executes Memcached Object Cache Driver logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Server-Level & Reverse Proxy Integration"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-157": {
@@ -1876,11 +3133,16 @@
         "name": "CDN Hostname URL Rewriting",
         "category": "Server-Level & Reverse Proxy Integration",
         "required_behavior": "Executes CDN Hostname URL Rewriting logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Server-Level & Reverse Proxy Integration"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-158": {
@@ -1888,11 +3150,16 @@
         "name": "ESI Edge Fragment Staging (LSWS)",
         "category": "Server-Level & Reverse Proxy Integration",
         "required_behavior": "Executes ESI Edge Fragment Staging (LSWS) logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Server-Level & Reverse Proxy Integration"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-159": {
@@ -1900,11 +3167,16 @@
         "name": "Google Analytics 4 (GA4) Tag Injector",
         "category": "Analytics, GSC & Rank Tracking",
         "required_behavior": "Executes Google Analytics 4 (GA4) Tag Injector logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Analytics, GSC & Rank Tracking"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-160": {
@@ -1912,11 +3184,16 @@
         "name": "Local GA4 `gtag.js` Script Host",
         "category": "Analytics, GSC & Rank Tracking",
         "required_behavior": "Executes Local GA4 `gtag.js` Script Host logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Analytics, GSC & Rank Tracking"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-161": {
@@ -1924,11 +3201,16 @@
         "name": "IP Anonymization & GDPR Cookie Guard",
         "category": "Analytics, GSC & Rank Tracking",
         "required_behavior": "Executes IP Anonymization & GDPR Cookie Guard logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Analytics, GSC & Rank Tracking"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-162": {
@@ -1936,11 +3218,16 @@
         "name": "Google Search Console OAuth2 Client",
         "category": "Analytics, GSC & Rank Tracking",
         "required_behavior": "Executes Google Search Console OAuth2 Client logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Analytics, GSC & Rank Tracking"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-163": {
@@ -1948,11 +3235,25 @@
         "name": "Search Console Keyword Rank Tracker",
         "category": "Analytics, GSC & Rank Tracking",
         "required_behavior": "Executes Search Console Keyword Rank Tracker logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Analytics, GSC & Rank Tracking"
+        "required_production_symbols": {
+            "files": [
+                "src/Analytics/Tracker/RankTracker.php"
+            ],
+            "classes": [
+                "ApexSEO\\Analytics\\Tracker\\RankTracker"
+            ],
+            "methods": [
+                "RankTracker::trackKeyword",
+                "RankTracker::getTrackedKeywords"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "REST API / WP-Cron tracking schedule"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testRankTrackerKeywords"
+            ]
         }
     },
     "APEX-164": {
@@ -1960,11 +3261,16 @@
         "name": "GSC URL Inspection API Integration",
         "category": "Analytics, GSC & Rank Tracking",
         "required_behavior": "Executes GSC URL Inspection API Integration logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Analytics, GSC & Rank Tracking"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-165": {
@@ -1972,11 +3278,16 @@
         "name": "Search Console Impressions/Clicks DB",
         "category": "Analytics, GSC & Rank Tracking",
         "required_behavior": "Executes Search Console Impressions/Clicks DB logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Analytics, GSC & Rank Tracking"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-166": {
@@ -1984,11 +3295,16 @@
         "name": "Top Winning / Losing Keywords Matrix",
         "category": "Analytics, GSC & Rank Tracking",
         "required_behavior": "Executes Top Winning / Losing Keywords Matrix logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Analytics, GSC & Rank Tracking"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-167": {
@@ -1996,11 +3312,16 @@
         "name": "Google Tag Manager (GTM) Container",
         "category": "Analytics, GSC & Rank Tracking",
         "required_behavior": "Executes Google Tag Manager (GTM) Container logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Analytics, GSC & Rank Tracking"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-168": {
@@ -2008,11 +3329,16 @@
         "name": "Matomo / Piwik Self-Hosted Analytics",
         "category": "Analytics, GSC & Rank Tracking",
         "required_behavior": "Executes Matomo / Piwik Self-Hosted Analytics logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Analytics, GSC & Rank Tracking"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-169": {
@@ -2020,11 +3346,27 @@
         "name": "REST Settings Controller",
         "category": "REST API & Headless Engine",
         "required_behavior": "Executes REST Settings Controller logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "REST API & Headless Engine"
+        "required_production_symbols": {
+            "files": [
+                "src/API/Controllers/SettingsRestController.php",
+                "src/API/RestApiRouter.php"
+            ],
+            "classes": [
+                "ApexSEO\\API\\Controllers\\SettingsRestController"
+            ],
+            "methods": [
+                "SettingsRestController::getSettings",
+                "SettingsRestController::updateSettings",
+                "SettingsRestController::registerRoutes"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "rest_api_init WordPress hook"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testSettingsControllerGetAndUpdate"
+            ]
         }
     },
     "APEX-170": {
@@ -2032,11 +3374,27 @@
         "name": "REST Meta Reader & Mutator Endpoint",
         "category": "REST API & Headless Engine",
         "required_behavior": "Executes REST Meta Reader & Mutator Endpoint logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "REST API & Headless Engine"
+        "required_production_symbols": {
+            "files": [
+                "src/API/Controllers/MetaRestController.php",
+                "src/SEO/Admin/MetaSaver.php"
+            ],
+            "classes": [
+                "ApexSEO\\API\\Controllers\\MetaRestController"
+            ],
+            "methods": [
+                "MetaRestController::getMeta",
+                "MetaRestController::saveMeta",
+                "MetaRestController::registerRoutes"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "rest_api_init WordPress hook"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testMetaControllerSaveAndGet"
+            ]
         }
     },
     "APEX-171": {
@@ -2044,11 +3402,26 @@
         "name": "REST Dynamic Schema CRUD Endpoint",
         "category": "REST API & Headless Engine",
         "required_behavior": "Executes REST Dynamic Schema CRUD Endpoint logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "REST API & Headless Engine"
+        "required_production_symbols": {
+            "files": [
+                "src/API/Controllers/SchemaRestController.php"
+            ],
+            "classes": [
+                "ApexSEO\\API\\Controllers\\SchemaRestController"
+            ],
+            "methods": [
+                "SchemaRestController::getSchemas",
+                "SchemaRestController::createSchema",
+                "SchemaRestController::registerRoutes"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "rest_api_init WordPress hook"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testSchemaControllerCRUD"
+            ]
         }
     },
     "APEX-172": {
@@ -2056,11 +3429,26 @@
         "name": "REST Redirect Management Endpoint",
         "category": "REST API & Headless Engine",
         "required_behavior": "Executes REST Redirect Management Endpoint logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "REST API & Headless Engine"
+        "required_production_symbols": {
+            "files": [
+                "src/API/Controllers/RedirectsRestController.php"
+            ],
+            "classes": [
+                "ApexSEO\\API\\Controllers\\RedirectsRestController"
+            ],
+            "methods": [
+                "RedirectsRestController::getRedirects",
+                "RedirectsRestController::createRedirect",
+                "RedirectsRestController::registerRoutes"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "rest_api_init hook"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testRedirectsControllerCRUD"
+            ]
         }
     },
     "APEX-173": {
@@ -2068,11 +3456,26 @@
         "name": "REST 404 Monitor Log Endpoint",
         "category": "REST API & Headless Engine",
         "required_behavior": "Executes REST 404 Monitor Log Endpoint logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "REST API & Headless Engine"
+        "required_production_symbols": {
+            "files": [
+                "src/API/Controllers/NotFoundRestController.php"
+            ],
+            "classes": [
+                "ApexSEO\\API\\Controllers\\NotFoundRestController"
+            ],
+            "methods": [
+                "NotFoundRestController::get404Logs",
+                "NotFoundRestController::clear404Logs",
+                "NotFoundRestController::registerRoutes"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "rest_api_init hook"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testNotFoundController"
+            ]
         }
     },
     "APEX-174": {
@@ -2080,11 +3483,25 @@
         "name": "REST Link Suggestions Query Endpoint",
         "category": "REST API & Headless Engine",
         "required_behavior": "Executes REST Link Suggestions Query Endpoint logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "REST API & Headless Engine"
+        "required_production_symbols": {
+            "files": [
+                "src/API/Controllers/LinksRestController.php"
+            ],
+            "classes": [
+                "ApexSEO\\API\\Controllers\\LinksRestController"
+            ],
+            "methods": [
+                "LinksRestController::getSuggestions",
+                "LinksRestController::registerRoutes"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "rest_api_init hook"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testLinksController"
+            ]
         }
     },
     "APEX-175": {
@@ -2092,11 +3509,25 @@
         "name": "Headless Complete SEO Meta & JSON-LD",
         "category": "REST API & Headless Engine",
         "required_behavior": "Executes Headless Complete SEO Meta & JSON-LD logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "REST API & Headless Engine"
+        "required_production_symbols": {
+            "files": [
+                "src/API/Controllers/MetaRestController.php"
+            ],
+            "classes": [
+                "ApexSEO\\API\\Controllers\\MetaRestController"
+            ],
+            "methods": [
+                "MetaRestController::getMeta",
+                "MetaRestController::registerRoutes"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "rest_api_init hook"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testMetaControllerSaveAndGet"
+            ]
         }
     },
     "APEX-176": {
@@ -2104,11 +3535,26 @@
         "name": "REST Cache Purge & Preload Trigger",
         "category": "REST API & Headless Engine",
         "required_behavior": "Executes REST Cache Purge & Preload Trigger logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "REST API & Headless Engine"
+        "required_production_symbols": {
+            "files": [
+                "src/API/Controllers/CacheRestController.php"
+            ],
+            "classes": [
+                "ApexSEO\\API\\Controllers\\CacheRestController"
+            ],
+            "methods": [
+                "CacheRestController::purgeCache",
+                "CacheRestController::triggerPreload",
+                "CacheRestController::registerRoutes"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "rest_api_init hook"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testCacheControllerPurgeAndPreload"
+            ]
         }
     },
     "APEX-177": {
@@ -2116,11 +3562,26 @@
         "name": "REST Media Image Optimize Action",
         "category": "REST API & Headless Engine",
         "required_behavior": "Executes REST Media Image Optimize Action logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "REST API & Headless Engine"
+        "required_production_symbols": {
+            "files": [
+                "src/API/Controllers/MediaRestController.php"
+            ],
+            "classes": [
+                "ApexSEO\\API\\Controllers\\MediaRestController"
+            ],
+            "methods": [
+                "MediaRestController::optimizeSingle",
+                "MediaRestController::bulkOptimize",
+                "MediaRestController::registerRoutes"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "rest_api_init hook"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testMediaControllerSingleAndBulk"
+            ]
         }
     },
     "APEX-178": {
@@ -2128,11 +3589,25 @@
         "name": "REST Migration Batch Worker Endpoint",
         "category": "REST API & Headless Engine",
         "required_behavior": "Executes REST Migration Batch Worker Endpoint logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "REST API & Headless Engine"
+        "required_production_symbols": {
+            "files": [
+                "src/API/Controllers/MigrationRestController.php"
+            ],
+            "classes": [
+                "ApexSEO\\API\\Controllers\\MigrationRestController"
+            ],
+            "methods": [
+                "MigrationRestController::executeMigration",
+                "MigrationRestController::registerRoutes"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "rest_api_init hook"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testMigrationControllerExecution"
+            ]
         }
     },
     "APEX-179": {
@@ -2140,11 +3615,25 @@
         "name": "REST Analytics Overview API",
         "category": "REST API & Headless Engine",
         "required_behavior": "Executes REST Analytics Overview API logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "REST API & Headless Engine"
+        "required_production_symbols": {
+            "files": [
+                "src/API/Controllers/AnalyticsRestController.php"
+            ],
+            "classes": [
+                "ApexSEO\\API\\Controllers\\AnalyticsRestController"
+            ],
+            "methods": [
+                "AnalyticsRestController::getOverview",
+                "AnalyticsRestController::registerRoutes"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "rest_api_init hook"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testAnalyticsController"
+            ]
         }
     },
     "APEX-180": {
@@ -2152,11 +3641,25 @@
         "name": "REST Rank Tracker Query API",
         "category": "REST API & Headless Engine",
         "required_behavior": "Executes REST Rank Tracker Query API logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "REST API & Headless Engine"
+        "required_production_symbols": {
+            "files": [
+                "src/API/Controllers/AnalyticsRestController.php"
+            ],
+            "classes": [
+                "ApexSEO\\API\\Controllers\\AnalyticsRestController"
+            ],
+            "methods": [
+                "AnalyticsRestController::getRankTracker",
+                "AnalyticsRestController::registerRoutes"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "rest_api_init hook"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testAnalyticsController"
+            ]
         }
     },
     "APEX-181": {
@@ -2164,11 +3667,25 @@
         "name": "`wp apex cache purge` Subcommand",
         "category": "WP-CLI Management Interface",
         "required_behavior": "Executes `wp apex cache purge` Subcommand logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "WP-CLI Management Interface"
+        "required_production_symbols": {
+            "files": [
+                "src/CLI/CacheCommand.php",
+                "src/Core/CLI/CliManager.php"
+            ],
+            "classes": [
+                "ApexSEO\\CLI\\CacheCommand"
+            ],
+            "methods": [
+                "CacheCommand::purge"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "WP_CLI::add_command during cli_init hook"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testCacheCommandPurgeAndWarmup"
+            ]
         }
     },
     "APEX-182": {
@@ -2176,11 +3693,24 @@
         "name": "`wp apex cache preload` Subcommand",
         "category": "WP-CLI Management Interface",
         "required_behavior": "Executes `wp apex cache preload` Subcommand logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "WP-CLI Management Interface"
+        "required_production_symbols": {
+            "files": [
+                "src/CLI/CacheCommand.php"
+            ],
+            "classes": [
+                "ApexSEO\\CLI\\CacheCommand"
+            ],
+            "methods": [
+                "CacheCommand::preload"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "cli_init hook"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testCacheCommandPurgeAndWarmup"
+            ]
         }
     },
     "APEX-183": {
@@ -2188,11 +3718,25 @@
         "name": "`wp apex index reindex` Subcommand",
         "category": "WP-CLI Management Interface",
         "required_behavior": "Executes `wp apex index reindex` Subcommand logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "WP-CLI Management Interface"
+        "required_production_symbols": {
+            "files": [
+                "src/CLI/IndexCommand.php"
+            ],
+            "classes": [
+                "ApexSEO\\CLI\\IndexCommand"
+            ],
+            "methods": [
+                "IndexCommand::rebuild",
+                "IndexCommand::status"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "cli_init hook"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testIndexCommandRebuildAndStatus"
+            ]
         }
     },
     "APEX-184": {
@@ -2200,11 +3744,25 @@
         "name": "`wp apex media optimize` Subcommand",
         "category": "WP-CLI Management Interface",
         "required_behavior": "Executes `wp apex media optimize` Subcommand logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "WP-CLI Management Interface"
+        "required_production_symbols": {
+            "files": [
+                "src/CLI/MediaCommand.php"
+            ],
+            "classes": [
+                "ApexSEO\\CLI\\MediaCommand"
+            ],
+            "methods": [
+                "MediaCommand::optimize",
+                "MediaCommand::restore"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "cli_init hook"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testMediaCommandOptimizeAndRestore"
+            ]
         }
     },
     "APEX-185": {
@@ -2212,11 +3770,24 @@
         "name": "`wp apex redirect add` Subcommand",
         "category": "WP-CLI Management Interface",
         "required_behavior": "Executes `wp apex redirect add` Subcommand logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "WP-CLI Management Interface"
+        "required_production_symbols": {
+            "files": [
+                "src/CLI/RedirectCommand.php"
+            ],
+            "classes": [
+                "ApexSEO\\CLI\\RedirectCommand"
+            ],
+            "methods": [
+                "RedirectCommand::add"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "cli_init hook"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testRedirectCommandAddAndList"
+            ]
         }
     },
     "APEX-186": {
@@ -2224,11 +3795,24 @@
         "name": "`wp apex redirect list` Subcommand",
         "category": "WP-CLI Management Interface",
         "required_behavior": "Executes `wp apex redirect list` Subcommand logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "WP-CLI Management Interface"
+        "required_production_symbols": {
+            "files": [
+                "src/CLI/RedirectCommand.php"
+            ],
+            "classes": [
+                "ApexSEO\\CLI\\RedirectCommand"
+            ],
+            "methods": [
+                "RedirectCommand::list"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "cli_init hook"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testRedirectCommandAddAndList"
+            ]
         }
     },
     "APEX-187": {
@@ -2236,11 +3820,24 @@
         "name": "`wp apex db clean` Subcommand",
         "category": "WP-CLI Management Interface",
         "required_behavior": "Executes `wp apex db clean` Subcommand logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "WP-CLI Management Interface"
+        "required_production_symbols": {
+            "files": [
+                "src/CLI/DatabaseCommand.php"
+            ],
+            "classes": [
+                "ApexSEO\\CLI\\DatabaseCommand"
+            ],
+            "methods": [
+                "DatabaseCommand::clean"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "cli_init hook"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testDatabaseCommandClean"
+            ]
         }
     },
     "APEX-188": {
@@ -2248,11 +3845,26 @@
         "name": "`wp apex migrate run` Subcommand",
         "category": "WP-CLI Management Interface",
         "required_behavior": "Executes `wp apex migrate run` Subcommand logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "WP-CLI Management Interface"
+        "required_production_symbols": {
+            "files": [
+                "src/CLI/MigrateCommand.php",
+                "src/Core/Database/MigrationRunner.php"
+            ],
+            "classes": [
+                "ApexSEO\\CLI\\MigrateCommand"
+            ],
+            "methods": [
+                "MigrateCommand::run",
+                "MigrateCommand::rollback"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "cli_init hook"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testMigrateCommandRunAndRollback"
+            ]
         }
     },
     "APEX-189": {
@@ -2260,11 +3872,24 @@
         "name": "`wp apex sitemap rebuild` Subcommand",
         "category": "WP-CLI Management Interface",
         "required_behavior": "Executes `wp apex sitemap rebuild` Subcommand logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "WP-CLI Management Interface"
+        "required_production_symbols": {
+            "files": [
+                "src/CLI/SitemapCommand.php"
+            ],
+            "classes": [
+                "ApexSEO\\CLI\\SitemapCommand"
+            ],
+            "methods": [
+                "SitemapCommand::rebuild"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "cli_init hook"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testSitemapCommandRebuild"
+            ]
         }
     },
     "APEX-190": {
@@ -2272,11 +3897,24 @@
         "name": "`wp apex doctor` Diagnostic Command",
         "category": "WP-CLI Management Interface",
         "required_behavior": "Executes `wp apex doctor` Diagnostic Command logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "WP-CLI Management Interface"
+        "required_production_symbols": {
+            "files": [
+                "src/CLI/DoctorCommand.php"
+            ],
+            "classes": [
+                "ApexSEO\\CLI\\DoctorCommand"
+            ],
+            "methods": [
+                "DoctorCommand::diagnose"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "cli_init hook"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testDoctorCommandDiagnose"
+            ]
         }
     },
     "APEX-191": {
@@ -2284,11 +3922,29 @@
         "name": "PSR-11 Dependency Injection Container",
         "category": "Core Architecture, Migration & Administration",
         "required_behavior": "Executes PSR-11 Dependency Injection Container logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Core Architecture, Migration & Administration"
+        "required_production_symbols": {
+            "files": [
+                "src/Core/Container/Container.php",
+                "src/Core/Container/ContainerInterface.php"
+            ],
+            "classes": [
+                "ApexSEO\\Core\\Container\\Container"
+            ],
+            "methods": [
+                "Container::get",
+                "Container::has",
+                "Container::singleton",
+                "Container::bind",
+                "Container::alias"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "Plugin bootstrap initialization"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testSingletonBinding"
+            ]
         }
     },
     "APEX-192": {
@@ -2296,11 +3952,16 @@
         "name": "Multi-Source Migration Engine",
         "category": "Core Architecture, Migration & Administration",
         "required_behavior": "Executes Multi-Source Migration Engine logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Core Architecture, Migration & Administration"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-193": {
@@ -2308,11 +3969,16 @@
         "name": "Active Plugin Conflict Detector",
         "category": "Core Architecture, Migration & Administration",
         "required_behavior": "Executes Active Plugin Conflict Detector logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Core Architecture, Migration & Administration"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-194": {
@@ -2320,11 +3986,26 @@
         "name": "Multisite Network Management",
         "category": "Core Architecture, Migration & Administration",
         "required_behavior": "Executes Multisite Network Management logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Core Architecture, Migration & Administration"
+        "required_production_symbols": {
+            "files": [
+                "src/Core/Multisite/MultisiteManager.php"
+            ],
+            "classes": [
+                "ApexSEO\\Core\\Multisite\\MultisiteManager"
+            ],
+            "methods": [
+                "MultisiteManager::isMultisite",
+                "MultisiteManager::runInBlogContext",
+                "MultisiteManager::getCurrentBlogId"
+            ]
+        },
+        "required_runtime_entrypoint_type": [
+            "Plugin boot and multi-site maintenance routines"
+        ],
+        "required_test_contract": {
+            "test_methods": [
+                "testRunInBlogContextExecution"
+            ]
         }
     },
     "APEX-195": {
@@ -2332,11 +4013,16 @@
         "name": "White Label Admin Interface",
         "category": "Core Architecture, Migration & Administration",
         "required_behavior": "Executes White Label Admin Interface logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Core Architecture, Migration & Administration"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-196": {
@@ -2344,11 +4030,16 @@
         "name": "Settings Backup, Import & Export",
         "category": "Core Architecture, Migration & Administration",
         "required_behavior": "Executes Settings Backup, Import & Export logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Core Architecture, Migration & Administration"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-197": {
@@ -2356,11 +4047,16 @@
         "name": "Action Scheduler Background Queue",
         "category": "Core Architecture, Migration & Administration",
         "required_behavior": "Executes Action Scheduler Background Queue logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Core Architecture, Migration & Administration"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     },
     "APEX-198": {
@@ -2368,11 +4064,16 @@
         "name": "Diagnostic System Health Reporter",
         "category": "Core Architecture, Migration & Administration",
         "required_behavior": "Executes Diagnostic System Health Reporter logic according to ApexSEO architecture standards.",
-        "required_evidence_requirements": {
-            "requires_production_class": true,
-            "requires_runtime_entrypoint": true,
-            "requires_behavioral_test": true,
-            "category": "Core Architecture, Migration & Administration"
+        "required_production_symbols": {
+            "files": [],
+            "classes": [],
+            "methods": []
+        },
+        "required_runtime_entrypoint_type": [
+            "bootstrap"
+        ],
+        "required_test_contract": {
+            "test_methods": []
         }
     }
 }

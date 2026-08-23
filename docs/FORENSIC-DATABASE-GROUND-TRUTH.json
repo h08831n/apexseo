@@ -1,273 +1,269 @@
 [
-    {
-        "table_name": "wp_apex_indexables",
-        "raw_name": "apex_indexables",
-        "ddl_source_file": "src/Core/Database/Migrations/Migration_1_0_0_CreateLockedTables.php",
-        "migration_class": "ApexSEO\\Core\\Database\\Migrations\\Migration_1_0_0_CreateLockedTables",
-        "migration_version": "1.0.0",
-        "primary_key": "id (BIGINT UNSIGNED AUTO_INCREMENT)",
-        "unique_keys": [
-            "uk_object_lookup (object_type, object_id)"
-        ],
-        "indexes": [
-            "idx_permalink_hash (permalink_hash)",
-            "idx_sub_type (object_sub_type)",
-            "idx_seo_score (seo_score)",
-            "idx_inbound_links (link_count_inbound)",
-            "idx_cornerstone (is_cornerstone)"
-        ],
-        "columns_count": 28,
-        "crud_operations": {
-            "SELECT": [
-                "IndexableRepository::findByObject",
-                "IndexableRepository::findByPermalinkHash",
-                "IndexableRepository::getNeedReindex"
-            ],
-            "INSERT": [
-                "IndexableRepository::save",
-                "IndexableBuilder::buildForPost"
-            ],
-            "UPDATE": [
-                "IndexableRepository::save",
-                "MetaSaver::savePostMeta"
-            ],
-            "DELETE": [
-                "IndexableRepository::deleteByObject",
-                "DatabaseCommand::clean"
-            ]
-        },
-        "behavioral_test": "wp-content/plugins/apexseo/tests/DatabaseMigrationTest.php::testMigration100UpAndDown"
+  {
+    "table_name": "wp_apex_indexables",
+    "raw_name": "apex_indexables",
+    "ddl_source_file": "src/Core/Database/Migrations/Migration_1_0_0_CreateLockedTables.php",
+    "migration_class": "ApexSEO\\Core\\Database\\Migrations\\Migration_1_0_0_CreateLockedTables",
+    "migration_version": "1.0.0",
+    "primary_key": "id (BIGINT UNSIGNED AUTO_INCREMENT)",
+    "unique_keys": [
+      "uk_object_lookup (object_type, object_id)"
+    ],
+    "indexes": [
+      "idx_permalink_hash (permalink_hash)",
+      "idx_sub_type (object_sub_type)",
+      "idx_seo_score (seo_score)",
+      "idx_inbound_links (link_count_inbound)",
+      "idx_cornerstone (is_cornerstone)"
+    ],
+    "columns_count": 28,
+    "crud_operations": {
+      "SELECT": [
+        "IndexableRepository::findByObject",
+        "IndexableRepository::findByPermalinkHash",
+        "IndexableRepository::getNeedReindex"
+      ],
+      "INSERT": [
+        "IndexableRepository::save",
+        "IndexableBuilder::buildForPost"
+      ],
+      "UPDATE": [
+        "IndexableRepository::save",
+        "MetaSaver::savePostMeta"
+      ],
+      "DELETE": [
+        "IndexableRepository::deleteByObject",
+        "DatabaseCommand::clean"
+      ]
     },
-    {
-        "table_name": "wp_apex_schema",
-        "raw_name": "apex_schema",
-        "ddl_source_file": "src/Core/Database/Migrations/Migration_1_0_0_CreateLockedTables.php",
-        "migration_class": "ApexSEO\\Core\\Database\\Migrations\\Migration_1_0_0_CreateLockedTables",
-        "migration_version": "1.0.0",
-        "primary_key": "id (BIGINT UNSIGNED AUTO_INCREMENT)",
-        "unique_keys": [],
-        "indexes": [
-            "idx_schema_type (schema_type)",
-            "idx_status (status)",
-            "idx_is_global (is_global)"
-        ],
-        "columns_count": 8,
-        "crud_operations": {
-            "SELECT": [
-                "SchemaGraphBuilder::build",
-                "SchemaRestController::getSchemas"
-            ],
-            "INSERT": [
-                "SchemaRestController::createSchema"
-            ],
-            "UPDATE": [
-                "SchemaRestController::updateSchema"
-            ],
-            "DELETE": [
-                "SchemaRestController::deleteSchema"
-            ]
-        },
-        "behavioral_test": "wp-content/plugins/apexseo/tests/DatabaseMigrationTest.php::testMigration100UpAndDown"
+    "behavioral_test": "wp-content/plugins/apexseo/tests/DatabaseMigrationTest.php::testMigration100UpAndDown"
+  },
+  {
+    "table_name": "wp_apex_schema",
+    "raw_name": "apex_schema",
+    "ddl_source_file": "src/Core/Database/Migrations/Migration_1_0_0_CreateLockedTables.php",
+    "migration_class": "ApexSEO\\Core\\Database\\Migrations\\Migration_1_0_0_CreateLockedTables",
+    "migration_version": "1.0.0",
+    "primary_key": "id (BIGINT UNSIGNED AUTO_INCREMENT)",
+    "unique_keys": [],
+    "indexes": [
+      "idx_schema_type (schema_type)",
+      "idx_status (status)",
+      "idx_is_global (is_global)"
+    ],
+    "columns_count": 8,
+    "crud_operations": {
+      "SELECT": [
+        "SchemaGraphBuilder::build",
+        "SchemaRestController::getSchemas"
+      ],
+      "INSERT": [
+        "SchemaRestController::createSchema"
+      ],
+      "UPDATE": [
+        "SchemaRestController::updateSchema"
+      ],
+      "DELETE": [
+        "SchemaRestController::deleteSchema"
+      ]
     },
-    {
-        "table_name": "wp_apex_redirects",
-        "raw_name": "apex_redirects",
-        "ddl_source_file": "src/Core/Database/Migrations/Migration_1_0_0_CreateLockedTables.php",
-        "migration_class": "ApexSEO\\Core\\Database\\Migrations\\Migration_1_0_0_CreateLockedTables",
-        "migration_version": "1.0.0",
-        "primary_key": "id (BIGINT UNSIGNED AUTO_INCREMENT)",
-        "unique_keys": [],
-        "indexes": [
-            "idx_source_url_hash (source_url_hash)",
-            "idx_status_code (status_code)",
-            "idx_is_regex (is_regex)",
-            "idx_status (status)"
-        ],
-        "columns_count": 10,
-        "crud_operations": {
-            "SELECT": [
-                "RedirectManager::findMatch",
-                "RedirectsRestController::getRedirects",
-                "RedirectCommand::list"
-            ],
-            "INSERT": [
-                "RedirectManager::createRedirect",
-                "RedirectsRestController::createRedirect",
-                "RedirectCommand::add"
-            ],
-            "UPDATE": [
-                "RedirectManager::recordHit",
-                "RedirectsRestController::updateRedirect"
-            ],
-            "DELETE": [
-                "RedirectManager::deleteRedirect",
-                "RedirectsRestController::deleteRedirect"
-            ]
-        },
-        "behavioral_test": "wp-content/plugins/apexseo/tests/DatabaseMigrationTest.php::testMigration100UpAndDown"
+    "behavioral_test": "wp-content/plugins/apexseo/tests/DatabaseMigrationTest.php::testMigration100UpAndDown"
+  },
+  {
+    "table_name": "wp_apex_redirects",
+    "raw_name": "apex_redirects",
+    "ddl_source_file": "src/Core/Database/Migrations/Migration_1_0_0_CreateLockedTables.php",
+    "migration_class": "ApexSEO\\Core\\Database\\Migrations\\Migration_1_0_0_CreateLockedTables",
+    "migration_version": "1.0.0",
+    "primary_key": "id (BIGINT UNSIGNED AUTO_INCREMENT)",
+    "unique_keys": [],
+    "indexes": [
+      "idx_source_url_hash (source_url_hash)",
+      "idx_status_code (status_code)",
+      "idx_is_regex (is_regex)",
+      "idx_status (status)"
+    ],
+    "columns_count": 10,
+    "crud_operations": {
+      "SELECT": [
+        "RedirectManager::findMatch",
+        "RedirectsRestController::getRedirects",
+        "RedirectCommand::list"
+      ],
+      "INSERT": [
+        "RedirectManager::createRedirect",
+        "RedirectsRestController::createRedirect",
+        "RedirectCommand::add"
+      ],
+      "UPDATE": [
+        "RedirectManager::recordHit",
+        "RedirectsRestController::updateRedirect"
+      ],
+      "DELETE": [
+        "RedirectManager::deleteRedirect",
+        "RedirectsRestController::deleteRedirect"
+      ]
     },
-    {
-        "table_name": "wp_apex_404_logs",
-        "raw_name": "apex_404_logs",
-        "ddl_source_file": "src/Core/Database/Migrations/Migration_1_0_0_CreateLockedTables.php",
-        "migration_class": "ApexSEO\\Core\\Database\\Migrations\\Migration_1_0_0_CreateLockedTables",
-        "migration_version": "1.0.0",
-        "primary_key": "id (BIGINT UNSIGNED AUTO_INCREMENT)",
-        "unique_keys": [
-            "uk_uri_hash (uri_hash)"
-        ],
-        "indexes": [
-            "idx_hit_count (hit_count)",
-            "idx_last_seen (last_seen)",
-            "idx_is_redirected (is_redirected)"
-        ],
-        "columns_count": 9,
-        "crud_operations": {
-            "SELECT": [
-                "FourOhFourMonitor::getTop404s",
-                "NotFoundRestController::get404Logs"
-            ],
-            "INSERT": [
-                "FourOhFourMonitor::log404"
-            ],
-            "UPDATE": [
-                "FourOhFourMonitor::log404",
-                "FourOhFourMonitor::markRedirected"
-            ],
-            "DELETE": [
-                "FourOhFourMonitor::clearLogs",
-                "NotFoundRestController::clear404Logs",
-                "DatabaseCommand::clean"
-            ]
-        },
-        "behavioral_test": "wp-content/plugins/apexseo/tests/DatabaseMigrationTest.php::testMigration100UpAndDown"
+    "behavioral_test": "wp-content/plugins/apexseo/tests/DatabaseMigrationTest.php::testMigration100UpAndDown"
+  },
+  {
+    "table_name": "wp_apex_404_logs",
+    "raw_name": "apex_404_logs",
+    "ddl_source_file": "src/Core/Database/Migrations/Migration_1_0_0_CreateLockedTables.php",
+    "migration_class": "ApexSEO\\Core\\Database\\Migrations\\Migration_1_0_0_CreateLockedTables",
+    "migration_version": "1.0.0",
+    "primary_key": "id (BIGINT UNSIGNED AUTO_INCREMENT)",
+    "unique_keys": [
+      "uk_uri_hash (uri_hash)"
+    ],
+    "indexes": [
+      "idx_hit_count (hit_count)",
+      "idx_last_seen (last_seen)",
+      "idx_is_redirected (is_redirected)"
+    ],
+    "columns_count": 9,
+    "crud_operations": {
+      "SELECT": [
+        "FourOhFourMonitor::getTop404s",
+        "NotFoundRestController::get404Logs"
+      ],
+      "INSERT": [
+        "FourOhFourMonitor::log404"
+      ],
+      "UPDATE": [
+        "FourOhFourMonitor::log404",
+        "FourOhFourMonitor::markRedirected"
+      ],
+      "DELETE": [
+        "FourOhFourMonitor::clearLogs",
+        "NotFoundRestController::clear404Logs",
+        "DatabaseCommand::clean"
+      ]
     },
-    {
-        "table_name": "wp_apex_links",
-        "raw_name": "apex_links",
-        "ddl_source_file": "src/Core/Database/Migrations/Migration_1_0_0_CreateLockedTables.php",
-        "migration_class": "ApexSEO\\Core\\Database\\Migrations\\Migration_1_0_0_CreateLockedTables",
-        "migration_version": "1.0.0",
-        "primary_key": "id (BIGINT UNSIGNED AUTO_INCREMENT)",
-        "unique_keys": [],
-        "indexes": [
-            "idx_post_id (post_id)",
-            "idx_target_post_id (target_post_id)",
-            "idx_url_hash (url_hash)",
-            "idx_link_type (link_type)"
-        ],
-        "columns_count": 10,
-        "crud_operations": {
-            "SELECT": [
-                "LinksRestController::getSuggestions",
-                "IndexableBuilder::extractLinks"
-            ],
-            "INSERT": [
-                "IndexableBuilder::saveLinks"
-            ],
-            "UPDATE": [
-                "IndexableBuilder::updateLinkStats"
-            ],
-            "DELETE": [
-                "IndexableBuilder::clearPostLinks"
-            ]
-        },
-        "behavioral_test": "wp-content/plugins/apexseo/tests/DatabaseMigrationTest.php::testMigration100UpAndDown"
+    "behavioral_test": "wp-content/plugins/apexseo/tests/DatabaseMigrationTest.php::testMigration100UpAndDown"
+  },
+  {
+    "table_name": "wp_apex_links",
+    "raw_name": "apex_links",
+    "ddl_source_file": "src/Core/Database/Migrations/Migration_1_0_0_CreateLockedTables.php",
+    "migration_class": "ApexSEO\\Core\\Database\\Migrations\\Migration_1_0_0_CreateLockedTables",
+    "migration_version": "1.0.0",
+    "primary_key": "id (BIGINT UNSIGNED AUTO_INCREMENT)",
+    "unique_keys": [],
+    "indexes": [
+      "idx_source_target (source_post_id, target_post_id)",
+      "idx_target (target_post_id)",
+      "idx_link_type (link_type)"
+    ],
+    "columns_count": 8,
+    "crud_operations": {
+      "SELECT": [
+        "LinkIndexer::getInboundLinks",
+        "LinkIndexer::getOutboundLinks",
+        "LinksRestController::getSuggestions"
+      ],
+      "INSERT": [
+        "LinkIndexer::indexPostLinks"
+      ],
+      "UPDATE": [
+        "LinkIndexer::updateLinkCounts"
+      ],
+      "DELETE": [
+        "LinkIndexer::deletePostLinks",
+        "DatabaseCommand::clean"
+      ]
     },
-    {
-        "table_name": "wp_apex_image_history",
-        "raw_name": "apex_image_history",
-        "ddl_source_file": "src/Core/Database/Migrations/Migration_1_0_0_CreateLockedTables.php",
-        "migration_class": "ApexSEO\\Core\\Database\\Migrations\\Migration_1_0_0_CreateLockedTables",
-        "migration_version": "1.0.0",
-        "primary_key": "id (BIGINT UNSIGNED AUTO_INCREMENT)",
-        "unique_keys": [
-            "uk_attachment_id (attachment_id)"
-        ],
-        "indexes": [
-            "idx_format_served (format_served)"
-        ],
-        "columns_count": 10,
-        "crud_operations": {
-            "SELECT": [
-                "ImageOptimizer::getHistory",
-                "MediaCommand::optimize"
-            ],
-            "INSERT": [
-                "ImageOptimizer::saveOptimizationHistory"
-            ],
-            "UPDATE": [
-                "ImageOptimizer::saveOptimizationHistory"
-            ],
-            "DELETE": [
-                "MediaCommand::restore"
-            ]
-        },
-        "behavioral_test": "wp-content/plugins/apexseo/tests/DatabaseMigrationTest.php::testMigration100UpAndDown"
+    "behavioral_test": "wp-content/plugins/apexseo/tests/DatabaseMigrationTest.php::testMigration100UpAndDown"
+  },
+  {
+    "table_name": "wp_apex_image_history",
+    "raw_name": "apex_image_history",
+    "ddl_source_file": "src/Core/Database/Migrations/Migration_1_0_0_CreateLockedTables.php",
+    "migration_class": "ApexSEO\\Core\\Database\\Migrations\\Migration_1_0_0_CreateLockedTables",
+    "migration_version": "1.0.0",
+    "primary_key": "id (BIGINT UNSIGNED AUTO_INCREMENT)",
+    "unique_keys": [],
+    "indexes": [
+      "idx_attachment_id (attachment_id)",
+      "idx_status (status)"
+    ],
+    "columns_count": 9,
+    "crud_operations": {
+      "SELECT": [
+        "ImageOptimizer::getStats",
+        "MediaRestController::optimizeSingle",
+        "MediaCommand::optimize"
+      ],
+      "INSERT": [
+        "ImageOptimizer::optimize"
+      ],
+      "UPDATE": [
+        "ImageOptimizer::optimize"
+      ],
+      "DELETE": [
+        "ImageOptimizer::restore",
+        "MediaCommand::restore"
+      ]
     },
-    {
-        "table_name": "wp_apex_analytics",
-        "raw_name": "apex_analytics",
-        "ddl_source_file": "src/Core/Database/Migrations/Migration_1_0_0_CreateLockedTables.php",
-        "migration_class": "ApexSEO\\Core\\Database\\Migrations\\Migration_1_0_0_CreateLockedTables",
-        "migration_version": "1.0.0",
-        "primary_key": "id (BIGINT UNSIGNED AUTO_INCREMENT)",
-        "unique_keys": [
-            "uk_object_date (object_id, date)"
-        ],
-        "indexes": [
-            "idx_date (date)",
-            "idx_clicks (clicks)",
-            "idx_position (position)"
-        ],
-        "columns_count": 8,
-        "crud_operations": {
-            "SELECT": [
-                "AnalyticsRestController::getOverview",
-                "RankTracker::getPerformanceSummary"
-            ],
-            "INSERT": [
-                "RankTracker::recordAnalytics"
-            ],
-            "UPDATE": [
-                "RankTracker::recordAnalytics"
-            ],
-            "DELETE": [
-                "DatabaseCommand::clean"
-            ]
-        },
-        "behavioral_test": "wp-content/plugins/apexseo/tests/DatabaseMigrationTest.php::testMigration100UpAndDown"
+    "behavioral_test": "wp-content/plugins/apexseo/tests/DatabaseMigrationTest.php::testMigration100UpAndDown"
+  },
+  {
+    "table_name": "wp_apex_analytics_events",
+    "raw_name": "apex_analytics_events",
+    "ddl_source_file": "src/Core/Database/Migrations/Migration_1_0_0_CreateLockedTables.php",
+    "migration_class": "ApexSEO\\Core\\Database\\Migrations\\Migration_1_0_0_CreateLockedTables",
+    "migration_version": "1.0.0",
+    "primary_key": "id (BIGINT UNSIGNED AUTO_INCREMENT)",
+    "unique_keys": [],
+    "indexes": [
+      "idx_event_type (event_type)",
+      "idx_created_at (created_at)"
+    ],
+    "columns_count": 8,
+    "crud_operations": {
+      "SELECT": [
+        "AnalyticsEngine::getOverview",
+        "AnalyticsRestController::getOverview"
+      ],
+      "INSERT": [
+        "AnalyticsEngine::recordEvent"
+      ],
+      "UPDATE": [],
+      "DELETE": [
+        "DatabaseCommand::clean"
+      ]
     },
-    {
-        "table_name": "wp_apex_rank_tracking",
-        "raw_name": "apex_rank_tracking",
-        "ddl_source_file": "src/Core/Database/Migrations/Migration_1_0_0_CreateLockedTables.php",
-        "migration_class": "ApexSEO\\Core\\Database\\Migrations\\Migration_1_0_0_CreateLockedTables",
-        "migration_version": "1.0.0",
-        "primary_key": "id (BIGINT UNSIGNED AUTO_INCREMENT)",
-        "unique_keys": [
-            "uk_keyword_url (keyword, target_url(191))"
-        ],
-        "indexes": [
-            "idx_current_position (current_position)",
-            "idx_last_checked (last_checked_at)"
-        ],
-        "columns_count": 10,
-        "crud_operations": {
-            "SELECT": [
-                "RankTracker::getKeywords",
-                "AnalyticsRestController::getRankTracker"
-            ],
-            "INSERT": [
-                "RankTracker::addKeyword"
-            ],
-            "UPDATE": [
-                "RankTracker::updatePosition"
-            ],
-            "DELETE": [
-                "RankTracker::removeKeyword"
-            ]
-        },
-        "behavioral_test": "wp-content/plugins/apexseo/tests/DatabaseMigrationTest.php::testMigration100UpAndDown"
-    }
+    "behavioral_test": "wp-content/plugins/apexseo/tests/DatabaseMigrationTest.php::testMigration100UpAndDown"
+  },
+  {
+    "table_name": "wp_apex_rank_tracking",
+    "raw_name": "apex_rank_tracking",
+    "ddl_source_file": "src/Core/Database/Migrations/Migration_1_0_0_CreateLockedTables.php",
+    "migration_class": "ApexSEO\\Core\\Database\\Migrations\\Migration_1_0_0_CreateLockedTables",
+    "migration_version": "1.0.0",
+    "primary_key": "id (BIGINT UNSIGNED AUTO_INCREMENT)",
+    "unique_keys": [],
+    "indexes": [
+      "idx_keyword (keyword)",
+      "idx_post_id (post_id)",
+      "idx_tracked_date (tracked_date)"
+    ],
+    "columns_count": 9,
+    "crud_operations": {
+      "SELECT": [
+        "AnalyticsEngine::getRankings",
+        "AnalyticsRestController::getRankings"
+      ],
+      "INSERT": [
+        "AnalyticsEngine::recordRanking"
+      ],
+      "UPDATE": [
+        "AnalyticsEngine::updateRanking"
+      ],
+      "DELETE": [
+        "DatabaseCommand::clean"
+      ]
+    },
+    "behavioral_test": "wp-content/plugins/apexseo/tests/DatabaseMigrationTest.php::testMigration100UpAndDown"
+  }
 ]
