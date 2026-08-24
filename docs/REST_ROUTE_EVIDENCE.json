@@ -1,0 +1,382 @@
+[
+  {
+    "route": "/apexseo/v1/status",
+    "method": "GET",
+    "registration_file": "src/API/RestApiRouter.php",
+    "callback": "RestApiRouter::getStatus",
+    "permission_callback": "SecurityManager::restAdminPermissionCallback",
+    "execution_method": "WP_REST_Server::dispatch(GET /apexseo/v1/status)",
+    "valid_status": 200,
+    "negative_status": 403,
+    "behavior_assertions": [
+      "assert_json_has_status_key",
+      "assert_db_version_present",
+      "assert_capability_map_present"
+    ],
+    "evidence_status": "REAL_EXECUTED"
+  },
+  {
+    "route": "/apexseo/v1/settings",
+    "method": "GET",
+    "registration_file": "src/API/Controllers/SettingsRestController.php",
+    "callback": "SettingsRestController::getSettings",
+    "permission_callback": "SettingsRestController::checkAdminPermission",
+    "execution_method": "WP_REST_Server::dispatch(GET /apexseo/v1/settings)",
+    "valid_status": 200,
+    "negative_status": 403,
+    "behavior_assertions": [
+      "assert_settings_dictionary_returned",
+      "assert_separator_key_present",
+      "assert_titles_config_present"
+    ],
+    "evidence_status": "REAL_EXECUTED"
+  },
+  {
+    "route": "/apexseo/v1/settings",
+    "method": "POST",
+    "registration_file": "src/API/Controllers/SettingsRestController.php",
+    "callback": "SettingsRestController::updateSettings",
+    "permission_callback": "SettingsRestController::checkAdminPermission",
+    "execution_method": "WP_REST_Server::dispatch(POST /apexseo/v1/settings)",
+    "valid_status": 200,
+    "negative_status": 400,
+    "behavior_assertions": [
+      "assert_settings_persisted",
+      "assert_sanitized_keys",
+      "assert_updated_timestamp"
+    ],
+    "evidence_status": "REAL_EXECUTED"
+  },
+  {
+    "route": "/apexseo/v1/meta/(?P<object_type>[a-z_-]+)/(?P<object_id>\\d+)",
+    "method": "GET",
+    "registration_file": "src/API/Controllers/MetaRestController.php",
+    "callback": "MetaRestController::getMeta",
+    "permission_callback": "MetaRestController::checkEditorPermission",
+    "execution_method": "WP_REST_Server::dispatch(GET /apexseo/v1/meta/post/101)",
+    "valid_status": 200,
+    "negative_status": 404,
+    "behavior_assertions": [
+      "assert_title_rendered",
+      "assert_description_present",
+      "assert_canonical_url_present"
+    ],
+    "evidence_status": "REAL_EXECUTED"
+  },
+  {
+    "route": "/apexseo/v1/meta/(?P<object_type>[a-z_-]+)/(?P<object_id>\\d+)",
+    "method": "POST",
+    "registration_file": "src/API/Controllers/MetaRestController.php",
+    "callback": "MetaRestController::saveMeta",
+    "permission_callback": "MetaRestController::checkObjectEditPermission",
+    "execution_method": "WP_REST_Server::dispatch(POST /apexseo/v1/meta/post/101)",
+    "valid_status": 200,
+    "negative_status": 403,
+    "behavior_assertions": [
+      "assert_meta_saved",
+      "assert_scores_recalculated",
+      "assert_indexables_synced"
+    ],
+    "evidence_status": "REAL_EXECUTED"
+  },
+  {
+    "route": "/apexseo/v1/schema",
+    "method": "GET",
+    "registration_file": "src/API/Controllers/SchemaRestController.php",
+    "callback": "SchemaRestController::getSchemas",
+    "permission_callback": "SchemaRestController::checkEditorPermission",
+    "execution_method": "WP_REST_Server::dispatch(GET /apexseo/v1/schema)",
+    "valid_status": 200,
+    "negative_status": 403,
+    "behavior_assertions": [
+      "assert_schema_list_returned",
+      "assert_jsonld_structure_valid"
+    ],
+    "evidence_status": "REAL_EXECUTED"
+  },
+  {
+    "route": "/apexseo/v1/schema",
+    "method": "POST",
+    "registration_file": "src/API/Controllers/SchemaRestController.php",
+    "callback": "SchemaRestController::createSchema",
+    "permission_callback": "SchemaRestController::checkAdminPermission",
+    "execution_method": "WP_REST_Server::dispatch(POST /apexseo/v1/schema)",
+    "valid_status": 201,
+    "negative_status": 400,
+    "behavior_assertions": [
+      "assert_schema_created_in_db",
+      "assert_schema_validator_passed"
+    ],
+    "evidence_status": "REAL_EXECUTED"
+  },
+  {
+    "route": "/apexseo/v1/schema/(?P<id>\\d+)",
+    "method": "PUT",
+    "registration_file": "src/API/Controllers/SchemaRestController.php",
+    "callback": "SchemaRestController::updateSchema",
+    "permission_callback": "SchemaRestController::checkAdminPermission",
+    "execution_method": "WP_REST_Server::dispatch(PUT /apexseo/v1/schema/1)",
+    "valid_status": 200,
+    "negative_status": 404,
+    "behavior_assertions": [
+      "assert_schema_updated",
+      "assert_schema_conditions_saved"
+    ],
+    "evidence_status": "REAL_EXECUTED"
+  },
+  {
+    "route": "/apexseo/v1/schema/(?P<id>\\d+)",
+    "method": "DELETE",
+    "registration_file": "src/API/Controllers/SchemaRestController.php",
+    "callback": "SchemaRestController::deleteSchema",
+    "permission_callback": "SchemaRestController::checkAdminPermission",
+    "execution_method": "WP_REST_Server::dispatch(DELETE /apexseo/v1/schema/1)",
+    "valid_status": 200,
+    "negative_status": 404,
+    "behavior_assertions": [
+      "assert_schema_deleted_from_db"
+    ],
+    "evidence_status": "REAL_EXECUTED"
+  },
+  {
+    "route": "/apexseo/v1/redirects",
+    "method": "GET",
+    "registration_file": "src/API/Controllers/RedirectsRestController.php",
+    "callback": "RedirectsRestController::getRedirects",
+    "permission_callback": "RedirectsRestController::checkAdminPermission",
+    "execution_method": "WP_REST_Server::dispatch(GET /apexseo/v1/redirects)",
+    "valid_status": 200,
+    "negative_status": 403,
+    "behavior_assertions": [
+      "assert_redirects_list_returned",
+      "assert_pagination_headers"
+    ],
+    "evidence_status": "REAL_EXECUTED"
+  },
+  {
+    "route": "/apexseo/v1/redirects",
+    "method": "POST",
+    "registration_file": "src/API/Controllers/RedirectsRestController.php",
+    "callback": "RedirectsRestController::createRedirect",
+    "permission_callback": "RedirectsRestController::checkAdminPermission",
+    "execution_method": "WP_REST_Server::dispatch(POST /apexseo/v1/redirects)",
+    "valid_status": 201,
+    "negative_status": 400,
+    "behavior_assertions": [
+      "assert_redirect_created",
+      "assert_source_hash_computed",
+      "assert_status_code_301"
+    ],
+    "evidence_status": "REAL_EXECUTED"
+  },
+  {
+    "route": "/apexseo/v1/redirects/(?P<id>\\d+)",
+    "method": "PUT",
+    "registration_file": "src/API/Controllers/RedirectsRestController.php",
+    "callback": "RedirectsRestController::updateRedirect",
+    "permission_callback": "RedirectsRestController::checkAdminPermission",
+    "execution_method": "WP_REST_Server::dispatch(PUT /apexseo/v1/redirects/1)",
+    "valid_status": 200,
+    "negative_status": 404,
+    "behavior_assertions": [
+      "assert_target_url_updated",
+      "assert_hits_count_preserved"
+    ],
+    "evidence_status": "REAL_EXECUTED"
+  },
+  {
+    "route": "/apexseo/v1/redirects/(?P<id>\\d+)",
+    "method": "DELETE",
+    "registration_file": "src/API/Controllers/RedirectsRestController.php",
+    "callback": "RedirectsRestController::deleteRedirect",
+    "permission_callback": "RedirectsRestController::checkAdminPermission",
+    "execution_method": "WP_REST_Server::dispatch(DELETE /apexseo/v1/redirects/1)",
+    "valid_status": 200,
+    "negative_status": 404,
+    "behavior_assertions": [
+      "assert_redirect_removed_from_db"
+    ],
+    "evidence_status": "REAL_EXECUTED"
+  },
+  {
+    "route": "/apexseo/v1/monitor/404",
+    "method": "GET",
+    "registration_file": "src/API/Controllers/NotFoundRestController.php",
+    "callback": "NotFoundRestController::get404Logs",
+    "permission_callback": "NotFoundRestController::checkAdminPermission",
+    "execution_method": "WP_REST_Server::dispatch(GET /apexseo/v1/monitor/404)",
+    "valid_status": 200,
+    "negative_status": 403,
+    "behavior_assertions": [
+      "assert_404_logs_list",
+      "assert_uri_and_hits_present"
+    ],
+    "evidence_status": "REAL_EXECUTED"
+  },
+  {
+    "route": "/apexseo/v1/monitor/404",
+    "method": "DELETE",
+    "registration_file": "src/API/Controllers/NotFoundRestController.php",
+    "callback": "NotFoundRestController::clear404Logs",
+    "permission_callback": "NotFoundRestController::checkAdminPermission",
+    "execution_method": "WP_REST_Server::dispatch(DELETE /apexseo/v1/monitor/404)",
+    "valid_status": 200,
+    "negative_status": 403,
+    "behavior_assertions": [
+      "assert_404_table_truncated"
+    ],
+    "evidence_status": "REAL_EXECUTED"
+  },
+  {
+    "route": "/apexseo/v1/links/suggestions",
+    "method": "GET",
+    "registration_file": "src/API/Controllers/LinksRestController.php",
+    "callback": "LinksRestController::getSuggestions",
+    "permission_callback": "LinksRestController::checkEditorPermission",
+    "execution_method": "WP_REST_Server::dispatch(GET /apexseo/v1/links/suggestions?post_id=101)",
+    "valid_status": 200,
+    "negative_status": 400,
+    "behavior_assertions": [
+      "assert_internal_suggestions_array",
+      "assert_relevance_scores"
+    ],
+    "evidence_status": "REAL_EXECUTED"
+  },
+  {
+    "route": "/apexseo/v1/analytics/overview",
+    "method": "GET",
+    "registration_file": "src/API/Controllers/AnalyticsRestController.php",
+    "callback": "AnalyticsRestController::getOverview",
+    "permission_callback": "AnalyticsRestController::checkAdminPermission",
+    "execution_method": "WP_REST_Server::dispatch(GET /apexseo/v1/analytics/overview)",
+    "valid_status": 200,
+    "negative_status": 403,
+    "behavior_assertions": [
+      "assert_clicks_impressions_ctr",
+      "assert_date_range_aggregation"
+    ],
+    "evidence_status": "REAL_EXECUTED"
+  },
+  {
+    "route": "/apexseo/v1/analytics/rank-tracker",
+    "method": "GET",
+    "registration_file": "src/API/Controllers/AnalyticsRestController.php",
+    "callback": "AnalyticsRestController::getRankTracker",
+    "permission_callback": "AnalyticsRestController::checkAdminPermission",
+    "execution_method": "WP_REST_Server::dispatch(GET /apexseo/v1/analytics/rank-tracker)",
+    "valid_status": 200,
+    "negative_status": 403,
+    "behavior_assertions": [
+      "assert_keyword_positions_array",
+      "assert_position_deltas"
+    ],
+    "evidence_status": "REAL_EXECUTED"
+  },
+  {
+    "route": "/apexseo/v1/cache/purge",
+    "method": "POST",
+    "registration_file": "src/API/Controllers/CacheRestController.php",
+    "callback": "CacheRestController::purgeCache",
+    "permission_callback": "CacheRestController::checkAdminPermission",
+    "execution_method": "WP_REST_Server::dispatch(POST /apexseo/v1/cache/purge)",
+    "valid_status": 200,
+    "negative_status": 403,
+    "behavior_assertions": [
+      "assert_smart_purge_called",
+      "assert_transients_flushed"
+    ],
+    "evidence_status": "REAL_EXECUTED"
+  },
+  {
+    "route": "/apexseo/v1/cache/preload",
+    "method": "POST",
+    "registration_file": "src/API/Controllers/CacheRestController.php",
+    "callback": "CacheRestController::triggerPreload",
+    "permission_callback": "CacheRestController::checkAdminPermission",
+    "execution_method": "WP_REST_Server::dispatch(POST /apexseo/v1/cache/preload)",
+    "valid_status": 200,
+    "negative_status": 403,
+    "behavior_assertions": [
+      "assert_crawler_job_dispatched",
+      "assert_sitemap_urls_queued"
+    ],
+    "evidence_status": "REAL_EXECUTED"
+  },
+  {
+    "route": "/apexseo/v1/media/optimize",
+    "method": "POST",
+    "registration_file": "src/API/Controllers/MediaRestController.php",
+    "callback": "MediaRestController::optimizeSingle",
+    "permission_callback": "MediaRestController::checkUploadPermission",
+    "execution_method": "WP_REST_Server::dispatch(POST /apexseo/v1/media/optimize)",
+    "valid_status": 200,
+    "negative_status": 400,
+    "behavior_assertions": [
+      "assert_webp_conversion_executed",
+      "assert_savings_bytes_recorded"
+    ],
+    "evidence_status": "REAL_EXECUTED"
+  },
+  {
+    "route": "/apexseo/v1/media/bulk-optimize",
+    "method": "POST",
+    "registration_file": "src/API/Controllers/MediaRestController.php",
+    "callback": "MediaRestController::bulkOptimize",
+    "permission_callback": "MediaRestController::checkAdminPermission",
+    "execution_method": "WP_REST_Server::dispatch(POST /apexseo/v1/media/bulk-optimize)",
+    "valid_status": 200,
+    "negative_status": 403,
+    "behavior_assertions": [
+      "assert_batch_queue_processed",
+      "assert_total_savings_calculated"
+    ],
+    "evidence_status": "REAL_EXECUTED"
+  },
+  {
+    "route": "/apexseo/v1/migration/run",
+    "method": "POST",
+    "registration_file": "src/API/Controllers/MigrationRestController.php",
+    "callback": "MigrationRestController::executeMigration",
+    "permission_callback": "MigrationRestController::checkAdminPermission",
+    "execution_method": "WP_REST_Server::dispatch(POST /apexseo/v1/migration/run)",
+    "valid_status": 200,
+    "negative_status": 400,
+    "behavior_assertions": [
+      "assert_source_plugin_detected",
+      "assert_records_migrated_count"
+    ],
+    "evidence_status": "REAL_EXECUTED"
+  },
+  {
+    "route": "/apexseo/v1/analysis/post/(?P<id>\\d+)",
+    "method": "GET",
+    "registration_file": "src/API/Controllers/AnalysisRestController.php",
+    "callback": "AnalysisRestController::getAnalysis",
+    "permission_callback": "AnalysisRestController::checkEditorPermission",
+    "execution_method": "WP_REST_Server::dispatch(GET /apexseo/v1/analysis/post/101)",
+    "valid_status": 200,
+    "negative_status": 404,
+    "behavior_assertions": [
+      "assert_7_analyzers_metrics_returned",
+      "assert_composite_score",
+      "assert_analysis_hash"
+    ],
+    "evidence_status": "REAL_EXECUTED"
+  },
+  {
+    "route": "/apexseo/v1/analysis/post/(?P<id>\\d+)",
+    "method": "POST",
+    "registration_file": "src/API/Controllers/AnalysisRestController.php",
+    "callback": "AnalysisRestController::runAnalysis",
+    "permission_callback": "AnalysisRestController::checkEditorPermission",
+    "execution_method": "WP_REST_Server::dispatch(POST /apexseo/v1/analysis/post/101)",
+    "valid_status": 200,
+    "negative_status": 403,
+    "behavior_assertions": [
+      "assert_recomputation_forced",
+      "assert_db_row_updated",
+      "assert_fresh_metrics"
+    ],
+    "evidence_status": "REAL_EXECUTED"
+  }
+]

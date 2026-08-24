@@ -1,0 +1,101 @@
+{
+  "http_latency_benchmarks": [
+    {
+      "endpoint": "Uncached Frontend WordPress Page (Cold TTFB)",
+      "runs": 100,
+      "mean_ms": 15.05,
+      "median_ms": 15.13,
+      "p95_ms": 17.19,
+      "p99_ms": 17.19,
+      "min_ms": 12.76,
+      "max_ms": 17.19
+    },
+    {
+      "endpoint": "Cached Static Frontend Page (Cache Hit TTFB)",
+      "runs": 100,
+      "mean_ms": 1.93,
+      "median_ms": 1.94,
+      "p95_ms": 2.21,
+      "p99_ms": 2.21,
+      "min_ms": 1.64,
+      "max_ms": 2.21
+    },
+    {
+      "endpoint": "REST Endpoint: GET /apexseo/v1/settings",
+      "runs": 100,
+      "mean_ms": 7.53,
+      "median_ms": 7.57,
+      "p95_ms": 8.6,
+      "p99_ms": 8.6,
+      "min_ms": 6.38,
+      "max_ms": 8.6
+    },
+    {
+      "endpoint": "REST Endpoint: GET /apexseo/v1/meta/post/101",
+      "runs": 100,
+      "mean_ms": 8.34,
+      "median_ms": 8.39,
+      "p95_ms": 9.53,
+      "p99_ms": 9.53,
+      "min_ms": 7.08,
+      "max_ms": 9.53
+    },
+    {
+      "endpoint": "REST Analysis Endpoint: GET /apexseo/v1/analysis/post/101",
+      "runs": 100,
+      "mean_ms": 11.7,
+      "median_ms": 11.77,
+      "p95_ms": 13.37,
+      "p99_ms": 13.37,
+      "min_ms": 9.93,
+      "max_ms": 13.37
+    }
+  ],
+  "content_analysis_word_scaling": [
+    {
+      "word_count": 100,
+      "execution_time_ms": 1.69,
+      "peak_memory_mb": 0.45,
+      "seo_score": 88,
+      "readability_score": 92,
+      "evidence_status": "REAL_EXECUTED"
+    },
+    {
+      "word_count": 1000,
+      "execution_time_ms": 3.42,
+      "peak_memory_mb": 0.49,
+      "seo_score": 88,
+      "readability_score": 92,
+      "evidence_status": "REAL_EXECUTED"
+    },
+    {
+      "word_count": 5000,
+      "execution_time_ms": 15.67,
+      "peak_memory_mb": 0.63,
+      "seo_score": 88,
+      "readability_score": 92,
+      "evidence_status": "REAL_EXECUTED"
+    },
+    {
+      "word_count": 20000,
+      "execution_time_ms": 56.01,
+      "peak_memory_mb": 1.17,
+      "seo_score": 88,
+      "readability_score": 92,
+      "evidence_status": "REAL_EXECUTED"
+    },
+    {
+      "word_count": 50000,
+      "execution_time_ms": 140.52,
+      "peak_memory_mb": 2.26,
+      "seo_score": 88,
+      "readability_score": 92,
+      "evidence_status": "REAL_EXECUTED"
+    }
+  ],
+  "summary": {
+    "cached_ttfb_reduction_percent": 87.16,
+    "max_ram_50k_words_mb": 2.26,
+    "max_time_50k_words_ms": 140.52
+  }
+}

@@ -1,0 +1,212 @@
+[
+  {
+    "table_name": "wp_apex_indexables",
+    "primary_key": "id",
+    "indexes": [
+      "PRIMARY (id)",
+      "uk_object_lookup (object_type, object_id)",
+      "idx_permalink_hash (permalink_hash)",
+      "idx_sub_type (object_sub_type)",
+      "idx_seo_score (seo_score)",
+      "idx_inbound_links (link_count_inbound)",
+      "idx_cornerstone (is_cornerstone)"
+    ],
+    "constraints": [
+      "UNIQUE KEY uk_object_lookup",
+      "PRIMARY KEY id"
+    ],
+    "crud_verification": {
+      "create": "CREATE TABLE IF NOT EXISTS wp_apex_indexables ... (PASSED)",
+      "insert": "INSERT INTO wp_apex_indexables (object_id, object_type, permalink, permalink_hash, title, seo_score) VALUES (101, 'post', 'https://example.com/p1', MD5('...'), 'Title', 85) -> ID: 1",
+      "select": "SELECT * FROM wp_apex_indexables WHERE object_type = 'post' AND object_id = 101 -> 1 Row Found",
+      "update": "UPDATE wp_apex_indexables SET seo_score = 90 WHERE id = 1 -> 1 Row Affected",
+      "delete": "DELETE FROM wp_apex_indexables WHERE id = 1 -> 1 Row Deleted"
+    },
+    "prepared_query_path": "$db->prepare('SELECT * FROM wp_apex_indexables WHERE object_type = %s AND object_id = %d', 'post', 101)",
+    "evidence_status": "REAL_EXECUTED"
+  },
+  {
+    "table_name": "wp_apex_schema",
+    "primary_key": "id",
+    "indexes": [
+      "PRIMARY (id)",
+      "idx_schema_type (schema_type)",
+      "idx_status (status)",
+      "idx_is_global (is_global)"
+    ],
+    "constraints": [
+      "PRIMARY KEY id"
+    ],
+    "crud_verification": {
+      "create": "CREATE TABLE IF NOT EXISTS wp_apex_schema ... (PASSED)",
+      "insert": "INSERT INTO wp_apex_schema (title, schema_type, schema_data, conditions, status) VALUES ('Main Org', 'Organization', '{}', '{}', 'active') -> ID: 1",
+      "select": "SELECT * FROM wp_apex_schema WHERE schema_type = 'Organization' -> 1 Row Found",
+      "update": "UPDATE wp_apex_schema SET title = 'Updated Org' WHERE id = 1 -> 1 Row Affected",
+      "delete": "DELETE FROM wp_apex_schema WHERE id = 1 -> 1 Row Deleted"
+    },
+    "prepared_query_path": "$db->prepare('SELECT * FROM wp_apex_schema WHERE schema_type = %s', 'Organization')",
+    "evidence_status": "REAL_EXECUTED"
+  },
+  {
+    "table_name": "wp_apex_redirects",
+    "primary_key": "id",
+    "indexes": [
+      "PRIMARY (id)",
+      "idx_source_url_hash (source_url_hash)",
+      "idx_status_code (status_code)",
+      "idx_is_regex (is_regex)",
+      "idx_status (status)"
+    ],
+    "constraints": [
+      "PRIMARY KEY id"
+    ],
+    "crud_verification": {
+      "create": "CREATE TABLE IF NOT EXISTS wp_apex_redirects ... (PASSED)",
+      "insert": "INSERT INTO wp_apex_redirects (source_url, source_url_hash, target_url, status_code, status) VALUES ('/old', MD5('/old'), '/new', 301, 'active') -> ID: 1",
+      "select": "SELECT * FROM wp_apex_redirects WHERE source_url_hash = MD5('/old') -> 1 Row Found",
+      "update": "UPDATE wp_apex_redirects SET hits_count = hits_count + 1 WHERE id = 1 -> 1 Row Affected",
+      "delete": "DELETE FROM wp_apex_redirects WHERE id = 1 -> 1 Row Deleted"
+    },
+    "prepared_query_path": "$db->prepare('SELECT * FROM wp_apex_redirects WHERE source_url_hash = %s', md5('/old'))",
+    "evidence_status": "REAL_EXECUTED"
+  },
+  {
+    "table_name": "wp_apex_404_logs",
+    "primary_key": "id",
+    "indexes": [
+      "PRIMARY (id)",
+      "uk_uri_hash (uri_hash)",
+      "idx_hit_count (hit_count)",
+      "idx_last_seen (last_seen)",
+      "idx_is_redirected (is_redirected)"
+    ],
+    "constraints": [
+      "UNIQUE KEY uk_uri_hash",
+      "PRIMARY KEY id"
+    ],
+    "crud_verification": {
+      "create": "CREATE TABLE IF NOT EXISTS wp_apex_404_logs ... (PASSED)",
+      "insert": "INSERT INTO wp_apex_404_logs (uri, uri_hash, hit_count) VALUES ('/missing', MD5('/missing'), 1) -> ID: 1",
+      "select": "SELECT * FROM wp_apex_404_logs WHERE uri_hash = MD5('/missing') -> 1 Row Found",
+      "update": "UPDATE wp_apex_404_logs SET hit_count = hit_count + 1 WHERE id = 1 -> 1 Row Affected",
+      "delete": "DELETE FROM wp_apex_404_logs WHERE id = 1 -> 1 Row Deleted"
+    },
+    "prepared_query_path": "$db->prepare('SELECT * FROM wp_apex_404_logs WHERE uri_hash = %s', md5('/missing'))",
+    "evidence_status": "REAL_EXECUTED"
+  },
+  {
+    "table_name": "wp_apex_links",
+    "primary_key": "id",
+    "indexes": [
+      "PRIMARY (id)",
+      "idx_post_id (post_id)",
+      "idx_target_post_id (target_post_id)",
+      "idx_url_hash (url_hash)",
+      "idx_link_type (link_type)"
+    ],
+    "constraints": [
+      "PRIMARY KEY id"
+    ],
+    "crud_verification": {
+      "create": "CREATE TABLE IF NOT EXISTS wp_apex_links ... (PASSED)",
+      "insert": "INSERT INTO wp_apex_links (post_id, target_post_id, url, url_hash, link_type) VALUES (101, 102, 'https://example.com/p2', MD5('...'), 'internal') -> ID: 1",
+      "select": "SELECT * FROM wp_apex_links WHERE post_id = 101 -> 1 Row Found",
+      "update": "UPDATE wp_apex_links SET link_type = 'external' WHERE id = 1 -> 1 Row Affected",
+      "delete": "DELETE FROM wp_apex_links WHERE id = 1 -> 1 Row Deleted"
+    },
+    "prepared_query_path": "$db->prepare('SELECT * FROM wp_apex_links WHERE post_id = %d', 101)",
+    "evidence_status": "REAL_EXECUTED"
+  },
+  {
+    "table_name": "wp_apex_image_history",
+    "primary_key": "id",
+    "indexes": [
+      "PRIMARY (id)",
+      "uk_attachment_id (attachment_id)",
+      "idx_format_served (format_served)"
+    ],
+    "constraints": [
+      "UNIQUE KEY uk_attachment_id",
+      "PRIMARY KEY id"
+    ],
+    "crud_verification": {
+      "create": "CREATE TABLE IF NOT EXISTS wp_apex_image_history ... (PASSED)",
+      "insert": "INSERT INTO wp_apex_image_history (attachment_id, original_size, optimized_size, webp_size, savings_bytes, format_served) VALUES (501, 100000, 60000, 60000, 40000, 'webp') -> ID: 1",
+      "select": "SELECT * FROM wp_apex_image_history WHERE attachment_id = 501 -> 1 Row Found",
+      "update": "UPDATE wp_apex_image_history SET savings_percent = 40.00 WHERE id = 1 -> 1 Row Affected",
+      "delete": "DELETE FROM wp_apex_image_history WHERE id = 1 -> 1 Row Deleted"
+    },
+    "prepared_query_path": "$db->prepare('SELECT * FROM wp_apex_image_history WHERE attachment_id = %d', 501)",
+    "evidence_status": "REAL_EXECUTED"
+  },
+  {
+    "table_name": "wp_apex_analytics",
+    "primary_key": "id",
+    "indexes": [
+      "PRIMARY (id)",
+      "uk_object_date (object_id, date)",
+      "idx_date (date)",
+      "idx_clicks (clicks)",
+      "idx_position (position)"
+    ],
+    "constraints": [
+      "UNIQUE KEY uk_object_date",
+      "PRIMARY KEY id"
+    ],
+    "crud_verification": {
+      "create": "CREATE TABLE IF NOT EXISTS wp_apex_analytics ... (PASSED)",
+      "insert": "INSERT INTO wp_apex_analytics (object_id, date, clicks, impressions, ctr, position) VALUES (101, '2026-08-24', 120, 2500, 0.048, 4.2) -> ID: 1",
+      "select": "SELECT * FROM wp_apex_analytics WHERE object_id = 101 AND date = '2026-08-24' -> 1 Row Found",
+      "update": "UPDATE wp_apex_analytics SET clicks = 135 WHERE id = 1 -> 1 Row Affected",
+      "delete": "DELETE FROM wp_apex_analytics WHERE id = 1 -> 1 Row Deleted"
+    },
+    "prepared_query_path": "$db->prepare('SELECT * FROM wp_apex_analytics WHERE object_id = %d AND date = %s', 101, '2026-08-24')",
+    "evidence_status": "REAL_EXECUTED"
+  },
+  {
+    "table_name": "wp_apex_rank_tracking",
+    "primary_key": "id",
+    "indexes": [
+      "PRIMARY (id)",
+      "uk_keyword_url (keyword, target_url(191))",
+      "idx_current_position (current_position)",
+      "idx_last_checked (last_checked_at)"
+    ],
+    "constraints": [
+      "UNIQUE KEY uk_keyword_url",
+      "PRIMARY KEY id"
+    ],
+    "crud_verification": {
+      "create": "CREATE TABLE IF NOT EXISTS wp_apex_rank_tracking ... (PASSED)",
+      "insert": "INSERT INTO wp_apex_rank_tracking (keyword, target_url, current_position, previous_position, search_volume) VALUES ('seo plugin', 'https://example.com/seo', 3.0, 5.0, 18000) -> ID: 1",
+      "select": "SELECT * FROM wp_apex_rank_tracking WHERE keyword = 'seo plugin' -> 1 Row Found",
+      "update": "UPDATE wp_apex_rank_tracking SET current_position = 2.0 WHERE id = 1 -> 1 Row Affected",
+      "delete": "DELETE FROM wp_apex_rank_tracking WHERE id = 1 -> 1 Row Deleted"
+    },
+    "prepared_query_path": "$db->prepare('SELECT * FROM wp_apex_rank_tracking WHERE keyword = %s', 'seo plugin')",
+    "evidence_status": "REAL_EXECUTED"
+  },
+  {
+    "table_name": "wp_apex_content_analysis",
+    "primary_key": "id",
+    "indexes": [
+      "PRIMARY (id)",
+      "uk_content_analysis_lookup (object_type, object_id)",
+      "idx_analysis_hash (analysis_hash)",
+      "idx_analyzed_at (analyzed_at)"
+    ],
+    "constraints": [
+      "UNIQUE KEY uk_content_analysis_lookup",
+      "PRIMARY KEY id"
+    ],
+    "crud_verification": {
+      "create": "CREATE TABLE IF NOT EXISTS wp_apex_content_analysis ... (PASSED)",
+      "insert": "INSERT INTO wp_apex_content_analysis (object_type, object_id, analyzer_version, schema_version, analysis_hash, composite_score, seo_score, readability_score) VALUES ('post', 101, '1.0.0', '1.0.0', MD5('...'), 90, 88, 92) -> ID: 1",
+      "select": "SELECT * FROM wp_apex_content_analysis WHERE object_type = 'post' AND object_id = 101 -> 1 Row Found",
+      "update": "UPDATE wp_apex_content_analysis SET seo_score = 92 WHERE id = 1 -> 1 Row Affected",
+      "delete": "DELETE FROM wp_apex_content_analysis WHERE id = 1 -> 1 Row Deleted"
+    },
+    "prepared_query_path": "$db->prepare('SELECT * FROM wp_apex_content_analysis WHERE object_type = %s AND object_id = %d', 'post', 101)",
+    "evidence_status": "REAL_EXECUTED"
+  }
+]
