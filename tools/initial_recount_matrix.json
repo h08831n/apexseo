@@ -1,0 +1,1388 @@
+{
+  "APEX-001": {
+    "id": "APEX-001",
+    "name": "Dynamic Title Tag Rewrite",
+    "category": "Meta & Titles Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-002": {
+    "id": "APEX-002",
+    "name": "Dynamic Meta Description Tag",
+    "category": "Meta & Titles Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-003": {
+    "id": "APEX-003",
+    "name": "Title Template Variable Replacer",
+    "category": "Meta & Titles Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-004": {
+    "id": "APEX-004",
+    "name": "Custom Taxonomy Title/Meta",
+    "category": "Meta & Titles Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-005": {
+    "id": "APEX-005",
+    "name": "Author Archive Title & Meta",
+    "category": "Meta & Titles Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-006": {
+    "id": "APEX-006",
+    "name": "Date Archive Title & Meta",
+    "category": "Meta & Titles Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-007": {
+    "id": "APEX-007",
+    "name": "Search Results Page Title/Meta",
+    "category": "Meta & Titles Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-008": {
+    "id": "APEX-008",
+    "name": "404 Error Page Title & Meta",
+    "category": "Meta & Titles Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-009": {
+    "id": "APEX-009",
+    "name": "Custom Separator Selector",
+    "category": "Meta & Titles Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-010": {
+    "id": "APEX-010",
+    "name": "Capitalize P-tags & Clean Titles",
+    "category": "Meta & Titles Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-011": {
+    "id": "APEX-011",
+    "name": "Strip Category Base Permalinks",
+    "category": "Meta & Titles Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-012": {
+    "id": "APEX-012",
+    "name": "Paged Subpages Title Modifier",
+    "category": "Meta & Titles Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-013": {
+    "id": "APEX-013",
+    "name": "Post Type Default Fallback Meta",
+    "category": "Meta & Titles Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-014": {
+    "id": "APEX-014",
+    "name": "Bulk Title/Meta Editor Screen",
+    "category": "Meta & Titles Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-015": {
+    "id": "APEX-015",
+    "name": "RSS Feed Header & Footer Append",
+    "category": "Meta & Titles Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-016": {
+    "id": "APEX-016",
+    "name": "Meta Keywords Support (Toggleable)",
+    "category": "Meta & Titles Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-017": {
+    "id": "APEX-017",
+    "name": "Custom-Fields Meta Tokens",
+    "category": "Meta & Titles Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-018": {
+    "id": "APEX-018",
+    "name": "Auto Meta Description Truncation",
+    "category": "Meta & Titles Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-019": {
+    "id": "APEX-019",
+    "name": "Self-Referential Canonical URL",
+    "category": "Canonical & Robots Directive Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-020": {
+    "id": "APEX-020",
+    "name": "Custom Canonical URL Override",
+    "category": "Canonical & Robots Directive Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-021": {
+    "id": "APEX-021",
+    "name": "Paginated Archive Canonical",
+    "category": "Canonical & Robots Directive Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-022": {
+    "id": "APEX-022",
+    "name": "Noindex Directive Controller",
+    "category": "Canonical & Robots Directive Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-023": {
+    "id": "APEX-023",
+    "name": "Nofollow Directive Controller",
+    "category": "Canonical & Robots Directive Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-024": {
+    "id": "APEX-024",
+    "name": "Advanced Robots (noarchive, nosnippet)",
+    "category": "Canonical & Robots Directive Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-025": {
+    "id": "APEX-025",
+    "name": "max-snippet, max-image-preview",
+    "category": "Canonical & Robots Directive Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-026": {
+    "id": "APEX-026",
+    "name": "Virtual Robots.txt Generator",
+    "category": "Canonical & Robots Directive Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-027": {
+    "id": "APEX-027",
+    "name": "Virtual Robots.txt Editor UI",
+    "category": "Canonical & Robots Directive Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-028": {
+    "id": "APEX-028",
+    "name": "X-Robots-Tag HTTP Header Output",
+    "category": "Canonical & Robots Directive Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-029": {
+    "id": "APEX-029",
+    "name": "Nofollow Unpaginated Feeds",
+    "category": "Canonical & Robots Directive Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-030": {
+    "id": "APEX-030",
+    "name": "Search & 404 Noindex Enforcement",
+    "category": "Canonical & Robots Directive Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-031": {
+    "id": "APEX-031",
+    "name": "OpenGraph Core Tags (og:title, etc.)",
+    "category": "Social Meta & OpenGraph Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-032": {
+    "id": "APEX-032",
+    "name": "OpenGraph Image Dimension Tags",
+    "category": "Social Meta & OpenGraph Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-033": {
+    "id": "APEX-033",
+    "name": "Twitter Card Tags (Summary/Large)",
+    "category": "Social Meta & OpenGraph Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-034": {
+    "id": "APEX-034",
+    "name": "Fallback Default Social Image",
+    "category": "Social Meta & OpenGraph Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-035": {
+    "id": "APEX-035",
+    "name": "Facebook App ID / Admin Meta",
+    "category": "Social Meta & OpenGraph Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-036": {
+    "id": "APEX-036",
+    "name": "Twitter Site & Creator Handles",
+    "category": "Social Meta & OpenGraph Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-037": {
+    "id": "APEX-037",
+    "name": "Article Author & Publisher Tags",
+    "category": "Social Meta & OpenGraph Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-038": {
+    "id": "APEX-038",
+    "name": "Live Social Preview in Editor",
+    "category": "Social Meta & OpenGraph Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-039": {
+    "id": "APEX-039",
+    "name": "Pinterest Domain Verification Tag",
+    "category": "Social Meta & OpenGraph Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-040": {
+    "id": "APEX-040",
+    "name": "XML Index & Sub-Sitemap Generator",
+    "category": "XML & RSS Sitemaps Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-041": {
+    "id": "APEX-041",
+    "name": "Post Type XML Sitemaps with Pagination",
+    "category": "XML & RSS Sitemaps Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-042": {
+    "id": "APEX-042",
+    "name": "Taxonomy XML Sitemaps",
+    "category": "XML & RSS Sitemaps Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-043": {
+    "id": "APEX-043",
+    "name": "Google News XML Sitemap",
+    "category": "XML & RSS Sitemaps Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-044": {
+    "id": "APEX-044",
+    "name": "Video XML Sitemap with Metadata",
+    "category": "XML & RSS Sitemaps Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-045": {
+    "id": "APEX-045",
+    "name": "Image XML Sitemap Embeds",
+    "category": "XML & RSS Sitemaps Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-046": {
+    "id": "APEX-046",
+    "name": "Custom XML XSLT Stylist",
+    "category": "XML & RSS Sitemaps Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-047": {
+    "id": "APEX-047",
+    "name": "Automatic Search Engine Ping",
+    "category": "XML & RSS Sitemaps Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-048": {
+    "id": "APEX-048",
+    "name": "Multi-Keyword Density & TF-IDF",
+    "category": "Content Analysis & Readability Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-049": {
+    "id": "APEX-049",
+    "name": "Flesch Reading Ease Formula",
+    "category": "Content Analysis & Readability Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-050": {
+    "id": "APEX-050",
+    "name": "Heading Structure Checker",
+    "category": "Content Analysis & Readability Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-051": {
+    "id": "APEX-051",
+    "name": "Internal Link Graph Counter",
+    "category": "Content Analysis & Readability Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-052": {
+    "id": "APEX-052",
+    "name": "Contextual Link Suggestions",
+    "category": "Content Analysis & Readability Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-053": {
+    "id": "APEX-053",
+    "name": "Orphaned Content Detector",
+    "category": "Content Analysis & Readability Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-054": {
+    "id": "APEX-054",
+    "name": "Paragraph Length & Voice Analyzer",
+    "category": "Content Analysis & Readability Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-055": {
+    "id": "APEX-055",
+    "name": "URL Change Interceptor (Auto 301)",
+    "category": "URL Routing, 404 Monitor & Redirects",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-056": {
+    "id": "APEX-056",
+    "name": "Regex & Wildcard URL Router",
+    "category": "URL Routing, 404 Monitor & Redirects",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-057": {
+    "id": "APEX-057",
+    "name": "High-Speed Buffered 404 Logger",
+    "category": "URL Routing, 404 Monitor & Redirects",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-058": {
+    "id": "APEX-058",
+    "name": "Fuzzy URL Match & Redirection",
+    "category": "URL Routing, 404 Monitor & Redirects",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-059": {
+    "id": "APEX-059",
+    "name": "Status Codes (301, 302, 307, 410, 451)",
+    "category": "URL Routing, 404 Monitor & Redirects",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-060": {
+    "id": "APEX-060",
+    "name": "Export Nginx / Apache Rules",
+    "category": "URL Routing, 404 Monitor & Redirects",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-061": {
+    "id": "APEX-061",
+    "name": "Redirect Hit Counter & Log Truncate",
+    "category": "URL Routing, 404 Monitor & Redirects",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-062": {
+    "id": "APEX-062",
+    "name": "Trailing Slash Enforcer",
+    "category": "URL Routing, 404 Monitor & Redirects",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-063": {
+    "id": "APEX-063",
+    "name": "Attachment URL Redirect to Parent",
+    "category": "URL Routing, 404 Monitor & Redirects",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-064": {
+    "id": "APEX-064",
+    "name": "Bulk Redirect CSV Import & Export",
+    "category": "URL Routing, 404 Monitor & Redirects",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-065": {
+    "id": "APEX-065",
+    "name": "Unified `@graph` JSON-LD Compiler",
+    "category": "Schema.org Structured Data & Knowledge Graph",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-066": {
+    "id": "APEX-066",
+    "name": "Dynamic Schema Conditions Engine",
+    "category": "Schema.org Structured Data & Knowledge Graph",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-067": {
+    "id": "APEX-067",
+    "name": "Article / NewsArticle Schema",
+    "category": "Schema.org Structured Data & Knowledge Graph",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-068": {
+    "id": "APEX-068",
+    "name": "LocalBusiness Multi-Location",
+    "category": "Schema.org Structured Data & Knowledge Graph",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-069": {
+    "id": "APEX-069",
+    "name": "Organization & Person Social Graph",
+    "category": "Schema.org Structured Data & Knowledge Graph",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-070": {
+    "id": "APEX-070",
+    "name": "FAQPage Structured Data Injector",
+    "category": "Schema.org Structured Data & Knowledge Graph",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-071": {
+    "id": "APEX-071",
+    "name": "WooCommerce Product & Variation",
+    "category": "Schema.org Structured Data & Knowledge Graph",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-072": {
+    "id": "APEX-072",
+    "name": "Recipe Structured Data Template",
+    "category": "Schema.org Structured Data & Knowledge Graph",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-073": {
+    "id": "APEX-073",
+    "name": "JobPosting Schema Template",
+    "category": "Schema.org Structured Data & Knowledge Graph",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-074": {
+    "id": "APEX-074",
+    "name": "Course & Learning Resource Schema",
+    "category": "Schema.org Structured Data & Knowledge Graph",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-075": {
+    "id": "APEX-075",
+    "name": "Event Schema (Online & Physical)",
+    "category": "Schema.org Structured Data & Knowledge Graph",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-076": {
+    "id": "APEX-076",
+    "name": "SoftwareApplication Schema",
+    "category": "Schema.org Structured Data & Knowledge Graph",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-077": {
+    "id": "APEX-077",
+    "name": "VideoObject Schema Stream",
+    "category": "Schema.org Structured Data & Knowledge Graph",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-078": {
+    "id": "APEX-078",
+    "name": "WebSite SearchAction Sitelinks",
+    "category": "Schema.org Structured Data & Knowledge Graph",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-079": {
+    "id": "APEX-079",
+    "name": "BreadcrumbList JSON-LD Graph",
+    "category": "Schema.org Structured Data & Knowledge Graph",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-080": {
+    "id": "APEX-080",
+    "name": "Schema Validation & Linting Engine",
+    "category": "Schema.org Structured Data & Knowledge Graph",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-081": {
+    "id": "APEX-081",
+    "name": "Static HTML Page Cache Buffer",
+    "category": "Page Caching & Cache Management",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-082": {
+    "id": "APEX-082",
+    "name": "Gzip Pre-Compression on Disk",
+    "category": "Page Caching & Cache Management",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-083": {
+    "id": "APEX-083",
+    "name": "Brotli Pre-Compression on Disk",
+    "category": "Page Caching & Cache Management",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-084": {
+    "id": "APEX-084",
+    "name": "Dedicated Mobile Cache Variant",
+    "category": "Page Caching & Cache Management",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-085": {
+    "id": "APEX-085",
+    "name": "Logged-In User Cookie Caching",
+    "category": "Page Caching & Cache Management",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-086": {
+    "id": "APEX-086",
+    "name": "SSL Dedicated Caching Path",
+    "category": "Page Caching & Cache Management",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-087": {
+    "id": "APEX-087",
+    "name": "WebP/AVIF HTML Cache Variant",
+    "category": "Page Caching & Cache Management",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-088": {
+    "id": "APEX-088",
+    "name": "Query String Whitelist Caching",
+    "category": "Page Caching & Cache Management",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-089": {
+    "id": "APEX-089",
+    "name": "Automated Post Update Cache Purge",
+    "category": "Page Caching & Cache Management",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-090": {
+    "id": "APEX-090",
+    "name": "Comment Submission Cache Purge",
+    "category": "Page Caching & Cache Management",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-091": {
+    "id": "APEX-091",
+    "name": "Global Empty Cache Trigger",
+    "category": "Page Caching & Cache Management",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-092": {
+    "id": "APEX-092",
+    "name": "Cache Lifespan & Expiry Garbage",
+    "category": "Page Caching & Cache Management",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-093": {
+    "id": "APEX-093",
+    "name": "Background Sitemap Cache Preload",
+    "category": "Page Caching & Cache Management",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-094": {
+    "id": "APEX-094",
+    "name": "WooCommerce Cart Cache Exclusions",
+    "category": "Page Caching & Cache Management",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-095": {
+    "id": "APEX-095",
+    "name": "REST API Endpoint Output Cache",
+    "category": "Page Caching & Cache Management",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-096": {
+    "id": "APEX-096",
+    "name": "Instant Hover / Click Preloader",
+    "category": "Page Caching & Cache Management",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-097": {
+    "id": "APEX-097",
+    "name": "Advanced Cache Bypass Rules",
+    "category": "Page Caching & Cache Management",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-098": {
+    "id": "APEX-098",
+    "name": "Cache Warm-up Concurrency Limiter",
+    "category": "Page Caching & Cache Management",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-099": {
+    "id": "APEX-099",
+    "name": "CSS Minification Engine",
+    "category": "Page Caching & Cache Management",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-100": {
+    "id": "APEX-100",
+    "name": "JS Minification Engine",
+    "category": "Page Caching & Cache Management",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-101": {
+    "id": "APEX-101",
+    "name": "CSS File Combination & Bundle",
+    "category": "Page Caching & Cache Management",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-102": {
+    "id": "APEX-102",
+    "name": "JS File Combination & Bundle",
+    "category": "Page Caching & Cache Management",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-103": {
+    "id": "APEX-103",
+    "name": "Critical CSS Local Extraction",
+    "category": "Page Caching & Cache Management",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-104": {
+    "id": "APEX-104",
+    "name": "Unused CSS (RUCSS) Local Cleaner",
+    "category": "Page Caching & Cache Management",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-105": {
+    "id": "APEX-105",
+    "name": "Load JavaScript Deferred",
+    "category": "Page Caching & Cache Management",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-106": {
+    "id": "APEX-106",
+    "name": "Delay JS Execution on Interaction",
+    "category": "Page Caching & Cache Management",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-107": {
+    "id": "APEX-107",
+    "name": "Script & Style Exclusion Regex",
+    "category": "Page Caching & Cache Management",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-108": {
+    "id": "APEX-108",
+    "name": "Safe Mode / Rollback on Script Error",
+    "category": "Page Caching & Cache Management",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-109": {
+    "id": "APEX-109",
+    "name": "Local Google Fonts Hosting",
+    "category": "Page Caching & Cache Management",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-110": {
+    "id": "APEX-110",
+    "name": "Font-Display: Swap Injector",
+    "category": "Page Caching & Cache Management",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-111": {
+    "id": "APEX-111",
+    "name": "Local Gravatar Avatar Caching",
+    "category": "Page Caching & Cache Management",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-112": {
+    "id": "APEX-112",
+    "name": "HTML Output Minification",
+    "category": "Page Caching & Cache Management",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-113": {
+    "id": "APEX-113",
+    "name": "DNS Prefetch & Preconnect Inserter",
+    "category": "Page Caching & Cache Management",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-114": {
+    "id": "APEX-114",
+    "name": "Strip WordPress Core Emojis",
+    "category": "Page Caching & Cache Management",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-115": {
+    "id": "APEX-115",
+    "name": "Strip WordPress Core OEmbeds",
+    "category": "Page Caching & Cache Management",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-116": {
+    "id": "APEX-116",
+    "name": "Heartbeat Frequency Control",
+    "category": "Page Caching & Cache Management",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-117": {
+    "id": "APEX-117",
+    "name": "Local GD/Imagick WebP Converter",
+    "category": "Media Optimization & WebP/AVIF Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-118": {
+    "id": "APEX-118",
+    "name": "Local GD/Imagick AVIF Converter",
+    "category": "Media Optimization & WebP/AVIF Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-119": {
+    "id": "APEX-119",
+    "name": "`<picture>` Tag HTML Rewriter",
+    "category": "Media Optimization & WebP/AVIF Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-120": {
+    "id": "APEX-120",
+    "name": "Bulk Image Optimization Queue",
+    "category": "Media Optimization & WebP/AVIF Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-121": {
+    "id": "APEX-121",
+    "name": "Auto-Optimize on Media Upload",
+    "category": "Media Optimization & WebP/AVIF Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-122": {
+    "id": "APEX-122",
+    "name": "Add Missing `width` & `height`",
+    "category": "Media Optimization & WebP/AVIF Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-123": {
+    "id": "APEX-123",
+    "name": "LCP Featured Image Preload (`fetchpriority`)",
+    "category": "Media Optimization & WebP/AVIF Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-124": {
+    "id": "APEX-124",
+    "name": "Original Image Backup & Restore",
+    "category": "Media Optimization & WebP/AVIF Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-125": {
+    "id": "APEX-125",
+    "name": "Quality Lossy/Lossless Selector",
+    "category": "Media Optimization & WebP/AVIF Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-126": {
+    "id": "APEX-126",
+    "name": "Strip EXIF Image Metadata",
+    "category": "Media Optimization & WebP/AVIF Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-127": {
+    "id": "APEX-127",
+    "name": "Image History & Savings Tracker",
+    "category": "Media Optimization & WebP/AVIF Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-128": {
+    "id": "APEX-128",
+    "name": "SVG Upload Sanitization",
+    "category": "Media Optimization & WebP/AVIF Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-129": {
+    "id": "APEX-129",
+    "name": "Resize Large Image Threshold",
+    "category": "Media Optimization & WebP/AVIF Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-130": {
+    "id": "APEX-130",
+    "name": "Cloud QUIC.cloud Image Converter",
+    "category": "Media Optimization & WebP/AVIF Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-131": {
+    "id": "APEX-131",
+    "name": "Native & JS Fallback Image LazyLoad",
+    "category": "Lazy Loading Subsystem",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-132": {
+    "id": "APEX-132",
+    "name": "LazyLoad Iframes & Video Players",
+    "category": "Lazy Loading Subsystem",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-133": {
+    "id": "APEX-133",
+    "name": "YouTube Preview Thumbnail Mockup",
+    "category": "Lazy Loading Subsystem",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-134": {
+    "id": "APEX-134",
+    "name": "Inline SVG Aspect-Ratio Placeholder",
+    "category": "Lazy Loading Subsystem",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-135": {
+    "id": "APEX-135",
+    "name": "LazyLoad CSS Background Images",
+    "category": "Lazy Loading Subsystem",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-136": {
+    "id": "APEX-136",
+    "name": "Exclude First N Images from LazyLoad",
+    "category": "Lazy Loading Subsystem",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-137": {
+    "id": "APEX-137",
+    "name": "Custom Class/Attribute Lazy Exclude",
+    "category": "Lazy Loading Subsystem",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-138": {
+    "id": "APEX-138",
+    "name": "LQIP Low Quality Base64 Generator",
+    "category": "Lazy Loading Subsystem",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-139": {
+    "id": "APEX-139",
+    "name": "Post Revisions Cleanup",
+    "category": "Database Optimization & Maintenance",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-140": {
+    "id": "APEX-140",
+    "name": "Auto-Drafts & Trashed Posts Cleanup",
+    "category": "Database Optimization & Maintenance",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-141": {
+    "id": "APEX-141",
+    "name": "Spam & Trashed Comments Cleanup",
+    "category": "Database Optimization & Maintenance",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-142": {
+    "id": "APEX-142",
+    "name": "Expired Transients SQL Cleanup",
+    "category": "Database Optimization & Maintenance",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-143": {
+    "id": "APEX-143",
+    "name": "All Transients Bulk Cleanup",
+    "category": "Database Optimization & Maintenance",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-144": {
+    "id": "APEX-144",
+    "name": "InnoDB / MyISAM `OPTIMIZE TABLE`",
+    "category": "Database Optimization & Maintenance",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-145": {
+    "id": "APEX-145",
+    "name": "Trackbacks & Pingbacks Cleanup",
+    "category": "Database Optimization & Maintenance",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-146": {
+    "id": "APEX-146",
+    "name": "MyISAM to InnoDB Engine Converter",
+    "category": "Database Optimization & Maintenance",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-147": {
+    "id": "APEX-147",
+    "name": "Automated Scheduled Cron DB Clean",
+    "category": "Database Optimization & Maintenance",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-148": {
+    "id": "APEX-148",
+    "name": "Database Dry-Run Cleanup Preview",
+    "category": "Database Optimization & Maintenance",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-149": {
+    "id": "APEX-149",
+    "name": "Apache `.htaccess` Expiration Rules",
+    "category": "Server-Level & Reverse Proxy Integration",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-150": {
+    "id": "APEX-150",
+    "name": "Nginx Direct Cache `try_files` Config",
+    "category": "Server-Level & Reverse Proxy Integration",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-151": {
+    "id": "APEX-151",
+    "name": "LiteSpeed `X-LiteSpeed-Cache-Control`",
+    "category": "Server-Level & Reverse Proxy Integration",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-152": {
+    "id": "APEX-152",
+    "name": "LiteSpeed Tagged Cache Purge Header",
+    "category": "Server-Level & Reverse Proxy Integration",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-153": {
+    "id": "APEX-153",
+    "name": "Varnish Reverse Proxy HTTP `PURGE`",
+    "category": "Server-Level & Reverse Proxy Integration",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-154": {
+    "id": "APEX-154",
+    "name": "Cloudflare Zone Cache API Purge",
+    "category": "Server-Level & Reverse Proxy Integration",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-155": {
+    "id": "APEX-155",
+    "name": "Redis Persistent Object Cache Driver",
+    "category": "Server-Level & Reverse Proxy Integration",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-156": {
+    "id": "APEX-156",
+    "name": "Memcached Object Cache Driver",
+    "category": "Server-Level & Reverse Proxy Integration",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-157": {
+    "id": "APEX-157",
+    "name": "CDN Hostname URL Rewriting",
+    "category": "Server-Level & Reverse Proxy Integration",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-158": {
+    "id": "APEX-158",
+    "name": "ESI Edge Fragment Staging (LSWS)",
+    "category": "Server-Level & Reverse Proxy Integration",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-159": {
+    "id": "APEX-159",
+    "name": "Google Analytics 4 (GA4) Tag Injector",
+    "category": "Analytics, GSC & Rank Tracking",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-160": {
+    "id": "APEX-160",
+    "name": "Local GA4 `gtag.js` Script Host",
+    "category": "Analytics, GSC & Rank Tracking",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-161": {
+    "id": "APEX-161",
+    "name": "IP Anonymization & GDPR Cookie Guard",
+    "category": "Analytics, GSC & Rank Tracking",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-162": {
+    "id": "APEX-162",
+    "name": "Google Search Console OAuth2 Client",
+    "category": "Analytics, GSC & Rank Tracking",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-163": {
+    "id": "APEX-163",
+    "name": "Search Console Keyword Rank Tracker",
+    "category": "Analytics, GSC & Rank Tracking",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-164": {
+    "id": "APEX-164",
+    "name": "GSC URL Inspection API Integration",
+    "category": "Analytics, GSC & Rank Tracking",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-165": {
+    "id": "APEX-165",
+    "name": "Search Console Impressions/Clicks DB",
+    "category": "Analytics, GSC & Rank Tracking",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-166": {
+    "id": "APEX-166",
+    "name": "Top Winning / Losing Keywords Matrix",
+    "category": "Analytics, GSC & Rank Tracking",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-167": {
+    "id": "APEX-167",
+    "name": "Google Tag Manager (GTM) Container",
+    "category": "Analytics, GSC & Rank Tracking",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-168": {
+    "id": "APEX-168",
+    "name": "Matomo / Piwik Self-Hosted Analytics",
+    "category": "Analytics, GSC & Rank Tracking",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-169": {
+    "id": "APEX-169",
+    "name": "REST Settings Controller",
+    "category": "REST API & Headless Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-170": {
+    "id": "APEX-170",
+    "name": "REST Meta Reader & Mutator Endpoint",
+    "category": "REST API & Headless Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-171": {
+    "id": "APEX-171",
+    "name": "REST Dynamic Schema CRUD Endpoint",
+    "category": "REST API & Headless Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-172": {
+    "id": "APEX-172",
+    "name": "REST Redirect Management Endpoint",
+    "category": "REST API & Headless Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-173": {
+    "id": "APEX-173",
+    "name": "REST 404 Monitor Log Endpoint",
+    "category": "REST API & Headless Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-174": {
+    "id": "APEX-174",
+    "name": "REST Link Suggestions Query Endpoint",
+    "category": "REST API & Headless Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-175": {
+    "id": "APEX-175",
+    "name": "Headless Complete SEO Meta & JSON-LD",
+    "category": "REST API & Headless Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-176": {
+    "id": "APEX-176",
+    "name": "REST Cache Purge & Preload Trigger",
+    "category": "REST API & Headless Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-177": {
+    "id": "APEX-177",
+    "name": "REST Media Image Optimize Action",
+    "category": "REST API & Headless Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-178": {
+    "id": "APEX-178",
+    "name": "REST Migration Batch Worker Endpoint",
+    "category": "REST API & Headless Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-179": {
+    "id": "APEX-179",
+    "name": "REST Analytics Overview API",
+    "category": "REST API & Headless Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-180": {
+    "id": "APEX-180",
+    "name": "REST Rank Tracker Query API",
+    "category": "REST API & Headless Engine",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-181": {
+    "id": "APEX-181",
+    "name": "`wp apex cache purge` Subcommand",
+    "category": "WP-CLI Management Interface",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-182": {
+    "id": "APEX-182",
+    "name": "`wp apex cache preload` Subcommand",
+    "category": "WP-CLI Management Interface",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-183": {
+    "id": "APEX-183",
+    "name": "`wp apex index reindex` Subcommand",
+    "category": "WP-CLI Management Interface",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-184": {
+    "id": "APEX-184",
+    "name": "`wp apex media optimize` Subcommand",
+    "category": "WP-CLI Management Interface",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-185": {
+    "id": "APEX-185",
+    "name": "`wp apex redirect add` Subcommand",
+    "category": "WP-CLI Management Interface",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-186": {
+    "id": "APEX-186",
+    "name": "`wp apex redirect list` Subcommand",
+    "category": "WP-CLI Management Interface",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-187": {
+    "id": "APEX-187",
+    "name": "`wp apex db clean` Subcommand",
+    "category": "WP-CLI Management Interface",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-188": {
+    "id": "APEX-188",
+    "name": "`wp apex migrate run` Subcommand",
+    "category": "WP-CLI Management Interface",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-189": {
+    "id": "APEX-189",
+    "name": "`wp apex sitemap rebuild` Subcommand",
+    "category": "WP-CLI Management Interface",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-190": {
+    "id": "APEX-190",
+    "name": "`wp apex doctor` Diagnostic Command",
+    "category": "WP-CLI Management Interface",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-191": {
+    "id": "APEX-191",
+    "name": "PSR-11 Dependency Injection Container",
+    "category": "Core Architecture, Migration & Administration",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-192": {
+    "id": "APEX-192",
+    "name": "Multi-Source Migration Engine",
+    "category": "Core Architecture, Migration & Administration",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-193": {
+    "id": "APEX-193",
+    "name": "Active Plugin Conflict Detector",
+    "category": "Core Architecture, Migration & Administration",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-194": {
+    "id": "APEX-194",
+    "name": "Multisite Network Management",
+    "category": "Core Architecture, Migration & Administration",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-195": {
+    "id": "APEX-195",
+    "name": "White Label Admin Interface",
+    "category": "Core Architecture, Migration & Administration",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-196": {
+    "id": "APEX-196",
+    "name": "Settings Backup, Import & Export",
+    "category": "Core Architecture, Migration & Administration",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-197": {
+    "id": "APEX-197",
+    "name": "Action Scheduler Background Queue",
+    "category": "Core Architecture, Migration & Administration",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  },
+  "APEX-198": {
+    "id": "APEX-198",
+    "name": "Diagnostic System Health Reporter",
+    "category": "Core Architecture, Migration & Administration",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "All required files, classes, and methods physically present."
+  }
+}

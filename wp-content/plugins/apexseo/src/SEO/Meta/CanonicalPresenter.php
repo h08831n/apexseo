@@ -5,7 +5,7 @@ use ApexSEO\SEO\Models\SeoContext;
 use ApexSEO\SEO\Models\Indexable;
 
 /**
- * Renders high-fidelity canonical URL link elements and strips tracking parameters.
+ * Renders high-fidelity canonical URL link elements and strips tracking parameters (APEX-019, APEX-020, APEX-021).
  */
 class CanonicalPresenter {
     /**
@@ -42,7 +42,7 @@ class CanonicalPresenter {
             return $this->cleanUrl($context);
         }
 
-        // 404 pages must not emit a canonical URL
+        // 404 pages must not emit a canonical URL (APEX-008, APEX-030)
         if ($context instanceof SeoContext && ($context->page_type === '404' || $context->object_type === '404')) {
             return '';
         }
@@ -58,6 +58,7 @@ class CanonicalPresenter {
             return '';
         }
 
+        // 1. Explicit Custom Canonical Override (APEX-020, APEX-021)
         if ($context instanceof Indexable && !empty($context->canonical_url)) {
             return $this->cleanUrl($context->canonical_url);
         }
@@ -65,11 +66,11 @@ class CanonicalPresenter {
         if ($context instanceof SeoContext) {
             $url = !empty($context->canonical_url) ? $context->canonical_url : $context->permalink;
             if (empty($url)) {
-                $url = home_url('/');
+                $url = function_exists('home_url') ? home_url('/') : 'http://localhost/';
             }
 
-            // Handle pagination on canonical
-            if ($context->is_paged && $context->page_number > 1) {
+            // Handle pagination on canonical if self-referential (APEX-012, APEX-021)
+            if (empty($context->canonical_url) && $context->is_paged && $context->page_number > 1) {
                 if (function_exists('get_pagenum_link')) {
                     $url = get_pagenum_link($context->page_number);
                 } else {
@@ -105,26 +106,66 @@ class CanonicalPresenter {
     }
 
     /**
-     * Strip tracking query parameters and normalize duplicate slashes.
+     * Clean, normalize, and validate canonical URL (APEX-020, APEX-021).
+     *
+     * Rules:
+     * - Reject dangerous schemes (javascript:, data:, vbscript:, file:)
+     * - Strip URL fragments (#section)
+     * - Strip tracking parameters (utm_*, fbclid, etc.)
+     * - Normalize host and scheme (http / https)
+     * - Normalize path slashes
      *
      * @param string $url
-     * @return string
+     * @return string Empty string if invalid or dangerous
      */
     public function cleanUrl($url) {
         if (empty($url)) {
             return '';
         }
 
-        $parsed = parse_url($url);
-        if (!$parsed || !isset($parsed['host'])) {
-            return $url;
+        $url = trim($url);
+
+        // Security: reject dangerous protocols
+        if (preg_match('/^(javascript|data|vbscript|file):/i', $url)) {
+            return '';
         }
 
-        $scheme = isset($parsed['scheme']) ? $parsed['scheme'] : 'https';
-        $host   = $parsed['host'];
-        $port   = isset($parsed['port']) ? ':' . $parsed['port'] : '';
-        $path   = isset($parsed['path']) ? $parsed['path'] : '/';
+        // Strip fragment (#...)
+        $fragmentPos = strpos($url, '#');
+        if ($fragmentPos !== false) {
+            $url = substr($url, 0, $fragmentPos);
+        }
 
+        $parsed = parse_url($url);
+        if (!$parsed || !isset($parsed['host'])) {
+            // Check if relative path
+            if (strpos($url, '/') === 0 && function_exists('home_url')) {
+                return $this->cleanUrl(home_url($url));
+            }
+            return '';
+        }
+
+        $scheme = isset($parsed['scheme']) ? strtolower($parsed['scheme']) : 'https';
+        if (!in_array($scheme, ['http', 'https'], true)) {
+            return '';
+        }
+
+        $host = strtolower($parsed['host']);
+        // Validate host name syntax
+        if (!filter_var('https://' . $host, FILTER_VALIDATE_URL) && !preg_match('/^[a-z0-9\.\-]+$/i', $host)) {
+            return '';
+        }
+
+        $port = isset($parsed['port']) ? ':' . $parsed['port'] : '';
+        $path = isset($parsed['path']) ? $parsed['path'] : '/';
+
+        // Normalize double slashes in path except initial
+        $path = preg_replace('#/+#', '/', $path);
+        if (empty($path)) {
+            $path = '/';
+        }
+
+        // Query parameters handling
         $query = '';
         if (!empty($parsed['query'])) {
             parse_str($parsed['query'], $queryParams);

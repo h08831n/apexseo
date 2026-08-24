@@ -15,14 +15,20 @@ use ApexSEO\SEO\Meta\TitlePresenter;
 use ApexSEO\SEO\Meta\DescriptionPresenter;
 use ApexSEO\SEO\Meta\CanonicalPresenter;
 use ApexSEO\SEO\Meta\RobotsPresenter;
+use ApexSEO\SEO\Meta\MetaKeywordsPresenter;
 use ApexSEO\SEO\Social\OpenGraphPresenter;
 use ApexSEO\SEO\Social\TwitterCardPresenter;
+use ApexSEO\SEO\Social\SocialPreviewService;
 use ApexSEO\SEO\Meta\MetaTagManager;
 use ApexSEO\SEO\Breadcrumbs\BreadcrumbGenerator;
 use ApexSEO\SEO\Sitemap\SitemapGenerator;
 use ApexSEO\SEO\Redirects\RedirectManager;
 use ApexSEO\SEO\Integrations\WooCommerceIntegration;
 use ApexSEO\SEO\Admin\MetaSaver;
+use ApexSEO\SEO\Permalinks\CategoryBaseStripper;
+use ApexSEO\SEO\Robots\RobotsTxtManager;
+use ApexSEO\SEO\Robots\RobotsHeaderManager;
+use ApexSEO\SEO\Feed\RssFeedManager;
 use ApexSEO\SEO\Analysis\KeywordAnalyzer;
 use ApexSEO\SEO\Analysis\ReadabilityScorer;
 use ApexSEO\SEO\Analysis\HeadingAnalyzer;
@@ -129,12 +135,46 @@ class SeoModule implements ModuleInterface, HookableInterface {
             return new RobotsPresenter();
         });
 
+        $container->singleton(MetaKeywordsPresenter::class, function(ContainerInterface $c) {
+            $config = $c->has(ConfigurationManager::class) ? $c->get(ConfigurationManager::class) : null;
+            return new MetaKeywordsPresenter($config);
+        });
+
         $container->singleton(OpenGraphPresenter::class, function(ContainerInterface $c) {
-            return new OpenGraphPresenter($c->get(VariableEngine::class));
+            $config = $c->has(ConfigurationManager::class) ? $c->get(ConfigurationManager::class) : null;
+            return new OpenGraphPresenter($c->get(VariableEngine::class), $config);
         });
 
         $container->singleton(TwitterCardPresenter::class, function(ContainerInterface $c) {
-            return new TwitterCardPresenter($c->get(VariableEngine::class));
+            $config = $c->has(ConfigurationManager::class) ? $c->get(ConfigurationManager::class) : null;
+            return new TwitterCardPresenter($c->get(VariableEngine::class), $config);
+        });
+
+        $container->singleton(SocialPreviewService::class, function(ContainerInterface $c) {
+            return new SocialPreviewService(
+                $c->get(VariableEngine::class),
+                $c->get(OpenGraphPresenter::class),
+                $c->get(TwitterCardPresenter::class)
+            );
+        });
+
+        $container->singleton(CategoryBaseStripper::class, function(ContainerInterface $c) {
+            $config = $c->has(ConfigurationManager::class) ? $c->get(ConfigurationManager::class) : null;
+            return new CategoryBaseStripper($config);
+        });
+
+        $container->singleton(RobotsTxtManager::class, function(ContainerInterface $c) {
+            $config = $c->has(ConfigurationManager::class) ? $c->get(ConfigurationManager::class) : null;
+            return new RobotsTxtManager($config);
+        });
+
+        $container->singleton(RobotsHeaderManager::class, function(ContainerInterface $c) {
+            $config = $c->has(ConfigurationManager::class) ? $c->get(ConfigurationManager::class) : null;
+            return new RobotsHeaderManager(
+                $c->get(ContextDetector::class),
+                $c->get(RobotsPresenter::class),
+                $config
+            );
         });
 
         $container->singleton(BreadcrumbGenerator::class, function() {
@@ -162,7 +202,8 @@ class SeoModule implements ModuleInterface, HookableInterface {
                 $c->get(CanonicalPresenter::class),
                 $c->get(RobotsPresenter::class),
                 $c->get(OpenGraphPresenter::class),
-                $c->get(TwitterCardPresenter::class)
+                $c->get(TwitterCardPresenter::class),
+                $c->get(MetaKeywordsPresenter::class)
             );
         });
 
@@ -173,8 +214,8 @@ class SeoModule implements ModuleInterface, HookableInterface {
             );
         });
 
-        $container->singleton(\ApexSEO\SEO\Feed\RssFeedManager::class, function(ContainerInterface $c) {
-            return new \ApexSEO\SEO\Feed\RssFeedManager(
+        $container->singleton(RssFeedManager::class, function(ContainerInterface $c) {
+            return new RssFeedManager(
                 $c->get(VariableEngine::class),
                 $c->get(TemplateManager::class),
                 $c->has(ConfigurationManager::class) ? $c->get(ConfigurationManager::class) : null
@@ -284,6 +325,43 @@ class SeoModule implements ModuleInterface, HookableInterface {
             return $title;
         }, 15);
 
+        // Category Base Stripping (APEX-011)
+        add_filter('category_link', function($link, $term = null) use ($container) {
+            if ($container->has(CategoryBaseStripper::class)) {
+                return $container->get(CategoryBaseStripper::class)->filterCategoryLink($link, $term);
+            }
+            return $link;
+        }, 10, 2);
+
+        add_filter('category_rewrite_rules', function($rules) use ($container) {
+            if ($container->has(CategoryBaseStripper::class)) {
+                return $container->get(CategoryBaseStripper::class)->modifyCategoryRewriteRules($rules);
+            }
+            return $rules;
+        }, 10, 1);
+
+        // Robots.txt Generator (APEX-025, APEX-026)
+        add_filter('robots_txt', function($output, $public) use ($container) {
+            if ($container->has(RobotsTxtManager::class)) {
+                return $container->get(RobotsTxtManager::class)->filterRobotsTxt($output, $public);
+            }
+            return $output;
+        }, 10, 2);
+
+        // X-Robots-Tag HTTP Headers (APEX-027, APEX-028, APEX-029, APEX-030)
+        add_filter('wp_headers', function(array $headers) use ($container) {
+            if ($container->has(RobotsHeaderManager::class)) {
+                return $container->get(RobotsHeaderManager::class)->filterHttpHeaders($headers);
+            }
+            return $headers;
+        }, 10, 1);
+
+        add_action('send_headers', function() use ($container) {
+            if ($container->has(RobotsHeaderManager::class)) {
+                $container->get(RobotsHeaderManager::class)->sendHttpHeader();
+            }
+        }, 10);
+
         // Admin Metadata Persistence
         add_action('save_post', function($postId, $post = null) use ($container) {
             if ($container->has(MetaSaver::class)) {
@@ -342,21 +420,24 @@ class SeoModule implements ModuleInterface, HookableInterface {
 
         // RSS Feed Content Filtering (APEX-015)
         add_filter('the_content_feed', function($content) use ($container) {
-            if ($container->has(\ApexSEO\SEO\Feed\RssFeedManager::class)) {
-                return $container->get(\ApexSEO\SEO\Feed\RssFeedManager::class)->injectFeedContent($content);
+            if ($container->has(RssFeedManager::class)) {
+                return $container->get(RssFeedManager::class)->injectFeedContent($content);
             }
             return $content;
         }, 10, 1);
 
         add_filter('the_excerpt_rss', function($content) use ($container) {
-            if ($container->has(\ApexSEO\SEO\Feed\RssFeedManager::class)) {
-                return $container->get(\ApexSEO\SEO\Feed\RssFeedManager::class)->injectFeedContent($content);
+            if ($container->has(RssFeedManager::class)) {
+                return $container->get(RssFeedManager::class)->injectFeedContent($content);
             }
             return $content;
         }, 10, 1);
 
-        // Fast Redirection Interceptor
+        // Fast Redirection & Category Base Interceptor
         add_action('template_redirect', function() use ($container) {
+            if ($container->has(CategoryBaseStripper::class)) {
+                $container->get(CategoryBaseStripper::class)->handleOldCategoryRedirect();
+            }
             if ($container->has(RedirectManager::class)) {
                 $container->get(RedirectManager::class)->interceptAndRedirect();
             }

@@ -36,6 +36,9 @@ class MetaTagManager {
     /** @var TwitterCardPresenter */
     protected $twitterCardPresenter;
 
+    /** @var MetaKeywordsPresenter */
+    protected $keywordsPresenter;
+
     /**
      * Constructor.
      */
@@ -47,7 +50,8 @@ class MetaTagManager {
         $canonicalPresenter = null,
         $robotsPresenter = null,
         $openGraphPresenter = null,
-        $twitterCardPresenter = null
+        $twitterCardPresenter = null,
+        $keywordsPresenter = null
     ) {
         $this->contextDetector      = $contextDetector !== null ? $contextDetector : new ContextDetector();
         $this->indexableRepository  = $indexableRepository;
@@ -57,6 +61,7 @@ class MetaTagManager {
         $this->robotsPresenter      = $robotsPresenter !== null ? $robotsPresenter : new RobotsPresenter();
         $this->openGraphPresenter   = $openGraphPresenter !== null ? $openGraphPresenter : new OpenGraphPresenter();
         $this->twitterCardPresenter = $twitterCardPresenter !== null ? $twitterCardPresenter : new TwitterCardPresenter();
+        $this->keywordsPresenter    = $keywordsPresenter !== null ? $keywordsPresenter : new MetaKeywordsPresenter();
     }
 
     /**
@@ -83,6 +88,7 @@ class MetaTagManager {
         $html .= $this->descriptionPresenter->renderHtmlTag($context);
         $html .= $this->canonicalPresenter->renderHtmlTag($context);
         $html .= $this->robotsPresenter->renderHtmlTag($context);
+        $html .= $this->keywordsPresenter->renderHtmlTag($context);
         $html .= $this->openGraphPresenter->render($context);
         $html .= $this->twitterCardPresenter->render($context);
         $html .= "<!-- / Apex SEO Platform -->\n";
