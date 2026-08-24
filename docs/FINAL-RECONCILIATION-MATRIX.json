@@ -1,0 +1,100 @@
+[
+  {
+    "id": "APEX-048",
+    "name": "Multi-Keyword Density & TF-IDF",
+    "implementation_files": [
+      "wp-content/plugins/apexseo/src/SEO/Analysis/KeywordAnalyzer.php",
+      "wp-content/plugins/apexseo/src/SEO/Analysis/ContentAnalyzer.php",
+      "wp-content/plugins/apexseo/src/SEO/Analysis/ContentAnalysisService.php"
+    ],
+    "production_entry_point": "save_post hook / REST POST /apexseo/v1/analysis/post/{id} / WP-CLI wp apexseo analysis post <id>",
+    "runtime_caller": "ContentAnalysisService::executePostAnalysis() -> ContentAnalyzer::analyzeContent() -> KeywordAnalyzer::analyze()",
+    "test_evidence": "wp-content/plugins/apexseo/tests/ContentAnalysisIntegrationTest.php::testSavePostTriggersCompleteAnalysisPipeline",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "Production class with tokenizer, exact/stemmed matching, density calculations, and TF-IDF corpus scoring, wired to save_post, REST, and WP-CLI."
+  },
+  {
+    "id": "APEX-049",
+    "name": "Flesch Reading Ease & Grade Level",
+    "implementation_files": [
+      "wp-content/plugins/apexseo/src/SEO/Analysis/ReadabilityScorer.php",
+      "wp-content/plugins/apexseo/src/SEO/Analysis/ContentAnalyzer.php",
+      "wp-content/plugins/apexseo/src/SEO/Analysis/ContentAnalysisService.php"
+    ],
+    "production_entry_point": "save_post hook / REST POST /apexseo/v1/analysis/post/{id} / WP-CLI wp apexseo analysis post <id>",
+    "runtime_caller": "ContentAnalysisService::executePostAnalysis() -> ContentAnalyzer::analyzeContent() -> ReadabilityScorer::calculateFleschScores()",
+    "test_evidence": "wp-content/plugins/apexseo/tests/ContentAnalysisIntegrationTest.php::testSavePostTriggersCompleteAnalysisPipeline",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "Production Flesch-Kincaid calculator with syllable counting and language capability warnings for RTL/Persian scripts, wired to save_post, REST, and WP-CLI."
+  },
+  {
+    "id": "APEX-050",
+    "name": "Heading Structure Hierarchy",
+    "implementation_files": [
+      "wp-content/plugins/apexseo/src/SEO/Analysis/HeadingAnalyzer.php",
+      "wp-content/plugins/apexseo/src/SEO/Analysis/ContentAnalyzer.php",
+      "wp-content/plugins/apexseo/src/SEO/Analysis/ContentAnalysisService.php"
+    ],
+    "production_entry_point": "save_post hook / REST POST /apexseo/v1/analysis/post/{id} / WP-CLI wp apexseo analysis post <id>",
+    "runtime_caller": "ContentAnalysisService::executePostAnalysis() -> ContentAnalyzer::analyzeContent() -> HeadingAnalyzer::analyzeHeadings()",
+    "test_evidence": "wp-content/plugins/apexseo/tests/ContentAnalysisIntegrationTest.php::testSavePostTriggersCompleteAnalysisPipeline",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "Production heading hierarchy analyzer validating H1-H6 sequences and focus keyword presence in headings, wired to save_post, REST, and WP-CLI."
+  },
+  {
+    "id": "APEX-051",
+    "name": "Internal Link Graph Scanner",
+    "implementation_files": [
+      "wp-content/plugins/apexseo/src/SEO/Analysis/LinkGraphScanner.php",
+      "wp-content/plugins/apexseo/src/SEO/Analysis/ContentAnalyzer.php",
+      "wp-content/plugins/apexseo/src/SEO/Analysis/ContentAnalysisService.php"
+    ],
+    "production_entry_point": "save_post hook / REST POST /apexseo/v1/analysis/post/{id} / WP-CLI wp apexseo analysis post <id>",
+    "runtime_caller": "ContentAnalysisService::executePostAnalysis() -> ContentAnalyzer::analyzeContent() -> LinkGraphScanner::scanContent()",
+    "test_evidence": "wp-content/plugins/apexseo/tests/ContentAnalysisIntegrationTest.php::testSavePostTriggersCompleteAnalysisPipeline",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "Production DOM link scanner identifying internal/external URLs, calculating anchor text relevance, and updating wp_apex_links, wired to save_post, REST, and WP-CLI."
+  },
+  {
+    "id": "APEX-052",
+    "name": "Passive Voice Analysis",
+    "implementation_files": [
+      "wp-content/plugins/apexseo/src/SEO/Analysis/PassiveVoiceAnalyzer.php",
+      "wp-content/plugins/apexseo/src/SEO/Analysis/ContentAnalyzer.php",
+      "wp-content/plugins/apexseo/src/SEO/Analysis/ContentAnalysisService.php"
+    ],
+    "production_entry_point": "save_post hook / REST POST /apexseo/v1/analysis/post/{id} / WP-CLI wp apexseo analysis post <id>",
+    "runtime_caller": "ContentAnalysisService::executePostAnalysis() -> ContentAnalyzer::analyzeContent() -> PassiveVoiceAnalyzer::analyzePassiveVoice()",
+    "test_evidence": "wp-content/plugins/apexseo/tests/ContentAnalysisIntegrationTest.php::testSavePostTriggersCompleteAnalysisPipeline",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "Production passive voice detection with auxiliary verb pairing and irregular past participle heuristics, wired to save_post, REST, and WP-CLI."
+  },
+  {
+    "id": "APEX-053",
+    "name": "Transition Word Analysis",
+    "implementation_files": [
+      "wp-content/plugins/apexseo/src/SEO/Analysis/TransitionWordAnalyzer.php",
+      "wp-content/plugins/apexseo/src/SEO/Analysis/ContentAnalyzer.php",
+      "wp-content/plugins/apexseo/src/SEO/Analysis/ContentAnalysisService.php"
+    ],
+    "production_entry_point": "save_post hook / REST POST /apexseo/v1/analysis/post/{id} / WP-CLI wp apexseo analysis post <id>",
+    "runtime_caller": "ContentAnalysisService::executePostAnalysis() -> ContentAnalyzer::analyzeContent() -> TransitionWordAnalyzer::analyzeTransitions()",
+    "test_evidence": "wp-content/plugins/apexseo/tests/ContentAnalysisIntegrationTest.php::testSavePostTriggersCompleteAnalysisPipeline",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "Production multilingual transition word matcher supporting English and Persian corpora, wired to save_post, REST, and WP-CLI."
+  },
+  {
+    "id": "APEX-054",
+    "name": "Paragraph & Sentence Structure",
+    "implementation_files": [
+      "wp-content/plugins/apexseo/src/SEO/Analysis/TextStructureAnalyzer.php",
+      "wp-content/plugins/apexseo/src/SEO/Analysis/ContentAnalyzer.php",
+      "wp-content/plugins/apexseo/src/SEO/Analysis/ContentAnalysisService.php"
+    ],
+    "production_entry_point": "save_post hook / REST POST /apexseo/v1/analysis/post/{id} / WP-CLI wp apexseo analysis post <id>",
+    "runtime_caller": "ContentAnalysisService::executePostAnalysis() -> ContentAnalyzer::analyzeContent() -> TextStructureAnalyzer::analyzeTextStructure()",
+    "test_evidence": "wp-content/plugins/apexseo/tests/ContentAnalysisIntegrationTest.php::testSavePostTriggersCompleteAnalysisPipeline",
+    "status": "REAL_IMPLEMENTED",
+    "reason": "Production paragraph and sentence length analyzer evaluating word counts per block, wired to save_post, REST, and WP-CLI."
+  }
+]
