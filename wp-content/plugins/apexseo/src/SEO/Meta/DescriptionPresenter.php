@@ -116,7 +116,7 @@ class DescriptionPresenter {
         $clean = strip_tags(strip_shortcodes((string) $str));
         $clean = str_replace(["\r", "\n", "\t"], ' ', $clean);
         $clean = html_entity_decode($clean, ENT_QUOTES, 'UTF-8');
-        $clean = preg_replace('/\s+/', ' ', $clean);
+        $clean = preg_replace('/\s+/u', ' ', $clean);
         $clean = trim($clean);
 
         if (mb_strlen($clean, 'UTF-8') <= $maxLength) {
@@ -133,9 +133,12 @@ class DescriptionPresenter {
 
         // If a word boundary exists reasonably close to the limit (at least 40% of targetLen)
         if ($lastSpace !== false && $lastSpace > (int)($targetLen * 0.4)) {
-            return rtrim(mb_substr($clean, 0, $lastSpace, 'UTF-8'), ' .,;:!?-') . '...';
+            $cut = mb_substr($clean, 0, $lastSpace, 'UTF-8');
+            $trimmed = preg_replace('/[\s\.,;:!\?\-–—\x{200c}]+$/u', '', $cut);
+            return $trimmed . '...';
         }
 
-        return mb_substr($clean, 0, $targetLen, 'UTF-8') . '...';
+        $trimmed = preg_replace('/[\s\.,;:!\?\-–—\x{200c}]+$/u', '', $substr);
+        return $trimmed . '...';
     }
 }

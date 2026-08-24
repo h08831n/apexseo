@@ -49,11 +49,85 @@ class VariableEngine {
         });
 
         $this->registerVariable('date', function($ctx) {
-            return isset($ctx['date']) ? $ctx['date'] : date(get_option('date_format', 'F j, Y'));
+            if (isset($ctx['date'])) {
+                return (string) $ctx['date'];
+            }
+            if (isset($ctx['archive_date'])) {
+                return (string) $ctx['archive_date'];
+            }
+            return date(function_exists('get_option') ? get_option('date_format', 'F j, Y') : 'F j, Y');
+        });
+
+        $this->registerVariable('archive_date', function($ctx) {
+            if (isset($ctx['archive_date'])) {
+                return (string) $ctx['archive_date'];
+            }
+            if (isset($ctx['date'])) {
+                return (string) $ctx['date'];
+            }
+            if (isset($ctx['title'])) {
+                return (string) $ctx['title'];
+            }
+            return date(function_exists('get_option') ? get_option('date_format', 'F j, Y') : 'F j, Y');
+        });
+
+        $this->registerVariable('year', function($ctx) {
+            if (isset($ctx['year'])) {
+                return (string) $ctx['year'];
+            }
+            if (function_exists('get_query_var') && get_query_var('year')) {
+                return (string) get_query_var('year');
+            }
+            return date('Y');
+        });
+
+        $this->registerVariable('currentyear', function($ctx) {
+            return date('Y');
+        });
+
+        $this->registerVariable('current_year', function($ctx) {
+            return date('Y');
+        });
+
+        $this->registerVariable('month', function($ctx) {
+            if (isset($ctx['month'])) {
+                return (string) $ctx['month'];
+            }
+            if (function_exists('get_query_var') && get_query_var('monthnum')) {
+                $monthNum = (int) get_query_var('monthnum');
+                return date('F', mktime(0, 0, 0, $monthNum, 10));
+            }
+            return date('F');
+        });
+
+        $this->registerVariable('currentmonth', function($ctx) {
+            return date('F');
+        });
+
+        $this->registerVariable('current_month', function($ctx) {
+            return date('F');
+        });
+
+        $this->registerVariable('day', function($ctx) {
+            if (isset($ctx['day'])) {
+                return (string) $ctx['day'];
+            }
+            if (function_exists('get_query_var') && get_query_var('day')) {
+                return (string) get_query_var('day');
+            }
+            return date('j');
+        });
+
+        $this->registerVariable('currentday', function($ctx) {
+            return date('j');
+        });
+
+        $this->registerVariable('current_day', function($ctx) {
+            return date('j');
         });
 
         $this->registerVariable('modified', function($ctx) {
-            return isset($ctx['modified']) ? $ctx['modified'] : (isset($ctx['date']) ? $ctx['date'] : '');
+            return isset($ctx['modified']) ? (string) $ctx['modified'] : (isset($ctx['date']) ? (string) $ctx['date'] : '');
         });
 
         $this->registerVariable('sitename', function($ctx) {
@@ -204,15 +278,19 @@ class VariableEngine {
             $key = strtolower($matches[1]);
 
             // 1. Direct match in provided context array
-            if (isset($contextArray[$key]) && is_scalar($contextArray[$key])) {
-                return (string) $contextArray[$key];
+            if (isset($contextArray[$key])) {
+                $formatted = $this->formatMetaValue($contextArray[$key]);
+                if ($formatted !== '') {
+                    return $formatted;
+                }
             }
 
             // 2. Match in registered resolver callbacks
             if (isset($this->resolvers[$key]) && is_callable($this->resolvers[$key])) {
                 $val = call_user_func($this->resolvers[$key], $contextArray);
-                if (is_scalar($val)) {
-                    return (string) $val;
+                $formatted = $this->formatMetaValue($val);
+                if ($formatted !== '') {
+                    return $formatted;
                 }
             }
 
@@ -224,15 +302,17 @@ class VariableEngine {
                 // Try ACF if available
                 if (function_exists('get_field')) {
                     $acfVal = get_field($metaKey, $objId);
-                    if (is_scalar($acfVal)) {
-                        return (string) $acfVal;
+                    $formatted = $this->formatMetaValue($acfVal);
+                    if ($formatted !== '') {
+                        return $formatted;
                     }
                 }
                 
                 if (function_exists('get_post_meta')) {
                     $metaVal = get_post_meta($objId, $metaKey, true);
-                    if (is_scalar($metaVal)) {
-                        return (string) $metaVal;
+                    $formatted = $this->formatMetaValue($metaVal);
+                    if ($formatted !== '') {
+                        return $formatted;
                     }
                 }
             }
@@ -243,8 +323,9 @@ class VariableEngine {
                 $termId = (int) $contextArray['object_id'];
                 if (function_exists('get_term_meta')) {
                     $metaVal = get_term_meta($termId, $metaKey, true);
-                    if (is_scalar($metaVal)) {
-                        return (string) $metaVal;
+                    $formatted = $this->formatMetaValue($metaVal);
+                    if ($formatted !== '') {
+                        return $formatted;
                     }
                 }
             }
@@ -255,15 +336,16 @@ class VariableEngine {
                 $userId = !empty($contextArray['author_id']) ? (int) $contextArray['author_id'] : (!empty($contextArray['object_id']) ? (int) $contextArray['object_id'] : 0);
                 if ($userId > 0 && function_exists('get_user_meta')) {
                     $metaVal = get_user_meta($userId, $metaKey, true);
-                    if (is_scalar($metaVal)) {
-                        return (string) $metaVal;
+                    $formatted = $this->formatMetaValue($metaVal);
+                    if ($formatted !== '') {
+                        return $formatted;
                     }
                 }
             }
 
             // 6. Default fallback
             if (isset($this->defaults[$key])) {
-                return $this->defaults[$key];
+                return (string) $this->defaults[$key];
             }
 
             return '';
@@ -277,6 +359,37 @@ class VariableEngine {
         }
 
         return trim($replaced);
+    }
+
+    /**
+     * Safely format a raw meta value (scalar, array, object) into a string without throwing warnings.
+     *
+     * @param mixed $val
+     * @return string
+     */
+    public function formatMetaValue($val) {
+        if (is_scalar($val)) {
+            return (string) $val;
+        }
+
+        if (is_object($val) && method_exists($val, '__toString')) {
+            return (string) $val;
+        }
+
+        if (is_array($val)) {
+            $allScalars = true;
+            foreach ($val as $sub) {
+                if (!is_scalar($sub)) {
+                    $allScalars = false;
+                    break;
+                }
+            }
+            if ($allScalars && !empty($val)) {
+                return implode(', ', $val);
+            }
+        }
+
+        return '';
     }
 
     /**

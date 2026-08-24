@@ -41,6 +41,10 @@ class SecurityManager implements ServiceContractInterface {
             return current_user_can('edit_term', $objectId);
         }
 
+        if ($objectType === 'user') {
+            return current_user_can('edit_user', $objectId);
+        }
+
         return current_user_can('edit_posts');
     }
 

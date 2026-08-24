@@ -56,12 +56,21 @@ class RssFeedManager implements ServiceContractInterface, HookableInterface {
     }
 
     /**
+     * Marker to prevent duplicate injection on same feed content.
+     */
+    const INJECTION_MARKER = '<!-- apexseo-rss-injected -->';
+
+    /**
      * Inject custom RSS header and footer into feed items (APEX-015).
      *
      * @param string $content
      * @return string
      */
     public function injectFeedContent($content) {
+        if (empty($content) || strpos($content, self::INJECTION_MARKER) !== false) {
+            return $content;
+        }
+
         $headerTpl = $this->templateManager->getRssHeaderTemplate();
         $footerTpl = $this->templateManager->getRssFooterTemplate();
 
@@ -82,6 +91,10 @@ class RssFeedManager implements ServiceContractInterface, HookableInterface {
      * @return string
      */
     public function formatFeedContent($content, array $context = []) {
+        if (strpos($content, self::INJECTION_MARKER) !== false) {
+            return $content;
+        }
+
         $headerTpl = $this->templateManager->getRssHeaderTemplate();
         $footerTpl = $this->templateManager->getRssFooterTemplate();
 
@@ -103,7 +116,7 @@ class RssFeedManager implements ServiceContractInterface, HookableInterface {
             }
         }
 
-        return $headerHtml . $content . $footerHtml;
+        return self::INJECTION_MARKER . "\n" . $headerHtml . $content . $footerHtml;
     }
 
     /**

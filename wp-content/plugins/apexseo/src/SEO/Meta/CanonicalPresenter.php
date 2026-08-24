@@ -42,6 +42,22 @@ class CanonicalPresenter {
             return $this->cleanUrl($context);
         }
 
+        // 404 pages must not emit a canonical URL
+        if ($context instanceof SeoContext && ($context->page_type === '404' || $context->object_type === '404')) {
+            return '';
+        }
+
+        if ($context instanceof Indexable && ($context->object_type === '404' || $context->object_sub_type === '404')) {
+            return '';
+        }
+
+        if (is_array($context) && (
+            (isset($context['page_type']) && $context['page_type'] === '404') ||
+            (isset($context['object_type']) && $context['object_type'] === '404')
+        )) {
+            return '';
+        }
+
         if ($context instanceof Indexable && !empty($context->canonical_url)) {
             return $this->cleanUrl($context->canonical_url);
         }
