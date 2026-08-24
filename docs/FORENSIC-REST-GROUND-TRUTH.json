@@ -366,5 +366,40 @@
       "wp_apex_redirects"
     ],
     "behavioral_test": "wp-content/plugins/apexseo/tests/RestSubsystemTest.php::testMigrationRunEndpoint"
+  },
+  {
+    "route": "/apexseo/v1/analysis/post/(?P<id>\\d+)",
+    "http_method": "GET",
+    "namespace": "apexseo/v1",
+    "controller": "ApexSEO\\API\\Controllers\\AnalysisRestController",
+    "callback": "ApexSEO\\API\\Controllers\\AnalysisRestController::getPostAnalysis",
+    "permission_callback": "ApexSEO\\API\\Controllers\\AnalysisRestController::checkAnalysisPermission",
+    "capability_check": "edit_posts | edit_post",
+    "nonce_required": true,
+    "argument_validation": "id integer regex",
+    "persistence_behavior": "Retrieves on-page SEO and readability analysis report from custom table/cache",
+    "database_tables": [
+      "wp_apex_content_analysis",
+      "wp_apex_indexables"
+    ],
+    "behavioral_test": "wp-content/plugins/apexseo/tests/ContentAnalysisIntegrationTest.php::testRestEndpointRetrievalAndRecomputation"
+  },
+  {
+    "route": "/apexseo/v1/analysis/post/(?P<id>\\d+)",
+    "http_method": "POST",
+    "namespace": "apexseo/v1",
+    "controller": "ApexSEO\\API\\Controllers\\AnalysisRestController",
+    "callback": "ApexSEO\\API\\Controllers\\AnalysisRestController::recomputePostAnalysis",
+    "permission_callback": "ApexSEO\\API\\Controllers\\AnalysisRestController::checkAnalysisPermission",
+    "capability_check": "edit_posts | edit_post",
+    "nonce_required": true,
+    "argument_validation": "id integer regex",
+    "persistence_behavior": "Recomputes and persists on-page SEO analysis report across all 7 analyzers",
+    "database_tables": [
+      "wp_apex_content_analysis",
+      "wp_apex_indexables",
+      "wp_apex_links"
+    ],
+    "behavioral_test": "wp-content/plugins/apexseo/tests/ContentAnalysisIntegrationTest.php::testRestEndpointRetrievalAndRecomputation"
   }
 ]

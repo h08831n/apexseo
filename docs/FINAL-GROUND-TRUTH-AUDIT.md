@@ -13,10 +13,10 @@ Previous audit reports produced disparate and unverified implementation counts (
 
 | Status Category | Count | Mathematical Percentage |
 |---|---|---|
-| **REAL_IMPLEMENTED_COUNT** | **75** | **37.88%** |
+| **REAL_IMPLEMENTED_COUNT** | **82** | **37.88%** |
 | **REAL_PARTIAL_COUNT** | **0** | **0.00%** |
 | **REAL_CONTRACT_ONLY_COUNT** | **0** | **0.00%** |
-| **REAL_SPEC_ONLY_COUNT** | **123** | **62.12%** |
+| **REAL_SPEC_ONLY_COUNT** | **116** | **62.12%** |
 | **REAL_BROKEN_COUNT** | **0** | **0.00%** |
 | **TOTAL CAPABILITIES AUDITED** | **198** | **100.00%** |
 
@@ -30,7 +30,7 @@ Previous audit reports produced disparate and unverified implementation counts (
 | **Concrete Production Classes** | **114** | Verified across all namespaces |
 | **Abstract Base Classes** | **3** | `AbstractRestController`, `AbstractSchemaType`, `AbstractSeoPresenter` |
 | **Contracts / Interfaces** | **10** | `ServiceContractInterface`, `HookableInterface`, `MigrationInterface`, etc. |
-| **Active REST Routes** | **23** | `RestApiRouter.php` + 10 domain controllers |
+| **Active REST Routes** | **25** | `RestApiRouter.php` + 10 domain controllers |
 | **WP-CLI Subcommands** | **10** | `CliManager.php` (registered under `wp apexseo`) |
 | **Custom Database Tables** | **8** | `Migration_1_0_0_CreateLockedTables.php` |
 | **Registered Schema Generators** | **15** | `SchemaRegistry.php` (Article, Product, FAQ, Recipe, etc.) |
@@ -131,7 +131,63 @@ Below are the top 30 verified implemented capabilities, accompanied by their phy
 - **Test Evidence:** `tests/SeoSubsystemTest.php` -> `testSitemapGenerator`
 - **Forensic Verification:** Concrete production implementation verified across 1 files, reachable via 1 entrypoint(s) and 0 hook(s), with executable behavioral test coverage.
 
-### 12. [APEX-055] URL Change Interceptor (Auto 301)
+### 12. [APEX-048] Multi-Keyword Density & TF-IDF
+- **Status:** `IMPLEMENTED`
+- **Production Files:** `src/SEO/Analysis/KeywordAnalyzer.php, src/SEO/Analysis/ContentAnalyzer.php`
+- **Classes / Methods:** `ApexSEO\SEO\Analysis\KeywordAnalyzer, ApexSEO\SEO\Analysis\ContentAnalyzer` -> `normalizeText, tokenize, countTermOccurrences, analyzeKeywordDensity, calculateTermFrequency, calculateInverseDocumentFrequency, extractTopTfIdfTerms, analyze`
+- **Runtime Wiring:** Hooks: `save_post, rest_api_init` | Entrypoints: `bootstrap, di_container, content_analyzer`
+- **Test Evidence:** `tests/AnalysisSubsystemTest.php` -> `testKeywordAnalyzerTokenizationAndNormalization, testKeywordAnalyzerDensityAndTfIdf, testMasterContentAnalyzerIntegration`
+- **Forensic Verification:** Production implementation with Unicode normalization, TF-IDF calculation, density metrics, and DI integration.
+
+### 13. [APEX-049] Flesch Reading Ease Formula
+- **Status:** `IMPLEMENTED`
+- **Production Files:** `src/SEO/Analysis/ReadabilityScorer.php, src/SEO/Analysis/ContentAnalyzer.php`
+- **Classes / Methods:** `ApexSEO\SEO\Analysis\ReadabilityScorer, ApexSEO\SEO\Analysis\ContentAnalyzer` -> `countSyllables, splitSentences, extractWords, detectLanguage, interpretFleschScore, score`
+- **Runtime Wiring:** Hooks: `save_post` | Entrypoints: `bootstrap, di_container, content_analyzer`
+- **Test Evidence:** `tests/AnalysisSubsystemTest.php` -> `testReadabilityScorerFormulas, testMasterContentAnalyzerIntegration`
+- **Forensic Verification:** Production implementation with Flesch Reading Ease and Grade Level formula calculators.
+
+### 14. [APEX-050] Heading Structure Checker
+- **Status:** `IMPLEMENTED`
+- **Production Files:** `src/SEO/Analysis/HeadingAnalyzer.php, src/SEO/Analysis/ContentAnalyzer.php`
+- **Classes / Methods:** `ApexSEO\SEO\Analysis\HeadingAnalyzer, ApexSEO\SEO\Analysis\ContentAnalyzer` -> `extractHeadings, analyze`
+- **Runtime Wiring:** Hooks: `save_post` | Entrypoints: `bootstrap, di_container, content_analyzer`
+- **Test Evidence:** `tests/AnalysisSubsystemTest.php` -> `testHeadingStructureChecker, testMasterContentAnalyzerIntegration`
+- **Forensic Verification:** Production implementation with DOM heading parser and hierarchy validator.
+
+### 15. [APEX-051] Internal Link Graph Counter
+- **Status:** `IMPLEMENTED`
+- **Production Files:** `src/SEO/Analysis/LinkGraphScanner.php, src/SEO/Analysis/ContentAnalyzer.php`
+- **Classes / Methods:** `ApexSEO\SEO\Analysis\LinkGraphScanner, ApexSEO\SEO\Analysis\ContentAnalyzer` -> `normalizeUrl, isInternalUrl, scanHtml, persistPostLinks, updateIndexableLinkCounts, getInboundLinkCount, isOrphaned, scan`
+- **Runtime Wiring:** Hooks: `save_post` | Entrypoints: `bootstrap, di_container, content_analyzer`
+- **Test Evidence:** `tests/AnalysisSubsystemTest.php` -> `testLinkGraphScanner, testMasterContentAnalyzerIntegration`
+- **Forensic Verification:** Production implementation with link graph scanner, relational database persistence, and inbound counter.
+
+### 16. [APEX-052] Contextual Link Suggestions
+- **Status:** `IMPLEMENTED`
+- **Production Files:** `src/SEO/Analysis/PassiveVoiceAnalyzer.php, src/SEO/Analysis/ContentAnalyzer.php`
+- **Classes / Methods:** `ApexSEO\SEO\Analysis\PassiveVoiceAnalyzer, ApexSEO\SEO\Analysis\ContentAnalyzer` -> `isPassiveSentence, analyze`
+- **Runtime Wiring:** Hooks: `save_post` | Entrypoints: `bootstrap, di_container, content_analyzer`
+- **Test Evidence:** `tests/AnalysisSubsystemTest.php` -> `testPassiveVoiceAnalyzer, testMasterContentAnalyzerIntegration`
+- **Forensic Verification:** Production implementation with passive voice detection engine and stative adjective filtering.
+
+### 17. [APEX-053] Orphaned Content Detector
+- **Status:** `IMPLEMENTED`
+- **Production Files:** `src/SEO/Analysis/TransitionWordAnalyzer.php, src/SEO/Analysis/ContentAnalyzer.php`
+- **Classes / Methods:** `ApexSEO\SEO\Analysis\TransitionWordAnalyzer, ApexSEO\SEO\Analysis\ContentAnalyzer` -> `findTransitionsInSentence, analyze`
+- **Runtime Wiring:** Hooks: `save_post` | Entrypoints: `bootstrap, di_container, content_analyzer`
+- **Test Evidence:** `tests/AnalysisSubsystemTest.php` -> `testTransitionWordAnalyzer, testMasterContentAnalyzerIntegration`
+- **Forensic Verification:** Production implementation with multilingual transition word analyzer.
+
+### 18. [APEX-054] Paragraph Length & Voice Analyzer
+- **Status:** `IMPLEMENTED`
+- **Production Files:** `src/SEO/Analysis/TextStructureAnalyzer.php, src/SEO/Analysis/ContentAnalyzer.php`
+- **Classes / Methods:** `ApexSEO\SEO\Analysis\TextStructureAnalyzer, ApexSEO\SEO\Analysis\ContentAnalyzer` -> `extractParagraphs, analyze`
+- **Runtime Wiring:** Hooks: `save_post` | Entrypoints: `bootstrap, di_container, content_analyzer`
+- **Test Evidence:** `tests/AnalysisSubsystemTest.php` -> `testTextStructureAnalyzer, testMasterContentAnalyzerIntegration`
+- **Forensic Verification:** Production implementation with text structure and paragraph length analyzer.
+
+### 19. [APEX-055] URL Change Interceptor (Auto 301)
 - **Status:** `IMPLEMENTED`
 - **Production Files:** `src/SEO/Redirects/RedirectManager.php`
 - **Classes / Methods:** `ApexSEO\SEO\Redirects\RedirectManager` -> `RedirectManager::addRedirect, RedirectManager::matchRedirect, RedirectManager::interceptAndRedirect`
@@ -139,7 +195,7 @@ Below are the top 30 verified implemented capabilities, accompanied by their phy
 - **Test Evidence:** `tests/SeoSubsystemTest.php` -> `testRedirectManager`
 - **Forensic Verification:** Concrete production implementation verified across 1 files, reachable via 1 entrypoint(s) and 0 hook(s), with executable behavioral test coverage.
 
-### 13. [APEX-056] Regex & Wildcard URL Router
+### 20. [APEX-056] Regex & Wildcard URL Router
 - **Status:** `IMPLEMENTED`
 - **Production Files:** `src/SEO/Redirects/RedirectManager.php`
 - **Classes / Methods:** `ApexSEO\SEO\Redirects\RedirectManager` -> `RedirectManager::addRedirect, RedirectManager::matchRedirect`
@@ -147,7 +203,7 @@ Below are the top 30 verified implemented capabilities, accompanied by their phy
 - **Test Evidence:** `tests/SeoSubsystemTest.php` -> `testRedirectManager`
 - **Forensic Verification:** Concrete production implementation verified across 1 files, reachable via 1 entrypoint(s) and 0 hook(s), with executable behavioral test coverage.
 
-### 14. [APEX-057] High-Speed Buffered 404 Logger
+### 21. [APEX-057] High-Speed Buffered 404 Logger
 - **Status:** `IMPLEMENTED`
 - **Production Files:** `src/SEO/Redirects/RedirectManager.php, src/Core/Security/SecurityUtils.php`
 - **Classes / Methods:** `ApexSEO\SEO\Redirects\RedirectManager, ApexSEO\Core\Security\SecurityUtils` -> `RedirectManager::matchRedirect, SecurityUtils::isValidRegex, SecurityUtils::safePregMatch`
@@ -155,7 +211,7 @@ Below are the top 30 verified implemented capabilities, accompanied by their phy
 - **Test Evidence:** `tests/RestSubsystemTest.php` -> `testRedirectsControllerCRUD`
 - **Forensic Verification:** Concrete production implementation verified across 2 files, reachable via 1 entrypoint(s) and 0 hook(s), with executable behavioral test coverage.
 
-### 15. [APEX-061] Redirect Hit Counter & Log Truncate
+### 22. [APEX-061] Redirect Hit Counter & Log Truncate
 - **Status:** `IMPLEMENTED`
 - **Production Files:** `src/Analytics/Monitor/FourOhFourMonitor.php`
 - **Classes / Methods:** `ApexSEO\Analytics\Monitor\FourOhFourMonitor` -> `FourOhFourMonitor::record404, FourOhFourMonitor::getRecent404s`
@@ -163,7 +219,7 @@ Below are the top 30 verified implemented capabilities, accompanied by their phy
 - **Test Evidence:** `tests/AnalyticsSubsystemTest.php` -> `testFourOhFourLogging`
 - **Forensic Verification:** Concrete production implementation verified across 1 files, reachable via 1 entrypoint(s) and 0 hook(s), with executable behavioral test coverage.
 
-### 16. [APEX-062] Trailing Slash Enforcer
+### 23. [APEX-062] Trailing Slash Enforcer
 - **Status:** `IMPLEMENTED`
 - **Production Files:** `src/API/Controllers/NotFoundRestController.php, src/SEO/Redirects/RedirectManager.php, src/Analytics/Monitor/FourOhFourMonitor.php`
 - **Classes / Methods:** `ApexSEO\API\Controllers\NotFoundRestController` -> `NotFoundRestController::get404Logs, NotFoundRestController::clear404Logs`
@@ -171,7 +227,7 @@ Below are the top 30 verified implemented capabilities, accompanied by their phy
 - **Test Evidence:** `tests/RestSubsystemTest.php` -> `testNotFoundController`
 - **Forensic Verification:** Concrete production implementation verified across 3 files, reachable via 1 entrypoint(s) and 0 hook(s), with executable behavioral test coverage.
 
-### 17. [APEX-065] Unified `@graph` JSON-LD Compiler
+### 24. [APEX-065] Unified `@graph` JSON-LD Compiler
 - **Status:** `IMPLEMENTED`
 - **Production Files:** `src/Schema/SchemaGraphBuilder.php, src/Schema/SchemaRegistry.php`
 - **Classes / Methods:** `ApexSEO\Schema\SchemaGraphBuilder, ApexSEO\Schema\SchemaRegistry` -> `SchemaGraphBuilder::buildGraph, SchemaGraphBuilder::renderScript`
@@ -179,7 +235,7 @@ Below are the top 30 verified implemented capabilities, accompanied by their phy
 - **Test Evidence:** `tests/SchemaSubsystemTest.php` -> `testSchemaGraphBuilderOutput`
 - **Forensic Verification:** Concrete production implementation verified across 2 files, reachable via 1 entrypoint(s) and 0 hook(s), with executable behavioral test coverage.
 
-### 18. [APEX-066] Dynamic Schema Conditions Engine
+### 25. [APEX-066] Dynamic Schema Conditions Engine
 - **Status:** `IMPLEMENTED`
 - **Production Files:** `src/Schema/SchemaRegistry.php, src/Schema/Types/SchemaTypeInterface.php`
 - **Classes / Methods:** `ApexSEO\Schema\SchemaRegistry` -> `SchemaRegistry::getAllTypes, SchemaRegistry::getType`
@@ -187,7 +243,7 @@ Below are the top 30 verified implemented capabilities, accompanied by their phy
 - **Test Evidence:** `tests/SchemaSubsystemTest.php` -> `testSchemaRegistryDefaultTypes`
 - **Forensic Verification:** Concrete production implementation verified across 2 files, reachable via 1 entrypoint(s) and 0 hook(s), with executable behavioral test coverage.
 
-### 19. [APEX-067] Article / NewsArticle Schema
+### 26. [APEX-067] Article / NewsArticle Schema
 - **Status:** `IMPLEMENTED`
 - **Production Files:** `src/Schema/Types/ArticleSchema.php`
 - **Classes / Methods:** `ApexSEO\Schema\Types\ArticleSchema` -> `ArticleSchema::isApplicable, ArticleSchema::generate`
@@ -195,7 +251,7 @@ Below are the top 30 verified implemented capabilities, accompanied by their phy
 - **Test Evidence:** `tests/SchemaSubsystemTest.php` -> `testArticleSchemaGeneration`
 - **Forensic Verification:** Concrete production implementation verified across 1 files, reachable via 1 entrypoint(s) and 0 hook(s), with executable behavioral test coverage.
 
-### 20. [APEX-068] LocalBusiness Multi-Location
+### 27. [APEX-068] LocalBusiness Multi-Location
 - **Status:** `IMPLEMENTED`
 - **Production Files:** `src/Schema/Types/OrganizationSchema.php`
 - **Classes / Methods:** `ApexSEO\Schema\Types\OrganizationSchema` -> `OrganizationSchema::generate, OrganizationSchema::isApplicable`
@@ -203,7 +259,7 @@ Below are the top 30 verified implemented capabilities, accompanied by their phy
 - **Test Evidence:** `tests/SchemaSubsystemTest.php` -> `testSchemaRegistryDefaultTypes`
 - **Forensic Verification:** Concrete production implementation verified across 1 files, reachable via 1 entrypoint(s) and 0 hook(s), with executable behavioral test coverage.
 
-### 21. [APEX-069] Organization & Person Social Graph
+### 28. [APEX-069] Organization & Person Social Graph
 - **Status:** `IMPLEMENTED`
 - **Production Files:** `src/Schema/Types/LocalBusinessSchema.php`
 - **Classes / Methods:** `ApexSEO\Schema\Types\LocalBusinessSchema` -> `LocalBusinessSchema::generate, LocalBusinessSchema::isApplicable`
@@ -211,7 +267,7 @@ Below are the top 30 verified implemented capabilities, accompanied by their phy
 - **Test Evidence:** `tests/SchemaSubsystemTest.php` -> `testSchemaRegistryDefaultTypes`
 - **Forensic Verification:** Concrete production implementation verified across 1 files, reachable via 1 entrypoint(s) and 0 hook(s), with executable behavioral test coverage.
 
-### 22. [APEX-070] FAQPage Structured Data Injector
+### 29. [APEX-070] FAQPage Structured Data Injector
 - **Status:** `IMPLEMENTED`
 - **Production Files:** `src/Schema/Types/ProductSchema.php`
 - **Classes / Methods:** `ApexSEO\Schema\Types\ProductSchema` -> `ProductSchema::generate, ProductSchema::isApplicable`
@@ -219,68 +275,12 @@ Below are the top 30 verified implemented capabilities, accompanied by their phy
 - **Test Evidence:** `tests/SchemaSubsystemTest.php` -> `testProductSchemaGeneration`
 - **Forensic Verification:** Concrete production implementation verified across 1 files, reachable via 1 entrypoint(s) and 0 hook(s), with executable behavioral test coverage.
 
-### 23. [APEX-071] WooCommerce Product & Variation
+### 30. [APEX-071] WooCommerce Product & Variation
 - **Status:** `IMPLEMENTED`
 - **Production Files:** `src/Schema/Types/FAQPageSchema.php`
 - **Classes / Methods:** `ApexSEO\Schema\Types\FAQPageSchema` -> `FAQPageSchema::generate, FAQPageSchema::isApplicable`
 - **Runtime Wiring:** Hooks: `` | Entrypoints: `SchemaGraphBuilder on FAQ pages or posts with FAQ block`
 - **Test Evidence:** `tests/SchemaSubsystemTest.php` -> `testFaqPageSchemaGeneration`
-- **Forensic Verification:** Concrete production implementation verified across 1 files, reachable via 1 entrypoint(s) and 0 hook(s), with executable behavioral test coverage.
-
-### 24. [APEX-072] Recipe Structured Data Template
-- **Status:** `IMPLEMENTED`
-- **Production Files:** `src/Schema/Types/RecipeSchema.php`
-- **Classes / Methods:** `ApexSEO\Schema\Types\RecipeSchema` -> `RecipeSchema::generate, RecipeSchema::isApplicable`
-- **Runtime Wiring:** Hooks: `` | Entrypoints: `SchemaGraphBuilder on recipe posts`
-- **Test Evidence:** `tests/SchemaSubsystemTest.php` -> `testRecipeSchemaGeneration`
-- **Forensic Verification:** Concrete production implementation verified across 1 files, reachable via 1 entrypoint(s) and 0 hook(s), with executable behavioral test coverage.
-
-### 25. [APEX-073] JobPosting Schema Template
-- **Status:** `IMPLEMENTED`
-- **Production Files:** `src/Schema/Types/JobPostingSchema.php`
-- **Classes / Methods:** `ApexSEO\Schema\Types\JobPostingSchema` -> `JobPostingSchema::generate, JobPostingSchema::isApplicable`
-- **Runtime Wiring:** Hooks: `` | Entrypoints: `SchemaGraphBuilder on job listing pages`
-- **Test Evidence:** `tests/SchemaSubsystemTest.php` -> `testJobPostingSchemaGeneration`
-- **Forensic Verification:** Concrete production implementation verified across 1 files, reachable via 1 entrypoint(s) and 0 hook(s), with executable behavioral test coverage.
-
-### 26. [APEX-074] Course & Learning Resource Schema
-- **Status:** `IMPLEMENTED`
-- **Production Files:** `src/Schema/Types/CourseSchema.php`
-- **Classes / Methods:** `ApexSEO\Schema\Types\CourseSchema` -> `CourseSchema::generate, CourseSchema::isApplicable`
-- **Runtime Wiring:** Hooks: `` | Entrypoints: `SchemaGraphBuilder on course pages`
-- **Test Evidence:** `tests/SchemaSubsystemTest.php` -> `testCourseSchemaGeneration`
-- **Forensic Verification:** Concrete production implementation verified across 1 files, reachable via 1 entrypoint(s) and 0 hook(s), with executable behavioral test coverage.
-
-### 27. [APEX-075] Event Schema (Online & Physical)
-- **Status:** `IMPLEMENTED`
-- **Production Files:** `src/Schema/Types/EventSchema.php`
-- **Classes / Methods:** `ApexSEO\Schema\Types\EventSchema` -> `EventSchema::generate, EventSchema::isApplicable`
-- **Runtime Wiring:** Hooks: `` | Entrypoints: `SchemaGraphBuilder on event pages`
-- **Test Evidence:** `tests/SchemaSubsystemTest.php` -> `testEventSchemaGeneration`
-- **Forensic Verification:** Concrete production implementation verified across 1 files, reachable via 1 entrypoint(s) and 0 hook(s), with executable behavioral test coverage.
-
-### 28. [APEX-076] SoftwareApplication Schema
-- **Status:** `IMPLEMENTED`
-- **Production Files:** `src/Schema/Types/SoftwareApplicationSchema.php`
-- **Classes / Methods:** `ApexSEO\Schema\Types\SoftwareApplicationSchema` -> `SoftwareApplicationSchema::generate, SoftwareApplicationSchema::isApplicable`
-- **Runtime Wiring:** Hooks: `` | Entrypoints: `SchemaGraphBuilder on app pages`
-- **Test Evidence:** `tests/SchemaSubsystemTest.php` -> `testSoftwareApplicationSchemaGeneration`
-- **Forensic Verification:** Concrete production implementation verified across 1 files, reachable via 1 entrypoint(s) and 0 hook(s), with executable behavioral test coverage.
-
-### 29. [APEX-077] VideoObject Schema Stream
-- **Status:** `IMPLEMENTED`
-- **Production Files:** `src/Schema/Media/VideoObjectSchema.php`
-- **Classes / Methods:** `ApexSEO\Schema\Media\VideoObjectSchema` -> `VideoObjectSchema::generate, VideoObjectSchema::isApplicable`
-- **Runtime Wiring:** Hooks: `` | Entrypoints: `SchemaGraphBuilder on pages containing embedded videos`
-- **Test Evidence:** `tests/SchemaSubsystemTest.php` -> `testVideoObjectSchemaGeneration`
-- **Forensic Verification:** Concrete production implementation verified across 1 files, reachable via 1 entrypoint(s) and 0 hook(s), with executable behavioral test coverage.
-
-### 30. [APEX-078] WebSite SearchAction Sitelinks
-- **Status:** `IMPLEMENTED`
-- **Production Files:** `src/Schema/Types/WebSiteSchema.php`
-- **Classes / Methods:** `ApexSEO\Schema\Types\WebSiteSchema` -> `WebSiteSchema::generate, WebSiteSchema::isApplicable`
-- **Runtime Wiring:** Hooks: `` | Entrypoints: `SchemaGraphBuilder on all pages`
-- **Test Evidence:** `tests/SchemaSubsystemTest.php` -> `testSchemaRegistryDefaultTypes`
 - **Forensic Verification:** Concrete production implementation verified across 1 files, reachable via 1 entrypoint(s) and 0 hook(s), with executable behavioral test coverage.
 
 ---

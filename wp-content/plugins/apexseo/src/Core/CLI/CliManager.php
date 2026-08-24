@@ -12,6 +12,7 @@ use ApexSEO\CLI\MigrateCommand;
 use ApexSEO\CLI\SitemapCommand;
 use ApexSEO\CLI\DoctorCommand;
 use ApexSEO\CLI\SchemaCommand;
+use ApexSEO\CLI\AnalysisCommand;
 
 /**
  * WP-CLI Command Infrastructure and Root Namespace Manager.
@@ -77,6 +78,10 @@ class CliManager implements ServiceContractInterface, HookableInterface {
 
         $this->registerCommand('schema', SchemaCommand::class, [
             'shortdesc' => 'Validate JSON-LD structured data schemas.',
+        ]);
+
+        $this->registerCommand('analysis', AnalysisCommand::class, [
+            'shortdesc' => 'Perform and inspect on-page SEO and readability content analysis.',
         ]);
     }
 

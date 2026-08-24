@@ -24,6 +24,9 @@ use ApexSEO\API\Controllers\AnalyticsRestController;
 use ApexSEO\API\Controllers\CacheRestController;
 use ApexSEO\API\Controllers\MediaRestController;
 use ApexSEO\API\Controllers\MigrationRestController;
+use ApexSEO\API\Controllers\AnalysisRestController;
+use ApexSEO\SEO\Analysis\ContentAnalysisService;
+use ApexSEO\SEO\Analysis\ContentAnalyzer;
 
 /**
  * Central REST API Subsystem Router & Manager (APEX-169 through APEX-180).
@@ -69,7 +72,8 @@ class RestApiRouter implements ServiceContractInterface, HookableInterface {
         SchemaValidator $schemaValidator,
         $cacheEngine = null,
         $imageOptimizer = null,
-        $cacheIntegration = null
+        $cacheIntegration = null,
+        $analysisService = null
     ) {
         $this->security = $security;
 
@@ -85,6 +89,13 @@ class RestApiRouter implements ServiceContractInterface, HookableInterface {
         $optimizer = $imageOptimizer !== null ? $imageOptimizer : new ImageOptimizer();
         $this->controllers['media']      = new MediaRestController($security, $optimizer);
         $this->controllers['migration']  = new MigrationRestController($security, $db);
+        $analysisSvc = $analysisService !== null ? $analysisService : new ContentAnalysisService(
+            new ContentAnalyzer(null, null, null, null, null, null, null, $indexableRepo),
+            $db,
+            $indexableRepo,
+            $config
+        );
+        $this->controllers['analysis']   = new AnalysisRestController($security, $analysisSvc);
     }
 
     /**

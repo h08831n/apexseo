@@ -1,17 +1,17 @@
 {
-  "total_production_classes": 122,
+  "total_production_classes": 125,
   "abstract_classes": 3,
   "interfaces": 10,
   "orphan_count": 0,
   "orphan_classes": [],
   "reachability_verification": {
-    "wordpress_hooks": 42,
-    "di_container_bindings": 36,
+    "wordpress_hooks": 44,
+    "di_container_bindings": 38,
     "module_loader_boots": 9,
-    "rest_api_controllers": 10,
-    "wp_cli_commands": 10,
+    "rest_api_controllers": 11,
+    "wp_cli_commands": 11,
     "schema_registry_generators": 15,
-    "subsystem_direct_wiring": 24
+    "subsystem_direct_wiring": 27
   },
   "verdict": "ZERO_ORPHANS_VERIFIED"
 }

@@ -24,8 +24,8 @@ for root, dirs, files in os.walk(src_dir):
 prod_files.sort()
 print(f"  -> Discovered {len(prod_files)} physical production PHP files in src/")
 
-if len(prod_files) != 126:
-    failures.append(f"Expected exactly 126 production PHP files in src/, found {len(prod_files)}")
+if len(prod_files) != 129:
+    failures.append(f"Expected exactly 129 production PHP files in src/, found {len(prod_files)}")
 
 root_php = [f for f in ['apexseo.php', 'uninstall.php'] if os.path.exists(os.path.join(plugin_root, f))]
 print(f"  -> Discovered {len(root_php)} root plugin files: {root_php}")
@@ -39,9 +39,9 @@ if not os.path.exists(rest_file):
 else:
     with open(rest_file) as f:
         routes = json.load(f)
-    print(f"  -> Confirmed {len(routes)} registered REST routes across 10 controllers + 1 router")
-    if len(routes) != 23:
-        failures.append(f"Expected 23 registered REST routes, found {len(routes)}")
+    print(f"  -> Confirmed {len(routes)} registered REST routes across 11 controllers + 1 router")
+    if len(routes) != 25:
+        failures.append(f"Expected 25 registered REST routes, found {len(routes)}")
 
 # 3. Audit Database Tables & DDL
 print("[3/8] Verifying Database Relational Schema DDL...")
@@ -63,8 +63,8 @@ with open(cli_manager_file) as f:
 
 cli_commands = re.findall(r"\$this->registerCommand\(\s*['\"]([^'\"]+)['\"]", cli_code)
 print(f"  -> Confirmed {len(cli_commands)} registered WP-CLI command modules under 'wp apexseo'")
-if len(cli_commands) != 10:
-    failures.append(f"Expected 10 CLI subcommands in CliManager, found {len(cli_commands)}")
+if len(cli_commands) != 11:
+    failures.append(f"Expected 11 CLI subcommands in CliManager, found {len(cli_commands)}")
 
 # 5. Audit Schema Graph Registry
 print("[5/8] Verifying JSON-LD Schema Registry...")

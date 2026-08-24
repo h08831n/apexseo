@@ -31,6 +31,7 @@ use ApexSEO\SEO\Analysis\PassiveVoiceAnalyzer;
 use ApexSEO\SEO\Analysis\TransitionWordAnalyzer;
 use ApexSEO\SEO\Analysis\TextStructureAnalyzer;
 use ApexSEO\SEO\Analysis\ContentAnalyzer;
+use ApexSEO\SEO\Analysis\ContentAnalysisService;
 
 /**
  * SEO Core Subsystem Module.
@@ -217,6 +218,15 @@ class SeoModule implements ModuleInterface, HookableInterface {
                 $c->has(IndexableRepository::class) ? $c->get(IndexableRepository::class) : null
             );
         });
+
+        $container->singleton(ContentAnalysisService::class, function(ContainerInterface $c) {
+            return new ContentAnalysisService(
+                $c->get(ContentAnalyzer::class),
+                $c->has(DatabaseManager::class) ? $c->get(DatabaseManager::class) : null,
+                $c->has(IndexableRepository::class) ? $c->get(IndexableRepository::class) : null,
+                $c->has(ConfigurationManager::class) ? $c->get(ConfigurationManager::class) : null
+            );
+        });
     }
 
     /**
@@ -271,6 +281,9 @@ class SeoModule implements ModuleInterface, HookableInterface {
             if ($container->has(MetaSaver::class)) {
                 $container->get(MetaSaver::class)->savePostMeta($postId, $post);
             }
+            if ($container->has(ContentAnalysisService::class)) {
+                $container->get(ContentAnalysisService::class)->handleSavePost($postId, $post);
+            }
         }, 10, 2);
 
         add_action('created_term', function($termId, $ttId, $taxonomy) use ($container) {
@@ -288,6 +301,9 @@ class SeoModule implements ModuleInterface, HookableInterface {
         add_action('delete_post', function($postId) use ($container) {
             if ($container->has(MetaSaver::class)) {
                 $container->get(MetaSaver::class)->deletePostIndexable($postId);
+            }
+            if ($container->has(ContentAnalysisService::class)) {
+                $container->get(ContentAnalysisService::class)->handleDeletePost($postId);
             }
         }, 10, 1);
 
