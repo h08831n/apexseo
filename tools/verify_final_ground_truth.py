@@ -24,8 +24,8 @@ for root, dirs, files in os.walk(src_dir):
 prod_files.sort()
 print(f"  -> Discovered {len(prod_files)} physical production PHP files in src/")
 
-if len(prod_files) != 118:
-    failures.append(f"Expected exactly 118 production PHP files in src/, found {len(prod_files)}")
+if len(prod_files) != 126:
+    failures.append(f"Expected exactly 126 production PHP files in src/, found {len(prod_files)}")
 
 root_php = [f for f in ['apexseo.php', 'uninstall.php'] if os.path.exists(os.path.join(plugin_root, f))]
 print(f"  -> Discovered {len(root_php)} root plugin files: {root_php}")
