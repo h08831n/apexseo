@@ -235,4 +235,216 @@ class IndexableBuilder {
 
         return $indexable;
     }
+
+    /**
+     * Build an Indexable model from a WP_User (Author) object.
+     *
+     * @param object|int $author
+     * @param array $overrides
+     * @return Indexable
+     */
+    public function buildFromAuthor($author, array $overrides = []) {
+        if (is_numeric($author)) {
+            $author = function_exists('get_userdata') ? get_userdata($author) : null;
+        }
+
+        $indexable = new Indexable();
+        if (!$author) {
+            return $indexable;
+        }
+
+        $authorId = (int) $author->ID;
+        $indexable->object_id = $authorId;
+        $indexable->object_type = 'user';
+        $indexable->object_sub_type = 'author';
+        $authorUrl = function_exists('get_author_posts_url') ? get_author_posts_url($authorId) : '';
+        $indexable->permalink = (string) $authorUrl;
+        $indexable->permalink_hash = md5($indexable->permalink);
+
+        $context = new SeoContext();
+        $context->object_id = $authorId;
+        $context->object_type = 'user';
+        $context->object_sub_type = 'author';
+        $context->author_id = $authorId;
+        $context->author_name = !empty($author->display_name) ? $author->display_name : '';
+        $context->title = $context->author_name;
+        $bio = function_exists('get_the_author_meta') ? get_the_author_meta('description', $authorId) : '';
+        $context->excerpt = !empty($bio) ? wp_strip_all_tags($bio) : '';
+        $context->permalink = $indexable->permalink;
+        $context->canonical_url = $indexable->permalink;
+        $context->site_name = get_option('blogname', 'WordPress');
+        $context->site_description = get_option('blogdescription', '');
+        $context->sep = $this->templateManager->getTitleSeparator();
+
+        $titleTpl = $this->templateManager->getTitleTemplate('author');
+        $descTpl = $this->templateManager->getDescriptionTemplate('author');
+
+        $indexable->title = $this->variableEngine->replace($titleTpl, $context);
+        $indexable->description = $this->variableEngine->replace($descTpl, $context);
+        $indexable->canonical_url = $indexable->permalink;
+        $indexable->is_robots_noindex = $this->templateManager->isDefaultNoindex('author');
+        $indexable->schema_type = 'ProfilePage';
+
+        if (function_exists('get_user_meta')) {
+            $metaTitle = get_user_meta($authorId, '_apexseo_title', true);
+            if (!empty($metaTitle)) {
+                $indexable->title = $this->variableEngine->replace($metaTitle, $context);
+            }
+            $metaDesc = get_user_meta($authorId, '_apexseo_description', true);
+            if (!empty($metaDesc)) {
+                $indexable->description = $this->variableEngine->replace($metaDesc, $context);
+            }
+            $metaNoindex = get_user_meta($authorId, '_apexseo_noindex', true);
+            if ($metaNoindex !== '') {
+                $indexable->is_robots_noindex = (bool) $metaNoindex;
+            }
+        }
+
+        if (!empty($overrides)) {
+            foreach ($overrides as $k => $v) {
+                if (property_exists($indexable, $k)) {
+                    $indexable->$k = $v;
+                }
+            }
+        }
+
+        return $indexable;
+    }
+
+    /**
+     * Build an Indexable model from Date Archive parameters (APEX-006).
+     *
+     * @param array $dateContext
+     * @param array $overrides
+     * @return Indexable
+     */
+    public function buildFromDateArchive(array $dateContext = [], array $overrides = []) {
+        $indexable = new Indexable();
+        $indexable->object_id = 0;
+        $indexable->object_type = 'archive';
+        $indexable->object_sub_type = 'date';
+
+        $context = new SeoContext();
+        $context->page_type = 'date';
+        $context->object_type = 'archive';
+        $context->object_sub_type = 'date';
+        $context->site_name = get_option('blogname', 'WordPress');
+        $context->site_description = get_option('blogdescription', '');
+        $context->sep = $this->templateManager->getTitleSeparator();
+
+        $dateStr = isset($dateContext['date']) ? $dateContext['date'] : (function_exists('single_month_title') ? single_month_title(' ', false) : date('F Y'));
+        $context->title = $dateStr;
+        $context->date_published = $dateStr;
+        $context->permalink = isset($dateContext['permalink']) ? $dateContext['permalink'] : (function_exists('home_url') ? home_url('/') : '');
+        $context->canonical_url = $context->permalink;
+
+        $titleTpl = $this->templateManager->getTitleTemplate('date');
+        $descTpl = $this->templateManager->getDescriptionTemplate('date');
+
+        $indexable->title = $this->variableEngine->replace($titleTpl, $context);
+        $indexable->description = $this->variableEngine->replace($descTpl, $context);
+        $indexable->permalink = $context->permalink;
+        $indexable->permalink_hash = md5($indexable->permalink);
+        $indexable->canonical_url = $indexable->permalink;
+        $indexable->is_robots_noindex = $this->templateManager->isDefaultNoindex('date');
+        $indexable->schema_type = 'CollectionPage';
+
+        if (!empty($overrides)) {
+            foreach ($overrides as $k => $v) {
+                if (property_exists($indexable, $k)) {
+                    $indexable->$k = $v;
+                }
+            }
+        }
+
+        return $indexable;
+    }
+
+    /**
+     * Build an Indexable model from Search results parameters (APEX-007).
+     *
+     * @param string $searchQuery
+     * @param array $overrides
+     * @return Indexable
+     */
+    public function buildFromSearch($searchQuery = '', array $overrides = []) {
+        $indexable = new Indexable();
+        $indexable->object_id = 0;
+        $indexable->object_type = 'search';
+        $indexable->object_sub_type = 'search';
+
+        $context = new SeoContext();
+        $context->page_type = 'search';
+        $context->object_type = 'search';
+        $context->object_sub_type = 'search';
+        $context->search_query = sanitize_text_field($searchQuery);
+        $context->title = $context->search_query;
+        $context->site_name = get_option('blogname', 'WordPress');
+        $context->site_description = get_option('blogdescription', '');
+        $context->sep = $this->templateManager->getTitleSeparator();
+        $context->permalink = function_exists('get_search_link') ? get_search_link($context->search_query) : '';
+        $context->canonical_url = $context->permalink;
+
+        $titleTpl = $this->templateManager->getTitleTemplate('search');
+        $descTpl = $this->templateManager->getDescriptionTemplate('search');
+
+        $indexable->title = $this->variableEngine->replace($titleTpl, $context);
+        $indexable->description = $this->variableEngine->replace($descTpl, $context);
+        $indexable->permalink = $context->permalink;
+        $indexable->permalink_hash = md5($indexable->permalink);
+        $indexable->canonical_url = $indexable->permalink;
+        $indexable->is_robots_noindex = true; // Search always defaults to noindex
+        $indexable->schema_type = 'SearchResultsPage';
+
+        if (!empty($overrides)) {
+            foreach ($overrides as $k => $v) {
+                if (property_exists($indexable, $k)) {
+                    $indexable->$k = $v;
+                }
+            }
+        }
+
+        return $indexable;
+    }
+
+    /**
+     * Build an Indexable model for 404 Error page (APEX-008).
+     *
+     * @param array $overrides
+     * @return Indexable
+     */
+    public function buildFrom404(array $overrides = []) {
+        $indexable = new Indexable();
+        $indexable->object_id = 0;
+        $indexable->object_type = '404';
+        $indexable->object_sub_type = '404';
+
+        $context = new SeoContext();
+        $context->page_type = '404';
+        $context->object_type = '404';
+        $context->object_sub_type = '404';
+        $context->title = 'Page Not Found';
+        $context->site_name = get_option('blogname', 'WordPress');
+        $context->site_description = get_option('blogdescription', '');
+        $context->sep = $this->templateManager->getTitleSeparator();
+
+        $titleTpl = $this->templateManager->getTitleTemplate('404');
+        $descTpl = $this->templateManager->getDescriptionTemplate('404');
+
+        $indexable->title = $this->variableEngine->replace($titleTpl, $context);
+        $indexable->description = $this->variableEngine->replace($descTpl, $context);
+        $indexable->is_robots_noindex = true;
+        $indexable->is_robots_nofollow = true;
+        $indexable->schema_type = 'WebPage';
+
+        if (!empty($overrides)) {
+            foreach ($overrides as $k => $v) {
+                if (property_exists($indexable, $k)) {
+                    $indexable->$k = $v;
+                }
+            }
+        }
+
+        return $indexable;
+    }
 }

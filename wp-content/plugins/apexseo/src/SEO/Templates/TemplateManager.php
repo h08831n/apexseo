@@ -143,4 +143,49 @@ class TemplateManager {
         }
         return '-';
     }
+
+    /**
+     * Get pagination title modifier template (APEX-012).
+     *
+     * @return string
+     */
+    public function getPageModifierTemplate() {
+        if ($this->config !== null) {
+            $modifier = $this->config->get('seo.templates.page_modifier', null);
+            if (!empty($modifier)) {
+                return (string) $modifier;
+            }
+        }
+        return '%%sep%% Page %%pagenumber%% of %%total_pages%%';
+    }
+
+    /**
+     * Get RSS feed content header template (APEX-015).
+     *
+     * @return string
+     */
+    public function getRssHeaderTemplate() {
+        if ($this->config !== null) {
+            $header = $this->config->get('seo.rss.header', null);
+            if ($header !== null) {
+                return (string) $header;
+            }
+        }
+        return '';
+    }
+
+    /**
+     * Get RSS feed content footer template (APEX-015).
+     *
+     * @return string
+     */
+    public function getRssFooterTemplate() {
+        if ($this->config !== null) {
+            $footer = $this->config->get('seo.rss.footer', null);
+            if ($footer !== null) {
+                return (string) $footer;
+            }
+        }
+        return '<p>The post %%post_link%% appeared first on %%blog_link%%.</p>';
+    }
 }

@@ -173,6 +173,14 @@ class SeoModule implements ModuleInterface, HookableInterface {
             );
         });
 
+        $container->singleton(\ApexSEO\SEO\Feed\RssFeedManager::class, function(ContainerInterface $c) {
+            return new \ApexSEO\SEO\Feed\RssFeedManager(
+                $c->get(VariableEngine::class),
+                $c->get(TemplateManager::class),
+                $c->has(ConfigurationManager::class) ? $c->get(ConfigurationManager::class) : null
+            );
+        });
+
         // Content Intelligence & On-Page Analysis Subsystem (APEX-048 to APEX-054)
         $container->singleton(KeywordAnalyzer::class, function() {
             return new KeywordAnalyzer();
@@ -311,6 +319,40 @@ class SeoModule implements ModuleInterface, HookableInterface {
             if ($container->has(MetaSaver::class)) {
                 $container->get(MetaSaver::class)->deleteTermIndexable($termId);
             }
+        }, 10, 1);
+
+        // Author Profile Metadata Persistence (APEX-005)
+        add_action('personal_options_update', function($userId) use ($container) {
+            if ($container->has(MetaSaver::class)) {
+                $container->get(MetaSaver::class)->saveAuthorMeta($userId);
+            }
+        }, 10, 1);
+
+        add_action('edit_user_profile_update', function($userId) use ($container) {
+            if ($container->has(MetaSaver::class)) {
+                $container->get(MetaSaver::class)->saveAuthorMeta($userId);
+            }
+        }, 10, 1);
+
+        add_action('delete_user', function($userId) use ($container) {
+            if ($container->has(MetaSaver::class)) {
+                $container->get(MetaSaver::class)->deleteAuthorIndexable($userId);
+            }
+        }, 10, 1);
+
+        // RSS Feed Content Filtering (APEX-015)
+        add_filter('the_content_feed', function($content) use ($container) {
+            if ($container->has(\ApexSEO\SEO\Feed\RssFeedManager::class)) {
+                return $container->get(\ApexSEO\SEO\Feed\RssFeedManager::class)->injectFeedContent($content);
+            }
+            return $content;
+        }, 10, 1);
+
+        add_filter('the_excerpt_rss', function($content) use ($container) {
+            if ($container->has(\ApexSEO\SEO\Feed\RssFeedManager::class)) {
+                return $container->get(\ApexSEO\SEO\Feed\RssFeedManager::class)->injectFeedContent($content);
+            }
+            return $content;
         }, 10, 1);
 
         // Fast Redirection Interceptor

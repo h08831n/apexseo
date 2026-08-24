@@ -111,6 +111,57 @@ class VariableEngine {
         $this->registerVariable('searchphrase', function($ctx) {
             return isset($ctx['searchphrase']) ? $ctx['searchphrase'] : (isset($ctx['search_query']) ? $ctx['search_query'] : '');
         });
+
+        $this->registerVariable('search_query', function($ctx) {
+            return isset($ctx['search_query']) ? $ctx['search_query'] : (isset($ctx['searchphrase']) ? $ctx['searchphrase'] : '');
+        });
+
+        $this->registerVariable('total_pages', function($ctx) {
+            return isset($ctx['total_pages']) ? (string) $ctx['total_pages'] : (isset($ctx['max_num_pages']) ? (string) $ctx['max_num_pages'] : '1');
+        });
+
+        $this->registerVariable('max_page', function($ctx) {
+            return isset($ctx['total_pages']) ? (string) $ctx['total_pages'] : (isset($ctx['max_num_pages']) ? (string) $ctx['max_num_pages'] : '1');
+        });
+
+        $this->registerVariable('term_description', function($ctx) {
+            return isset($ctx['term_description']) ? $ctx['term_description'] : (isset($ctx['excerpt']) ? $ctx['excerpt'] : '');
+        });
+
+        $this->registerVariable('taxonomy', function($ctx) {
+            return isset($ctx['taxonomy']) ? $ctx['taxonomy'] : (isset($ctx['object_sub_type']) ? $ctx['object_sub_type'] : '');
+        });
+
+        $this->registerVariable('author_bio', function($ctx) {
+            return isset($ctx['author_bio']) ? $ctx['author_bio'] : (isset($ctx['excerpt']) ? $ctx['excerpt'] : '');
+        });
+
+        $this->registerVariable('post_link', function($ctx) {
+            $url = isset($ctx['permalink']) ? $ctx['permalink'] : (isset($ctx['url']) ? $ctx['url'] : '');
+            $title = isset($ctx['title']) ? $ctx['title'] : (isset($ctx['post_title']) ? $ctx['post_title'] : 'Post');
+            return '<a href="' . esc_url($url) . '">' . esc_html($title) . '</a>';
+        });
+
+        $this->registerVariable('post_title', function($ctx) {
+            return isset($ctx['title']) ? $ctx['title'] : (isset($ctx['post_title']) ? $ctx['post_title'] : '');
+        });
+
+        $this->registerVariable('blog_link', function($ctx) {
+            $url = function_exists('home_url') ? home_url('/') : 'http://localhost';
+            $sitename = !empty($ctx['sitename']) ? $ctx['sitename'] : (function_exists('get_option') ? get_option('blogname', 'WordPress') : 'WordPress');
+            return '<a href="' . esc_url($url) . '">' . esc_html($sitename) . '</a>';
+        });
+
+        $this->registerVariable('blog_title', function($ctx) {
+            return !empty($ctx['sitename']) ? $ctx['sitename'] : (function_exists('get_option') ? get_option('blogname', 'WordPress') : 'WordPress');
+        });
+
+        $this->registerVariable('author_link', function($ctx) {
+            $authorName = isset($ctx['author_name']) ? $ctx['author_name'] : (isset($ctx['author']) ? $ctx['author'] : 'Author');
+            $authorId = isset($ctx['author_id']) ? (int) $ctx['author_id'] : 0;
+            $url = ($authorId > 0 && function_exists('get_author_posts_url')) ? get_author_posts_url($authorId) : '#';
+            return '<a href="' . esc_url($url) . '">' . esc_html($authorName) . '</a>';
+        });
     }
 
     /**
@@ -165,18 +216,52 @@ class VariableEngine {
                 }
             }
 
-            // 3. Custom Field lookup %%cf_<custom_field_name>%%
-            if (strpos($key, 'cf_') === 0 && !empty($contextArray['object_id'])) {
-                $metaKey = substr($key, 3);
+            // 3. Custom Field lookup %%cf_<name>%% or %%custom_field_<name>%%
+            if ((strpos($key, 'cf_') === 0 || strpos($key, 'custom_field_') === 0) && !empty($contextArray['object_id'])) {
+                $metaKey = strpos($key, 'cf_') === 0 ? substr($key, 3) : substr($key, 13);
+                $objId = (int) $contextArray['object_id'];
+                
+                // Try ACF if available
+                if (function_exists('get_field')) {
+                    $acfVal = get_field($metaKey, $objId);
+                    if (is_scalar($acfVal)) {
+                        return (string) $acfVal;
+                    }
+                }
+                
                 if (function_exists('get_post_meta')) {
-                    $metaVal = get_post_meta($contextArray['object_id'], $metaKey, true);
+                    $metaVal = get_post_meta($objId, $metaKey, true);
                     if (is_scalar($metaVal)) {
                         return (string) $metaVal;
                     }
                 }
             }
 
-            // 4. Default fallback
+            // 4. Term Meta lookup %%ct_<name>%% or %%term_meta_<name>%%
+            if ((strpos($key, 'ct_') === 0 || strpos($key, 'term_meta_') === 0) && !empty($contextArray['object_id'])) {
+                $metaKey = strpos($key, 'ct_') === 0 ? substr($key, 3) : substr($key, 10);
+                $termId = (int) $contextArray['object_id'];
+                if (function_exists('get_term_meta')) {
+                    $metaVal = get_term_meta($termId, $metaKey, true);
+                    if (is_scalar($metaVal)) {
+                        return (string) $metaVal;
+                    }
+                }
+            }
+
+            // 5. User / Author Meta lookup %%um_<name>%% or %%user_meta_<name>%%
+            if ((strpos($key, 'um_') === 0 || strpos($key, 'user_meta_') === 0)) {
+                $metaKey = strpos($key, 'um_') === 0 ? substr($key, 3) : substr($key, 10);
+                $userId = !empty($contextArray['author_id']) ? (int) $contextArray['author_id'] : (!empty($contextArray['object_id']) ? (int) $contextArray['object_id'] : 0);
+                if ($userId > 0 && function_exists('get_user_meta')) {
+                    $metaVal = get_user_meta($userId, $metaKey, true);
+                    if (is_scalar($metaVal)) {
+                        return (string) $metaVal;
+                    }
+                }
+            }
+
+            // 6. Default fallback
             if (isset($this->defaults[$key])) {
                 return $this->defaults[$key];
             }

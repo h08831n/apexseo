@@ -76,6 +76,13 @@ class MetaRestController extends AbstractRestController {
                 ],
             ],
         ]);
+
+        // POST /apexseo/v1/meta/bulk (APEX-014)
+        $this->registerRoute('/meta/bulk', [
+            'methods'             => 'POST',
+            'callback'            => [$this, 'bulkSaveMeta'],
+            'permission_callback' => [$this->security, 'restAdminPermissionCallback'],
+        ]);
     }
 
     /**
@@ -221,6 +228,29 @@ class MetaRestController extends AbstractRestController {
         return $this->success([
             'success'   => true,
             'indexable' => $indexable->toArray(),
+        ]);
+    }
+
+    /**
+     * Bulk save SEO metadata for multiple items (APEX-014).
+     *
+     * @param \WP_REST_Request|array $request
+     * @return \WP_REST_Response|\WP_Error
+     */
+    public function bulkSaveMeta($request) {
+        $params = $request instanceof \WP_REST_Request ? $request->get_json_params() : $request;
+        $items = isset($params['items']) && is_array($params['items']) ? $params['items'] : (is_array($params) ? $params : []);
+
+        if (empty($items)) {
+            return $this->error('apexseo_invalid_payload', 'An array of items is required.', 400);
+        }
+
+        $saver = new \ApexSEO\SEO\Admin\MetaSaver($this->repository, $this->builder);
+        $results = $saver->bulkSave($items);
+
+        return $this->success([
+            'success' => true,
+            'results' => $results,
         ]);
     }
 }

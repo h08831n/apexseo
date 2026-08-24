@@ -39,32 +39,101 @@ class TitlePresenter {
      * Render the title string for the given context or indexable.
      *
      * @param SeoContext|Indexable|array $context
-     * @return string Raw unescaped title string
+     * @return string Sanitized unescaped title string
      */
     public function render($context) {
-        if ($context instanceof Indexable && !empty($context->title)) {
-            return $context->title;
+        $rawTitle = '';
+        $isPaged = false;
+        $contextArray = [];
+
+        if ($context instanceof Indexable) {
+            if (!empty($context->title)) {
+                $rawTitle = $context->title;
+            }
+            $contextArray = $context->toArray();
+        } elseif (is_array($context)) {
+            $contextArray = $context;
+            $pageType = isset($context['page_type']) ? $context['page_type'] : 'post';
+            $isPaged = !empty($context['is_paged']) || (isset($context['page_number']) && (int) $context['page_number'] > 1);
+
+            if (!empty($context['title'])) {
+                $template = $this->templateManager->getTitleTemplate($pageType);
+                $rawTitle = $this->variableEngine->replace($template, $context);
+            } else {
+                $template = $this->templateManager->getTitleTemplate($pageType);
+                $rawTitle = $this->variableEngine->replace($template, $context);
+            }
+        } elseif ($context instanceof SeoContext) {
+            $contextArray = $context->toArray();
+            $isPaged = $context->is_paged || $context->page_number > 1;
+
+            if ($context->page_type === 'single') {
+                $pageType = !empty($context->object_sub_type) ? $context->object_sub_type : 'post';
+            } elseif ($context->page_type === 'term') {
+                $pageType = !empty($context->object_sub_type) ? $context->object_sub_type : 'category';
+            } else {
+                $pageType = $context->page_type;
+            }
+
+            $template = $this->templateManager->getTitleTemplate($pageType);
+            $rawTitle = $this->variableEngine->replace($template, $context);
         }
 
-        if (is_array($context)) {
-            $rawTitle = isset($context['title']) ? $context['title'] : '';
-            $sep = isset($context['sep']) ? $context['sep'] : $this->templateManager->getTitleSeparator();
-            $sitename = isset($context['sitename']) ? $context['sitename'] : get_option('blogname', 'WordPress');
-            $pageType = isset($context['page_type']) ? $context['page_type'] : 'post';
+        if (empty($rawTitle)) {
+            $rawTitle = function_exists('get_option') ? get_option('blogname', 'WordPress') : 'WordPress';
+        }
 
-            if (!empty($rawTitle)) {
-                $template = $this->templateManager->getTitleTemplate($pageType);
-                return $this->variableEngine->replace($template, $context);
+        // Apply pagination title modifier (APEX-012)
+        if ($isPaged && !preg_match('/(?:page|صفحه)\s+\d+/i', $rawTitle)) {
+            $pageModifierTpl = $this->templateManager->getPageModifierTemplate();
+            $pageSuffix = $this->variableEngine->replace($pageModifierTpl, $contextArray);
+            if (!empty($pageSuffix)) {
+                $rawTitle .= ' ' . $pageSuffix;
             }
         }
 
-        if ($context instanceof SeoContext) {
-            $pageType = $context->page_type === 'single' ? $context->object_sub_type : $context->page_type;
-            $template = $this->templateManager->getTitleTemplate($pageType);
-            return $this->variableEngine->replace($template, $context);
+        // Apply sanitization and separator cleanup (APEX-010)
+        $sanitized = $this->sanitizeTitle($rawTitle, isset($contextArray['sep']) ? $contextArray['sep'] : $this->templateManager->getTitleSeparator());
+
+        if (function_exists('apply_filters')) {
+            $sanitized = apply_filters('apexseo_title', $sanitized, $context);
         }
 
-        return get_option('blogname', 'WordPress');
+        return $sanitized;
+    }
+
+    /**
+     * Sanitize and normalize document title string (APEX-010).
+     *
+     * @param string $title
+     * @param string $sep
+     * @return string
+     */
+    public function sanitizeTitle($title, $sep = '-') {
+        // Strip tags and shortcodes
+        $clean = strip_tags(strip_shortcodes((string) $title));
+
+        // Remove newlines, carriage returns, and tabs
+        $clean = str_replace(["\r", "\n", "\t"], ' ', $clean);
+
+        // Decode HTML entities so &amp; isn't double-escaped later
+        $clean = html_entity_decode($clean, ENT_QUOTES, 'UTF-8');
+
+        // Collapse multiple spaces
+        $clean = preg_replace('/\s+/', ' ', $clean);
+
+        // Clean up duplicate and dangling separators
+        $sepEscaped = preg_quote(trim($sep), '/');
+        if (!empty($sepEscaped)) {
+            // Collapse duplicate separators: " | | " -> " | "
+            $clean = preg_replace('/(\s*' . $sepEscaped . '\s*){2,}/', ' ' . trim($sep) . ' ', $clean);
+            // Remove leading separator: " - Post Title" -> "Post Title"
+            $clean = preg_replace('/^\s*' . $sepEscaped . '\s*/', '', $clean);
+            // Remove trailing separator: "Post Title - " -> "Post Title"
+            $clean = preg_replace('/\s*' . $sepEscaped . '\s*$/', '', $clean);
+        }
+
+        return trim($clean);
     }
 
     /**
