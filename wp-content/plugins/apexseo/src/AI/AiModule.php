@@ -67,11 +67,19 @@ class AiModule implements ModuleInterface {
         // Dynamic /llms.txt route hook
         if (function_exists('add_action')) {
             add_action('init', function() use ($container) {
-                if (isset($_SERVER['REQUEST_URI']) && $_SERVER['REQUEST_URI'] === '/llms.txt') {
-                    header('Content-Type: text/plain; charset=utf-8');
-                    $generator = $container->get(LlmsTxtGenerator::class);
-                    echo $generator->generateLlmsTxt();
-                    exit;
+                if (isset($_SERVER['REQUEST_URI'])) {
+                    $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+                    if ($path === '/llms.txt') {
+                        header('Content-Type: text/plain; charset=utf-8');
+                        $generator = $container->get(LlmsTxtGenerator::class);
+                        echo $generator->generateLlmsTxt();
+                        exit;
+                    } elseif ($path === '/llms-full.txt') {
+                        header('Content-Type: text/plain; charset=utf-8');
+                        $generator = $container->get(LlmsTxtGenerator::class);
+                        echo $generator->generateLlmsFullTxt();
+                        exit;
+                    }
                 }
             });
         }

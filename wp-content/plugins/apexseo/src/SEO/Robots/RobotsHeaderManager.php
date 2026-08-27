@@ -95,7 +95,7 @@ class RobotsHeaderManager {
         }
 
         if ($context === null) {
-            $context = $this->contextDetector->detect();
+            $context = $this->contextDetector->detectContext();
         }
 
         // 1. 404 Context (APEX-030)

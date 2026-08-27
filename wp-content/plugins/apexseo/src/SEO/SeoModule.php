@@ -442,5 +442,74 @@ class SeoModule implements ModuleInterface, HookableInterface {
                 $container->get(RedirectManager::class)->interceptAndRedirect();
             }
         }, 1);
+
+        // Dynamic XML Sitemap Routes (APEX-022, APEX-023, APEX-024)
+        add_action('init', function() use ($container) {
+            if (isset($_SERVER['REQUEST_URI']) && $container->has(SitemapGenerator::class)) {
+                $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+                $home = function_exists('home_url') ? home_url() : 'http://127.0.0.1:8080';
+                $sitemapGen = $container->get(SitemapGenerator::class);
+
+                if (in_array($path, ['/sitemap_index.xml', '/sitemap.xml'], true)) {
+                    header('Content-Type: text/xml; charset=UTF-8');
+                    $index = [
+                        ['loc' => $home . '/post-sitemap.xml', 'lastmod' => date('c')],
+                        ['loc' => $home . '/page-sitemap.xml', 'lastmod' => date('c')],
+                        ['loc' => $home . '/category-sitemap.xml', 'lastmod' => date('c')],
+                    ];
+                    echo $sitemapGen->renderIndexSitemap($index);
+                    exit;
+                } elseif ($path === '/post-sitemap.xml') {
+                    header('Content-Type: text/xml; charset=UTF-8');
+                    $urls = [];
+                    if (function_exists('get_posts')) {
+                        $posts = get_posts(['post_type' => 'post', 'post_status' => 'publish', 'numberposts' => 100]);
+                        foreach ($posts as $p) {
+                            $urls[] = [
+                                'loc' => get_permalink($p->ID),
+                                'lastmod' => get_post_modified_time('c', true, $p->ID),
+                                'changefreq' => 'weekly',
+                                'priority' => 0.8
+                            ];
+                        }
+                    }
+                    echo $sitemapGen->renderUrlSitemap($urls);
+                    exit;
+                } elseif ($path === '/page-sitemap.xml') {
+                    header('Content-Type: text/xml; charset=UTF-8');
+                    $urls = [];
+                    if (function_exists('get_posts')) {
+                        $pages = get_posts(['post_type' => 'page', 'post_status' => 'publish', 'numberposts' => 100]);
+                        foreach ($pages as $p) {
+                            $urls[] = [
+                                'loc' => get_permalink($p->ID),
+                                'lastmod' => get_post_modified_time('c', true, $p->ID),
+                                'changefreq' => 'monthly',
+                                'priority' => 0.6
+                            ];
+                        }
+                    }
+                    echo $sitemapGen->renderUrlSitemap($urls);
+                    exit;
+                } elseif ($path === '/category-sitemap.xml') {
+                    header('Content-Type: text/xml; charset=UTF-8');
+                    $urls = [];
+                    if (function_exists('get_terms')) {
+                        $terms = get_terms(['taxonomy' => 'category', 'hide_empty' => false]);
+                        if (!is_wp_error($terms) && is_array($terms)) {
+                            foreach ($terms as $t) {
+                                $urls[] = [
+                                    'loc' => get_term_link($t),
+                                    'changefreq' => 'weekly',
+                                    'priority' => 0.5
+                                ];
+                            }
+                        }
+                    }
+                    echo $sitemapGen->renderUrlSitemap($urls);
+                    exit;
+                }
+            }
+        });
     }
 }
