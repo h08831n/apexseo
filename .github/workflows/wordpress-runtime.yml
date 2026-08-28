@@ -58,7 +58,7 @@ jobs:
           echo "Executing setup-wordpress.sh inside WordPress container..."
           docker compose -f docker-compose.runtime.yml exec -T wordpress bash /var/www/html/scripts/runtime/setup-wordpress.sh
 
-      - name: 2. Real Database Verification (All 9 APEX Tables & CRUD)
+      - name: 2. Real Database Verification (All 8 Locked APEX Tables & CRUD)
         run: |
           echo "Executing verify-db.sh..."
           docker compose -f docker-compose.runtime.yml exec -T wordpress bash /var/www/html/scripts/runtime/verify-db.sh

@@ -17,11 +17,10 @@ EXPECTED_TABLES=(
     "wp_apex_image_history"
     "wp_apex_analytics"
     "wp_apex_rank_tracking"
-    "wp_apex_content_analysis"
 )
 
 # 1. Verify Table Existence
-echo "--- [1/4] Checking Existence of all 9 APEX Tables ---"
+echo "--- [1/4] Checking Existence of all 8 APEX Tables ---"
 for TABLE in "${EXPECTED_TABLES[@]}"; do
     EXISTS=$($MYSQL_CMD "SHOW TABLES LIKE '$TABLE';" -s -N)
     if [ "$EXISTS" = "$TABLE" ]; then
@@ -32,6 +31,15 @@ for TABLE in "${EXPECTED_TABLES[@]}"; do
     fi
 done
 
+# Verify wp_apex_content_analysis is ABSENT
+NO_NINTH_TABLE=$($MYSQL_CMD "SHOW TABLES LIKE 'wp_apex_content_analysis';" -s -N)
+if [ -z "$NO_NINTH_TABLE" ]; then
+    echo "[PASS] Verified table wp_apex_content_analysis is NOT present (8-table schema enforced)"
+else
+    echo "[FAIL] Unexpected 9th table wp_apex_content_analysis exists"
+    FAILURES=$((FAILURES + 1))
+fi
+
 # 2. Verify Schema Definitions, Primary Keys and Key Columns
 echo ""
 echo "--- [2/4] Checking Columns and Primary Keys ---"
@@ -40,17 +48,10 @@ echo "--- [2/4] Checking Columns and Primary Keys ---"
 echo "Validating wp_apex_indexables schema..."
 $MYSQL_CMD "DESCRIBE wp_apex_indexables;" > /tmp/desc_indexables.txt
 grep -q "primary_focus_keyword" /tmp/desc_indexables.txt && echo "[PASS] Column primary_focus_keyword present" || { echo "[FAIL] Missing primary_focus_keyword"; FAILURES=$((FAILURES + 1)); }
-grep -q "seo_score" /tmp/desc_indexables.txt && echo "[PASS] Column seo_score present" || { echo "[FAIL] Missing seo_score"; FAILURES=$((FAILURES + 1)); }
+grep -q "keyword_density" /tmp/desc_indexables.txt && echo "[PASS] Column keyword_density present" || { echo "[FAIL] Missing keyword_density"; FAILURES=$((FAILURES + 1)); }
 grep -q "readability_score" /tmp/desc_indexables.txt && echo "[PASS] Column readability_score present" || { echo "[FAIL] Missing readability_score"; FAILURES=$((FAILURES + 1)); }
+grep -q "content_analysis" /tmp/desc_indexables.txt && echo "[PASS] Column content_analysis present" || { echo "[FAIL] Missing content_analysis"; FAILURES=$((FAILURES + 1)); }
 grep -q "is_cornerstone" /tmp/desc_indexables.txt && echo "[PASS] Column is_cornerstone present" || { echo "[FAIL] Missing is_cornerstone"; FAILURES=$((FAILURES + 1)); }
-
-# Check wp_apex_content_analysis
-echo "Validating wp_apex_content_analysis schema..."
-$MYSQL_CMD "DESCRIBE wp_apex_content_analysis;" > /tmp/desc_analysis.txt
-grep -q "composite_score" /tmp/desc_analysis.txt && echo "[PASS] Column composite_score present" || { echo "[FAIL] Missing composite_score"; FAILURES=$((FAILURES + 1)); }
-grep -q "keyword_metrics" /tmp/desc_analysis.txt && echo "[PASS] Column keyword_metrics present" || { echo "[FAIL] Missing keyword_metrics"; FAILURES=$((FAILURES + 1)); }
-grep -q "heading_metrics" /tmp/desc_analysis.txt && echo "[PASS] Column heading_metrics present" || { echo "[FAIL] Missing heading_metrics"; FAILURES=$((FAILURES + 1)); }
-grep -q "passive_voice_metrics" /tmp/desc_analysis.txt && echo "[PASS] Column passive_voice_metrics present" || { echo "[FAIL] Missing passive_voice_metrics"; FAILURES=$((FAILURES + 1)); }
 
 # Check wp_apex_redirects
 echo "Validating wp_apex_redirects schema..."

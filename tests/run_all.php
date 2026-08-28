@@ -24,6 +24,7 @@ require_once __DIR__ . '/AnalysisSubsystemTest.php';
 require_once __DIR__ . '/SchemaSubsystemTest.php';
 require_once __DIR__ . '/PerformanceSubsystemTest.php';
 require_once __DIR__ . '/MediaSubsystemTest.php';
+require_once __DIR__ . '/MediaFailureContractTest.php';
 require_once __DIR__ . '/AiSubsystemTest.php';
 require_once __DIR__ . '/AnalyticsSubsystemTest.php';
 require_once __DIR__ . '/RestSubsystemTest.php';
@@ -45,6 +46,7 @@ $testClasses = [
     ApexSEO\Tests\SchemaSubsystemTest::class,
     ApexSEO\Tests\PerformanceSubsystemTest::class,
     ApexSEO\Tests\MediaSubsystemTest::class,
+    ApexSEO\Tests\MediaFailureContractTest::class,
     ApexSEO\Tests\AiSubsystemTest::class,
     ApexSEO\Tests\AnalyticsSubsystemTest::class,
     ApexSEO\Tests\RestSubsystemTest::class,
