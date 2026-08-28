@@ -2,6 +2,7 @@
 namespace ApexSEO\Core\CLI;
 
 use ApexSEO\Core\Container\ContainerInterface;
+use ApexSEO\CLI\RootCommand;
 use ApexSEO\CLI\IndexCommand;
 use ApexSEO\CLI\CacheCommand;
 use ApexSEO\CLI\MediaCommand;
@@ -11,6 +12,7 @@ use ApexSEO\CLI\MigrateCommand;
 use ApexSEO\CLI\SitemapCommand;
 use ApexSEO\CLI\DoctorCommand;
 use ApexSEO\CLI\SchemaCommand;
+use ApexSEO\CLI\AnalysisCommand;
 
 class CliManager {
     private $commands = [];
@@ -30,6 +32,7 @@ class CliManager {
         $this->commands['doctor'] = DoctorCommand::class;
         $this->commands['report'] = DoctorCommand::class;
         $this->commands['schema'] = SchemaCommand::class;
+        $this->commands['analysis'] = AnalysisCommand::class;
     }
 
     public function getCommands(): array {
@@ -40,6 +43,8 @@ class CliManager {
         if (!defined('WP_CLI') || !WP_CLI) {
             return;
         }
+
+        \WP_CLI::add_command('apexseo', $container->get(RootCommand::class));
 
         foreach ($this->commands as $name => $class) {
             $instance = $container->get($class);

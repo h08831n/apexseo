@@ -15,8 +15,6 @@ services:
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_unicode_ci
       - --innodb-buffer-pool-size=256M
-    ports:
-      - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
     networks:
@@ -31,6 +29,9 @@ services:
     build:
       context: ./docker/wordpress-runtime
       dockerfile: Dockerfile.wordpress
+      args:
+        WP_VERSION: ${WP_VERSION:-6.7}
+        PHP_VERSION: ${PHP_VERSION:-8.2}
     container_name: apexseo_runtime_wordpress
     restart: unless-stopped
     depends_on:
@@ -46,13 +47,13 @@ services:
       WORDPRESS_DEBUG_LOG: 1
       WORDPRESS_DEBUG_DISPLAY: 1
     ports:
-      - "3000:80"
       - "8080:80"
     volumes:
       - wp_core:/var/www/html
       - .:/var/www/html/wp-content/plugins/apexseo
       - ./tests/integration:/var/www/html/tests/integration
       - ./phpunit.runtime.xml:/var/www/html/phpunit.runtime.xml
+      - ./scripts/runtime:/var/www/html/scripts/runtime
     networks:
       - apex_runtime_net
 
@@ -60,6 +61,8 @@ services:
     build:
       context: ./docker/wordpress-runtime
       dockerfile: Dockerfile.wpcli
+      args:
+        PHP_VERSION: ${PHP_VERSION:-8.2}
     container_name: apexseo_runtime_wpcli
     restart: "no"
     depends_on:

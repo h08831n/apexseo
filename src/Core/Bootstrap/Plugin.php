@@ -5,6 +5,7 @@ use ApexSEO\Core\Container\Container;
 use ApexSEO\Core\Container\ContainerInterface;
 use ApexSEO\Core\Environment\EnvironmentDetector;
 use ApexSEO\Core\Environment\CapabilityRegistry;
+use ApexSEO\Core\Environment\Server\ServerAdapterInterface;
 use ApexSEO\Core\Configuration\ConfigurationManager;
 use ApexSEO\Core\Database\DatabaseManager;
 use ApexSEO\Core\Security\SecurityManager;
@@ -90,6 +91,10 @@ class Plugin {
 
         $c->singleton(ContainerInterface::class, $c);
         $c->singleton(EnvironmentDetector::class, EnvironmentDetector::class);
+        $c->singleton(ServerAdapterInterface::class, function($container) {
+            $detector = $container->get(EnvironmentDetector::class);
+            return $detector->detectServerAdapter();
+        });
         $c->singleton(CapabilityRegistry::class, CapabilityRegistry::class);
         $c->singleton(ConfigurationManager::class, ConfigurationManager::class);
         $c->singleton(SecurityManager::class, SecurityManager::class);

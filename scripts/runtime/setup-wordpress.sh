@@ -9,7 +9,7 @@ WP_PATH="/var/www/html"
 WP_CLI="wp --allow-root --path=${WP_PATH}"
 
 # 1. Wait for MySQL to be fully ready
-echo "[1/6] Waiting for MySQL database readiness..."
+echo "[1/7] Waiting for MySQL database readiness..."
 MAX_TRIES=30
 COUNT=0
 until mysqladmin ping -h db -u wp_test_user -pwp_test_pass_123! --silent; do
@@ -24,7 +24,7 @@ done
 echo "Database is ready!"
 
 # 2. Check if WordPress core is installed
-echo "[2/6] Checking WordPress Core Installation..."
+echo "[2/7] Checking WordPress Core Installation..."
 if ! $WP_CLI core is-installed 2>/dev/null; then
     echo "Installing WordPress Core..."
     $WP_CLI core install \
@@ -40,13 +40,13 @@ else
 fi
 
 # 3. Configure Permalinks & Settings
-echo "[3/6] Configuring Permalinks and Core Options..."
+echo "[3/7] Configuring Permalinks and Core Options..."
 $WP_CLI rewrite structure '/%postname%/' --hard
 $WP_CLI option update blogdescription "Production-Grade WordPress SEO Runtime Validation Site"
 $WP_CLI option update timezone_string "UTC"
 
-# 4. Create Standard and Test Roles / Users
-echo "[4/6] Setting up Test Users and Roles..."
+# 4. Create Standard and Test Roles / Users & REST Auth
+echo "[4/7] Setting up Test Users and Application Passwords..."
 if ! $WP_CLI user get editor_user --field=ID 2>/dev/null; then
     $WP_CLI user create editor_user editor@apexseo.local \
         --role=editor \
@@ -54,15 +54,32 @@ if ! $WP_CLI user get editor_user --field=ID 2>/dev/null; then
         --display_name="Apex Test Editor"
 fi
 
-# 5. Activate APEX SEO Plugin
-echo "[5/6] Activating APEX SEO Plugin..."
+# Generate Application Password for apex_admin for reliable REST API authentication
+APP_PASS=$($WP_CLI user application-password create apex_admin "ApexCiTest" --porcelain 2>/dev/null || echo "")
+if [ -n "$APP_PASS" ]; then
+    echo "apex_admin:$APP_PASS" > /tmp/apex_admin_auth
+    echo "Application Password generated successfully for apex_admin."
+else
+    echo "apex_admin:AdminPassword123!" > /tmp/apex_admin_auth
+fi
+
+# 5. Install / Update Composer dependencies in plugin
+echo "[5/7] Installing Plugin Composer Dependencies..."
+if [ -d "/var/www/html/wp-content/plugins/apexseo" ]; then
+    cd /var/www/html/wp-content/plugins/apexseo
+    composer install --no-interaction --prefer-dist
+    cd /var/www/html
+fi
+
+# 6. Activate APEX SEO Plugin
+echo "[6/7] Activating APEX SEO Plugin..."
 $WP_CLI plugin activate apexseo
 
 STATUS=$($WP_CLI plugin status apexseo | grep -i "Status:" || true)
 echo "Plugin Status: $STATUS"
 
-# 6. Verify Database Tables Created by Activation
-echo "[6/6] Verifying APEX Relational Schema..."
+# 7. Verify Database Tables Created by Activation
+echo "[7/7] Verifying APEX Relational Schema..."
 TABLES=$($WP_CLI db query "SHOW TABLES LIKE 'wp_apex_%';" --skip-column-names)
 echo "Discovered APEX Tables:"
 echo "$TABLES"

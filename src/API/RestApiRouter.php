@@ -44,9 +44,7 @@ class RestApiRouter {
         ];
 
         foreach ($controllerClasses as $key => $class) {
-            if ($this->container->has($class)) {
-                $this->controllers[$key] = $this->container->get($class);
-            }
+            $this->controllers[$key] = $this->container->get($class);
         }
     }
 

@@ -2,14 +2,17 @@
 namespace ApexSEO\API\Controllers;
 
 use ApexSEO\Core\Security\SecurityManager;
+use ApexSEO\Core\Database\DatabaseManager;
 use ApexSEO\Analytics\Tracker\RankTracker;
 
 class AnalyticsRestController extends AbstractRestController {
     private $rankTracker;
+    private $db;
 
-    public function __construct(SecurityManager $security, RankTracker $rankTracker) {
+    public function __construct(SecurityManager $security, RankTracker $rankTracker, ?DatabaseManager $db = null) {
         parent::__construct($security);
         $this->rankTracker = $rankTracker;
+        $this->db = $db;
     }
 
     public function registerRoutes(): void {
@@ -31,12 +34,27 @@ class AnalyticsRestController extends AbstractRestController {
     }
 
     public function getOverview($request) {
+        $keywords = $this->rankTracker->getKeywords();
+        $indexedPages = 0;
+        if ($this->db) {
+            $table = $this->db->getTableName(DatabaseManager::TABLE_INDEXABLES);
+            $count = $this->db->get_var("SELECT COUNT(*) FROM {$table}");
+            $indexedPages = (int)$count;
+        }
+
+        $top10 = 0;
+        foreach ($keywords as $kw) {
+            if (isset($kw['position']) && (int)$kw['position'] > 0 && (int)$kw['position'] <= 10) {
+                $top10++;
+            }
+        }
+
         return $this->sendResponse([
             'success' => true,
             'overview' => [
-                'tracked_keywords' => count($this->rankTracker->getKeywords()),
-                'top_10_count'     => 0,
-                'indexed_pages'    => 10,
+                'tracked_keywords' => count($keywords),
+                'top_10_count'     => $top10,
+                'indexed_pages'    => $indexedPages,
             ]
         ]);
     }

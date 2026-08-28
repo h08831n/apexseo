@@ -64,9 +64,10 @@ class CacheRestController extends AbstractRestController {
     }
 
     public function preloadCache($request) {
-        return $this->sendResponse([
-            'success' => true,
-            'message' => 'Cache warmup job queued.',
-        ]);
+        return $this->sendError(
+            'not_implemented',
+            'Cache warmup queue operation is not implemented.',
+            501
+        );
     }
 }

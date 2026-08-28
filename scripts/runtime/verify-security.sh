@@ -7,6 +7,9 @@ echo "=========================================================="
 
 REST_BASE="http://localhost:8080/wp-json/apexseo/v1"
 ADMIN_AUTH="apex_admin:AdminPassword123!"
+if [ -f /tmp/apex_admin_auth ]; then
+    ADMIN_AUTH=$(cat /tmp/apex_admin_auth)
+fi
 FAILURES=0
 
 test_security_payload() {

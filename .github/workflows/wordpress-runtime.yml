@@ -33,8 +33,11 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Start WordPress Runtime Stack via Docker Compose
+        env:
+          WP_VERSION: ${{ matrix.wordpress-version }}
+          PHP_VERSION: ${{ matrix.php-version }}
         run: |
-          echo "Starting Docker Compose services..."
+          echo "Starting Docker Compose services for WP ${{ matrix.wordpress-version }} / PHP ${{ matrix.php-version }}..."
           docker compose -f docker-compose.runtime.yml up -d --build
 
       - name: Wait for MySQL and WordPress Readiness
@@ -43,20 +46,43 @@ jobs:
           docker compose -f docker-compose.runtime.yml exec -T db mysqladmin ping -h localhost -u wp_test_user -pwp_test_pass_123! --silent --wait=60
 
           echo "Waiting for WordPress HTTP Web Server..."
+          READY=0
           for i in {1..30}; do
             HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080 || true)
-            echo "WordPress HTTP Status probe: $HTTP_STATUS"
+            echo "WordPress HTTP Status probe: $HTTP_STATUS (attempt $i/30)"
             if [ "$HTTP_STATUS" -ne 000 ] && [ "$HTTP_STATUS" -ne 502 ]; then
               echo "WordPress Web Server is accepting connections!"
+              READY=1
               break
             fi
             sleep 2
           done
+          if [ "$READY" -ne 1 ]; then
+            echo "ERROR: WordPress Web Server failed to become ready within timeout."
+            exit 1
+          fi
 
       - name: 1. Setup WordPress Core & Plugin Activation
         run: |
           echo "Executing setup-wordpress.sh inside WordPress container..."
           docker compose -f docker-compose.runtime.yml exec -T wordpress bash /var/www/html/scripts/runtime/setup-wordpress.sh
+
+      - name: Assert Matrix Versions in Container
+        run: |
+          echo "Verifying container runtime versions against declared matrix..."
+          PHP_VER=$(docker compose -f docker-compose.runtime.yml exec -T wordpress php -r 'echo PHP_MAJOR_VERSION.".".PHP_MINOR_VERSION;')
+          echo "Actual Container PHP Version: $PHP_VER (Expected: ${{ matrix.php-version }})"
+          if [ "$PHP_VER" != "${{ matrix.php-version }}" ]; then
+            echo "ERROR: PHP version mismatch! Expected ${{ matrix.php-version }}, got $PHP_VER"
+            exit 1
+          fi
+
+          WP_VER=$(docker compose -f docker-compose.runtime.yml exec -T wordpress wp core version --allow-root || true)
+          echo "Actual WordPress Core Version: $WP_VER (Expected prefix: ${{ matrix.wordpress-version }})"
+          if [[ "$WP_VER" != ${{ matrix.wordpress-version }}* ]]; then
+            echo "ERROR: WordPress version mismatch! Expected prefix ${{ matrix.wordpress-version }}, got $WP_VER"
+            exit 1
+          fi
 
       - name: 2. Real Database Verification (All 8 Locked APEX Tables & CRUD)
         run: |
@@ -93,16 +119,20 @@ jobs:
           echo "Executing verify-performance.sh..."
           docker compose -f docker-compose.runtime.yml exec -T wordpress bash /var/www/html/scripts/runtime/verify-performance.sh
 
-      - name: 9. PHPUnit Runtime Integration Test Suite
+      - name: 9. PHPUnit Unit & Subsystem Test Suite
+        run: |
+          echo "Executing PHPUnit unit and subsystem tests..."
+          docker compose -f docker-compose.runtime.yml exec -T wordpress bash -c "
+            cd /var/www/html/wp-content/plugins/apexseo && \
+            vendor/bin/phpunit -c /var/www/html/wp-content/plugins/apexseo/phpunit.xml
+          "
+
+      - name: 10. PHPUnit WordPress Runtime Integration Test Suite
         run: |
           echo "Running PHPUnit integration suite inside container..."
           docker compose -f docker-compose.runtime.yml exec -T wordpress bash -c "
             cd /var/www/html && \
-            if [ -f vendor/bin/phpunit ]; then
-              vendor/bin/phpunit -c phpunit.runtime.xml
-            else
-              php -r 'echo \"PHPUnit binary not in vendor, verified via shell test runners.\n\";'
-            fi
+            /var/www/html/wp-content/plugins/apexseo/vendor/bin/phpunit -c phpunit.runtime.xml
           "
 
       - name: Capture Container Error and Access Logs on Failure
@@ -114,6 +144,8 @@ jobs:
           docker compose -f docker-compose.runtime.yml logs --tail=100 wordpress
           echo "=== Database Container Logs ==="
           docker compose -f docker-compose.runtime.yml logs --tail=50 db
+          echo "=== WordPress Debug Log ==="
+          docker compose -f docker-compose.runtime.yml exec -T wordpress cat /var/www/html/wp-content/debug.log 2>/dev/null || true
 
       - name: Upload Test Evidence and Performance Artifacts
         if: always()

@@ -1,5 +1,6 @@
-# Official WP-CLI image with PHP 8.2
-FROM wordpress:cli-php8.2
+# Parameterized WP-CLI image
+ARG PHP_VERSION=8.2
+FROM wordpress:cli-php${PHP_VERSION}
 
 USER root
 

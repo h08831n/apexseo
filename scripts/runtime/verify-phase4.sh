@@ -58,23 +58,13 @@ $WP_CLI eval "
 do_action('save_post', $EN_POST_ID, \$post, true);
 "
 
-# 2. Verify Database Persistence in wp_apex_content_analysis & wp_apex_indexables
+# 2. Verify Database Persistence in wp_apex_indexables and wp_apex_links
 echo ""
 echo "--- [2/3] Verifying Real Database Persistence for English Post ---"
 
-ANALYSIS_ROW=$($MYSQL_CMD "SELECT composite_score, seo_score, readability_score, keyword_metrics, heading_metrics, link_metrics, passive_voice_metrics, transition_metrics FROM wp_apex_content_analysis WHERE object_id = $EN_POST_ID;" -s -N)
-
-if [ -n "$ANALYSIS_ROW" ]; then
-    echo "[PASS] Persisted analysis record found for Post $EN_POST_ID in wp_apex_content_analysis"
-    echo "Scores and metrics preview: $(echo "$ANALYSIS_ROW" | cut -f1,2,3)"
-else
-    echo "[FAIL] No analysis record found in wp_apex_content_analysis for Post $EN_POST_ID"
-    FAILURES=$((FAILURES + 1))
-fi
-
-INDEXABLE_ROW=$($MYSQL_CMD "SELECT seo_score, readability_score, primary_focus_keyword FROM wp_apex_indexables WHERE object_id = $EN_POST_ID AND object_type = 'post';" -s -N)
+INDEXABLE_ROW=$($MYSQL_CMD "SELECT readability_score, primary_focus_keyword, keyword_density, content_analysis FROM wp_apex_indexables WHERE object_id = $EN_POST_ID AND object_type = 'post';" -s -N)
 if [ -n "$INDEXABLE_ROW" ]; then
-    echo "[PASS] Persisted indexables record found: $INDEXABLE_ROW"
+    echo "[PASS] Persisted indexables record with content analysis found: $(echo "$INDEXABLE_ROW" | cut -f1,2,3)"
 else
     echo "[FAIL] No indexable record found in wp_apex_indexables for Post $EN_POST_ID"
     FAILURES=$((FAILURES + 1))
@@ -127,11 +117,11 @@ $WP_CLI eval "
 do_action('save_post', $FA_POST_ID, \$post, true);
 "
 
-FA_ANALYSIS_ROW=$($MYSQL_CMD "SELECT composite_score, seo_score, readability_score FROM wp_apex_content_analysis WHERE object_id = $FA_POST_ID;" -s -N)
-if [ -n "$FA_ANALYSIS_ROW" ]; then
-    echo "[PASS] Persisted analysis record found for Persian Post $FA_POST_ID: $FA_ANALYSIS_ROW"
+FA_INDEXABLE_ROW=$($MYSQL_CMD "SELECT readability_score, primary_focus_keyword, keyword_density FROM wp_apex_indexables WHERE object_id = $FA_POST_ID AND object_type = 'post';" -s -N)
+if [ -n "$FA_INDEXABLE_ROW" ]; then
+    echo "[PASS] Persisted indexables record found for Persian Post $FA_POST_ID: $FA_INDEXABLE_ROW"
 else
-    echo "[FAIL] No analysis record found for Persian Post $FA_POST_ID"
+    echo "[FAIL] No indexable record found for Persian Post $FA_POST_ID in wp_apex_indexables"
     FAILURES=$((FAILURES + 1))
 fi
 

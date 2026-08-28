@@ -1,7 +1,9 @@
-# Official WordPress Apache base image with PHP 8.2
-FROM wordpress:php8.2-apache
+# Parameterized WordPress Apache base image
+ARG WP_VERSION=6.7
+ARG PHP_VERSION=8.2
+FROM wordpress:${WP_VERSION}-php${PHP_VERSION}-apache
 
-# Install required system packages: mysql-client, curl, jq, git, unzip, libzip-dev
+# Install required system packages: mysql-client, curl, jq, git, unzip, libzip-dev, image libraries
 RUN apt-get update && apt-get install -y --no-install-recommends \
     default-mysql-client \
     curl \
@@ -20,6 +22,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Install Composer for running PHPUnit or autoloader inside container
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Install WP-CLI inside WordPress container for direct CLI execution
+RUN curl -o /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
+    && chmod +x /usr/local/bin/wp
 
 # Copy custom PHP configuration
 COPY php.ini /usr/local/etc/php/conf.d/custom-apex.ini

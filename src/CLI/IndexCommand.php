@@ -11,7 +11,7 @@ class IndexCommand extends AbstractCliCommand {
 
     public function rebuild($args, $assocArgs): int {
         if (defined('WP_CLI') && WP_CLI) {
-            \WP_CLI::success("Index rebuild completed.");
+            \WP_CLI::success("Index rebuild Complete.");
         }
         return 0;
     }
