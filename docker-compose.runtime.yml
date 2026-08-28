@@ -49,7 +49,7 @@ services:
       - "8080:80"
     volumes:
       - wp_core:/var/www/html
-      - ./wp-content/plugins/apexseo:/var/www/html/wp-content/plugins/apexseo
+      - .:/var/www/html/wp-content/plugins/apexseo
       - ./tests/integration:/var/www/html/tests/integration
       - ./phpunit.runtime.xml:/var/www/html/phpunit.runtime.xml
     networks:
@@ -74,7 +74,7 @@ services:
       WORDPRESS_DEBUG: 1
     volumes:
       - wp_core:/var/www/html
-      - ./wp-content/plugins/apexseo:/var/www/html/wp-content/plugins/apexseo
+      - .:/var/www/html/wp-content/plugins/apexseo
       - ./scripts/runtime:/var/www/html/scripts/runtime
     networks:
       - apex_runtime_net

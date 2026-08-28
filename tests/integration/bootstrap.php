@@ -29,10 +29,18 @@ if (file_exists($wp_load)) {
 }
 
 // Autoload plugin classes
-$autoloader = dirname(__DIR__, 2) . '/wp-content/plugins/apexseo/src/Autoloader.php';
-if (file_exists($autoloader)) {
-    require_once $autoloader;
-    if (class_exists('\\ApexSEO\\Autoloader')) {
-        \ApexSEO\Autoloader::register();
+$autoloader_paths = [
+    '/var/www/html/wp-content/plugins/apexseo/src/Autoloader.php',
+    dirname(__DIR__, 2) . '/src/Autoloader.php',
+    dirname(__DIR__, 2) . '/wp-content/plugins/apexseo/src/Autoloader.php',
+];
+
+foreach ($autoloader_paths as $autoloader) {
+    if (file_exists($autoloader)) {
+        require_once $autoloader;
+        if (class_exists('\\ApexSEO\\Autoloader')) {
+            \ApexSEO\Autoloader::register();
+        }
+        break;
     }
 }
