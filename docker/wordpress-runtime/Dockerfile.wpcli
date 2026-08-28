@@ -1,0 +1,17 @@
+# Official WP-CLI image with PHP 8.2
+FROM wordpress:cli-php8.2
+
+USER root
+
+# Install tools for testing
+RUN apk add --no-cache \
+    mysql-client \
+    curl \
+    jq \
+    bash \
+    git \
+    libzip-dev
+
+USER 33:33
+
+WORKDIR /var/www/html

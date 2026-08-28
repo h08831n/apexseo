@@ -1,0 +1,88 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: apexseo_runtime_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password_123!
+      MYSQL_DATABASE: wordpress_test
+      MYSQL_USER: wp_test_user
+      MYSQL_PASSWORD: wp_test_pass_123!
+    command:
+      - --default-authentication-plugin=mysql_native_password
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --innodb-buffer-pool-size=256M
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - apex_runtime_net
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot_password_123!"]
+      interval: 3s
+      timeout: 5s
+      retries: 20
+
+  wordpress:
+    build:
+      context: ./docker/wordpress-runtime
+      dockerfile: Dockerfile.wordpress
+    container_name: apexseo_runtime_wordpress
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_NAME: wordpress_test
+      WORDPRESS_DB_USER: wp_test_user
+      WORDPRESS_DB_PASSWORD: wp_test_pass_123!
+      WORDPRESS_TABLE_PREFIX: wp_
+      WORDPRESS_DEBUG: 1
+      WORDPRESS_DEBUG_LOG: 1
+      WORDPRESS_DEBUG_DISPLAY: 1
+    ports:
+      - "8080:80"
+    volumes:
+      - wp_core:/var/www/html
+      - ./wp-content/plugins/apexseo:/var/www/html/wp-content/plugins/apexseo
+      - ./tests/integration:/var/www/html/tests/integration
+      - ./phpunit.runtime.xml:/var/www/html/phpunit.runtime.xml
+    networks:
+      - apex_runtime_net
+
+  wpcli:
+    build:
+      context: ./docker/wordpress-runtime
+      dockerfile: Dockerfile.wpcli
+    container_name: apexseo_runtime_wpcli
+    restart: "no"
+    depends_on:
+      wordpress:
+        condition: service_started
+      db:
+        condition: service_healthy
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_NAME: wordpress_test
+      WORDPRESS_DB_USER: wp_test_user
+      WORDPRESS_DB_PASSWORD: wp_test_pass_123!
+      WORDPRESS_DEBUG: 1
+    volumes:
+      - wp_core:/var/www/html
+      - ./wp-content/plugins/apexseo:/var/www/html/wp-content/plugins/apexseo
+      - ./scripts/runtime:/var/www/html/scripts/runtime
+    networks:
+      - apex_runtime_net
+
+volumes:
+  db_data:
+  wp_core:
+
+networks:
+  apex_runtime_net:
+    driver: bridge

@@ -1,0 +1,33 @@
+# Official WordPress Apache base image with PHP 8.2
+FROM wordpress:php8.2-apache
+
+# Install required system packages: mysql-client, curl, jq, git, unzip, libzip-dev
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    default-mysql-client \
+    curl \
+    jq \
+    git \
+    unzip \
+    libzip-dev \
+    libpng-dev \
+    libjpeg-dev \
+    libwebp-dev \
+    libfreetype6-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
+    && docker-php-ext-install -j$(nproc) gd zip mysqli pdo pdo_mysql \
+    && a2enmod rewrite headers \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Composer for running PHPUnit or autoloader inside container
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Copy custom PHP configuration
+COPY php.ini /usr/local/etc/php/conf.d/custom-apex.ini
+
+# Copy Apache VirtualHost configuration
+COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
+
+# Set working directory
+WORKDIR /var/www/html
+
+EXPOSE 80

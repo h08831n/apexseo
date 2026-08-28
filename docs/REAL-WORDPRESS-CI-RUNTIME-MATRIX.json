@@ -1,0 +1,139 @@
+{
+  "metadata": {
+    "title": "APEX SEO - Real WordPress CI Runtime Verification Matrix",
+    "version": "1.0.0",
+    "plugin_version": "1.0.0",
+    "ci_workflow_path": ".github/workflows/wordpress-runtime.yml",
+    "compose_manifest_path": "docker-compose.runtime.yml",
+    "tested_target_environments": [
+      {
+        "os": "ubuntu-latest",
+        "wordpress_version": "6.7",
+        "php_version": "8.2",
+        "database_version": "mysql:8.0"
+      },
+      {
+        "os": "ubuntu-latest",
+        "wordpress_version": "6.6",
+        "php_version": "8.1",
+        "database_version": "mysql:8.0"
+      }
+    ],
+    "local_sandbox_status": "CODE_IMPLEMENTED",
+    "local_sandbox_runtime_status": "RUNTIME_NOT_VERIFIED",
+    "ci_runner_status": "CONFIGURED_AWAITING_PUSH",
+    "environment_note": "CI runtime tests are configured but require a GitHub Actions runner to execute."
+  },
+  "subsystem_matrices": {
+    "database": {
+      "runner_script": "scripts/runtime/verify-db.sh",
+      "status": "CODE_IMPLEMENTED",
+      "runtime_status": "RUNTIME_NOT_VERIFIED",
+      "tables": [
+        { "name": "wp_apex_indexables", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "name": "wp_apex_schema", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "name": "wp_apex_redirects", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "name": "wp_apex_404_logs", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "name": "wp_apex_links", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "name": "wp_apex_image_history", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "name": "wp_apex_analytics", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "name": "wp_apex_rank_tracking", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "name": "wp_apex_content_analysis", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" }
+      ]
+    },
+    "phase4_content_analysis": {
+      "runner_script": "scripts/runtime/verify-phase4.sh",
+      "status": "CODE_IMPLEMENTED",
+      "runtime_status": "RUNTIME_NOT_VERIFIED",
+      "test_cases": [
+        { "id": "PHASE4-EN-POST", "name": "English Multi-Heading Post Insertion & Analysis", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "id": "PHASE4-FA-POST", "name": "Persian (Farsi) RTL Post Insertion & Analysis", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "id": "PHASE4-DB-PERSIST", "name": "wp_apex_content_analysis Database Record Persistence", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "id": "PHASE4-INDEXABLE-SYNC", "name": "wp_apex_indexables Score & Keyword Sync", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "id": "PHASE4-LINKS-EXTRACT", "name": "wp_apex_links Internal & External Link Extraction", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" }
+      ]
+    },
+    "rest_api": {
+      "runner_script": "scripts/runtime/verify-rest.sh",
+      "status": "CODE_IMPLEMENTED",
+      "runtime_status": "RUNTIME_NOT_VERIFIED",
+      "endpoints": [
+        { "route": "/wp-json/apexseo/v1/status", "method": "GET", "auth_required": true, "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "route": "/wp-json/apexseo/v1/settings", "method": "GET", "auth_required": true, "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "route": "/wp-json/apexseo/v1/settings", "method": "POST", "auth_required": true, "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "route": "/wp-json/apexseo/v1/redirects", "method": "GET", "auth_required": true, "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "route": "/wp-json/apexseo/v1/redirects", "method": "POST", "auth_required": true, "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "route": "/wp-json/apexseo/v1/404", "method": "GET", "auth_required": true, "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "route": "/wp-json/apexseo/v1/cache/status", "method": "GET", "auth_required": true, "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "route": "/wp-json/apexseo/v1/cache/purge", "method": "POST", "auth_required": true, "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "route": "/wp-json/apexseo/v1/media/status", "method": "GET", "auth_required": true, "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "route": "/wp-json/apexseo/v1/schema/validate", "method": "POST", "auth_required": true, "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "route": "/wp-json/apexseo/v1/analytics/overview", "method": "GET", "auth_required": true, "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "route": "/wp-json/apexseo/v1/analysis/post/{id}", "method": "GET", "auth_required": true, "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "route": "/wp-json/apexseo/v1/analysis/post/{id}", "method": "POST", "auth_required": true, "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" }
+      ]
+    },
+    "wp_cli": {
+      "runner_script": "scripts/runtime/verify-cli.sh",
+      "status": "CODE_IMPLEMENTED",
+      "runtime_status": "RUNTIME_NOT_VERIFIED",
+      "commands": [
+        { "command": "wp apexseo", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "command": "wp apexseo doctor", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "command": "wp apexseo report", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "command": "wp apexseo analysis post <id>", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "command": "wp apexseo analysis all", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "command": "wp apexseo analysis reindex", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "command": "wp apexseo cache purge --all", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "command": "wp apexseo sitemap rebuild", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "command": "wp apexseo schema validate --type=Article", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "command": "wp apexseo redirect list", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "command": "wp apexseo index rebuild", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "command": "wp apexseo db cleanup", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" }
+      ]
+    },
+    "frontend_and_permalinks": {
+      "runner_script": "scripts/runtime/verify-frontend.sh",
+      "status": "CODE_IMPLEMENTED",
+      "runtime_status": "RUNTIME_NOT_VERIFIED",
+      "checks": [
+        { "name": "Homepage Title and Meta", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "name": "Canonical Link Tag in Head", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "name": "OpenGraph and Twitter Tags", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "name": "JSON-LD Structured Data Schema", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "name": "Robots.txt Output with AI Crawlers", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "name": "Sitemap Index XML", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "name": "LLMs.txt AI Manifest", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "name": "404 X-Robots-Tag Header", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "name": "Search Query X-Robots-Tag Header", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "name": "Feed X-Robots-Tag Header", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "name": "Category Base Strip 301 Redirect", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" }
+      ]
+    },
+    "security": {
+      "runner_script": "scripts/runtime/verify-security.sh",
+      "status": "CODE_IMPLEMENTED",
+      "runtime_status": "RUNTIME_NOT_VERIFIED",
+      "tests": [
+        { "name": "Unauthorized REST Request 401 Rejection", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "name": "Malicious Javascript URL Scheme Rejection", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "name": "Data URI Scheme Rejection", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "name": "Malformed Regex Pattern Rejection", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "name": "Malformed JSON Body Rejection", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "name": "Invalid Schema Object Rejection", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "name": "Nonexistent Post ID 404 Handling", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" }
+      ]
+    },
+    "performance": {
+      "runner_script": "scripts/runtime/verify-performance.sh",
+      "status": "CODE_IMPLEMENTED",
+      "runtime_status": "RUNTIME_NOT_VERIFIED",
+      "benchmarks": [
+        { "name": "Frontend Homepage TTFB", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "name": "Robots.txt TTFB", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "name": "REST API Status Latency", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" },
+        { "name": "In-Process WP-CLI Post Analysis Duration", "status": "CODE_IMPLEMENTED", "runtime_status": "RUNTIME_NOT_VERIFIED" }
+      ]
+    }
+  }
+}
