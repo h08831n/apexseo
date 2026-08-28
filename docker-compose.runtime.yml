@@ -46,6 +46,7 @@ services:
       WORDPRESS_DEBUG_LOG: 1
       WORDPRESS_DEBUG_DISPLAY: 1
     ports:
+      - "3000:80"
       - "8080:80"
     volumes:
       - wp_core:/var/www/html
