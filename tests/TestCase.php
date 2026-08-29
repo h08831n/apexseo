@@ -5,15 +5,11 @@ use Exception;
 
 if (class_exists('\PHPUnit\Framework\TestCase')) {
     abstract class TestCase extends \PHPUnit\Framework\TestCase {
-        public static $assertionCount = 0;
-
-        public function assertStringContains($needle, $haystack, $message = '') {
-            self::$assertionCount++;
+        public function assertStringContains($needle, $haystack, string $message = ''): void {
             $this->assertStringContainsString((string)$needle, (string)$haystack, $message);
         }
 
-        public function assertStringNotContains($needle, $haystack, $message = '') {
-            self::$assertionCount++;
+        public function assertStringNotContains($needle, $haystack, string $message = ''): void {
             $this->assertStringNotContainsString((string)$needle, (string)$haystack, $message);
         }
     }

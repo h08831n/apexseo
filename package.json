@@ -1,9 +1,0 @@
-{
-  "name": "apexseo",
-  "version": "1.0.0",
-  "private": true,
-  "description": "Production-grade unified WordPress SEO, Schema, AI, Performance, Cache & Analytics Platform",
-  "scripts": {
-    "build": "echo 'WordPress plugin build verified'"
-  }
-}

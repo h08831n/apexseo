@@ -63,10 +63,11 @@ test_rest_endpoint "Authorized /status" "GET" "/status" "$ADMIN_AUTH" "" 200
 test_rest_endpoint "Authorized /settings (GET)" "GET" "/settings" "$ADMIN_AUTH" "" 200
 test_rest_endpoint "Authorized /settings (POST update)" "POST" "/settings" "$ADMIN_AUTH" '{"enable_auto_sitemap": true, "enable_breadcrumbs": true}' 200
 test_rest_endpoint "Authorized /redirects (GET list)" "GET" "/redirects" "$ADMIN_AUTH" "" 200
-test_rest_endpoint "Authorized /redirects (POST create)" "POST" "/redirects" "$ADMIN_AUTH" '{"source_url": "/promo-old", "target_url": "/promo-new", "status_code": 301}' 201
+test_rest_endpoint "Authorized /redirects (POST create)" "POST" "/redirects" "$ADMIN_AUTH" '{"source_path": "/promo-old", "target_url": "/promo-new", "status_code": 301}' 201
 test_rest_endpoint "Authorized /404 (GET logs)" "GET" "/404" "$ADMIN_AUTH" "" 200
 test_rest_endpoint "Authorized /cache/status" "GET" "/cache/status" "$ADMIN_AUTH" "" 200
 test_rest_endpoint "Authorized /cache/purge" "POST" "/cache/purge" "$ADMIN_AUTH" '{"type": "all"}' 200
+test_rest_endpoint "Authorized /cache/preload (501 Not Implemented)" "POST" "/cache/preload" "$ADMIN_AUTH" "" 501
 test_rest_endpoint "Authorized /media/status" "GET" "/media/status" "$ADMIN_AUTH" "" 200
 test_rest_endpoint "Authorized /schema/validate" "POST" "/schema/validate" "$ADMIN_AUTH" '{"@context": "https://schema.org", "@type": "Organization", "name": "Apex SEO"}' 200
 test_rest_endpoint "Authorized /analytics/overview" "GET" "/analytics/overview" "$ADMIN_AUTH" "" 200

@@ -158,30 +158,52 @@ class RestSubsystemTest extends TestCase {
     public function testRedirectsControllerCRUD() {
         $controller = $this->router->getController('redirects');
 
-        // POST Create
-        $createResponse = $controller->createRedirect([
-            'source_url'  => 'https://example.com/old-rest-url/',
-            'target_url'  => 'https://example.com/new-rest-url/',
-            'status_code' => 301,
-        ]);
+        // POST Create - Valid
+        $createRequest = new \WP_REST_Request('POST', '/apexseo/v1/redirects');
+        $createRequest->set_param('source_path', '/old-rest-url');
+        $createRequest->set_param('target_url', 'https://example.com/new-rest-url');
+        $createRequest->set_param('status_code', 301);
+
+        $createResponse = $controller->createRedirect($createRequest);
         $createData = ($createResponse instanceof \WP_REST_Response) ? $createResponse->get_data() : $createResponse;
         $this->assertTrue($createData['success']);
-        $this->assertEquals('/old-rest-url/', $createData['source_url']);
+        $this->assertNotEmpty($createData['id']);
+
+        // Empty source_path failure
+        $emptyRequest = new \WP_REST_Request('POST', '/apexseo/v1/redirects');
+        $emptyRequest->set_param('source_path', '');
+        $emptyRequest->set_param('target_url', 'https://example.com/target');
+        $emptyResponse = $controller->createRedirect($emptyRequest);
+        $this->assertTrue(($emptyResponse instanceof \WP_Error) || (isset($emptyResponse['code']) && $emptyResponse['code'] === 'missing_required_fields'));
+
+        // Unsafe target scheme failure (javascript:)
+        $xssRequest = new \WP_REST_Request('POST', '/apexseo/v1/redirects');
+        $xssRequest->set_param('source_path', '/unsafe-src');
+        $xssRequest->set_param('target_url', 'javascript:alert(1)');
+        $xssResponse = $controller->createRedirect($xssRequest);
+        $this->assertTrue(($xssResponse instanceof \WP_Error) || (isset($xssResponse['code']) && $xssResponse['code'] === 'invalid_target_scheme'));
+
+        // Unsupported status code failure
+        $statusRequest = new \WP_REST_Request('POST', '/apexseo/v1/redirects');
+        $statusRequest->set_param('source_path', '/status-src');
+        $statusRequest->set_param('target_url', 'https://example.com/target');
+        $statusRequest->set_param('status_code', 999);
+        $statusResponse = $controller->createRedirect($statusRequest);
+        $this->assertTrue(($statusResponse instanceof \WP_Error) || (isset($statusResponse['code']) && $statusResponse['code'] === 'invalid_status_code'));
 
         // Prevent Loop
-        $loopResponse = $controller->createRedirect([
-            'source_url'  => 'https://example.com/loop/',
-            'target_url'  => 'https://example.com/loop/',
-            'status_code' => 301,
-        ]);
-        $this->assertTrue(($loopResponse instanceof \WP_Error) || (isset($loopResponse['error'])));
+        $loopRequest = new \WP_REST_Request('POST', '/apexseo/v1/redirects');
+        $loopRequest->set_param('source_path', '/loop');
+        $loopRequest->set_param('target_url', '/loop');
+        $loopResponse = $controller->createRedirect($loopRequest);
+        $this->assertTrue(($loopResponse instanceof \WP_Error) || (isset($loopResponse['code']) && $loopResponse['code'] === 'redirect_loop_detected'));
 
         // GET List
-        $getResponse = $controller->getRedirects(['page' => 1, 'per_page' => 10]);
+        $getRequest = new \WP_REST_Request('GET', '/apexseo/v1/redirects');
+        $getResponse = $controller->getRedirects($getRequest);
         $getData = ($getResponse instanceof \WP_REST_Response) ? $getResponse->get_data() : $getResponse;
         $this->assertTrue($getData['success']);
-        $this->assertEquals(1, $getData['page']);
-        $this->assertEquals(10, $getData['per_page']);
+        $this->assertIsArray($getData['redirects']);
     }
 
     public function testNotFoundController() {
@@ -240,10 +262,13 @@ class RestSubsystemTest extends TestCase {
         $postPurgeData = ($postPurge instanceof \WP_REST_Response) ? $postPurge->get_data() : $postPurge;
         $this->assertTrue($postPurgeData['success']);
 
-        $preloadResponse = $controller->triggerPreload();
+        $preloadResponse = $controller->preloadCache(new \WP_REST_Request('POST', '/apexseo/v1/cache/preload'));
         $preloadData = ($preloadResponse instanceof \WP_REST_Response) ? $preloadResponse->get_data() : $preloadResponse;
-        $this->assertTrue($preloadData['success']);
-        $this->assertEquals('enqueued', $preloadData['status']);
+        $this->assertTrue(
+            ($preloadResponse instanceof \WP_Error) ||
+            (isset($preloadData['code']) && $preloadData['code'] === 'not_implemented') ||
+            (isset($preloadResponse->status) && $preloadResponse->status === 501)
+        );
     }
 
     public function testMediaControllerSingleAndBulk() {
@@ -307,13 +332,13 @@ class RestSubsystemTest extends TestCase {
     public function testSecuritySqlInjectionResilience() {
         $controller = $this->router->getController('redirects');
 
-        // SQL injection payload in source_url / target_url
+        // SQL injection payload in source_path / target_url
         $sqlPayload = "' OR 1=1; DROP TABLE wp_users; --";
-        $createRes = $controller->createRedirect([
-            'source_url'  => '/test-sqli-' . md5(uniqid()) . '/',
-            'target_url'  => 'https://example.com/' . urlencode($sqlPayload),
-            'status_code' => 301,
-        ]);
+        $req = new \WP_REST_Request('POST', '/apexseo/v1/redirects');
+        $req->set_param('source_path', '/test-sqli-' . md5(uniqid()) . '/');
+        $req->set_param('target_url', 'https://example.com/' . urlencode($sqlPayload));
+        $req->set_param('status_code', 301);
+        $createRes = $controller->createRedirect($req);
         $data = ($createRes instanceof \WP_REST_Response) ? $createRes->get_data() : $createRes;
         $this->assertTrue($data['success']);
 

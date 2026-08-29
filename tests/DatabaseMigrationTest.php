@@ -14,7 +14,7 @@ class DatabaseMigrationTest extends TestCase {
      */
     protected $db;
 
-    public function setUp() {
+    public function setUp(): void {
         global $wpdb, $mock_wp_options;
         $mock_wp_options = [];
         $this->db = new DatabaseManager($wpdb);
@@ -29,7 +29,6 @@ class DatabaseMigrationTest extends TestCase {
         $this->assertEquals('wp_apex_image_history', $this->db->getTableName(DatabaseManager::TABLE_IMAGE_HISTORY));
         $this->assertEquals('wp_apex_analytics', $this->db->getTableName(DatabaseManager::TABLE_ANALYTICS));
         $this->assertEquals('wp_apex_rank_tracking', $this->db->getTableName(DatabaseManager::TABLE_RANK_TRACKING));
-        $this->assertEquals('wp_apex_content_analysis', $this->db->getTableName(DatabaseManager::TABLE_CONTENT_ANALYSIS));
     }
 
     public function testCustomPrefixOverride() {
@@ -38,7 +37,7 @@ class DatabaseMigrationTest extends TestCase {
         $this->db->setPrefix(null);
     }
 
-    public function testMigrationExecutionCreates9LockedTables() {
+    public function testMigrationExecutionCreates8LockedTables() {
         $runner = new MigrationRunner($this->db);
         $executed = $runner->migrate();
 
@@ -46,7 +45,7 @@ class DatabaseMigrationTest extends TestCase {
         $this->assertEquals('1.0.0', $executed[0]);
         $this->assertEquals('1.0.0', SchemaVersion::getInstalledVersion());
 
-        // Verify all 9 locked tables exist
+        // Verify all 8 locked tables exist
         $this->assertTrue($this->db->hasTable('wp_apex_indexables'));
         $this->assertTrue($this->db->hasTable('wp_apex_schema'));
         $this->assertTrue($this->db->hasTable('wp_apex_redirects'));
@@ -55,7 +54,7 @@ class DatabaseMigrationTest extends TestCase {
         $this->assertTrue($this->db->hasTable('wp_apex_image_history'));
         $this->assertTrue($this->db->hasTable('wp_apex_analytics'));
         $this->assertTrue($this->db->hasTable('wp_apex_rank_tracking'));
-        $this->assertTrue($this->db->hasTable('wp_apex_content_analysis'));
+        $this->assertFalse($this->db->hasTable('wp_apex_content_analysis'), '9th table wp_apex_content_analysis must NOT exist');
     }
 
     public function testMigrationRollbackDropsTables() {

@@ -57,6 +57,25 @@ class RedirectsRestController extends AbstractRestController {
             return $this->sendError('missing_required_fields', 'Source path and target URL are required.', 400);
         }
 
+        // Validate unsafe target schemes
+        $parsedScheme = parse_url($target, PHP_URL_SCHEME);
+        if ($parsedScheme && in_array(strtolower($parsedScheme), ['javascript', 'data', 'vbscript'], true)) {
+            return $this->sendError('invalid_target_scheme', 'Target URL contains an unsafe scheme.', 400);
+        }
+
+        // Validate supported status codes
+        $allowedStatusCodes = [301, 302, 307, 308, 410, 451];
+        if (!in_array($status, $allowedStatusCodes, true)) {
+            return $this->sendError('invalid_status_code', 'Invalid redirect HTTP status code.', 400);
+        }
+
+        // Detect redirect loops
+        $cleanSource = '/' . ltrim(parse_url($source, PHP_URL_PATH) ?: $source, '/');
+        $cleanTarget = '/' . ltrim(parse_url($target, PHP_URL_PATH) ?: $target, '/');
+        if ($cleanSource === $cleanTarget) {
+            return $this->sendError('redirect_loop_detected', 'Source and target paths cannot be identical.', 400);
+        }
+
         $id = $this->redirectManager->addRedirect($source, $target, $status);
         if (!$id) {
             return $this->sendError('create_failed', 'Failed to create redirect rule.', 500);

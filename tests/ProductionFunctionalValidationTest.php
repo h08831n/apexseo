@@ -138,7 +138,7 @@ class ProductionFunctionalValidationTest extends TestCase {
         $result = $migration->up($this->db);
         $this->assertTrue($result);
 
-        // Check required tables created
+        // Check required tables created (8 locked tables, no 9th table)
         $this->assertTrue($this->db->tableExists('apex_indexables'));
         $this->assertTrue($this->db->tableExists('apex_schema'));
         $this->assertTrue($this->db->tableExists('apex_redirects'));
@@ -147,7 +147,7 @@ class ProductionFunctionalValidationTest extends TestCase {
         $this->assertTrue($this->db->tableExists('apex_image_history'));
         $this->assertTrue($this->db->tableExists('apex_analytics'));
         $this->assertTrue($this->db->tableExists('apex_rank_tracking'));
-        $this->assertTrue($this->db->tableExists('apex_content_analysis'));
+        $this->assertFalse($this->db->tableExists('apex_content_analysis'), '9th table apex_content_analysis must NOT exist');
     }
 
     /**
@@ -210,46 +210,38 @@ class ProductionFunctionalValidationTest extends TestCase {
     }
 
     /**
-     * Phase 4: Database Tables CRUD & Index Health (9 Tables).
+     * Phase 4: Database Tables CRUD & Index Health (8 Tables).
      */
     public function testPhase4DatabaseValidation() {
         $prefix = $this->db->getPrefix();
 
-        // 1. Insert & Query Indexables
+        // 1. Insert & Query Indexables (including content analysis fields)
         $idxId = $this->db->insert("{$prefix}apex_indexables", [
-            'object_type'       => 'post',
-            'object_id'         => 201,
-            'permalink'         => 'https://example.com/test-post',
-            'permalink_hash'    => md5('https://example.com/test-post'),
-            'canonical_url'     => 'https://example.com/test-post',
-            'title'             => 'Test Post SEO Title',
-            'description'       => 'Test Description',
-            'seo_score'         => 88,
-            'readability_score' => 92
+            'object_type'           => 'post',
+            'object_id'             => 201,
+            'permalink'             => 'https://example.com/test-post',
+            'permalink_hash'        => md5('https://example.com/test-post'),
+            'canonical_url'         => 'https://example.com/test-post',
+            'title'                 => 'Test Post SEO Title',
+            'description'           => 'Test Description',
+            'seo_score'             => 88,
+            'readability_score'     => 92,
+            'primary_focus_keyword' => 'cloud architecture',
+            'keyword_density'       => 1.85,
+            'content_analysis'      => json_encode(['score' => 88, 'readability' => 92]),
         ]);
         $this->assertGreaterThan(0, $idxId);
 
-        // 2. Insert & Query Redirects
+        // 2. Insert & Query Redirects using production schema
         $redirId = $this->db->insert("{$prefix}apex_redirects", [
-            'source_url'      => '/old-page',
-            'target_url'      => '/new-page',
-            'status_code'     => 301,
-            'source_url_hash' => md5('/old-page'),
-            'status'          => 'active'
+            'source_path' => '/old-page',
+            'target_url'  => '/new-page',
+            'status_code' => 301,
+            'match_type'  => 'exact',
+            'hits'        => 0,
+            'is_active'   => 1,
         ]);
         $this->assertGreaterThan(0, $redirId);
-
-        // 3. Insert & Query Content Analysis Table
-        $analysisId = $this->db->insert("{$prefix}apex_content_analysis", [
-            'object_type'       => 'post',
-            'object_id'         => 201,
-            'analysis_hash'     => md5('Sample content body'),
-            'composite_score'   => 87,
-            'seo_score'         => 85,
-            'readability_score' => 90,
-            'analyzed_at'       => date('Y-m-d H:i:s')
-        ]);
-        $this->assertGreaterThan(0, $analysisId);
     }
 
     /**

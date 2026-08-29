@@ -52,9 +52,11 @@ test_security_payload() {
 
 # 1. Injection & Malicious URLs
 echo "--- [1/3] Malicious URL Schemes & Invalid Regex Injection ---"
-test_security_payload "XSS Javascript URL in Redirect Target" "POST" "/redirects" "$ADMIN_AUTH" '{"source_url": "/test-xss", "target_url": "javascript:alert(1)", "status_code": 301}' "400"
-test_security_payload "Data URI scheme injection in Redirect" "POST" "/redirects" "$ADMIN_AUTH" '{"source_url": "/test-data", "target_url": "data:text/html;base64,PHNjcmlwdD5hbGVydCgxKTwvc2NyaXB0Pg==", "status_code": 301}' "400"
-test_security_payload "Malformed Unclosed Regex in Redirect Rule" "POST" "/redirects" "$ADMIN_AUTH" '{"source_url": "/test-(unclosed", "target_url": "/target", "is_regex": 1}' "400"
+test_security_payload "XSS Javascript URL in Redirect Target" "POST" "/redirects" "$ADMIN_AUTH" '{"source_path": "/test-xss", "target_url": "javascript:alert(1)", "status_code": 301}' "400"
+test_security_payload "Data URI scheme injection in Redirect" "POST" "/redirects" "$ADMIN_AUTH" '{"source_path": "/test-data", "target_url": "data:text/html;base64,PHNjcmlwdD5hbGVydCgxKTwvc2NyaXB0Pg==", "status_code": 301}' "400"
+test_security_payload "Empty source path in Redirect Rule" "POST" "/redirects" "$ADMIN_AUTH" '{"source_path": "", "target_url": "/target", "status_code": 301}' "400"
+test_security_payload "Redirect Loop Source Equals Target" "POST" "/redirects" "$ADMIN_AUTH" '{"source_path": "/test-loop", "target_url": "/test-loop", "status_code": 301}' "400"
+test_security_payload "Invalid Status Code in Redirect" "POST" "/redirects" "$ADMIN_AUTH" '{"source_path": "/test-status", "target_url": "/new-target", "status_code": 999}' "400"
 
 # 2. Malformed JSON & Schema Payloads
 echo ""

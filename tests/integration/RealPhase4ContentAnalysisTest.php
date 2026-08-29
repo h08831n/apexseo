@@ -32,18 +32,7 @@ class RealPhase4ContentAnalysisTest extends TestCase {
         $post = get_post($postId);
         do_action('save_post', $postId, $post, true);
 
-        // Assert database persistence in wp_apex_content_analysis
-        $analysis = $wpdb->get_row($wpdb->prepare(
-            "SELECT * FROM wp_apex_content_analysis WHERE object_id = %d AND object_type = 'post'",
-            $postId
-        ), ARRAY_A);
-
-        $this->assertNotNull($analysis, 'Analysis record must exist in wp_apex_content_analysis.');
-        $this->assertGreaterThan(0, (int)$analysis['composite_score']);
-        $this->assertNotEmpty($analysis['keyword_metrics']);
-        $this->assertNotEmpty($analysis['heading_metrics']);
-
-        // Assert indexables persistence
+        // Assert indexables persistence with content analysis data
         $indexable = $wpdb->get_row($wpdb->prepare(
             "SELECT * FROM wp_apex_indexables WHERE object_id = %d AND object_type = 'post'",
             $postId
@@ -51,6 +40,9 @@ class RealPhase4ContentAnalysisTest extends TestCase {
 
         $this->assertNotNull($indexable, 'Indexable record must exist in wp_apex_indexables.');
         $this->assertEquals('cloud computing', $indexable['primary_focus_keyword']);
+        $this->assertNotNull($indexable['readability_score']);
+        $this->assertNotNull($indexable['keyword_density']);
+        $this->assertNotEmpty($indexable['content_analysis']);
 
         // Assert link graph extraction
         $linksCount = (int)$wpdb->get_var($wpdb->prepare(
@@ -85,13 +77,14 @@ class RealPhase4ContentAnalysisTest extends TestCase {
         $post = get_post($postId);
         do_action('save_post', $postId, $post, true);
 
-        $analysis = $wpdb->get_row($wpdb->prepare(
-            "SELECT * FROM wp_apex_content_analysis WHERE object_id = %d",
+        $indexable = $wpdb->get_row($wpdb->prepare(
+            "SELECT * FROM wp_apex_indexables WHERE object_id = %d AND object_type = 'post'",
             $postId
         ), ARRAY_A);
 
-        $this->assertNotNull($analysis, 'Persian analysis record must exist in wp_apex_content_analysis.');
-        $this->assertGreaterThan(0, (int)$analysis['composite_score']);
+        $this->assertNotNull($indexable, 'Persian analysis record must exist in wp_apex_indexables.');
+        $this->assertEquals('بهینه‌سازی', $indexable['primary_focus_keyword']);
+        $this->assertNotNull($indexable['readability_score']);
 
         wp_delete_post($postId, true);
     }
