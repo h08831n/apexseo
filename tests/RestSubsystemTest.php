@@ -34,7 +34,7 @@ class RestSubsystemTest extends TestCase {
     protected $imageOptimizer;
     protected $router;
 
-    public function setUp() {
+    public function setUp(): void {
         parent::setUp();
         $this->security         = new SecurityManager();
         $this->config           = new ConfigurationManager();
@@ -165,7 +165,9 @@ class RestSubsystemTest extends TestCase {
         $createRequest->set_param('status_code', 301);
 
         $createResponse = $controller->createRedirect($createRequest);
-        $createData = ($createResponse instanceof \WP_REST_Response) ? $createResponse->get_data() : $createResponse;
+        $this->assertInstanceOf('WP_REST_Response', $createResponse);
+        $this->assertEquals(201, $createResponse->get_status());
+        $createData = $createResponse->get_data();
         $this->assertTrue($createData['success']);
         $this->assertNotEmpty($createData['id']);
 
@@ -174,14 +176,22 @@ class RestSubsystemTest extends TestCase {
         $emptyRequest->set_param('source_path', '');
         $emptyRequest->set_param('target_url', 'https://example.com/target');
         $emptyResponse = $controller->createRedirect($emptyRequest);
-        $this->assertTrue(($emptyResponse instanceof \WP_Error) || (isset($emptyResponse['code']) && $emptyResponse['code'] === 'missing_required_fields'));
+        $this->assertInstanceOf('WP_REST_Response', $emptyResponse);
+        $this->assertEquals(400, $emptyResponse->get_status());
+        $emptyData = $emptyResponse->get_data();
+        $this->assertFalse($emptyData['success']);
+        $this->assertEquals('missing_required_fields', $emptyData['code']);
 
         // Unsafe target scheme failure (javascript:)
         $xssRequest = new \WP_REST_Request('POST', '/apexseo/v1/redirects');
         $xssRequest->set_param('source_path', '/unsafe-src');
         $xssRequest->set_param('target_url', 'javascript:alert(1)');
         $xssResponse = $controller->createRedirect($xssRequest);
-        $this->assertTrue(($xssResponse instanceof \WP_Error) || (isset($xssResponse['code']) && $xssResponse['code'] === 'invalid_target_scheme'));
+        $this->assertInstanceOf('WP_REST_Response', $xssResponse);
+        $this->assertEquals(400, $xssResponse->get_status());
+        $xssData = $xssResponse->get_data();
+        $this->assertFalse($xssData['success']);
+        $this->assertEquals('invalid_target_scheme', $xssData['code']);
 
         // Unsupported status code failure
         $statusRequest = new \WP_REST_Request('POST', '/apexseo/v1/redirects');
@@ -189,19 +199,29 @@ class RestSubsystemTest extends TestCase {
         $statusRequest->set_param('target_url', 'https://example.com/target');
         $statusRequest->set_param('status_code', 999);
         $statusResponse = $controller->createRedirect($statusRequest);
-        $this->assertTrue(($statusResponse instanceof \WP_Error) || (isset($statusResponse['code']) && $statusResponse['code'] === 'invalid_status_code'));
+        $this->assertInstanceOf('WP_REST_Response', $statusResponse);
+        $this->assertEquals(400, $statusResponse->get_status());
+        $statusData = $statusResponse->get_data();
+        $this->assertFalse($statusData['success']);
+        $this->assertEquals('invalid_status_code', $statusData['code']);
 
         // Prevent Loop
         $loopRequest = new \WP_REST_Request('POST', '/apexseo/v1/redirects');
         $loopRequest->set_param('source_path', '/loop');
         $loopRequest->set_param('target_url', '/loop');
         $loopResponse = $controller->createRedirect($loopRequest);
-        $this->assertTrue(($loopResponse instanceof \WP_Error) || (isset($loopResponse['code']) && $loopResponse['code'] === 'redirect_loop_detected'));
+        $this->assertInstanceOf('WP_REST_Response', $loopResponse);
+        $this->assertEquals(400, $loopResponse->get_status());
+        $loopData = $loopResponse->get_data();
+        $this->assertFalse($loopData['success']);
+        $this->assertEquals('redirect_loop_detected', $loopData['code']);
 
         // GET List
         $getRequest = new \WP_REST_Request('GET', '/apexseo/v1/redirects');
         $getResponse = $controller->getRedirects($getRequest);
-        $getData = ($getResponse instanceof \WP_REST_Response) ? $getResponse->get_data() : $getResponse;
+        $this->assertInstanceOf('WP_REST_Response', $getResponse);
+        $this->assertEquals(200, $getResponse->get_status());
+        $getData = $getResponse->get_data();
         $this->assertTrue($getData['success']);
         $this->assertIsArray($getData['redirects']);
     }

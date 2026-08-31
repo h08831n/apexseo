@@ -35,10 +35,28 @@ jobs:
 
       - name: PHP Syntax Check (php -l)
         run: |
-          find src/ tests/ scripts/ -type f -name "*.php" -print0 | xargs -0 -n1 php -l
+          set -euo pipefail
+          while IFS= read -r -d '' file; do
+              echo "Linting: $file"
+              php -l "$file"
+          done < <(find src tests scripts -type f -name '*.php' -print0)
 
       - name: Run PHPUnit Unit Test Suite
         run: vendor/bin/phpunit -c phpunit.xml
+
+      - name: Validate Installable Plugin ZIP Package
+        run: |
+          echo "Building production installable ZIP package..."
+          mkdir -p build/apexseo
+          cp -r apexseo.php src templates readme.txt composer.json composer.lock build/apexseo/
+          cd build
+          zip -r apexseo.zip apexseo/
+          echo "Verifying ZIP contents..."
+          unzip -l apexseo.zip | grep "apexseo/apexseo.php"
+          unzip -l apexseo.zip | grep "apexseo/src/Autoloader.php"
+          cd ..
+          rm -rf build
+          echo "Installable Plugin ZIP validation: PASSED"
 
   wordpress-runtime-integration:
     name: "WP Runtime (PHP ${{ matrix.php-version }} / WP ${{ matrix.wordpress-version }} / ${{ matrix.db-service }})"
@@ -47,7 +65,7 @@ jobs:
     timeout-minutes: 25
 
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
         php-version: ['8.2', '8.1']
         wordpress-version: ['6.7', '6.6']
