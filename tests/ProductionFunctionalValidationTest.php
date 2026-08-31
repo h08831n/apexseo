@@ -64,7 +64,7 @@ class ProductionFunctionalValidationTest extends TestCase {
     protected $restRouter;
     protected $cliManager;
 
-    public function setUp() {
+    public function setUp(): void {
         parent::setUp();
 
         $this->container = new Container();

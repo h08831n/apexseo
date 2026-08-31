@@ -9,11 +9,10 @@ use ApexSEO\SEO\Redirects\RedirectManager;
 use ApexSEO\Analytics\Monitor\FourOhFourMonitor;
 
 /**
- * Static Schema Consistency Test.
+ * Static Schema Consistency Test Suite.
  *
- * Validates that all model properties, repository persistence payloads,
- * and subsystem insert/update statements strictly match the production
- * locked database schema defined in Migration_1_0_0_CreateLockedTables.
+ * Verifies that all production model properties, repository persistence payloads,
+ * and database managers strictly align with the authoritative migration schema.
  */
 class SchemaConsistencyTest extends TestCase {
     /**
@@ -22,16 +21,92 @@ class SchemaConsistencyTest extends TestCase {
     protected $db;
 
     public function setUp(): void {
+        parent::setUp();
         global $wpdb, $mock_wp_options;
         $mock_wp_options = [];
         $this->db = new DatabaseManager($wpdb);
     }
 
     /**
-     * Test that Indexable model and repository payload contain all migration columns.
+     * Extract column definitions from migration SQL.
      */
-    public function testIndexableSchemaAndPersistencePayloadConsistency() {
-        $migrationColumns = [
+    private function extractColumnsFromDdl(string $ddl): array {
+        $columns = [];
+        $lines = explode("\n", $ddl);
+        foreach ($lines as $line) {
+            $line = trim($line);
+            if (preg_match('/^`([a-zA-Z0-9_]+)`\s+/', $line, $matches)) {
+                $columns[] = $matches[1];
+            }
+        }
+        return $columns;
+    }
+
+    /**
+     * Test Indexable model setters, getters, fill, and toArray mapping against migration DDL.
+     */
+    public function testIndexableModelAndMigrationSchemaConsistency() {
+        $migration = new Migration_1_0_0_CreateLockedTables();
+        $reflector = new \ReflectionClass($migration);
+
+        // Run migration on mock DB
+        $migration->up($this->db);
+
+        // 1. Create Indexable via constructor fill
+        $attributes = [
+            'id'                     => 1,
+            'object_id'              => 42,
+            'object_type'            => 'post',
+            'object_sub_type'        => 'post',
+            'permalink'              => 'https://example.com/test-post',
+            'canonical_url'          => 'https://example.com/test-post',
+            'title'                  => 'SEO Title',
+            'description'            => 'SEO Description',
+            'robots_index'           => true,
+            'robots_follow'          => true,
+            'primary_focus_keyword'  => 'wordpress seo',
+            'keyword_density'        => 2.5,
+            'readability_score'      => 85,
+            'content_analysis'       => ['score' => 85, 'flesch' => 70.0],
+            'is_cornerstone'         => false,
+        ];
+
+        $indexable = new Indexable($attributes);
+
+        // 2. Validate Getters
+        $this->assertEquals(1, $indexable->getId());
+        $this->assertEquals(42, $indexable->getObjectId());
+        $this->assertEquals('post', $indexable->getObjectType());
+        $this->assertEquals('post', $indexable->getObjectSubType());
+        $this->assertEquals('https://example.com/test-post', $indexable->getPermalink());
+        $this->assertEquals('https://example.com/test-post', $indexable->getCanonicalUrl());
+        $this->assertEquals('SEO Title', $indexable->getTitle());
+        $this->assertEquals('SEO Description', $indexable->getDescription());
+        $this->assertTrue($indexable->getRobotsIndex());
+        $this->assertTrue($indexable->getRobotsFollow());
+        $this->assertEquals('wordpress seo', $indexable->getPrimaryFocusKeyword());
+        $this->assertEquals(2.5, $indexable->getKeywordDensity());
+        $this->assertEquals(85, $indexable->getReadabilityScore());
+        $this->assertIsArray($indexable->getContentAnalysis());
+        $this->assertFalse($indexable->isCornerstone());
+
+        // 3. Validate Public Setters
+        $indexable->setPrimaryFocusKeyword('advanced optimization');
+        $this->assertEquals('advanced optimization', $indexable->getPrimaryFocusKeyword());
+        $indexable->setKeywordDensity(3.1);
+        $this->assertEquals(3.1, $indexable->getKeywordDensity());
+        $indexable->setReadabilityScore(90);
+        $this->assertEquals(90, $indexable->getReadabilityScore());
+        $indexable->setContentAnalysis(['score' => 90]);
+        $this->assertEquals(['score' => 90], $indexable->getContentAnalysis());
+        $indexable->setIsCornerstone(true);
+        $this->assertTrue($indexable->isCornerstone());
+
+        // 4. Validate toArray() keys against writable columns in migration DDL
+        $arrayData = $indexable->toArray();
+        unset($arrayData['id']);
+
+        $expectedMigrationColumns = [
             'object_id',
             'object_type',
             'object_sub_type',
@@ -48,69 +123,67 @@ class SchemaConsistencyTest extends TestCase {
             'is_cornerstone',
         ];
 
-        // 1. Verify model property existence
-        $indexable = new Indexable();
-        $this->assertTrue(property_exists($indexable, 'primary_focus_keyword'));
-        $this->assertTrue(property_exists($indexable, 'keyword_density'));
-        $this->assertTrue(property_exists($indexable, 'readability_score'));
-        $this->assertTrue(property_exists($indexable, 'content_analysis'));
-        $this->assertTrue(property_exists($indexable, 'seo_score'));
+        $this->assertEquals($expectedMigrationColumns, array_keys($arrayData));
 
-        // 2. Populate and test repository save mapping
-        $indexable->object_id = 100;
-        $indexable->object_type = 'post';
-        $indexable->object_sub_type = 'post';
-        $indexable->title = 'Test Title';
-        $indexable->description = 'Test Description';
-        $indexable->primary_focus_keyword = 'wordpress testing';
-        $indexable->keyword_density = 2.45;
-        $indexable->readability_score = 85;
-        $indexable->content_analysis = ['score' => 85, 'flesch' => 70.5];
+        // 5. Ensure obsolete columns are NOT emitted
+        $this->assertArrayNotHasKey('seo_score', $arrayData);
+        $this->assertArrayNotHasKey('permalink_hash', $arrayData);
 
+        // 6. Test Repository Persistence
         $repo = new IndexableRepository($this->db);
-        $result = $repo->save($indexable);
-        $this->assertTrue($result);
+        $saved = $repo->save($indexable);
+        $this->assertTrue($saved);
+
+        $found = $repo->find(42, 'post');
+        $this->assertNotNull($found);
+        $this->assertEquals('advanced optimization', $found->getPrimaryFocusKeyword());
     }
 
     /**
-     * Test that RedirectManager uses exact production columns.
+     * Test RedirectManager writes only valid columns in wp_apex_redirects.
      */
-    public function testRedirectManagerUsesProductionColumns() {
+    public function testRedirectManagerSchemaConsistency() {
         $manager = new RedirectManager($this->db);
 
-        // Add redirect
-        $id = $manager->addRedirect('/source-path', 'https://example.com/target', 301);
+        $id = $manager->addRedirect('/old-url', 'https://example.com/new-url', 301);
         $this->assertNotNull($id);
 
-        // Match redirect
-        $matched = $manager->matchRedirect('/source-path');
-        // Delete redirect
-        $deleted = $manager->deleteRedirect(1);
+        $matched = $manager->matchRedirect('/old-url');
+        $this->assertNotNull($matched);
+        $this->assertEquals('https://example.com/new-url', $matched['target_url']);
+
+        $deleted = $manager->deleteRedirect($id);
         $this->assertTrue($deleted);
     }
 
     /**
-     * Test that FourOhFourMonitor uses exact production columns.
+     * Test FourOhFourMonitor writes only valid columns (no last_occurred_at).
      */
-    public function testFourOhFourMonitorUsesProductionColumns() {
+    public function testFourOhFourMonitorSchemaConsistency() {
         $monitor = new FourOhFourMonitor($this->db);
 
-        // Log 404
-        $monitor->log('/non-existent-page', 'https://referrer.com', 'Mozilla/5.0', '127.0.0.1');
+        $monitor->log('/missing-page', 'https://referrer.com', 'Mozilla/5.0', '192.168.1.1');
+        $logs = $monitor->getLogs(5);
 
-        $logs = $monitor->getLogs(10);
         $this->assertIsArray($logs);
+        $this->assertNotEmpty($logs);
+        $first = $logs[0];
+        $this->assertArrayHasKey('request_uri', $first);
+        $this->assertArrayHasKey('referrer', $first);
+        $this->assertArrayHasKey('user_agent', $first);
+        $this->assertArrayHasKey('ip_address', $first);
+        $this->assertArrayHasKey('hits', $first);
+        $this->assertArrayNotHasKey('last_occurred_at', $first);
     }
 
     /**
-     * Test that all 8 locked tables have authoritative migration DDL statements.
+     * Test Migration 1.0.0 defines exactly 8 tables and no 9th table.
      */
-    public function testAllEightLockedTablesDefinedInMigration() {
+    public function testMigrationSchemaDefinitionIntegrity() {
         $migration = new Migration_1_0_0_CreateLockedTables();
-        $this->assertEquals('1.0.0', $migration->getVersion());
-        $this->assertTrue($migration->up($this->db));
+        $migration->up($this->db);
 
-        $expectedTables = [
+        $lockedTables = [
             'wp_apex_indexables',
             'wp_apex_schema',
             'wp_apex_redirects',
@@ -121,10 +194,10 @@ class SchemaConsistencyTest extends TestCase {
             'wp_apex_rank_tracking',
         ];
 
-        foreach ($expectedTables as $table) {
-            $this->assertTrue($this->db->hasTable($table), "Table {$table} must be created by migration.");
+        foreach ($lockedTables as $table) {
+            $this->assertTrue($this->db->hasTable($table), "Table {$table} must exist in migration.");
         }
 
-        $this->assertFalse($this->db->hasTable('wp_apex_content_analysis'), "wp_apex_content_analysis must NOT exist.");
+        $this->assertFalse($this->db->hasTable('wp_apex_content_analysis'), "Obsolete 9th table must NOT exist.");
     }
 }

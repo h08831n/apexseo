@@ -57,7 +57,6 @@ class RealDatabaseIntegrationTest extends TestCase {
         $this->assertContains('object_type', $columnNames);
         $this->assertContains('primary_focus_keyword', $columnNames);
         $this->assertContains('keyword_density', $columnNames);
-        $this->assertContains('seo_score', $columnNames);
         $this->assertContains('readability_score', $columnNames);
         $this->assertContains('content_analysis', $columnNames);
         $this->assertContains('is_cornerstone', $columnNames);

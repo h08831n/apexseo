@@ -7,11 +7,6 @@ namespace ApexSEO\Tests;
  */
 abstract class TestCase extends \PHPUnit\Framework\TestCase {
     /**
-     * @var int Assertion count helper
-     */
-    public static $assertionCount = 0;
-
-    /**
      * Legacy assertion alias.
      */
     public function assertStringContains($needle, $haystack, string $message = ''): void {

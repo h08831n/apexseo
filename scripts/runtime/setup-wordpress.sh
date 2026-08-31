@@ -75,8 +75,11 @@ fi
 echo "[6/7] Activating APEX SEO Plugin..."
 $WP_CLI plugin activate apexseo
 
-STATUS=$($WP_CLI plugin status apexseo | grep -i "Status:" || true)
-echo "Plugin Status: $STATUS"
+if ! $WP_CLI plugin is-active apexseo; then
+    echo "ERROR: APEX SEO plugin failed to activate!"
+    exit 1
+fi
+echo "Plugin APEX SEO is active and verified."
 
 # 7. Verify Database Tables Created by Activation
 echo "[7/7] Verifying APEX Relational Schema..."

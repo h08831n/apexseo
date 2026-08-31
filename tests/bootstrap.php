@@ -438,6 +438,12 @@ if (!function_exists('is_wp_error')) {
     }
 }
 
+// Fallback TestCase stub when running without PHPUnit
+if (!class_exists('PHPUnit\Framework\TestCase')) {
+    require_once __DIR__ . '/StandaloneTestCase.php';
+    eval('namespace PHPUnit\Framework; class TestCase extends \ApexSEO\Tests\StandaloneTestCase {}');
+}
+
 // Load plugin autoloader
 require_once dirname(__DIR__) . '/src/Autoloader.php';
 \ApexSEO\Autoloader::register();

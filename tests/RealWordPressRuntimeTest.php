@@ -7,6 +7,25 @@ namespace ApexSEO\Tests;
 class RealWordPressRuntimeTest extends TestCase {
     protected $serverUrl = 'http://127.0.0.1:8080';
 
+    public function setUp(): void {
+        parent::setUp();
+        if (!function_exists('curl_init')) {
+            $this->markTestSkipped('cURL extension is required for runtime HTTP tests.');
+        }
+        $ch = @curl_init($this->serverUrl . '/');
+        if ($ch) {
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 1);
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 1);
+            @curl_exec($ch);
+            $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            curl_close($ch);
+            if ($code === 0) {
+                $this->markTestSkipped('Live WordPress HTTP server is not reachable at ' . $this->serverUrl);
+            }
+        }
+    }
+
     protected function httpGet($path) {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $this->serverUrl . $path);

@@ -30,6 +30,8 @@ require_once __DIR__ . '/AnalyticsSubsystemTest.php';
 require_once __DIR__ . '/RestSubsystemTest.php';
 require_once __DIR__ . '/RestApiResolutionTest.php';
 require_once __DIR__ . '/CliSubsystemTest.php';
+require_once __DIR__ . '/SchemaConsistencyTest.php';
+require_once __DIR__ . '/LinkGraphScannerParserTest.php';
 
 $testClasses = [
     ApexSEO\Tests\AutoloaderTest::class,
@@ -53,6 +55,8 @@ $testClasses = [
     ApexSEO\Tests\RestSubsystemTest::class,
     ApexSEO\Tests\RestApiResolutionTest::class,
     ApexSEO\Tests\CliSubsystemTest::class,
+    ApexSEO\Tests\SchemaConsistencyTest::class,
+    ApexSEO\Tests\LinkGraphScannerParserTest::class,
 ];
 
 echo "====================================================\n";

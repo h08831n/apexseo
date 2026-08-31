@@ -44,19 +44,53 @@ jobs:
       - name: Run PHPUnit Unit Test Suite
         run: vendor/bin/phpunit -c phpunit.xml
 
-      - name: Validate Installable Plugin ZIP Package
+      - name: Build and Validate Installable Plugin ZIP Package
         run: |
-          echo "Building production installable ZIP package..."
+          echo "Building production installable ZIP package in staging directory..."
+          rm -rf build
           mkdir -p build/apexseo
-          cp -r apexseo.php src templates readme.txt composer.json composer.lock build/apexseo/
+          cp -r apexseo.php uninstall.php src composer.json build/apexseo/
           cd build
           zip -r apexseo.zip apexseo/
-          echo "Verifying ZIP contents..."
-          unzip -l apexseo.zip | grep "apexseo/apexseo.php"
-          unzip -l apexseo.zip | grep "apexseo/src/Autoloader.php"
           cd ..
-          rm -rf build
+          
+          echo "Verifying ZIP contents and asserting required/forbidden structures..."
+          ZIP_CONTENTS=$(unzip -Z1 build/apexseo.zip)
+          
+          echo "$ZIP_CONTENTS" | grep -q "^apexseo/apexseo.php$" || { echo "ERROR: Missing apexseo/apexseo.php in ZIP"; exit 1; }
+          echo "$ZIP_CONTENTS" | grep -q "^apexseo/uninstall.php$" || { echo "ERROR: Missing apexseo/uninstall.php in ZIP"; exit 1; }
+          echo "$ZIP_CONTENTS" | grep -q "^apexseo/src/Autoloader.php$" || { echo "ERROR: Missing apexseo/src/Autoloader.php in ZIP"; exit 1; }
+          
+          FORBIDDEN=(
+            "tests/"
+            "docs/"
+            "tools/"
+            "scripts/"
+            "docker/"
+            ".github/"
+            "node_modules/"
+            "package.json"
+            "server.js"
+            "phpunit.xml"
+            "phpunit.runtime.xml"
+            "wp-content/"
+          )
+          
+          for PATTERN in "${FORBIDDEN[@]}"; do
+            if echo "$ZIP_CONTENTS" | grep -q "$PATTERN"; then
+              echo "ERROR: Disallowed item matching '$PATTERN' found in release ZIP archive!"
+              exit 1
+            fi
+          done
+          
           echo "Installable Plugin ZIP validation: PASSED"
+
+      - name: Upload installable plugin
+        uses: actions/upload-artifact@v4
+        with:
+          name: apexseo-installable
+          path: build/apexseo.zip
+          if-no-files-found: error
 
   wordpress-runtime-integration:
     name: "WP Runtime (PHP ${{ matrix.php-version }} / WP ${{ matrix.wordpress-version }} / ${{ matrix.db-service }})"
@@ -123,7 +157,7 @@ jobs:
             exit 1
           fi
 
-          WP_VER=$(docker compose -f docker-compose.runtime.yml exec -T wordpress wp core version --allow-root || true)
+          WP_VER=$(docker compose -f docker-compose.runtime.yml exec -T wordpress wp core version --allow-root)
           echo "Actual WordPress Core Version: $WP_VER (Expected prefix: ${{ matrix.wordpress-version }})"
           if [[ "$WP_VER" != ${{ matrix.wordpress-version }}* ]]; then
             echo "ERROR: WordPress version mismatch! Expected prefix ${{ matrix.wordpress-version }}, got $WP_VER"

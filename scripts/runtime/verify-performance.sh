@@ -51,11 +51,14 @@ measure_http "REST Settings Endpoint" "$REST_BASE/settings" "$ADMIN_AUTH"
 # Measure Analysis execution time via WP-CLI
 WP_PATH="/var/www/html"
 WP_CLI="wp --allow-root --path=${WP_PATH}"
-POST_ID=$($WP_CLI post list --post_type=post --post_status=publish --field=ID --posts_per_page=1 | head -n1 || echo "1")
+POST_ID=$($WP_CLI post list --post_type=post --field=ID --posts_per_page=1 | head -n1 || echo "")
+if [ -z "$POST_ID" ]; then
+    POST_ID=$($WP_CLI post create --post_title="Performance Benchmark Post" --post_content="<p>Performance benchmark test content for APEX SEO analysis engine.</p>" --post_status=publish --porcelain)
+fi
 
 echo -n "Measuring WP-CLI Analysis Execution for Post $POST_ID ... "
 START_TS=$(date +%s%N)
-$WP_CLI apexseo analysis post $POST_ID > /dev/null 2>&1 || true
+$WP_CLI apexseo analysis post "$POST_ID" > /dev/null
 END_TS=$(date +%s%N)
 DURATION_MS=$(( (END_TS - START_TS) / 1000000 ))
 echo "${DURATION_MS}ms"

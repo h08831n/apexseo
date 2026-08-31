@@ -46,7 +46,7 @@ class RealPhase4ContentAnalysisTest extends TestCase {
 
         // Assert link graph extraction
         $linksCount = (int)$wpdb->get_var($wpdb->prepare(
-            "SELECT COUNT(*) FROM wp_apex_links WHERE post_id = %d",
+            "SELECT COUNT(*) FROM wp_apex_links WHERE source_id = %d",
             $postId
         ));
         $this->assertGreaterThanOrEqual(2, $linksCount, 'Link extractor must record extracted internal & external links.');
