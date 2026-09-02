@@ -15,13 +15,17 @@ class RealCliIntegrationTest extends TestCase {
         $cliManager = new \ApexSEO\Core\CLI\CliManager();
         $commands = $cliManager->getCommands();
 
-        $this->assertArrayHasKey('analysis', $commands);
-        $this->assertArrayHasKey('doctor', $commands);
+        $this->assertArrayHasKey('index', $commands);
         $this->assertArrayHasKey('cache', $commands);
-        $this->assertArrayHasKey('sitemap', $commands);
-        $this->assertArrayHasKey('schema', $commands);
+        $this->assertArrayHasKey('media', $commands);
         $this->assertArrayHasKey('redirect', $commands);
         $this->assertArrayHasKey('db', $commands);
-        $this->assertArrayHasKey('index', $commands);
+        $this->assertArrayHasKey('migrate', $commands);
+        $this->assertArrayHasKey('sitemap', $commands);
+        $this->assertArrayHasKey('doctor', $commands);
+        $this->assertArrayHasKey('report', $commands);
+        $this->assertArrayHasKey('schema', $commands);
+        $this->assertArrayHasKey('analysis', $commands);
+        $this->assertCount(11, $commands);
     }
 }

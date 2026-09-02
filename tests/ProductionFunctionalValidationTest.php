@@ -123,7 +123,7 @@ class ProductionFunctionalValidationTest extends TestCase {
             $this->contentAnalysisService
         );
 
-        $this->cliManager = new CliManager($this->container);
+        $this->cliManager = new CliManager();
     }
 
     /**
@@ -195,7 +195,7 @@ class ProductionFunctionalValidationTest extends TestCase {
      * Phase 3: WP-CLI Command Modules Execution (11 Modules).
      */
     public function testPhase3WpCliCommandsExecution() {
-        $commands = $this->cliManager->getRegisteredCommands();
+        $commands = $this->cliManager->getCommands();
         $this->assertEquals(11, count($commands));
         $this->assertTrue(isset($commands['index']));
         $this->assertTrue(isset($commands['cache']));

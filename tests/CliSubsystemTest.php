@@ -12,6 +12,8 @@ use ApexSEO\CLI\MigrateCommand;
 use ApexSEO\CLI\SitemapCommand;
 use ApexSEO\CLI\DoctorCommand;
 use ApexSEO\CLI\SchemaCommand;
+use ApexSEO\CLI\AnalysisCommand;
+use ApexSEO\SEO\Analysis\ContentAnalysisService;
 
 class CliSubsystemTest extends TestCase {
     protected $cliManager;
@@ -37,7 +39,8 @@ class CliSubsystemTest extends TestCase {
         $this->assertArrayHasKey('doctor', $commands);
         $this->assertArrayHasKey('report', $commands);
         $this->assertArrayHasKey('schema', $commands);
-        $this->assertEquals(10, count($commands));
+        $this->assertArrayHasKey('analysis', $commands);
+        $this->assertCount(11, $commands);
     }
 
     public function testIndexCommandRebuildAndStatus() {
@@ -170,6 +173,20 @@ class CliSubsystemTest extends TestCase {
 
         // Valid post schema
         $code = $cmd->validate([42], ['format' => 'json']);
+        $this->assertEquals(0, $code);
+    }
+
+    public function testAnalysisCommandExecution() {
+        $service = $this->container->get(ContentAnalysisService::class);
+        $cmd = new AnalysisCommand($service);
+
+        $code = $cmd->post([1], []);
+        $this->assertEquals(0, $code);
+
+        $code = $cmd->all([], []);
+        $this->assertEquals(0, $code);
+
+        $code = $cmd->reindex([], []);
         $this->assertEquals(0, $code);
     }
 }
