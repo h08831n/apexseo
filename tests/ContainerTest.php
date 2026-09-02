@@ -30,7 +30,8 @@ class ContainerTest extends TestCase {
      */
     protected $container;
 
-    public function setUp() {
+    protected function setUp(): void {
+        parent::setUp();
         $this->container = new Container();
     }
 

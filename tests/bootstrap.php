@@ -90,12 +90,18 @@ if (!class_exists('wpdb')) {
             return [];
         }
 
+        public $insert_id = 1;
+        public $last_insert = [];
+        public $last_update = [];
+
         public function insert($table, $data, $format = null) {
             $this->insert_id = rand(1, 9999);
+            $this->last_insert = ['table' => $table, 'data' => $data];
             return 1;
         }
 
         public function update($table, $data, $where, $format = null, $where_format = null) {
+            $this->last_update = ['table' => $table, 'data' => $data, 'where' => $where];
             return 1;
         }
 

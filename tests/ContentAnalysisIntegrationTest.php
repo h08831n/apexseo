@@ -62,7 +62,8 @@ class ContentAnalysisIntegrationTest extends TestCase {
     /**
      * Set up test dependencies and clean environment before each test.
      */
-    public function setUp() {
+    protected function setUp(): void {
+        parent::setUp();
         $this->container = new Container();
         $this->db = new DatabaseManager();
         $this->security = new SecurityManager();

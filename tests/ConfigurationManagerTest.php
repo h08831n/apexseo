@@ -7,7 +7,8 @@ use ApexSEO\Core\Configuration\ConfigurationManager;
  * Configuration Manager Test.
  */
 class ConfigurationManagerTest extends TestCase {
-    public function setUp() {
+    protected function setUp(): void {
+        parent::setUp();
         global $mock_wp_options;
         $mock_wp_options = [];
     }

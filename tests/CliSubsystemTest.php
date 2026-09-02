@@ -17,7 +17,7 @@ class CliSubsystemTest extends TestCase {
     protected $cliManager;
     protected $container;
 
-    public function setUp() {
+    protected function setUp(): void {
         parent::setUp();
         Plugin::reset();
         $plugin = Plugin::getInstance();

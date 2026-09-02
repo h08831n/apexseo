@@ -39,7 +39,7 @@ class Migration_1_0_0_CreateLockedTables implements MigrationInterface {
                 `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
                 PRIMARY KEY (`id`),
                 UNIQUE KEY `uk_object` (`object_id`, `object_type`),
-                KEY `idx_permalink_hash` (`object_type`, `object_sub_type`)
+                KEY `idx_object_type_subtype` (`object_type`, `object_sub_type`)
             ) {$charsetCollate};",
 
             "CREATE TABLE IF NOT EXISTS `{$prefix}apex_schema` (

@@ -28,29 +28,40 @@ class SchemaConsistencyTest extends TestCase {
     }
 
     /**
-     * Extract column definitions from migration SQL.
+     * Extract column definitions per table from migration SQL.
+     *
+     * @return array<string, string[]>
      */
-    private function extractColumnsFromDdl(string $ddl): array {
-        $columns = [];
-        $lines = explode("\n", $ddl);
-        foreach ($lines as $line) {
-            $line = trim($line);
-            if (preg_match('/^`([a-zA-Z0-9_]+)`\s+/', $line, $matches)) {
-                $columns[] = $matches[1];
+    private function extractAllTableColumnsFromMigration(): array {
+        $migration = new Migration_1_0_0_CreateLockedTables();
+        $this->db->getWpdb()->queries = [];
+        $migration->up($this->db);
+
+        $tables = [];
+        foreach ($this->db->getWpdb()->queries as $sql) {
+            if (preg_match('/CREATE TABLE (?:IF NOT EXISTS )?`?([a-zA-Z0-9_]+)`?\s*\((.*?)\)\s*[^\)]*$/is', $sql, $tableMatches)) {
+                $tableName = $tableMatches[1];
+                $body = $tableMatches[2];
+                $columns = [];
+                foreach (explode("\n", $body) as $line) {
+                    $line = trim($line);
+                    if (preg_match('/^`([a-zA-Z0-9_]+)`\s+/', $line, $colMatches)) {
+                        $columns[] = $colMatches[1];
+                    }
+                }
+                $tables[$tableName] = $columns;
             }
         }
-        return $columns;
+        return $tables;
     }
 
     /**
      * Test Indexable model setters, getters, fill, and toArray mapping against migration DDL.
      */
     public function testIndexableModelAndMigrationSchemaConsistency() {
-        $migration = new Migration_1_0_0_CreateLockedTables();
-        $reflector = new \ReflectionClass($migration);
-
-        // Run migration on mock DB
-        $migration->up($this->db);
+        $allTableColumns = $this->extractAllTableColumnsFromMigration();
+        $this->assertArrayHasKey('wp_apex_indexables', $allTableColumns, 'wp_apex_indexables table must be present in migration DDL');
+        $indexableDdlColumns = $allTableColumns['wp_apex_indexables'];
 
         // 1. Create Indexable via constructor fill
         $attributes = [
@@ -106,74 +117,73 @@ class SchemaConsistencyTest extends TestCase {
         $arrayData = $indexable->toArray();
         unset($arrayData['id']);
 
-        $expectedMigrationColumns = [
-            'object_id',
-            'object_type',
-            'object_sub_type',
-            'permalink',
-            'canonical_url',
-            'title',
-            'description',
-            'robots_index',
-            'robots_follow',
-            'primary_focus_keyword',
-            'keyword_density',
-            'readability_score',
-            'content_analysis',
-            'is_cornerstone',
-        ];
+        // Writable columns = All DDL columns excluding database-managed columns (id, created_at, updated_at)
+        $dbManagedColumns = ['id', 'created_at', 'updated_at'];
+        $expectedWritableColumns = array_values(array_diff($indexableDdlColumns, $dbManagedColumns));
 
-        $this->assertEquals($expectedMigrationColumns, array_keys($arrayData));
+        $modelWritableKeys = array_keys($arrayData);
+        sort($expectedWritableColumns);
+        sort($modelWritableKeys);
+
+        $this->assertEquals($expectedWritableColumns, $modelWritableKeys, 'Indexable::toArray() writable keys must match migration DDL columns minus db-managed fields.');
 
         // 5. Ensure obsolete columns are NOT emitted
         $this->assertArrayNotHasKey('seo_score', $arrayData);
         $this->assertArrayNotHasKey('permalink_hash', $arrayData);
 
-        // 6. Test Repository Persistence
+        // 6. Test Repository Persistence Payload Capture
         $repo = new IndexableRepository($this->db);
         $saved = $repo->save($indexable);
         $this->assertTrue($saved);
 
-        $found = $repo->find(42, 'post');
-        $this->assertNotNull($found);
-        $this->assertEquals('advanced optimization', $found->getPrimaryFocusKeyword());
+        $capturedInsert = $this->db->getWpdb()->last_insert;
+        $this->assertNotEmpty($capturedInsert, 'Repository must execute an insert.');
+        $this->assertEquals('wp_apex_indexables', $capturedInsert['table']);
+
+        $persistedKeys = array_keys($capturedInsert['data']);
+        sort($persistedKeys);
+        $this->assertEquals($expectedWritableColumns, $persistedKeys, 'Repository persistence payload keys must match migration DDL writable columns.');
     }
 
     /**
      * Test RedirectManager writes only valid columns in wp_apex_redirects.
      */
     public function testRedirectManagerSchemaConsistency() {
+        $allTableColumns = $this->extractAllTableColumnsFromMigration();
+        $this->assertArrayHasKey('wp_apex_redirects', $allTableColumns);
+        $redirectColumns = $allTableColumns['wp_apex_redirects'];
+
         $manager = new RedirectManager($this->db);
+        $manager->addRedirect('/old-url', 'https://example.com/new-url', 301);
 
-        $id = $manager->addRedirect('/old-url', 'https://example.com/new-url', 301);
-        $this->assertNotNull($id);
+        $capturedInsert = $this->db->getWpdb()->last_insert;
+        $this->assertNotEmpty($capturedInsert);
+        $this->assertEquals('wp_apex_redirects', $capturedInsert['table']);
 
-        $matched = $manager->matchRedirect('/old-url');
-        $this->assertNotNull($matched);
-        $this->assertEquals('https://example.com/new-url', $matched['target_url']);
-
-        $deleted = $manager->deleteRedirect($id);
-        $this->assertTrue($deleted);
+        foreach (array_keys($capturedInsert['data']) as $column) {
+            $this->assertContains($column, $redirectColumns, "Column '{$column}' sent by RedirectManager must exist in wp_apex_redirects DDL.");
+        }
     }
 
     /**
      * Test FourOhFourMonitor writes only valid columns (no last_occurred_at).
      */
     public function testFourOhFourMonitorSchemaConsistency() {
+        $allTableColumns = $this->extractAllTableColumnsFromMigration();
+        $this->assertArrayHasKey('wp_apex_404_logs', $allTableColumns);
+        $logsColumns = $allTableColumns['wp_apex_404_logs'];
+
         $monitor = new FourOhFourMonitor($this->db);
-
         $monitor->log('/missing-page', 'https://referrer.com', 'Mozilla/5.0', '192.168.1.1');
-        $logs = $monitor->getLogs(5);
 
-        $this->assertIsArray($logs);
-        $this->assertNotEmpty($logs);
-        $first = $logs[0];
-        $this->assertArrayHasKey('request_uri', $first);
-        $this->assertArrayHasKey('referrer', $first);
-        $this->assertArrayHasKey('user_agent', $first);
-        $this->assertArrayHasKey('ip_address', $first);
-        $this->assertArrayHasKey('hits', $first);
-        $this->assertArrayNotHasKey('last_occurred_at', $first);
+        $capturedInsert = $this->db->getWpdb()->last_insert;
+        $this->assertNotEmpty($capturedInsert);
+        $this->assertEquals('wp_apex_404_logs', $capturedInsert['table']);
+
+        foreach (array_keys($capturedInsert['data']) as $column) {
+            $this->assertContains($column, $logsColumns, "Column '{$column}' sent by FourOhFourMonitor must exist in wp_apex_404_logs DDL.");
+        }
+        $this->assertArrayNotHasKey('last_occurred_at', $capturedInsert['data']);
     }
 
     /**

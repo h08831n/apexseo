@@ -10,7 +10,8 @@ use ApexSEO\Core\Configuration\ConfigurationManager;
  * Plugin Lifecycle, Activation, Deactivation, and Uninstall Safety Test.
  */
 class LifecycleTest extends TestCase {
-    public function setUp() {
+    protected function setUp(): void {
+        parent::setUp();
         Plugin::reset();
         global $mock_wp_options;
         $mock_wp_options = [];

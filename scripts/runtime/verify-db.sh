@@ -68,7 +68,7 @@ echo ""
 echo "--- [3/4] Checking Unique Constraints and Secondary Indexes ---"
 INDEXES_INDEXABLES=$($MYSQL_CMD "SHOW INDEX FROM wp_apex_indexables;" -s -N)
 echo "$INDEXES_INDEXABLES" | grep -q "uk_object" && echo "[PASS] Unique key uk_object verified" || { echo "[FAIL] Missing uk_object"; FAILURES=$((FAILURES + 1)); }
-echo "$INDEXES_INDEXABLES" | grep -q "idx_permalink_hash" && echo "[PASS] Index idx_permalink_hash verified" || { echo "[FAIL] Missing idx_permalink_hash"; FAILURES=$((FAILURES + 1)); }
+echo "$INDEXES_INDEXABLES" | grep -q "idx_object_type_subtype" && echo "[PASS] Index idx_object_type_subtype verified" || { echo "[FAIL] Missing idx_object_type_subtype"; FAILURES=$((FAILURES + 1)); }
 
 INDEXES_REDIRECTS=$($MYSQL_CMD "SHOW INDEX FROM wp_apex_redirects;" -s -N)
 echo "$INDEXES_REDIRECTS" | grep -q "uk_source_path" && echo "[PASS] Unique key uk_source_path verified" || { echo "[FAIL] Missing uk_source_path"; FAILURES=$((FAILURES + 1)); }

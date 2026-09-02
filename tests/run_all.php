@@ -91,7 +91,7 @@ foreach ($testClasses as $testClass) {
 }
 
 echo "\n----------------------------------------------------\n";
-echo sprintf("Summary: %d Passed, %d Failed (Assertions: %d)\n", $totalPassed, $totalFailed, ApexSEO\Tests\TestCase::$assertionCount);
+echo sprintf("Summary: %d Passed, %d Failed (Assertions: %d)\n", $totalPassed, $totalFailed, ApexSEO\Tests\StandaloneTestCase::$assertionCount);
 echo "----------------------------------------------------\n";
 
 if ($totalFailed > 0) {

@@ -39,7 +39,7 @@ jobs:
           while IFS= read -r -d '' file; do
               echo "Linting: $file"
               php -l "$file"
-          done < <(find src tests scripts -type f -name '*.php' -print0)
+          done < <(find . -type f -name '*.php' -not -path './vendor/*' -not -path './build/*' -print0)
 
       - name: Run PHPUnit Unit Test Suite
         run: vendor/bin/phpunit -c phpunit.xml

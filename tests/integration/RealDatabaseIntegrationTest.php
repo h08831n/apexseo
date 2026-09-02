@@ -65,7 +65,7 @@ class RealDatabaseIntegrationTest extends TestCase {
         $keyNames = array_column($indexes, 'Key_name');
         $this->assertContains('PRIMARY', $keyNames);
         $this->assertContains('uk_object', $keyNames);
-        $this->assertContains('idx_permalink_hash', $keyNames);
+        $this->assertContains('idx_object_type_subtype', $keyNames);
     }
 
     public function testRedirectsTableSchemaAndIndexes() {

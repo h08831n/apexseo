@@ -139,15 +139,16 @@ class ProductionFunctionalValidationTest extends TestCase {
         $this->assertTrue($result);
 
         // Check required tables created (8 locked tables, no 9th table)
-        $this->assertTrue($this->db->tableExists('apex_indexables'));
-        $this->assertTrue($this->db->tableExists('apex_schema'));
-        $this->assertTrue($this->db->tableExists('apex_redirects'));
-        $this->assertTrue($this->db->tableExists('apex_404_logs'));
-        $this->assertTrue($this->db->tableExists('apex_links'));
-        $this->assertTrue($this->db->tableExists('apex_image_history'));
-        $this->assertTrue($this->db->tableExists('apex_analytics'));
-        $this->assertTrue($this->db->tableExists('apex_rank_tracking'));
-        $this->assertFalse($this->db->tableExists('apex_content_analysis'), '9th table apex_content_analysis must NOT exist');
+        $prefix = $this->db->getPrefix();
+        $this->assertTrue($this->db->hasTable("{$prefix}apex_indexables"));
+        $this->assertTrue($this->db->hasTable("{$prefix}apex_schema"));
+        $this->assertTrue($this->db->hasTable("{$prefix}apex_redirects"));
+        $this->assertTrue($this->db->hasTable("{$prefix}apex_404_logs"));
+        $this->assertTrue($this->db->hasTable("{$prefix}apex_links"));
+        $this->assertTrue($this->db->hasTable("{$prefix}apex_image_history"));
+        $this->assertTrue($this->db->hasTable("{$prefix}apex_analytics"));
+        $this->assertTrue($this->db->hasTable("{$prefix}apex_rank_tracking"));
+        $this->assertFalse($this->db->hasTable("{$prefix}apex_content_analysis"), '9th table apex_content_analysis must NOT exist');
     }
 
     /**
@@ -220,11 +221,9 @@ class ProductionFunctionalValidationTest extends TestCase {
             'object_type'           => 'post',
             'object_id'             => 201,
             'permalink'             => 'https://example.com/test-post',
-            'permalink_hash'        => md5('https://example.com/test-post'),
             'canonical_url'         => 'https://example.com/test-post',
             'title'                 => 'Test Post SEO Title',
             'description'           => 'Test Description',
-            'seo_score'             => 88,
             'readability_score'     => 92,
             'primary_focus_keyword' => 'cloud architecture',
             'keyword_density'       => 1.85,
