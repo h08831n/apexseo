@@ -1,14 +1,16 @@
 <?php
 namespace ApexSEO\Tests;
 
+use ApexSEO\Core\Bootstrap\Plugin;
 use ApexSEO\Core\Security\SecurityManager;
 use ApexSEO\Core\Configuration\ConfigurationManager;
 use ApexSEO\Core\Database\DatabaseManager;
 use ApexSEO\SEO\Repository\IndexableRepository;
 use ApexSEO\SEO\Builder\IndexableBuilder;
+use ApexSEO\SEO\Variables\VariableEngine;
+use ApexSEO\SEO\Templates\TemplateManager;
 use ApexSEO\Schema\SchemaRegistry;
 use ApexSEO\Schema\Validator\SchemaValidator;
-use ApexSEO\Cache\Engine\CacheEngine;
 use ApexSEO\Media\Optimizer\ImageOptimizer;
 use ApexSEO\API\RestApiRouter;
 use ApexSEO\API\Controllers\SettingsRestController;
@@ -21,47 +23,28 @@ use ApexSEO\API\Controllers\AnalyticsRestController;
 use ApexSEO\API\Controllers\CacheRestController;
 use ApexSEO\API\Controllers\MediaRestController;
 use ApexSEO\API\Controllers\MigrationRestController;
+use ApexSEO\API\Controllers\AnalysisRestController;
 
 class RestSubsystemTest extends TestCase {
     protected $security;
     protected $config;
     protected $db;
-    protected $indexableRepo;
-    protected $indexableBuilder;
-    protected $schemaRegistry;
-    protected $schemaValidator;
-    protected $cacheEngine;
-    protected $imageOptimizer;
     protected $router;
 
     public function setUp(): void {
         parent::setUp();
-        $this->security         = new SecurityManager();
-        $this->config           = new ConfigurationManager();
-        $this->db               = new DatabaseManager();
-        $this->indexableRepo    = new IndexableRepository($this->db);
-        $this->indexableBuilder = new IndexableBuilder();
-        $this->schemaRegistry   = new SchemaRegistry();
-        $this->schemaValidator  = new SchemaValidator();
-        $this->cacheEngine      = null;
-        $this->imageOptimizer   = new ImageOptimizer();
+        $plugin = Plugin::getInstance();
+        $container = $plugin->getContainer();
 
-        $this->router = new RestApiRouter(
-            $this->security,
-            $this->config,
-            $this->db,
-            $this->indexableRepo,
-            $this->indexableBuilder,
-            $this->schemaRegistry,
-            $this->schemaValidator,
-            $this->cacheEngine,
-            $this->imageOptimizer
-        );
+        $this->security = $container->get(SecurityManager::class);
+        $this->config   = $container->get(ConfigurationManager::class);
+        $this->db       = $container->get(DatabaseManager::class);
+        $this->router   = $container->get(RestApiRouter::class);
     }
 
     public function testRestRouterInitialization() {
         $controllers = $this->router->getControllers();
-        $this->assertEquals(10, count($controllers));
+        $this->assertEquals(11, count($controllers));
         $this->assertInstanceOf(SettingsRestController::class, $this->router->getController('settings'));
         $this->assertInstanceOf(MetaRestController::class, $this->router->getController('meta'));
         $this->assertInstanceOf(SchemaRestController::class, $this->router->getController('schema'));
@@ -72,15 +55,17 @@ class RestSubsystemTest extends TestCase {
         $this->assertInstanceOf(CacheRestController::class, $this->router->getController('cache'));
         $this->assertInstanceOf(MediaRestController::class, $this->router->getController('media'));
         $this->assertInstanceOf(MigrationRestController::class, $this->router->getController('migration'));
+        $this->assertInstanceOf(AnalysisRestController::class, $this->router->getController('analysis'));
     }
 
     public function testStatusEndpointResponse() {
-        $response = $this->router->getStatus();
+        $request = new \WP_REST_Request('GET', '/apexseo/v1/status');
+        $response = $this->router->getStatus($request);
         $this->assertNotNull($response);
         $data = ($response instanceof \WP_REST_Response) ? $response->get_data() : $response;
-        $this->assertEquals('apexseo/v1', $data['namespace']);
-        $this->assertEquals('active', $data['status']);
-        $this->assertEquals(22, $data['registered_apis']);
+        $this->assertTrue($data['success']);
+        $this->assertEquals('operational', $data['status']);
+        $this->assertCount(11, $data['controllers']);
     }
 
     public function testSettingsControllerGetAndUpdate() {
@@ -102,25 +87,27 @@ class RestSubsystemTest extends TestCase {
     public function testMetaControllerSaveAndGet() {
         $controller = $this->router->getController('meta');
 
-        $saveResponse = $controller->saveMeta([
-            'object_type'            => 'post',
-            'object_id'              => 42,
-            'title'                  => 'Optimized REST Title',
-            'description'            => 'Clean REST SEO description.',
-            'canonical_url'          => 'https://example.com/rest-post-42/',
-            'primary_focus_keyword'  => 'enterprise rest api',
-        ]);
+        $req = new \WP_REST_Request('POST', '/apexseo/v1/meta/post/42');
+        $req->set_param('type', 'post');
+        $req->set_param('id', 42);
+        $req->set_param('title', 'Optimized REST Title');
+        $req->set_param('description', 'Clean REST SEO description.');
+        $req->set_param('canonical_url', 'https://example.com/rest-post-42/');
+        $req->set_param('primary_focus_keyword', 'enterprise rest api');
+
+        $saveResponse = $controller->saveMeta($req);
         $saveData = ($saveResponse instanceof \WP_REST_Response) ? $saveResponse->get_data() : $saveResponse;
         $this->assertTrue($saveData['success']);
-        $this->assertEquals('Optimized REST Title', $saveData['indexable']['title']);
+        $this->assertEquals('Optimized REST Title', $saveData['data']['title']);
 
-        $getResponse = $controller->getMeta([
-            'object_type' => 'post',
-            'object_id'   => 42,
-        ]);
+        $getReq = new \WP_REST_Request('GET', '/apexseo/v1/meta/post/42');
+        $getReq->set_param('type', 'post');
+        $getReq->set_param('id', 42);
+
+        $getResponse = $controller->getMeta($getReq);
         $getData = ($getResponse instanceof \WP_REST_Response) ? $getResponse->get_data() : $getResponse;
         $this->assertTrue($getData['success']);
-        $this->assertEquals('enterprise rest api', $getData['indexable']['primary_focus_keyword']);
+        $this->assertEquals('enterprise rest api', $getData['data']['primary_focus_keyword']);
     }
 
     public function testSchemaControllerCRUD() {

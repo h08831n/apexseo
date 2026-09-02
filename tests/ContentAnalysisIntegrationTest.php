@@ -79,8 +79,8 @@ class ContentAnalysisIntegrationTest extends TestCase {
         $headings = new HeadingAnalyzer();
         $links = new LinkGraphScanner($this->db);
         $passive = new PassiveVoiceAnalyzer($readability);
-        $transitions = new TransitionWordAnalyzer($readability, $kw);
-        $textStructure = new TextStructureAnalyzer($readability);
+        $transitions = new TransitionWordAnalyzer();
+        $textStructure = new TextStructureAnalyzer();
 
         $this->analyzer = new ContentAnalyzer(
             $kw,

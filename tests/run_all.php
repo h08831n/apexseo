@@ -32,6 +32,11 @@ require_once __DIR__ . '/RestApiResolutionTest.php';
 require_once __DIR__ . '/CliSubsystemTest.php';
 require_once __DIR__ . '/SchemaConsistencyTest.php';
 require_once __DIR__ . '/LinkGraphScannerParserTest.php';
+require_once __DIR__ . '/ContentAnalysisIntegrationTest.php';
+require_once __DIR__ . '/Phase5AHardeningTest.php';
+require_once __DIR__ . '/Phase5BComprehensiveTest.php';
+require_once __DIR__ . '/ProductionFunctionalValidationTest.php';
+require_once __DIR__ . '/RealWordPressRuntimeTest.php';
 
 $testClasses = [
     ApexSEO\Tests\AutoloaderTest::class,
@@ -57,6 +62,11 @@ $testClasses = [
     ApexSEO\Tests\CliSubsystemTest::class,
     ApexSEO\Tests\SchemaConsistencyTest::class,
     ApexSEO\Tests\LinkGraphScannerParserTest::class,
+    ApexSEO\Tests\ContentAnalysisIntegrationTest::class,
+    ApexSEO\Tests\Phase5AHardeningTest::class,
+    ApexSEO\Tests\Phase5BComprehensiveTest::class,
+    ApexSEO\Tests\ProductionFunctionalValidationTest::class,
+    ApexSEO\Tests\RealWordPressRuntimeTest::class,
 ];
 
 echo "====================================================\n";

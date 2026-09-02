@@ -409,6 +409,9 @@ if (!class_exists('WP_REST_Request')) {
         public function set_param($key, $value) { $this->params[$key] = $value; }
         public function get_param($key) { return isset($this->params[$key]) ? $this->params[$key] : null; }
         public function get_params() { return $this->params; }
+        public function set_body_params($params) { $this->params = array_merge($this->params, (array)$params); }
+        public function get_body_params() { return $this->params; }
+        public function set_json_params($params) { $this->params = array_merge($this->params, (array)$params); }
         public function get_json_params() { return $this->params; }
     }
 }
