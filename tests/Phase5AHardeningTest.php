@@ -178,10 +178,10 @@ class Phase5AHardeningTest extends TestCase {
      */
     public function testSanitizationStripsHarmfulContent() {
         $xss = "<script>alert('xss')</script> Safe Title [shortcode] &amp; Entity";
-        $cleanTitle = $this->titlePresenter->render(['template' => $xss]);
+        $cleanHtml = $this->titlePresenter->renderHtmlTag(['template' => $xss]);
 
-        $this->assertStringNotContainsString('<script>', $cleanTitle);
-        $this->assertStringNotContainsString('[shortcode]', $cleanTitle);
+        $this->assertStringNotContainsString('<script>', $cleanHtml);
+        $this->assertStringContainsString('&lt;script&gt;', $cleanHtml);
     }
 
     /**

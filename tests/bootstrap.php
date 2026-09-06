@@ -302,6 +302,14 @@ if (!function_exists('sanitize_title')) {
     }
 }
 
+if (!function_exists('wp_sanitize_redirect')) {
+    function wp_sanitize_redirect($location) {
+        $regex = '/[^\t\r\n\x20-\x7e\x80-\xff]/';
+        $location = preg_replace($regex, '', (string)$location);
+        return preg_replace('/%0[0-8bcef]/i', '', preg_replace('/%1[0-9a-f]/i', '', $location));
+    }
+}
+
 if (!function_exists('wp_kses_post')) {
     function wp_kses_post($data) {
         return strip_tags((string)$data, '<p><a><b><strong><i><em><ul><ol><li><h1><h2><h3><h4><h5><h6><blockquote><img><br>');
@@ -384,6 +392,68 @@ if (!function_exists('site_url')) {
     }
 }
 
+if (!function_exists('get_post')) {
+    function get_post($post = null) {
+        if ($post instanceof \stdClass) {
+            return $post;
+        }
+        $id = (int)$post;
+        if ($id <= 0) {
+            return null;
+        }
+        return (object)[
+            'ID'           => $id,
+            'post_title'   => 'Test Post ' . $id,
+            'post_content' => 'Test Content for ' . $id,
+            'post_type'    => 'post',
+            'post_status'  => 'publish',
+        ];
+    }
+}
+
+if (!function_exists('get_permalink')) {
+    function get_permalink($post = 0) {
+        $id = is_object($post) ? ($post->ID ?? 1) : (int)$post;
+        return 'https://example.com/p/' . ($id ?: 1);
+    }
+}
+
+global $mock_post_meta;
+$mock_post_meta = [];
+
+if (!function_exists('get_post_meta')) {
+    function get_post_meta($post_id, $key = '', $single = false) {
+        global $mock_post_meta;
+        if (empty($key)) {
+            return $mock_post_meta[$post_id] ?? [];
+        }
+        $val = $mock_post_meta[$post_id][$key] ?? null;
+        if ($single) {
+            return is_array($val) ? ($val[0] ?? '') : ($val ?? '');
+        }
+        return is_array($val) ? $val : ($val !== null ? [$val] : []);
+    }
+}
+
+if (!function_exists('update_post_meta')) {
+    function update_post_meta($post_id, $key, $value) {
+        global $mock_post_meta;
+        if (!isset($mock_post_meta[$post_id])) {
+            $mock_post_meta[$post_id] = [];
+        }
+        $mock_post_meta[$post_id][$key] = $value;
+        return true;
+    }
+}
+
+if (!function_exists('delete_post_meta')) {
+    function delete_post_meta($post_id, $key) {
+        global $mock_post_meta;
+        unset($mock_post_meta[$post_id][$key]);
+        return true;
+    }
+}
+
 if (!class_exists('WP_REST_Response')) {
     class WP_REST_Response {
         protected $data;
@@ -456,3 +526,6 @@ if (!class_exists('PHPUnit\Framework\TestCase')) {
 // Load plugin autoloader
 require_once dirname(__DIR__) . '/src/Autoloader.php';
 \ApexSEO\Autoloader::register();
+
+// Load base test case
+require_once __DIR__ . '/TestCase.php';

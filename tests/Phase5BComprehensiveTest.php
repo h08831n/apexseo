@@ -55,7 +55,7 @@ class Phase5BComprehensiveTest extends TestCase {
         $presenter = new CanonicalPresenter();
 
         $context = [
-            'canonical' => 'https://example.com/blog/seo-guide/',
+            'canonical_url' => 'https://example.com/blog/seo-guide/',
         ];
         $rendered = $presenter->render($context);
         $this->assertEquals('https://example.com/blog/seo-guide/', $rendered);
